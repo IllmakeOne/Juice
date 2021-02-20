@@ -1,9 +1,8 @@
 import Button from 'react-bootstrap/Button';
-import ACTIONS from '../MainBar'
 import { FiTrash } from "react-icons/fi"
 
 
-const CartButton = ({item, dispatch}) => {     
+const CartButton = ({item, demoveItem}) => {     
     //make so it can demove from basket
     //and allowe modifyin price if Modifiable=true
         return (
@@ -14,9 +13,7 @@ const CartButton = ({item, dispatch}) => {
 
             <Button 
                     variant="outline-primary" 
-                    onClick ={dispatch(
-                        {type: ACTIONS.DELCARTITEM,
-                            id: item.id})}
+                    onClick ={()=>demoveItem(item.id)}
                     >
                     
                        <FiTrash />

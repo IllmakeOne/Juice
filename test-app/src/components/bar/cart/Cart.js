@@ -1,7 +1,8 @@
 
 import CartButton from './CartButton';
 
-function Cart({basket, dispatch}) {
+function Cart({basket, demoveItem}) {
+
 
     const getSum = () => {
         var sum = 0
@@ -30,8 +31,8 @@ function Cart({basket, dispatch}) {
         <div className='cart'>
             <h2>Cart</h2>
 
-            { console.log('incart'),
-                console.log(basket.cart),
+            { /*console.log('incart'),
+                console.log(basket.cart),*/
                 basket.cart.map((item) => 
                 (
                 <div key = {item.id} 
@@ -40,7 +41,7 @@ function Cart({basket, dispatch}) {
                     <h3>{item.name}</h3> 
                 
                     <CartButton item = {item} 
-                        dispatch = {dispatch}/>
+                        demoveItem = {demoveItem}/>
                     {/* <ChangePriceB item = {item} changePrice = {changePrice}/> */}
                 </div>            
                 )) 
