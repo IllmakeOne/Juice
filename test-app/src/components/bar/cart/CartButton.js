@@ -2,13 +2,24 @@ import Button from 'react-bootstrap/Button';
 import { FiTrash } from "react-icons/fi"
 
 
-const CartButton = ({item, demoveItem}) => {     
+// function dab(test, changePrice, item, new ){}
+//     if(test == false)
+//         return  <Button 
+//             variant="outline-primary" 
+//             onClick ={()=>changePrice(item.id, changePrice)}
+//             >                
+//             <FiTrash />
+//         </Button> 
+    
+// }
+
+
+const CartButton = ({item, demoveItem, changePrice}) => {     
     //make so it can demove from basket
     //and allowe modifyin price if Modifiable=true
         return (
             <div >
-            Item name: {item.name} <br/>
-            Number Selected: {item.stock} <br/>
+            Number Selected: <h3>{item.stock}</h3> <br/>
             Price of Item: {item.price}
 
             <Button 
@@ -17,7 +28,10 @@ const CartButton = ({item, demoveItem}) => {
                     >
                     
                        <FiTrash />
-                </Button>{' '}  
+                </Button>
+            {
+            }
+
 
             </div>
         );

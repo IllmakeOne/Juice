@@ -1,7 +1,21 @@
 import React, { useEffect,  useState} from 'react'
-import Header from '../Header'
 import Cart from './cart/Cart'
 import ProdSet from './products/ProdSet'
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
+
+
+const _exportPdf = () => {
+
+    html2canvas(document.querySelector("#capture")).then(canvas => {
+       document.body.appendChild(canvas);  // if you want see your screenshot in body.
+       const imgData = canvas.toDataURL('image/png');
+       const pdf = new jsPDF();
+       pdf.addImage(imgData, 'PNG', 0, 0);
+       pdf.save("download.pdf"); 
+   });
+
+}
 
 
 const fetchProds = async () => {
@@ -28,6 +42,8 @@ function MainBar() {
             })
         }
         getProds()
+    
+    // setTimeout(_exportPdf(),10000)
     }, [])
 
 
@@ -82,13 +98,12 @@ function MainBar() {
 
 
 
-
     /*onSubmit = { } */
      /* onChange={e=>setname(e.target.value)<form>
                 <input type="text" value = {ACTION.GET}/>
             </form>*/
     return (
-        <div>
+        <div id='capture' >
             {/* <Header title= {JSON.stringify(bar,null)}/> */}
             {/* {JSON.stringify(bar,null)} */}
             {/* {console.log(bar)} */}
