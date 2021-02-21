@@ -9,7 +9,7 @@ const fetchProds = async () => {
     const data = await res.json()
     return data
 }
-
+//new Branch here
    
 function MainBar() {
 
