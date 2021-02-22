@@ -70,7 +70,7 @@ function MainBar({startScreen}) {
     const Caller= () =>{
         switch(screen){
             case BarScreen.ADDITEM:
-                    return <StockHandler items={bar.prods} pushTop = {addItemtoDB}/>;
+                    return <StockHandler zeers={bar.prods} pushTop = {addItemtoDB}/>;
             case BarScreen.SELLBAR:
                     return <div>
                         <Cart  basket = {bar} demoveItem = {removeItemfromCart} />
@@ -193,7 +193,7 @@ function MainBar({startScreen}) {
                 <input type="text" value = {ACTION.GET}/>
             </form>*/
     return (
-        <div id='capture' >
+        <div id='capture' className='mainbar' >
 
             <Button 
                     className ='switchToSellBar'

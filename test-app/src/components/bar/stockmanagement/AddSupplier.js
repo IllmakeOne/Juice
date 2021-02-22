@@ -40,7 +40,7 @@ const  AddSupplier = ({pushTop}) => {
         
       const [name, setName] = useState('')
       const [cui, setCui] = useState('')
-      const [orc, setOrc] = useState('') //oficiul registrul comertului
+      const [orc, setOrc] = useState('') 
       const [address, setAddress] = useState('')
       const [bank, setBank] = useState('')
       const [iban, setIban] = useState('')
@@ -61,7 +61,7 @@ const  AddSupplier = ({pushTop}) => {
                 <label>CUI</label>
                 <input
                 type='text'
-                placeholder='Cod Unic de Inregistrare'
+                placeholder='uniq CUI'
                 value={cui}
                 onChange={(e) => setCui(e.currentTarget.value)}
                 />
@@ -71,7 +71,7 @@ const  AddSupplier = ({pushTop}) => {
                 <label>ORC</label>
                 <input
                 type='text'
-                placeholder='Nr Ordine Registrul Comertului'
+                placeholder='lamo'
                 value={orc}
                 onChange={(e) => setOrc(e.currentTarget.value)}
                 />
@@ -81,7 +81,7 @@ const  AddSupplier = ({pushTop}) => {
                 <label>Address</label>
                 <input
                 type='text'
-                placeholder='Fc Ripensia nr 33'
+                placeholder='your moms '
                 value={address}
                 onChange={(e) => setAddress(e.currentTarget.value)}
                 />
@@ -107,7 +107,7 @@ const  AddSupplier = ({pushTop}) => {
                 />
             </div>
     
-            <input type='submit' value='Save Product' className='btn btn-block' />
+            <input type='submit' value='Save Product' className='btn btn-block' width = '50px' />
         </form>
         )
 }

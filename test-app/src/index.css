@@ -54,7 +54,7 @@ body {
 
 .btn-block {
   display: block;
-  width: 100%;
+  width: 50%;
 }
 
 .piece {
@@ -70,8 +70,10 @@ body {
   padding-top: 20px;
   background: #2dbd2d;
   position: absolute;
-  left: 60%;
+  left: 30%;
 }
+
+
 
 .product {
   background: #f4f4f4;
@@ -88,9 +90,11 @@ body {
   height: 90%;
   width: 100%;
   padding-top: 20px;
-  background: orange;
-  position: relative;
-  /* right: 10%; */
+  /* background: orange; */
+  
+  position: absolute;
+  left: 300px;
+  top: 150px;
 }
 
 .prodbutton {
@@ -116,12 +120,15 @@ body {
 }
 
 .prodset {
-  height: 100%;
-  width: 90%;
+  height: 50%;
+  width: 25%;
   background: red;
   margin: 10px;
   padding: 10px 20px;
-  border-color: coral;
+  /* position: absolute; */
+  border-color: coral; 
+  position: relative;
+
 
   /* display: inline-block; */
 }
@@ -150,6 +157,7 @@ body {
 
 .form-control {
   margin: 20px 0;
+  width: 50%
 }
 
 .type-control {

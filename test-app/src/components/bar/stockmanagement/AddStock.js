@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react'
 import MainBar from '../MainBar'
-import {Autocomplete} from '@material-ui/lab';
+// import {Autocomplete} from '@material-ui/lab';
 import { TextField } from '@material-ui/core';
 
 
@@ -63,7 +63,7 @@ const  AddStock = ({zeers, pushTop}) => {
                 <h3>Cui: {supplier.cui}</h3>
                 <h3>Bank: {supplier.bank}</h3>
             </div> */}
-
+{/* 
             <Autocomplete
                 id="prodct selection"
                 options={zeers}
@@ -71,7 +71,7 @@ const  AddStock = ({zeers, pushTop}) => {
                 style={{ width: 300 }}
                 renderInput={(zeers) => 
                 <TextField {...zeers} label="Look for product" variant="outlined" />}
-            />
+            /> */}
             
             <div className='form-control'>
                 <label>Numar Produse</label>
