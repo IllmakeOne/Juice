@@ -6,6 +6,7 @@ const ProdButton = ({prod, onClick}) => {
  
         return (
             <div className = 'prodbutton'>
+            Price: {prod.price}
             <Button 
                 variant="outline-primary" 
                 onClick ={()=>onClick(prod.id)}

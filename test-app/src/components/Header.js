@@ -1,10 +1,5 @@
-import { BarScreen } from "./bar/MainBar"
-
 
 const Header = ({title}) => {
-    const onClick = () =>{
-        console.log('clique')
-    }
 
     return (
         <header className='header'>

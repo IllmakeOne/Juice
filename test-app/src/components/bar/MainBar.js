@@ -3,15 +3,17 @@ import Cart from './cart/Cart'
 import ProdSet from './products/ProdSet'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
-import StockHandler from '../stockmanagement/StockHandler'
-import AddSupplier from './extras/AddSupplier'
+import StockHandler from './stockmanagement/StockHandler'
+import AddSupplier from './stockmanagement/AddSupplier'
 import Button from 'react-bootstrap/Button'
+import AddStock from  './stockmanagement/AddStock'
 
 
 export const BarScreen = {
     SELLBAR : 'sell bar',
     ADDSTOCK : 'add stock',
-    ADDSUPPLIER : 'add supplier'
+    ADDSUPPLIER : 'add supplier',
+    ADDITEM : 'add item'
 
 }
 
@@ -67,7 +69,7 @@ function MainBar({startScreen}) {
 
     const Caller= () =>{
         switch(screen){
-            case BarScreen.ADDSTOCK:
+            case BarScreen.ADDITEM:
                     return <StockHandler pushTop = {addItemtoDB}/>;
             case BarScreen.SELLBAR:
                     return <div>
@@ -75,7 +77,9 @@ function MainBar({startScreen}) {
                         <ProdSet items = {bar} addtoCart = {addtoCart}/> </div> 
             case BarScreen.ADDSUPPLIER:   
                     return <AddSupplier pushTop= {pushSupplier}/>
-                    
+            case BarScreen.ADDSTOCK:   
+                    return <AddStock pushTop= {pushItemtoStock}/>
+                   
         }
     }
 
@@ -152,12 +156,16 @@ function MainBar({startScreen}) {
         )
     }
 
-
+    /**
+     * adds item to db, with stock .
+     * @param {*} item 
+     */
     const addItemtoDB = (item) =>{
 
-        const fixed = item.type=='Service'? false : true
+       
         const to_send = {
-            fixedPrice: fixed,
+            fixedPrice: item.type=='Service'? false : true,
+            //fixed price is false if the item is a service
             stock : 0,
             ...item
         }
@@ -166,9 +174,17 @@ function MainBar({startScreen}) {
 
     }
 
+    /**
+     * send the new supplier to the DB
+     * @param {} item 
+     */
     const pushSupplier = (item) =>{
         console.log(item)
+        
+    }
 
+    const pushItemtoStock = (item) =>{
+        console.log(item)
     }
 
     /*onSubmit = { } */
@@ -195,11 +211,19 @@ function MainBar({startScreen}) {
             <Button 
                     className ='switchToAddInvItem'
                     variant="outline-primary" 
-                    onClick ={() => setScreen(BarScreen.ADDSTOCK)}
+                    onClick ={() => setScreen(BarScreen.ADDITEM)}
                     > 
                     Add Inventory Item
             </Button>
-            {/* <Header title= {JSON.stringify(bar,null)}/> */}
+            <Button 
+                    className ='switchToAddStock'
+                    variant="outline-primary" 
+                    onClick ={() => setScreen(BarScreen.ADDSTOCK)}
+                    > 
+                    Add Inventory
+            </Button>
+            {/* <Header t
+            itle= {JSON.stringify(bar,null)}/> */}
             {/* {JSON.stringify(bar,null)} */}
             {/* {console.log(bar)}
             <Cart  basket = {bar} demoveItem = {removeItemfromCart} />
