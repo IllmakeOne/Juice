@@ -70,7 +70,7 @@ function MainBar({startScreen}) {
     const Caller= () =>{
         switch(screen){
             case BarScreen.ADDITEM:
-                    return <StockHandler pushTop = {addItemtoDB}/>;
+                    return <StockHandler items={bar.prods} pushTop = {addItemtoDB}/>;
             case BarScreen.SELLBAR:
                     return <div>
                         <Cart  basket = {bar} demoveItem = {removeItemfromCart} />
@@ -112,7 +112,7 @@ function MainBar({startScreen}) {
         bar.prods[indexProd].stock +=  bar.cart[indexBask].stock
         bar.cart.splice(indexBask,1)
 
-        console.log(bar)
+        // console.log(bar)
        
         setBar({prods: bar.prods, cart: bar.cart})
     }
@@ -170,6 +170,7 @@ function MainBar({startScreen}) {
             ...item
         }
         // Phetch('post', `prods/`, to_send
+        console.log("bruh")
         console.log(to_send)
 
     }

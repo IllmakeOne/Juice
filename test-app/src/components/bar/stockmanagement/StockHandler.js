@@ -59,7 +59,7 @@ function StockHandler({pushTop}) {
         </div>
         <div className='form-control form-control-check'>
             <label>Price</label>
-            <input
+            <input 
             type='number'
             value={price}
             onChange={(e) => setPrice(e.currentTarget.value)}

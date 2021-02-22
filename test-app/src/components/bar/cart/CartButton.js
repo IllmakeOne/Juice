@@ -8,7 +8,7 @@ const CartButton = ({item, demoveItem, changePrice}) => {
 
     function dab( ){
     if(item.fixedPrice == false){
-        console.log('habve thibutton')
+        // console.log('habve thibutton')
         return  <Button 
             variant="outline-primary" 
             onClick ={()=>changePrice(item.id, changePrice)}
@@ -32,7 +32,8 @@ const CartButton = ({item, demoveItem, changePrice}) => {
                     
                        <FiTrash />
                 </Button>
-            {!item.fixedPrice && <Button 
+                
+                {!item.fixedPrice && <Button 
                     variant="outline-primary" 
                     onClick ={()=>changePrice(item.id, changePrice)}
                     >                
