@@ -1,5 +1,6 @@
-import Header from './components/Header'
+
 import MainBar from './components/bar/MainBar'
+import SideBarAndHeader from './components/SideBarAndHeader'
 
 
 function App() {
@@ -9,9 +10,8 @@ function App() {
 
 
   return (
-    <div className="container">
-      <Header />
-
+    <div>
+      <SideBarAndHeader />
       <div>
       <MainBar />
       </div>

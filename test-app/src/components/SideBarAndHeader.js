@@ -1,19 +1,28 @@
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
+
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
-import MenuIcon from '@material-ui/icons/Menu';
+
+import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
+
+import InboxIcon from '@material-ui/icons/MoveToInbox';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import MoneyIcon from '@material-ui/icons/Money'
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import DescriptionIcon from '@material-ui/icons/Description';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -21,20 +30,11 @@ import BuildIcon from '@material-ui/icons/Build';
 import TranslateIcon from '@material-ui/icons/Translate';
 import ContactsIcon from '@material-ui/icons/ImportContacts';
 
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-
 import logo from "../assets/logo.png"
 
-export default function Header() {
+
+
+export default function PermanentDrawerLeft() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -75,55 +75,11 @@ export default function Header() {
     </Menu>
   );
 
-//   const mobileMenuId = 'primary-search-account-menu-mobile';
-//   const renderMobileMenu = (
-//     <Menu
-//       anchorEl={mobileMoreAnchorEl}
-//       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-//       id={mobileMenuId}
-//       keepMounted
-//       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-//       open={isMobileMenuOpen}
-//       onClose={handleMobileMenuClose}
-//     >
-//       <MenuItem>
-//         <IconButton aria-label="show 4 new mails" color="inherit">
-//           <Badge badgeContent={4} color="secondary">
-//             <MailIcon />
-//           </Badge>
-//         </IconButton>
-//         <p>Messages</p>
-//       </MenuItem>
-//       <MenuItem>
-//         <IconButton aria-label="show 11 new notifications" color="inherit">
-//           <Badge badgeContent={11} color="secondary">
-//             <NotificationsIcon />
-//           </Badge>
-//         </IconButton>
-//         <p>Notifications</p>
-//       </MenuItem>
-//       <MenuItem onClick={handleProfileMenuOpen}>
-//         <IconButton
-//           aria-label="account of current user"
-//           aria-controls="primary-search-account-menu"
-//           aria-haspopup="true"
-//           color="inherit"
-//         >
-//           <AccountCircle />
-//         </IconButton>
-//         <p>Profile</p>
-//       </MenuItem>
-//     </Menu>
-//   );
-
   return (
-    <div className={classes.grow}>
-      <AppBar position="static">
-        <Toolbar>
-            <div className={classes.logoDivStyle}>
-        <img src={logo} alt="Logo" className={classes.logoStyle} />
-        </div>
-        
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+      <Toolbar>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -197,7 +153,6 @@ export default function Header() {
 
         </Toolbar>
       </AppBar>
-      
       <Drawer
         className={classes.drawer}
         variant="permanent"
@@ -205,116 +160,111 @@ export default function Header() {
           paper: classes.drawerPaper,
         }}
         anchor="left"
-      >  <div>
+      >
+        <div />
+        <div className={classes.logoDivStyle}>      
+           <img src={logo} alt="Logo" className={classes.logoStyle} />
         </div>
-        <div className={classes.toolbar} />
-      
-        <Divider />
-        
+
+        <Divider classes={{root: classes.divider}}/>
         <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemIcon style={{ color: "white"}} >{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText style={{ color: "white"}} primary={text} />
             </ListItem>
           ))}
         </List>
-        <Divider />
+        <Divider classes={{root: classes.divider}}/>
         <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemIcon style={{ color: "white"}}>{index % 2 === 0 ? <BuildIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText style={{ color: "white"}} primary={text} />
             </ListItem>
           ))}
         </List>
       </Drawer>
-      {//renderMobileMenu
-        }
-      {renderMenu}
     </div>
   );
 }
 
 
-const drawerWidth = 240;
+
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
-    logoDivStyle: {
-        borderRight: "1px solid white",
-        marginRight: theme.spacing(3),
-    },
-    logoStyle: {
-        crop: "fill",
-        width: 100,
-        marginRight: theme.spacing(1),
-    },
-
-    grow: {
-      flexGrow: 1,
-      
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block',
-      },
-    },
-   
-    inputRoot: {
-      color: 'inherit',
-    },
-  
-    sectionDesktop: {
-      display: 'none',
-      [theme.breakpoints.up('md')]: {
-        display: 'flex',
-      },
-    },
-
-    drawer: {
-       
-        width: drawerWidth,
-        flexShrink: 0,
-      },
-
-      root: {
-        display: 'flex',
-      },
-      drawerPaper: {
-        marginTop:64,
-        width: drawerWidth,
-      },
+  sideBarEntry:{
+    color:"white",
+  },
 
 
-    sectionMobile: {
+  root: {
+    display: 'flex',
+  },
+
+  divider: {
+    // Theme Color, or use css color in quote
+    background: 'white',
+   },
+
+  logoStyle: {
+    crop: "fill",
+    width: "83%",
+},
+
+logoDivStyle: {
+  justifyContent: "center",
+  alignItems: "center",
+},
+
+  appBar: {
+    borderLeft: "1px solid white",
+    background:"#1565c0",
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+  },
+
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    background:"#1565c0",
+    width: drawerWidth,
+  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing(3),
+  },
+
+
+  grow: {
+    flexGrow: 1,
+    
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+  },
+ 
+  inputRoot: {
+    color: 'inherit',
+  },
+
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
       display: 'flex',
-      [theme.breakpoints.up('md')]: {
-        display: 'none',
-      },
-
-
-
-
-
-
-
-
-     
-
-
-     
-     
-      // necessary for content to be below app bar
-      toolbar: theme.mixins.toolbar,
-      content: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
-        padding: theme.spacing(3),
-      },
-
     },
-  }));
+  },
+
+}));
