@@ -1,3 +1,6 @@
+
+import MainBar from './components/bar/MainBar'
+import SideBarAndHeader from './components/SideBarAndHeader'
 import Header from './components/Header'
 import MainBar , {BarScreen} from './components/bar/MainBar'
 
@@ -7,9 +10,8 @@ function App() {
 
 
   return (
-    <div className="container">
-      <Header />
-
+    <div>
+      <SideBarAndHeader />
       <div>
       <MainBar startScreen = {BarScreen.SELLBAR}/>
       </div>
