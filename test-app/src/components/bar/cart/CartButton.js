@@ -1,20 +1,23 @@
 import Button from 'react-bootstrap/Button';
-import { FiTrash } from "react-icons/fi"
+import { FiCheck, FiTrash } from "react-icons/fi"
 
-
-// function dab(test, changePrice, item, new ){}
-//     if(test == false)
-//         return  <Button 
-//             variant="outline-primary" 
-//             onClick ={()=>changePrice(item.id, changePrice)}
-//             >                
-//             <FiTrash />
-//         </Button> 
-    
-// }
+  
 
 
 const CartButton = ({item, demoveItem, changePrice}) => {     
+
+    function dab( ){
+    if(item.fixedPrice == false){
+        console.log('habve thibutton')
+        return  <Button 
+            variant="outline-primary" 
+            onClick ={()=>changePrice(item.id, changePrice)}
+            >                
+            <FiCheck />
+        </Button> 
+    }
+    
+    }   
     //make so it can demove from basket
     //and allowe modifyin price if Modifiable=true
         return (
@@ -29,7 +32,12 @@ const CartButton = ({item, demoveItem, changePrice}) => {
                     
                        <FiTrash />
                 </Button>
-            {
+            {!item.fixedPrice && <Button 
+                    variant="outline-primary" 
+                    onClick ={()=>changePrice(item.id, changePrice)}
+                    >                
+                    <FiCheck />
+                </Button> 
             }
 
 

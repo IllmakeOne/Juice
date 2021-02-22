@@ -1,11 +1,9 @@
 import Header from './components/Header'
-import MainBar from './components/bar/MainBar'
+import MainBar , {BarScreen} from './components/bar/MainBar'
 
 
 function App() {
 
-  const name = ' Robz '
-  const dicc = false
 
 
   return (
@@ -13,7 +11,7 @@ function App() {
       <Header />
 
       <div>
-      <MainBar />
+      <MainBar startScreen = {BarScreen.SELLBAR}/>
       </div>
       {/* <h2>supp {name} </h2>
       <h2> subb {dicc ? 'yes': 'bio'} </h2> */}

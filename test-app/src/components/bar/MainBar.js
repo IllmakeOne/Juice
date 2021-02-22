@@ -3,7 +3,17 @@ import Cart from './cart/Cart'
 import ProdSet from './products/ProdSet'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
+import StockHandler from '../stockmanagement/StockHandler'
+import AddSupplier from './extras/AddSupplier'
+import Button from 'react-bootstrap/Button'
 
+
+export const BarScreen = {
+    SELLBAR : 'sell bar',
+    ADDSTOCK : 'add stock',
+    ADDSUPPLIER : 'add supplier'
+
+}
 
 const _exportPdf = () => {
 
@@ -17,6 +27,7 @@ const _exportPdf = () => {
 
 }
 
+const API = 'http://localhost:3001/'
 
 const fetchProds = async () => {
     const res = await fetch('http://localhost:3001/prods')
@@ -24,13 +35,49 @@ const fetchProds = async () => {
     return data
 }
 //new Branch here
+
+const Phetch = async (method, endpoint, body) => {
+    try {
+      const response = await fetch(`${API}${endpoint}`, {
+        method,
+        body: body && JSON.stringify(body),
+        // headers: {
+        //   'content-type': 'application/json',
+        //   accept: 'application/json',
+        //   authorization: `Bearer ${await this.props.auth.getAccessToken()}`,
+        // },
+      });
+      return await response.json();
+    } catch (error) {
+      console.error(error);
+
+    }
+  }
    
-function MainBar() {
+
+
+function MainBar({startScreen}) {
 
     const[bar, setBar] = useState({
         prods: [],
         cart: []
     })
+
+    const[screen, setScreen] = useState(startScreen)
+
+    const Caller= () =>{
+        switch(screen){
+            case BarScreen.ADDSTOCK:
+                    return <StockHandler pushTop = {addItemtoDB}/>;
+            case BarScreen.SELLBAR:
+                    return <div>
+                        <Cart  basket = {bar} demoveItem = {removeItemfromCart} />
+                        <ProdSet items = {bar} addtoCart = {addtoCart}/> </div> 
+            case BarScreen.ADDSUPPLIER:   
+                    return <AddSupplier pushTop= {pushSupplier}/>
+                    
+        }
+    }
 
     // //get from db and pas son
     useEffect(() =>{
@@ -97,6 +144,32 @@ function MainBar() {
     }
 
 
+    const sell = () => {
+        bar.cart.map((el)=> {
+            
+        }
+        
+        )
+    }
+
+
+    const addItemtoDB = (item) =>{
+
+        const fixed = item.type=='Service'? false : true
+        const to_send = {
+            fixedPrice: fixed,
+            stock : 0,
+            ...item
+        }
+        // Phetch('post', `prods/`, to_send
+        console.log(to_send)
+
+    }
+
+    const pushSupplier = (item) =>{
+        console.log(item)
+
+    }
 
     /*onSubmit = { } */
      /* onChange={e=>setname(e.target.value)<form>
@@ -104,11 +177,36 @@ function MainBar() {
             </form>*/
     return (
         <div id='capture' >
+
+            <Button 
+                    className ='switchToSellBar'
+                    variant="outline-primary" 
+                    onClick ={() => setScreen(BarScreen.SELLBAR)}
+                    > 
+                    Bar
+            </Button>
+            <Button 
+                    className ='switchToAddsupplier'
+                    variant="outline-primary" 
+                    onClick ={() => setScreen(BarScreen.ADDSUPPLIER)}
+                    > 
+                    Add Supplier
+            </Button>
+            <Button 
+                    className ='switchToAddInvItem'
+                    variant="outline-primary" 
+                    onClick ={() => setScreen(BarScreen.ADDSTOCK)}
+                    > 
+                    Add Inventory Item
+            </Button>
             {/* <Header title= {JSON.stringify(bar,null)}/> */}
             {/* {JSON.stringify(bar,null)} */}
-            {/* {console.log(bar)} */}
+            {/* {console.log(bar)}
             <Cart  basket = {bar} demoveItem = {removeItemfromCart} />
-            <ProdSet items = {bar} addtoCart = {addtoCart}/>
+            <ProdSet items = {bar} addtoCart = {addtoCart}/> */}
+            {/* <StockHandler pushTop = {addItemtoDB}/> */}
+
+            {Caller()}
         </div>   
     )
 }

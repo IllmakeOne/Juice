@@ -1,37 +1,41 @@
 {
-
-  "prods" : [
+  "prods": [
     {
       "id": 1,
-      "name":"Fanta .5",
+      "name": "Fanta .5",
       "price": 6,
       "stock": 10,
       "fixedPrice": true
     },
     {
       "id": 4,
-      "name":"Coffee",
+      "name": "Coffee",
       "price": 6,
       "stock": 20,
       "fixedPrice": true
     },
     {
       "id": 2,
-      "name":"Cola .5",
+      "name": "Cola .5",
       "price": 7,
       "stock": 20,
       "fixedPrice": true
     },
     {
       "id": 3,
-      "name":"Water .5",
+      "name": "Water .5",
       "price": 5,
       "stock": 100,
       "fixedPrice": true
+    },
+    {
+      "id": 10,
+      "name": "Tennis",
+      "price": 6,
+      "stock": -1,
+      "fixedPrice": false
     }
   ],
-
-  
   "posts": [
     {
       "id": 1,

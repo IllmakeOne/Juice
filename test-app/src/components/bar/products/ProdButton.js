@@ -6,7 +6,6 @@ const ProdButton = ({prod, onClick}) => {
  
         return (
             <div className = 'prodbutton'>
-            {prod.stock,console.log(prod.id)}
             <Button 
                 variant="outline-primary" 
                 onClick ={()=>onClick(prod.id)}
