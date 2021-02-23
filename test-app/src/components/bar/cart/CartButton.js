@@ -4,7 +4,7 @@ import { FiCheck, FiTrash } from "react-icons/fi"
   
 
 
-const CartButton = ({item, demoveItem, changePrice}) => {     
+const CartButton = ({item, removeItem, changePrice}) => {     
 
     function dab( ){
     if(item.fixedPrice == false){
@@ -27,7 +27,7 @@ const CartButton = ({item, demoveItem, changePrice}) => {
 
             <Button 
                     variant="outline-primary" 
-                    onClick ={()=>demoveItem(item.id)}
+                    onClick ={()=>removeItem(item.id)}
                     >
                     
                        <FiTrash />

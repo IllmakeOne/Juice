@@ -5,6 +5,7 @@ const ProdSet = ({items, addtoCart}) => {
     return (
         
         <div className='prodset'>
+            
             {items.prods.map((prod) => 
             (
             <div key = {prod.id} >
@@ -13,6 +14,7 @@ const ProdSet = ({items, addtoCart}) => {
                      onClick = {addtoCart} />
             </div>            
             ))}
+            
         </div>
     )
 }

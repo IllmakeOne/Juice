@@ -17,17 +17,7 @@ export const BarScreen = {
 
 }
 
-const _exportPdf = () => {
 
-    html2canvas(document.querySelector("#capture")).then(canvas => {
-       document.body.appendChild(canvas);  // if you want see your screenshot in body.
-       const imgData = canvas.toDataURL('image/png');
-       const pdf = new jsPDF();
-       pdf.addImage(imgData, 'PNG', 0, 0);
-       pdf.save("download.pdf"); 
-   });
-
-}
 
 const API = 'http://localhost:3001/'
 
@@ -73,7 +63,9 @@ function MainBar({startScreen}) {
                     return <StockHandler zeers={bar.prods} pushTop = {addItemtoDB}/>;
             case BarScreen.SELLBAR:
                     return <div>
-                        <Cart  basket = {bar} demoveItem = {removeItemfromCart} />
+                        <Cart  basket = {bar} 
+                                removeItem = {removeItemfromCart}
+                                removeAllCart = {removeAllCart} />
                         <ProdSet items = {bar} addtoCart = {addtoCart}/> </div> 
             case BarScreen.ADDSUPPLIER:   
                     return <AddSupplier pushTop= {pushSupplier}/>
@@ -101,10 +93,17 @@ function MainBar({startScreen}) {
     // useEffect(() =>{
     //     console.log(bar)
     // }, [bar])
-
+    const removeAllCart = async () => {
+        bar.cart.map((el) => {
+            // console.log(el)
+            removeItemfromCart(el.id)
+        })
+       
+    }
 
 
     const removeItemfromCart = async (id) => {
+
         const indexProd = bar.prods.findIndex(el  => el.id == id)
     
         const indexBask = bar.cart.findIndex(el  => el.id == id)
@@ -112,7 +111,7 @@ function MainBar({startScreen}) {
         bar.prods[indexProd].stock +=  bar.cart[indexBask].stock
         bar.cart.splice(indexBask,1)
 
-        // console.log(bar)
+        console.log(bar)
        
         setBar({prods: bar.prods, cart: bar.cart})
     }

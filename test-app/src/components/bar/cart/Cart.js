@@ -1,7 +1,9 @@
 
+import { Button } from '@material-ui/core';
 import CartButton from './CartButton';
+import { FiTrash2 } from "react-icons/fi"
 
-function Cart({basket, demoveItem}) {
+function Cart({basket, removeItem ,removeAllCart}) {
 
 
     const getSum = () => {
@@ -12,24 +14,33 @@ function Cart({basket, demoveItem}) {
         return sum
     }
 
-    // const changePrice = (id, new_price) => {
-    //     var selected = basket.map(
-    //         function(el) {
-    //             if(el.id == id){
-    //                 return el
-    //             }
-    //         }
-    //     )
-    //     selected.price = new_price
-    // }
+    const changePrice = (id, new_price) => {
+        var selected = basket.map(
+            function(el) {
+                if(el.id == id){
+                    return el
+                }
+            }
+        )
+        selected.price = new_price
+    }
 
     
             {/* <CartSet items = {basket} 
                     removeItem = {removeItem}
                     chan gePrice = {changePrice} /> */}
+
+    
     return (
         <div className='cart'>
             <h2>Cart</h2>
+            <Button className = 'deleteAllcart'
+                    variant="outline-primary" 
+                    onClick ={()=>removeAllCart()}
+                    >
+                    
+                       <FiTrash2 />
+                </Button>
 
             { /*console.log('incart'),
                 console.log(basket.cart),*/
@@ -41,7 +52,7 @@ function Cart({basket, demoveItem}) {
                     <h3>{item.name}</h3> 
                 
                     <CartButton item = {item} 
-                        demoveItem = {demoveItem}/>
+                        removeItem = {removeItem}/>
                     {/* <ChangePriceB item = {item} changePrice = {changePrice}/> */}
                 </div>            
                 )) 
