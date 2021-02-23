@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 const arrayofTypes = ['Warm Drink', 'Snack', 'Ernergy Drink','Service']
 
-function StockHandler({pushTop}) {
+function StockHandler({prods, pushTop}) {
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -16,8 +16,15 @@ function StockHandler({pushTop}) {
             alert('Add valid price')
             return 
         }
+        
+        prods.map((el) => {
+            if(el.name == name){
+                alert(`Item with nane ${name} already exists`)
+                return
+            }
+        })
 
-        pushTop({name, type, price})
+        pushTop({name, type, price, tva})
         
         setName('')
         setType('')
@@ -29,6 +36,7 @@ function StockHandler({pushTop}) {
   const [name, setName] = useState('')
   const [type, setType] = useState('')
   const [price, setPrice] = useState(-1)
+  const [tva, setTVA] = useState(1)
 
     return (
         <form className='add-form' onSubmit={onSubmit}>
@@ -64,6 +72,16 @@ function StockHandler({pushTop}) {
             value={price}
             onChange={(e) => setPrice(e.currentTarget.value)}
             />
+        </div>
+        
+        <div>
+        <label>VAT  </label>
+                <select name="prodTypes" 
+                    onChange={(e) => setTVA(e.target.value)}>
+                          <option value ={1}>5% (service) </option>
+                          <option value ={2}>9% (juice/snack)</option>
+                          <option value ={3}>19% (alchool) </option>
+                 </select>
         </div>
 
         <input type='submit' value='Save Product' className='btn btn-block' />

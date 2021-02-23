@@ -60,7 +60,7 @@ function MainBar({startScreen}) {
     const Caller= () =>{
         switch(screen){
             case BarScreen.ADDITEM:
-                    return <StockHandler zeers={bar.prods} pushTop = {addItemtoDB}/>;
+                    return <StockHandler prods={bar.prods} pushTop = {addItemtoDB}/>;
             case BarScreen.SELLBAR:
                     return <div>
                         <Cart  basket = {bar} 
