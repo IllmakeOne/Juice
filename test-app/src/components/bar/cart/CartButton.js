@@ -21,19 +21,20 @@ const CartButton = ({item, removeItem, changePrice}) => {
     //make so it can demove from basket
     //and allowe modifyin price if Modifiable=true
         return (
-            <div >
+            <div className = 'cartbutton'>
             Number Selected: <h3>{item.stock}</h3> <br/>
             Price of Item: {item.price}
+                    <br/>
 
-            <Button 
+            
+                <Button 
                     variant="outline-primary" 
                     onClick ={()=>removeItem(item.id)}
                     >
-                    
                        <FiTrash />
                 </Button>
                 
-                {!item.fixedPrice && <Button 
+                {item.type=='Service' && <Button 
                     variant="outline-primary" 
                     onClick ={()=>changePrice(item.id, changePrice)}
                     >                

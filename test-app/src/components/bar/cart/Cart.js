@@ -8,7 +8,7 @@ function Cart({basket, removeItem ,removeAllCart}) {
 
     const getSum = () => {
         var sum = 0
-        basket.cart.forEach(element => {
+        basket.forEach(element => {
             sum += element.price * element.stock            
         });
         return sum
@@ -25,10 +25,6 @@ function Cart({basket, removeItem ,removeAllCart}) {
         selected.price = new_price
     }
 
-    
-            {/* <CartSet items = {basket} 
-                    removeItem = {removeItem}
-                    chan gePrice = {changePrice} /> */}
 
     
     return (
@@ -44,10 +40,9 @@ function Cart({basket, removeItem ,removeAllCart}) {
 
             { /*console.log('incart'),
                 console.log(basket.cart),*/
-                basket.cart.map((item) => 
+                basket.map((item) => 
                 (
                 <div key = {item.id} 
-                    className = 'cartbutton'
                     >
                     <h3>{item.name}</h3> 
                 

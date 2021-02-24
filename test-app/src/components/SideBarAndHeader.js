@@ -33,6 +33,8 @@ import ContactsIcon from '@material-ui/icons/ImportContacts';
 import logo from "../assets/logo.png"
 
 
+import MainBar , {BarScreen} from './bar/MainBar'
+
 
 export default function PermanentDrawerLeft() {
   const classes = useStyles();
@@ -153,6 +155,7 @@ export default function PermanentDrawerLeft() {
 
         </Toolbar>
       </AppBar>
+      {/* <MainBar startScreen = {BarScreen.SELLBAR}/> */}
       <Drawer
         className={classes.drawer}
         variant="permanent"

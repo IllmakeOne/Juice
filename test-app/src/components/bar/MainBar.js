@@ -57,19 +57,23 @@ function MainBar({startScreen}) {
 
     const[screen, setScreen] = useState(startScreen)
 
-    const Caller= () =>{
+    const Caller = () =>{
         switch(screen){
             case BarScreen.ADDITEM:
+                //page to add item to invetory
                     return <StockHandler prods={bar.prods} pushTop = {addItemtoDB}/>;
             case BarScreen.SELLBAR:
+                // selling cart and item display
                     return <div>
-                        <Cart  basket = {bar} 
+                        <Cart  basket = {bar.cart} 
                                 removeItem = {removeItemfromCart}
                                 removeAllCart = {removeAllCart} />
-                        <ProdSet items = {bar} addtoCart = {addtoCart}/> </div> 
+                        <ProdSet items = {bar.prods} onClick = {addtoCart}/> </div> 
             case BarScreen.ADDSUPPLIER:   
+                //add a new supplier to DB
                     return <AddSupplier pushTop= {pushSupplier}/>
-            case BarScreen.ADDSTOCK:   
+            case BarScreen.ADDSTOCK:  
+                //add new sellable item
                     return <AddStock pushTop= {pushItemtoStock}/>
                    
         }
@@ -95,9 +99,14 @@ function MainBar({startScreen}) {
     // }, [bar])
     const removeAllCart = async () => {
         bar.cart.map((el) => {
-            // console.log(el)
-            removeItemfromCart(el.id)
+            bar.prods.map((prd)=>{
+                if(prd.id==el.id)
+                    prd.stock+=el.stock
+            })
         })
+
+        setBar({prods: bar.prods, cart: []})
+        
        
     }
 
@@ -111,7 +120,7 @@ function MainBar({startScreen}) {
         bar.prods[indexProd].stock +=  bar.cart[indexBask].stock
         bar.cart.splice(indexBask,1)
 
-        console.log(bar)
+        // console.log(bar)
        
         setBar({prods: bar.prods, cart: bar.cart})
     }
@@ -147,12 +156,8 @@ function MainBar({startScreen}) {
     }
 
 
-    const sell = () => {
-        bar.cart.map((el)=> {
-            
-        }
-        
-        )
+    const aux = (item) => {
+        console.log(item.id)
     }
 
     /**
@@ -180,11 +185,13 @@ function MainBar({startScreen}) {
      */
     const pushSupplier = (item) =>{
         console.log(item)
+        //TODO
         
     }
 
     const pushItemtoStock = (item) =>{
         console.log(item)
+        //TODO
     }
 
     /*onSubmit = { } */
@@ -222,13 +229,6 @@ function MainBar({startScreen}) {
                     > 
                     Add Inventory
             </Button>
-            {/* <Header t
-            itle= {JSON.stringify(bar,null)}/> */}
-            {/* {JSON.stringify(bar,null)} */}
-            {/* {console.log(bar)}
-            <Cart  basket = {bar} demoveItem = {removeItemfromCart} />
-            <ProdSet items = {bar} addtoCart = {addtoCart}/> */}
-            {/* <StockHandler pushTop = {addItemtoDB}/> */}
 
             {Caller()}
         </div>   

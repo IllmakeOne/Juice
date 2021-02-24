@@ -70,7 +70,7 @@ body {
   padding-top: 20px;
   background: #2dbd2d;
   position: absolute;
-  left: 30%;
+  left: 60%;
 }
 
 
@@ -82,19 +82,25 @@ body {
   cursor: pointer;
 }
 
+.prodtypeset{
+  background: rgb(162, 13, 207);
+  border-color: white;
+  border-style: solid;
+}
+
 .changeprice{
   float: right;
 }
 
 .mainbar{
   height: 90%;
-  width: 100%;
+  width: 80%;
   padding-top: 20px;
-  /* background: orange; */
+  background: orange;
   
   position: absolute;
-  left: 300px;
-  top: 150px;
+  left: 200px;
+  top: 60px;
 }
 
 .prodbutton {
@@ -119,14 +125,32 @@ body {
 
 }
 
+.display_prods {
+  background: black;
+  height: 100%;
+  width: 60%;
+  position: absolute;
+  left: 40%;
+  top:100%;
+
+}
+.itemchangersdaddy{
+  /* background: greenyellow; */
+  height: 100%;
+  width: 25%;
+  position: absolute;
+  left: -0.5px;
+  top:50px;
+}
+
 .prodset {
   height: 50%;
-  width: 25%;
+  width: 50%;
   background: red;
   margin: 10px;
   padding: 10px 20px;
   /* position: absolute; */
-  border-color: coral; 
+  /* border-color: coral;  */
   position: relative;
 
 

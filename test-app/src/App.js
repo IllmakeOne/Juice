@@ -12,7 +12,7 @@ function App() {
     <div>
       <SideBarAndHeader />
         <div>
-        <MainBar startScreen = {BarScreen.SELLBAR}/>
+        <MainBar startScreen = {BarScreen.ADDITEM}/>
         </div>
       {/* <h2>supp {name} </h2>
       <h2> subb {dicc ? 'yes': 'bio'} </h2> */}

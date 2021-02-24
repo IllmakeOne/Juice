@@ -3,6 +3,7 @@
     {
       "id": 1,
       "name": "Fanta .5",
+      "type": "Juice",
       "price": 6,
       "stock": 10,
       "fixedPrice": true
@@ -10,6 +11,7 @@
     {
       "id": 2,
       "name": "Coffee",
+      "type": "Warm Drink",
       "price": 6,
       "stock": 20,
       "fixedPrice": true
@@ -17,6 +19,7 @@
     {
       "id": 3,
       "name": "Cola .5",
+      "type": "Juice",
       "price": 7,
       "stock": 20,
       "fixedPrice": true
@@ -24,16 +27,26 @@
     {
       "id": 4,
       "name": "Water .5",
+      "type": "Juice",
       "price": 5,
-      "stock": 100,
+      "stock": 50,
       "fixedPrice": true
     },
     {
       "id": 5,
       "name": "Tennis",
+      "type": "Service",
       "price": 6,
       "stock": -1,
       "fixedPrice": false
+    },
+    {
+      "id": 6,
+      "name": "Tea",
+      "type": "Warm Drink",
+      "price": 6,
+      "stock": 50,
+      "fixedPrice": true
     }
   ],
   "posts": [
