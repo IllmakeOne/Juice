@@ -1,12 +1,15 @@
-
 import SideBarAndHeader from './components/SideBarAndHeader'
-import Header from './components/Header'
 import MainBar , {BarScreen} from './components/bar/MainBar'
+import MainRec from './components/rec/MainRec'
+import StartScreen from './components/StartScreen'
 
+const routes = {
+  "/": () => <StartScreen />,
+  "/bar": () => <MainBar />,
+  "/rec": () => <MainRec />
+};
 
 function App() {
-
-
 
   return (
     <div>
@@ -21,3 +24,4 @@ function App() {
 }
 
 export default App;
+

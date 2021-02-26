@@ -32,9 +32,14 @@ import ContactsIcon from '@material-ui/icons/ImportContacts';
 
 import logo from "../assets/logo.png"
 
+import { Route, Link, BrowserRouter as Router } from "react-router-dom";
+
 
 import MainBar , {BarScreen} from './bar/MainBar'
 
+const routes = {
+  "/bar": () => <MainBar />
+};
 
 export default function PermanentDrawerLeft() {
   const classes = useStyles();
@@ -180,6 +185,18 @@ export default function PermanentDrawerLeft() {
         </List>
         <Divider classes={{root: classes.divider}}/>
         <List>
+          <ListItem>
+              <div>
+                <Router>
+                  <ul>
+                    <li>
+                      <Link to="/bar">Bar</Link>
+                    </li>
+                  </ul>
+                  <Route path="/bar" component={MainBar} />   
+                </Router>
+              </div>
+          </ListItem>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon style={{ color: "white"}}>{index % 2 === 0 ? <BuildIcon /> : <MailIcon />}</ListItemIcon>

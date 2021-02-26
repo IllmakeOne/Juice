@@ -46,7 +46,7 @@ const Phetch = async (method, endpoint, body) => {
     }
   }
    
-
+//----------------------------------------Main Component--------------------------------------------------------------------------
 
 function MainBar({startScreen}) {
 
@@ -67,17 +67,20 @@ function MainBar({startScreen}) {
                     return <div>
                         <Cart  basket = {bar.cart} 
                                 removeItem = {removeItemfromCart}
-                                removeAllCart = {removeAllCart} />
+                                removeAllCart = {removeAllCart} 
+                                changePrice = {changePriceCart}/>
                         <ProdSet items = {bar.prods} onClick = {addtoCart}/> </div> 
             case BarScreen.ADDSUPPLIER:   
                 //add a new supplier to DB
                     return <AddSupplier pushTop= {pushSupplier}/>
             case BarScreen.ADDSTOCK:  
                 //add new sellable item
-                    return <AddStock pushTop= {pushItemtoStock}/>
+                    return <AddStock/>
                    
         }
     }
+
+//----------------------------------------Methhods--------------------------------------------------------------------------
 
     // //get from db and pas son
     useEffect(() =>{
@@ -96,6 +99,7 @@ function MainBar({startScreen}) {
 
     // useEffect(() =>{
     //     console.log(bar)
+    // setTimeout(_exportPdf(),10000)
     // }, [bar])
     const removeAllCart = async () => {
         bar.cart.map((el) => {
@@ -106,8 +110,7 @@ function MainBar({startScreen}) {
         })
 
         setBar({prods: bar.prods, cart: []})
-        
-       
+
     }
 
 
@@ -124,25 +127,39 @@ function MainBar({startScreen}) {
        
         setBar({prods: bar.prods, cart: bar.cart})
     }
+
+    const changePriceCart =  (id, newprice) => {
+        const indexProd = bar.prods.findIndex(el  => el.id == id)
+    
+        const indexBask = bar.cart.findIndex(el  => el.id == id)
+    
+        bar.prods[indexProd].price =  newprice
+
+        setBar({prods: bar.prods, cart: bar.cart})
+    }
      
     const addtoCart = async  (id) => {
-        // console.log(id)
+        console.log(id)
         const bruh = bar.prods
         const auxBasket = bar.cart
         var aux = null
        bruh.map(
             function(prod) {
                 if(prod.id == id){
-                    prod.stock = prod.stock - 1
+                    if(prod.type != 'Service'){
+                        prod.stock = prod.stock - 1
+                    }
                     aux = {
                         id: prod.id,
                         name: prod.name,
-                         stock: 1,
-                         price: prod.price,
-                         fixedPrice: prod.fixedPrice
+                        stock: 1,
+                        price: prod.price,
+                        fixedPrice: prod.fixedPrice
                     }
+                    
                 }
             })
+            
         const indexof = auxBasket.findIndex(elem => elem.id == id)
         if(indexof== -1){
             //if it finds it , increase basket stock
@@ -151,7 +168,7 @@ function MainBar({startScreen}) {
             //if it doesnt, add it wiht stock 1
             auxBasket[indexof].stock += 1
         }
-        // console.log(bar)
+        console.log(bar.cart)
         setBar({prods: bruh, cart: auxBasket})
     }
 
@@ -165,8 +182,6 @@ function MainBar({startScreen}) {
      * @param {*} item 
      */
     const addItemtoDB = (item) =>{
-
-       
         const to_send = {
             fixedPrice: item.type=='Service'? false : true,
             //fixed price is false if the item is a service

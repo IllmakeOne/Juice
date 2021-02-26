@@ -1,4 +1,4 @@
-import CartButton from './bar/cart/CartButton'
+import CartButton from './CartButton'
 import ChangePriceB from './ChangePriceB'
 import React from 'react'
 
