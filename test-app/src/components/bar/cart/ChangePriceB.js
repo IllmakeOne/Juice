@@ -20,15 +20,13 @@ function ChangePriceB({item, changePrice}) {
         return (
             <div>  
                 {console.log('reeeee')}
-                <Popup />      
                 kills meeee
-                {/*
                <Button 
                     className ='changeprice'
                     variant="outline-primary" 
-                    onClick ={() => changePrice(item.id, 2)}
+                    onClick ={() => changePrice(item.id, 1000)}
                     > Oh my god
-                </Button>{' '} */} 
+                </Button>{' '} 
             </div>
         )
     }
@@ -36,14 +34,15 @@ function ChangePriceB({item, changePrice}) {
 
     return (
         <div>
-            <Button 
+                {console.log('reeeee')}
+                kills meeee
+               <Button 
+                    className ='changeprice'
                     variant="outline-primary" 
-                    onClick ={() => clickEdit()}
-                    >
-                    
-                       <FiEdit />
-                       
-                </Button>{' '}  
+                    onClick ={() => changePrice(item.id, 2)}
+                    > 
+                    <FiEdit/>
+                </Button>{' '} 
 
                 {/* <Panel header="Panel title" bordered>
                 <Paragraph />

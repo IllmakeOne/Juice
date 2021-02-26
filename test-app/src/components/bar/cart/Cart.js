@@ -2,8 +2,9 @@
 import { Button } from '@material-ui/core';
 import CartButton from './CartButton';
 import { FiTrash2 } from "react-icons/fi"
+import ChangePriceB from './ChangePriceB'
 
-function Cart({basket, removeItem ,removeAllCart}) {
+function Cart({basket, removeItem ,removeAllCart, changePrice}) {
 
 
     const getSum = () => {
@@ -14,18 +15,6 @@ function Cart({basket, removeItem ,removeAllCart}) {
         return sum
     }
 
-    const changePrice = (id, new_price) => {
-        var selected = basket.map(
-            function(el) {
-                if(el.id == id){
-                    return el
-                }
-            }
-        )
-        selected.price = new_price
-    }
-
-
     
     return (
         <div className='cart'>
@@ -34,7 +23,7 @@ function Cart({basket, removeItem ,removeAllCart}) {
                     variant="outline-primary" 
                     onClick ={()=>removeAllCart()}
                     >
-                    
+                    Empty cart
                        <FiTrash2 />
                 </Button>
 
@@ -44,11 +33,10 @@ function Cart({basket, removeItem ,removeAllCart}) {
                 (
                 <div key = {item.id} 
                     >
-                    <h3>{item.name}</h3> 
                 
                     <CartButton item = {item} 
-                        removeItem = {removeItem}/>
-                    {/* <ChangePriceB item = {item} changePrice = {changePrice}/> */}
+                        removeItem = {removeItem}
+                        changePrice = {changePrice}/>
                 </div>            
                 )) 
             }

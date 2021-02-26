@@ -84,8 +84,8 @@ body {
 
 .prodtypeset{
   background: rgb(162, 13, 207);
-  border-color: white;
-  border-style: solid;
+  height: 1000%;
+  width: 80%;
 }
 
 .changeprice{
@@ -103,10 +103,24 @@ body {
   top: 60px;
 }
 
+/* .tablle{
+  height: 50%;
+  width: 100%
+}
+
+.intable{
+  background: rgb(214, 216, 97);  position: absolute;
+  left: 200px;
+  top: 60px;
+
+} */
+
 .prodbutton {
   background: rgb(214, 216, 97);
   height: 50%;
-  width: 50%;
+  width: 100%;
+  border-color: white;
+  border-style: solid;
 }
 
 .finalbasket{

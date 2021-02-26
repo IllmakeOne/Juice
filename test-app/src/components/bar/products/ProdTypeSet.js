@@ -9,7 +9,7 @@ const ProdTypeSet = ({items, onClick}) => {
             {items.map((prod) => {
                         return (
                     <div key = {prod.id} >
-                        <h3>{prod.name}</h3>
+                        {/* <h3>{prod.name}</h3> */}
                         <ProdButton prod = {prod}
                             onClick = {onClick} />
                     </div>
