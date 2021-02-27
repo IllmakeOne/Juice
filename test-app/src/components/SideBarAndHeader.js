@@ -33,12 +33,14 @@ import ContactsIcon from '@material-ui/icons/ImportContacts';
 import logo from "../assets/logo.png"
 
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
-
-
-import MainBar , {BarScreen} from './bar/MainBar'
+import MainBar from './bar/MainBar'
+import MainRec from './rec/MainRec';
+import StartScreen from './StartScreen';
 
 const routes = {
-  "/bar": () => <MainBar />
+  "/": () => <StartScreen />,
+  "/bar": () => <MainBar />,
+  "/rec": () => <MainRec />
 };
 
 export default function PermanentDrawerLeft() {
@@ -190,10 +192,23 @@ export default function PermanentDrawerLeft() {
                 <Router>
                   <ul>
                     <li>
-                      <Link to="/bar">Bar</Link>
+                      <Link to="/"><h2>StartScreent</h2></Link>
                     </li>
                   </ul>
-                  <Route path="/bar" component={MainBar} />   
+                  <ul>
+                    <li>
+                      <Link to="/bar"><h2>Bar</h2></Link>
+                    </li>
+                  </ul>
+                  <ul>
+                    <li>
+                      <Link to="/rec"><h2>Reception</h2></Link>
+                    </li>
+                  </ul>
+                  
+                  <Route path="/" component={StartScreen} />  
+                  <Route path="/bar" component={MainBar} />  
+                  <Route path="/rec" component={MainRec} />   
                 </Router>
               </div>
           </ListItem>

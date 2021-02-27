@@ -97,10 +97,7 @@ function MainBar({startScreen}) {
     }, [])
 
 
-    // useEffect(() =>{
-    //     console.log(bar)
-    // setTimeout(_exportPdf(),10000)
-    // }, [bar])
+    
     const removeAllCart = async () => {
         bar.cart.map((el) => {
             bar.prods.map((prd)=>{

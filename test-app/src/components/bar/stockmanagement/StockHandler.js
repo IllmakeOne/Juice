@@ -1,15 +1,19 @@
-import React from 'react'
 import { useState } from 'react'
+import { Autocomplete } from '@material-ui/lab';
+import TextField from '@material-ui/core/TextField';
+import Autocompl from '../pieces/Autocompl';
 
 const arrayofTypes = ['Warm Drink', 'Snack', 'Ernergy Drink','Service']
 
+
+//this should be called add item 
 function StockHandler({prods, pushTop}) {
 
     const onSubmit = (e) => {
         e.preventDefault()
 
         if(name == ''){
-            alert('Add prod name please')
+        alert('Add prod name please')
             return 
         }
         if(price <= 1){
@@ -25,6 +29,7 @@ function StockHandler({prods, pushTop}) {
         })
 
         pushTop({name, type, price, tva})
+        console.log({name, type, price, tva})
         
         setName('')
         setType('')
@@ -58,13 +63,21 @@ function StockHandler({prods, pushTop}) {
                             <option value = {el}>{el}</option>)
                     })}
                  </select>
-            {/* <input
-            type='text'
-            placeholder='add new Item Type'
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            /> */}
         </div>
+
+        {/* <Autocomplete
+            id="combo-box-demo"
+            options={arrayofTypes}
+            getOptionLabel={(option) => option}
+            style={{ width: 300 }}
+            renderInput={(params) => 
+                    <TextField {...params} label="Combo box" variant="outlined" 
+            on/>}        /> */}
+
+        <div>
+            <Autocompl />
+        </div>
+
         <div className='form-control form-control-check'>
             <label>Price</label>
             <input 
