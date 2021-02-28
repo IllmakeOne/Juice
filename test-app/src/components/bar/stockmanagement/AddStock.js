@@ -1,8 +1,9 @@
 import { useState, useEffect} from 'react'
 import MainBar from '../MainBar'
 // import {Autocomplete} from '@material-ui/lab';
-import { Table } from 'react-bootstrap'
+// import { Table } from 'react-bootstrap'
 import { TextField } from '@material-ui/core';
+import { DataGrid } from '@material-ui/data-grid'
 import { FiCheck } from 'react-icons/fi';
 import Button from 'react-bootstrap/esm/Button';
 
@@ -119,11 +120,57 @@ const  AddStock = () => {
     }
 
     const bruhwaht= (e)=>{
-        console.log(JSON.stringify(e.target.value))
+        console.log(e.target.value)
         // console.log(JSON.stringify(crtSupp))
         setSuppliers({sups: suppliers.sups,
                       crt: e.target.value})
     }
+
+
+//------------------------------------------------DEV----------------
+
+const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'name', headerName: 'Name', width: 130 },
+    { field: 'type', headerName: 'Prod Type', width: 130 },
+    {
+        field: 'price',
+        headerName: 'Price',
+        type: 'number',
+        width: 90,
+    },
+    {
+        field: 'stock',
+        headerName: 'stock',
+        type: 'number',
+        width: 90,
+    },
+    // {
+    //   field: 'fullName',
+    //   headerName: 'Full name',
+    //   description: 'This column has a value getter and is not sortable.',
+    //   sortable: false,
+    //   width: 160,
+    //   valueGetter: (params) =>
+    //     `${params.getValue('firstName') || ''} ${params.getValue('lastName') || ''}`,
+    // },
+  ];
+
+  const rows = [
+    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  ];
+  
+
+
+//------------------------------------------------DEV/////////////----------------
     return (
         <div>
 
@@ -148,91 +195,10 @@ const  AddStock = () => {
                 }   
             </div>
         
-            <h1>Table start:</h1>
-            <Table striped bordered hover className=''>
-                <thead>
-                    <tr>
-                    <th>#|</th>
-                    <th>|Product|</th>
-                    <th>|Stock to be Added|</th>
-                    <th>|Price without VAT|</th>
-                    <th>|VAT|</th>
-                    <th>|Total without VAT</th>
-                    <th>  </th>
-                    </tr>
-                </thead>
-                <tbody className = ''>
-
-                    {upProds.map((el)=>{
-                        return (
-                            <tr>
-                            <td>{el.id}</td>
-                            <td>{el.name}</td>
-                            <td>{el.stock}</td>
-                            <td>{el.price}</td>
-                            <td>{el.vat}%</td>
-                            <td>{el.stock * el.price}</td>
-                            </tr>                            
-                        )
-                    })}
-
-                    <tr>
-                        <td>
-                            {crtItem.id}
-                        </td>
-                    <td>
-                        <div className='form-control'>
-                            <select name="prodsAddStock" 
-                            onChange={(e) => onSelectItem(e.target.value)} >
-                                {
-                                prods.map((el) => {
-                                    return (
-                                        <option value = {el}>{el.name}</option>)
-                                })}
-                            </select>
-                         </div>
-                    </td>
-                    <td>
-                        <div className='form-control'>
-                            <input
-                                type='number'
-                                placeholder='1'
-                                value={crtItem.stock}
-                                onChange={(e) => selectedsetUpStock(e.currentTarget.value)}
-                            />
-                        </div>
-                    </td>
-                    <td>
-                         <div className='form-control'>
-                                <input
-                                    type='number'
-                                    placeholder='1'
-                                    value={crtItem.price}
-                                    onChange={(e) => selectedsetUpPrice(e.currentTarget.value)}
-                                 />
-                        </div>
-                    </td>
-
-                    <td>
-                        {crtItem.vat}%
-                    </td>
-
-                    <td>
-                        {crtItem.total}
-                    </td>
-                        <Button 
-                            variant="outline-primary" 
-                            onClick ={()=>upItem()}
-                            >
-                            <FiCheck />
-                         </Button>{' '}        
-                    </tr>
-                    
-
-                </tbody>
-                </Table>
-
+            <div className='datagrid' style={{ height: 400, width: '50%'}}>
+                <DataGrid rows={prods} columns={columns} pageSize={5} checkboxSelection />
             </div>
+        </div>
 
         
     )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -17,7 +17,7 @@ const filter = createFilterOptions({
 
 // const filter = createFilterOptions();
 
-export default function Autocompl() {
+export default function AutoCompAddItem({upValue}) {
 
   const types = [
     {name: 'Warm Drink', vat: 9},
@@ -27,12 +27,18 @@ export default function Autocompl() {
     {name: 'Alchool', vat: 19}
   ]
 
-  const [value, setValue] = React.useState(null); 
-  const [open, toggleOpen] = React.useState(false);
+  const [value, setValue] = useState(null); 
+  const [open, toggleOpen] = useState(false);
+
+  // useEffect(() =>{
+  //   upValue(value)
+  // }, [value])
+
+  const onChange = (newvalue) => {}
 
   const handleClose = () => {
     setDialogValue({
-      nametype: '',
+      name: '',
       vat: '',
     });
 
@@ -40,17 +46,19 @@ export default function Autocompl() {
   };
 
   const [dialogValue, setDialogValue] = React.useState({
-    nametype: '',
+    name: '',
     vat: '',
   });
 
   const handleSubmit = (event) => {
+    console.log('Handle submit called')
     event.preventDefault();
-    setValue({
-      nametype: dialogValue.nametype,
-      vat: parseInt(dialogValue.vat, 10),
-    });
+    
 
+    upValue({
+      name: dialogValue.name,
+      vat: parseInt(dialogValue.vat, 10),
+    })
     handleClose();
   };
 
@@ -61,21 +69,32 @@ export default function Autocompl() {
         onChange={(event, newValue) => {
           if (typeof newValue === 'string') {
             // timeout to avoid instant validation of the dialog's form.
+            // console.log('I   ' + JSON.stringify(newValue))
             setTimeout(() => {
               toggleOpen(true);
               setDialogValue({
-                nametype: newValue,
-                vat: '',
+                name: newValue.name,
+                vat: newValue.vat,
               });
             });
           } else if (newValue && newValue.inputValue) {
+            // console.log('I I    ' + JSON.stringify(newValue))
             toggleOpen(true);
             setDialogValue({
-              nametype: newValue.inputValue,
-              vat: '',
+              name: newValue.name,
+              vat: newValue.vat,
             });
           } else {
-            setValue(newValue);
+            // console.log('I I I   ' + JSON.stringify(newValue))
+            setValue({
+              name: newValue.name,
+              vat: newValue.vat,
+            });
+
+            upValue({
+              name: newValue.name,
+              vat: newValue.vat,
+            })
           }
         }}
 
@@ -83,22 +102,7 @@ export default function Autocompl() {
         id="free-solo-dialog-demo"
         options={types}
         //--------------------------------------------------------Filter-----------
-        // filterOptions={(params) => {
-        //   const filtered = filter(params);
-        
-        //    if (params.inputValue !== '') {
-        //      // console.log(params.inputValue)
-        //      // console.log(options)
-        //      filtered.push({
-        //        inputValue: params.inputValue,
-        //        nametype: `Add "${params.inputValue}"`,
-        //      });
-        //    }
-        //    // console.log(filtered)
-        //    return filtered;
-        //  }}
-
-         filterOptions={(options, params) => {
+        filterOptions = {(options, params) => {
           const filtered = filter(options, params);
 
           if (params.inputValue !== '') {
@@ -108,20 +112,21 @@ export default function Autocompl() {
             });
           }
 
-           console.log(filtered)
+          //  console.log(filtered)
           return filtered;
         }}
         //--------------------------------------------------------Filter ///-----------
 
         getOptionLabel={(option) => {
           // e.g value selected with enter, right from the input
+          // console.log(option)
           if (typeof option.name === 'string') {
             return option.name;
           }
           if (option.inputValue) {
             return option.inputValue;
           }
-          return option.nametype;
+          return option.name;
         }}
         selectOnFocus
         clearOnBlur
@@ -144,8 +149,8 @@ export default function Autocompl() {
               autoFocus
               margin="dense"
               id="name"
-              value={dialogValue.nametype}
-              onChange={(event) => setDialogValue({ ...dialogValue, nametype: event.target.value })}
+              value={dialogValue.name}
+              onChange={(event) => setDialogValue({ ...dialogValue, name: event.target.value })}
               label="Type name"
               type="text"
             />

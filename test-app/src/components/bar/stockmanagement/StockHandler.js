@@ -1,13 +1,31 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Autocomplete } from '@material-ui/lab';
 import TextField from '@material-ui/core/TextField';
-import Autocompl from '../pieces/Autocompl';
+import AutoCompAddItem from '../pieces/AutoCompAddItem';
+
+import {fetchProds} from '../DBconn'
 
 const arrayofTypes = ['Warm Drink', 'Snack', 'Ernergy Drink','Service']
 
 
 //this should be called add item 
-function StockHandler({prods, pushTop}) {
+function StockHandler({pushTop}) {
+
+    const [prods, setProds] = useState([])
+
+    useEffect(()=>{
+        const gett = async () => {
+            const inprods = await fetchProds()
+            setProds({prods: inprods})
+        }
+
+        gett()
+
+    },[])
+
+    useEffect(()=>{
+        console.log(prods)
+    },[prods])
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -21,30 +39,50 @@ function StockHandler({prods, pushTop}) {
             return 
         }
         
-        prods.map((el) => {
-            if(el.name == name){
-                alert(`Item with nane ${name} already exists`)
-                return
-            }
-        })
+        // prods.map((el) => {
+        //     if(el.name == name){
+        //         alert(`Item with nane ${name} already exists`)
+        //         return
+        //     }
+        // })
 
-        pushTop({name, type, price, tva})
-        console.log({name, type, price, tva})
+        pushTop({name, type, price, vat})
+        console.log({name, type, price, vat})
         
         setName('')
         setType('')
         setPrice(-1)
-        
+    }
+
+
+    const setTypeandVAT = (itemtyvat) => {
+        setVat(itemtyvat.vat)
+        setType(itemtyvat.name)
+        console.log(JSON.stringify(itemtyvat) + 'IN Stockhandler')
     }
 
     
   const [name, setName] = useState('')
   const [type, setType] = useState('')
   const [price, setPrice] = useState(-1)
-  const [tva, setTVA] = useState(1)
+  const [vat, setVat] = useState(1)
+
+    useEffect(()=>{
+        console.log('Name: ' +name)
+    },[name])
+    useEffect(()=>{
+        console.log('Type: ' +type)
+    },[type])
+    useEffect(()=>{
+        console.log('Price: ' + price)
+    },[price])
+    useEffect(()=>{
+        console.log('Vat: ' +vat)
+    },[vat])
 
     return (
-        <form className='add-form' onSubmit={onSubmit}>
+    // <div>
+    <form className='add-form' onSubmit={onSubmit}>
         <div className='form-control'>
             <label>Name</label>
             <input
@@ -54,28 +92,9 @@ function StockHandler({prods, pushTop}) {
             onChange={(e) => setName(e.target.value)}
             />
         </div>
-        <div className='type-control'>
-            <label>Type of product: </label>
-                <select name="prodTypes" 
-                onChange={(e) => setType(e.target.value)} >
-                    {arrayofTypes.map((el) => {
-                        return (
-                            <option value = {el}>{el}</option>)
-                    })}
-                 </select>
-        </div>
-
-        {/* <Autocomplete
-            id="combo-box-demo"
-            options={arrayofTypes}
-            getOptionLabel={(option) => option}
-            style={{ width: 300 }}
-            renderInput={(params) => 
-                    <TextField {...params} label="Combo box" variant="outlined" 
-            on/>}        /> */}
 
         <div>
-            <Autocompl />
+            <AutoCompAddItem upValue = {setTypeandVAT}/>
         </div>
 
         <div className='form-control form-control-check'>
@@ -87,17 +106,19 @@ function StockHandler({prods, pushTop}) {
             />
         </div>
         
-        <div>
+        {/* <div>
         <label>VAT  </label>
                 <select name="prodTypes" 
-                    onChange={(e) => setTVA(e.target.value)}>
+                    onChange={(e) => setVat(e.target.value)}>
                           <option value ={1}>5% (service) </option>
                           <option value ={2}>9% (juice/snack)</option>
                           <option value ={3}>19% (alchool) </option>
                  </select>
-        </div>
+        </div> */}
 
         <input type='submit' value='Save Product' className='btn btn-block' />
+        
+    {/* </div> */}
     </form>
     )
 }

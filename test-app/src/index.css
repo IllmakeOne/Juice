@@ -171,6 +171,12 @@ body {
   /* display: inline-block; */
 }
 
+.datagrid{
+  position: absolute;
+  background: rgb(245, 228, 228);
+
+}
+
 .addprodbutt{
   /* margin: 5px;
   padding: 5px 10px; */
