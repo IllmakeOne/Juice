@@ -68,7 +68,7 @@ function MainBar({startScreen}) {
                         <Cart  basket = {bar.cart} 
                                 removeItem = {removeItemfromCart}
                                 removeAllCart = {removeAllCart} 
-                                changePrice = {changePriceCart}/>
+                                changeItem = {changeCartItem}/>
                         <ProdSet items = {bar.prods} onClick = {addtoCart}/> </div> 
             case BarScreen.ADDSUPPLIER:   
                 //add a new supplier to DB
@@ -125,18 +125,28 @@ function MainBar({startScreen}) {
         setBar({prods: bar.prods, cart: bar.cart})
     }
 
-    const changePriceCart =  (id, newprice) => {
-        const indexProd = bar.prods.findIndex(el  => el.id == id)
-    
-        const indexBask = bar.cart.findIndex(el  => el.id == id)
-    
-        bar.prods[indexProd].price =  newprice
+    const changeCartItem =  ({id, price, amount}) => {
+        // console.log('id' +id +' price ' + price + ' amount ' + amount)
+        var difference = 0
+        bar.cart.forEach((el)=>{
+            if(el.id == id){
+                difference = amount - el.stock
+                el.stock = amount
+                el.price = price
+            }
+        })
+
+        bar.prods.forEach((el)=>{
+            if(el.id == id){
+                el.stock -= difference
+            }
+        })
 
         setBar({prods: bar.prods, cart: bar.cart})
     }
      
     const addtoCart = async  (id) => {
-        console.log(id)
+        // console.log(id)
         const bruh = bar.prods
         const auxBasket = bar.cart
         var aux = null

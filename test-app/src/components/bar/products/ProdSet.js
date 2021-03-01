@@ -3,6 +3,7 @@ import ProdTypeSet from './ProdTypeSet'
 import Button from 'react-bootstrap/esm/Button';
 import { useState, useEffect } from 'react'
 import ProdButton from './ProdButton'
+import React from 'react'
 
 const  ProdSet = ({items, onClick}) => {
 
@@ -29,6 +30,7 @@ const  ProdSet = ({items, onClick}) => {
 
     return (
         
+        <React.Fragment>
         <div className='prodset'>
             {uniqueTypes}
                         
@@ -67,6 +69,7 @@ const  ProdSet = ({items, onClick}) => {
             </div>            
             ))} */}
         </div>
+        </React.Fragment>
     )
 }
 

@@ -5,7 +5,6 @@ import MainBar from '../MainBar'
 import { TextField } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid'
 import { FiCheck } from 'react-icons/fi';
-import Button from 'react-bootstrap/esm/Button';
 
 
 
@@ -195,8 +194,8 @@ const columns = [
                 }   
             </div>
         
-            <div className='datagrid' style={{ height: 400, width: '50%'}}>
-                <DataGrid rows={prods} columns={columns} pageSize={5} checkboxSelection />
+            <div className='datagrid' style={{ height: 500, width: '50%'}}>
+                <DataGrid rows={prods} columns={columns} pageSize={8} checkboxSelection />
             </div>
         </div>
 

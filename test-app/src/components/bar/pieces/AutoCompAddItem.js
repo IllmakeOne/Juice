@@ -28,7 +28,12 @@ export default function AutoCompAddItem({upValue}) {
   ]
 
   const [value, setValue] = useState(null); 
-  const [open, toggleOpen] = useState(false);
+  const [open, toggleOpen] = useState(false); 
+
+  const [dialogValue, setDialogValue] = React.useState({
+    name: '',
+    vat: '',
+  });
 
   // useEffect(() =>{
   //   upValue(value)
@@ -42,13 +47,14 @@ export default function AutoCompAddItem({upValue}) {
       vat: '',
     });
 
+    setDialogValue({
+      name: dialogValue.name,
+      vat: parseInt(dialogValue.vat, 10),
+    })
+
     toggleOpen(false);
   };
 
-  const [dialogValue, setDialogValue] = React.useState({
-    name: '',
-    vat: '',
-  });
 
   const handleSubmit = (event) => {
     console.log('Handle submit called')
@@ -139,7 +145,7 @@ export default function AutoCompAddItem({upValue}) {
         )}
       />
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleClose}>
           <DialogTitle id="form-dialog-title">Add new product Type</DialogTitle>
           <DialogContent>
             <DialogContentText>

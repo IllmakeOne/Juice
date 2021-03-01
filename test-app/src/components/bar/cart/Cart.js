@@ -3,8 +3,9 @@ import { Button } from '@material-ui/core';
 import CartButton from './CartButton';
 import { FiTrash2 } from "react-icons/fi"
 import ChangePriceB from './ChangePriceB'
+import React from 'react'
 
-function Cart({basket, removeItem ,removeAllCart, changePrice}) {
+function Cart({basket, removeItem ,removeAllCart, changeItem}) {
 
 
     const getSum = () => {
@@ -17,6 +18,7 @@ function Cart({basket, removeItem ,removeAllCart, changePrice}) {
 
     
     return (
+        <React.Fragment>
         <div className='cart'>
             <h2>Cart</h2>
             <Button className = 'deleteAllcart'
@@ -33,10 +35,9 @@ function Cart({basket, removeItem ,removeAllCart, changePrice}) {
                 (
                 <div key = {item.id} 
                     >
-                
                     <CartButton item = {item} 
                         removeItem = {removeItem}
-                        changePrice = {changePrice}/>
+                        changeItem = {changeItem}/>
                 </div>            
                 )) 
             }
@@ -44,6 +45,7 @@ function Cart({basket, removeItem ,removeAllCart, changePrice}) {
                 Finish total: {getSum()} lei
             </div>
         </div>
+        </React.Fragment>
     )
 }
 
