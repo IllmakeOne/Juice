@@ -1,4 +1,4 @@
-import CartButton from './bar/cart/CartButton'
+import CartButton from './CartButton'
 import ChangePriceB from './ChangePriceB'
 import React from 'react'
 
@@ -18,13 +18,6 @@ function CartSet({items, removeItem, changePrice}) {
       }
 
 
-    const testChange = (item) => {
-        if(item.fixedPrice == false){
-            return <ChangePriceB item = {item}
-                    changePrice = {changePrice()} />
-        }
-    }
-
     return (
         <div className='cartset'> 
              { 
@@ -35,8 +28,8 @@ function CartSet({items, removeItem, changePrice}) {
                     >
                     <h3>{item.name}</h3> 
                     <CartButton item = {item} 
-                        removeItem = {removeItem}/>
-    {                   testChange(item)}
+                        removeItem = {removeItem}
+                        changeItem = {changePrice}/>
                     {/* <ChangePriceB item = {item} changePrice = {changePrice}/> */}
                 </div>            
                 )) 
