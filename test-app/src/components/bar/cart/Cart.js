@@ -1,9 +1,12 @@
 
 import { Button } from '@material-ui/core';
 import CartButton from './CartButton';
-import { FiTrash2 } from "react-icons/fi"
+import { FiTrash2, FiShoppingCart} from "react-icons/fi"
 import ChangePriceB from './ChangePriceB'
 import React from 'react'
+
+
+import RecCartButton from './RecCartButton'
 
 function Cart({basket, removeItem ,removeAllCart, changeItem}) {
 
@@ -35,7 +38,7 @@ function Cart({basket, removeItem ,removeAllCart, changeItem}) {
                 (
                 <div key = {item.id} 
                     >
-                    <CartButton item = {item} 
+                    <RecCartButton item = {item} 
                         removeItem = {removeItem}
                         changeItem = {changeItem}/>
                 </div>            
@@ -44,6 +47,15 @@ function Cart({basket, removeItem ,removeAllCart, changeItem}) {
             <div className='finalbasket'>
                 Finish total: {getSum()} lei
             </div>
+            <Button 
+                className='finalbasket'
+                variant="contained"
+                color='green'
+                size="large"
+                startIcon={<FiShoppingCart />}
+                // onClick ={()=>removeItem(item.id)}
+                >
+            </Button>
         </div>
         </React.Fragment>
     )

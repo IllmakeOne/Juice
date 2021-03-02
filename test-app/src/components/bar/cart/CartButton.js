@@ -1,7 +1,7 @@
 import { FiCheck, FiTrash } from "react-icons/fi"
 import ChangePriceB from './ChangePriceB'
 
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'

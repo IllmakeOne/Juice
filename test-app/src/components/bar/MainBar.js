@@ -9,6 +9,9 @@ import Button from 'react-bootstrap/Button'
 import AddStock from  './stockmanagement/AddStock'
 
 
+import Box from '@material-ui/core/Box';
+
+
 export const BarScreen = {
     SELLBAR : 'sell bar',
     ADDSTOCK : 'add stock',
@@ -65,11 +68,18 @@ function MainBar({startScreen}) {
             case BarScreen.SELLBAR:
                 // selling cart and item display
                     return <div>
-                        <Cart  basket = {bar.cart} 
-                                removeItem = {removeItemfromCart}
-                                removeAllCart = {removeAllCart} 
-                                changeItem = {changeCartItem}/>
-                        <ProdSet items = {bar.prods} onClick = {addtoCart}/> </div> 
+                        <Box display="flex" flexDirection="row" className='barscreenbox' p={1} m={1} bgcolor="background.paper">
+                            <Box>
+                                <ProdSet items = {bar.prods} onClick = {addtoCart}/>
+                            </Box>
+                           
+                            <Box alignSelf="flex-end">
+                            <Cart  basket = {bar.cart} 
+                                    removeItem = {removeItemfromCart}
+                                    removeAllCart = {removeAllCart} 
+                                    changeItem = {changeCartItemPrice}/></Box>
+                     </Box>
+                        </div>
             case BarScreen.ADDSUPPLIER:   
                 //add a new supplier to DB
                     return <AddSupplier pushTop= {pushSupplier}/>
@@ -142,6 +152,16 @@ function MainBar({startScreen}) {
             }
         })
 
+        setBar({prods: bar.prods, cart: bar.cart})
+    }
+
+    const changeCartItemPrice =  ({id, price}) => {
+        // console.log(id)
+        bar.cart.forEach((el)=>{
+            if(el.id == id){
+                el.price = price
+            }
+        })
         setBar({prods: bar.prods, cart: bar.cart})
     }
      
@@ -221,38 +241,49 @@ function MainBar({startScreen}) {
                 <input type="text" value = {ACTION.GET}/>
             </form>*/
     return (
-        <div id='capture' className='mainbar' >
-
+        <div id='capture' className='mainbar' tyle={{ width: '100%' }} >
+            <Box display="flex" flexDirection="row" p={1} m={1} bgcolor="background.paper">
+            <Box >
             <Button 
                     className ='switchToSellBar'
                     variant="outline-primary" 
                     onClick ={() => setScreen(BarScreen.SELLBAR)}
                     > 
                     Bar
-            </Button>
+            </Button></Box>
+
+            <Box >
             <Button 
                     className ='switchToAddsupplier'
                     variant="outline-primary" 
                     onClick ={() => setScreen(BarScreen.ADDSUPPLIER)}
                     > 
                     Add Supplier
-            </Button>
+            </Button></Box>
+
+            <Box >
             <Button 
                     className ='switchToAddInvItem'
                     variant="outline-primary" 
                     onClick ={() => setScreen(BarScreen.ADDITEM)}
                     > 
                     Add Inventory Item
-            </Button>
+            </Button></Box>
+
+
+            <Box >
             <Button 
                     className ='switchToAddStock'
                     variant="outline-primary" 
                     onClick ={() => setScreen(BarScreen.ADDSTOCK)}
                     > 
                     Add Inventory
-            </Button>
+            </Button></Box>
 
+            </Box>
+            <Box >
             {Caller()}
+            </Box>
         </div>   
     )
 }
