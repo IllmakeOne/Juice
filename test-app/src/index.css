@@ -64,6 +64,22 @@ body {
   padding-top: 20px;
 }
 
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+
 /* .cart {
   height: 50%;
   width: 30%;
@@ -74,6 +90,9 @@ body {
 } */
 .barscreenbox{
   width: 100%;
+}
+.dx-scheduler-cell-sizes-horizontal {
+  width: 50px;
 }
 
 
@@ -86,8 +105,8 @@ body {
 
 .prodtypeset{
   background: rgb(162, 13, 207);
-  height: 1000%;
-  width: 80%;
+  /* height: 1000%;
+  width: 80%; */
 }
 
 .changeprice{
@@ -119,10 +138,12 @@ body {
 
 .prodbutton {
   background: rgb(214, 216, 97);
-  height: 50%;
-  width: 100%;
+  /* height: 50%;
+  width: 100%; */
+  padding: 20px 20px;
   border-color: white;
-  border-style: solid;
+  border-style: dashed;
+  border-radius: 15px;
 }
 
 .finalbasket{
@@ -144,30 +165,30 @@ body {
 .display_prods {
   background: black;
   height: 100%;
-  width: 60%;
-  position: absolute;
+  width: 100%;
+  /* position: absolute;
   left: 40%;
-  top:100%;
+  top:100%; */
 
 }
 .itemchangersdaddy{
   /* background: greenyellow; */
-  height: 100%;
+  /* height: 100%;
   width: 25%;
   position: absolute;
   left: -0.5px;
-  top:50px;
+  top:50px; */
 }
 
 .prodset {
-  height: 50%;
-  width: 50%;
+  /* height: 50%;
+  width: 50%; */
   background: red;
   margin: 10px;
   padding: 10px 20px;
   /* position: absolute; */
   /* border-color: coral;  */
-  position: relative;
+  /* position: relative; */
 
 
   /* display: inline-block; */

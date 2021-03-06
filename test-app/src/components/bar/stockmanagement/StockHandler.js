@@ -67,18 +67,18 @@ function StockHandler({pushTop}) {
   const [price, setPrice] = useState(-1)
   const [vat, setVat] = useState(1)
 
-    useEffect(()=>{
-        console.log('Name: ' +name)
-    },[name])
-    useEffect(()=>{
-        console.log('Type: ' +type)
-    },[type])
-    useEffect(()=>{
-        console.log('Price: ' + price)
-    },[price])
-    useEffect(()=>{
-        console.log('Vat: ' +vat)
-    },[vat])
+    // useEffect(()=>{
+    //     console.log('Name: ' +name)
+    // },[name])
+    // useEffect(()=>{
+    //     console.log('Type: ' +type)
+    // },[type])
+    // useEffect(()=>{
+    //     console.log('Price: ' + price)
+    // },[price])
+    // useEffect(()=>{
+    //     console.log('Vat: ' +vat)
+    // },[vat])
 
     return (
     // <div>

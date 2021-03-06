@@ -1,11 +1,13 @@
 
 import Button from 'react-bootstrap/esm/Button';
+import { GridColumn } from 'emotion-flex-grid'
 import { FiPlus } from 'react-icons/fi';
 
 const ProdButton = ({prod, onClick}) => {  
  
         return (
             <div className = 'prodbutton' onClick ={()=>onClick(prod.id)}>
+            {/* <GridColumn width = {4}> */}
                 
             <h3>{prod.name}</h3>  <br/>
             Price: {prod.price} <br/>
@@ -18,6 +20,7 @@ const ProdButton = ({prod, onClick}) => {
                 
                     <FiPlus />
             </Button>{' '} */}
+            {/* </GridColumn> */}
                 
             </div>
 

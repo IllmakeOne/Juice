@@ -4,19 +4,20 @@ import MainRec from './components/rec/MainRec'
 import StartScreen from './components/StartScreen'
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import StockHandler from './components/bar/stockmanagement/StockHandler';
-import OurScheduler from './components/rec/schedules/Scheduler';
+import MainSche from './components/rec/schedules/MainSche';
+
+
 
 
 const routes = {
   "/": () => <StartScreen />,
 
-  "/bar": () => <MainBar />,
+  "/bar": () => <MainBar startScreen='sell bar'/>,
   "/newitem": () => <StockHandler />,
   
   "/rec": () => <MainRec />,
-  "/rec/sche": () => <OurScheduler />,
+  "/rec/sche": () => <MainSche/>,
 };
-
 function App() {
 
 
@@ -55,7 +56,7 @@ function App() {
                   <Route path="/bar" component={MainBar} />  
                   <Route path="/rec" component={MainRec} />   
                   <Route path="/newitem" component={StockHandler} />  
-                  <Route path='/rec/sche' component={OurScheduler} />  
+                  <Route path='/rec/sche' component={MainSche} />  
                 </Router>
               </div>
         <div>

@@ -8,8 +8,10 @@ import AddSupplier from './stockmanagement/AddSupplier'
 import Button from 'react-bootstrap/Button'
 import AddStock from  './stockmanagement/AddStock'
 
+import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
-import Box from '@material-ui/core/Box';
+
+// import Box from '@material-ui/core/Box';
 
 
 export const BarScreen = {
@@ -68,24 +70,26 @@ function MainBar({startScreen}) {
             case BarScreen.SELLBAR:
                 // selling cart and item display
                     return <div>
-                        <Box display="flex" flexDirection="row" className='barscreenbox' p={1} m={1} bgcolor="background.paper">
-                            <Box>
-                                <ProdSet items = {bar.prods} onClick = {addtoCart}/>
-                            </Box>
-                           
-                            <Box alignSelf="flex-end">
-                            <Cart  basket = {bar.cart} 
-                                    removeItem = {removeItemfromCart}
-                                    removeAllCart = {removeAllCart} 
-                                    changeItem = {changeCartItemPrice}/></Box>
-                     </Box>
+                            {bar ? <div>
+                                <GridRow wrap='wrap'>
+                                    <GridColumn width={8}>
+                                         <ProdSet items = {bar.prods} onClick = {addtoCart}/>
+                                    </GridColumn>
+                                    <GridColumn width={4}>
+                                        <Cart  basket = {bar.cart} 
+                                            removeItem = {removeItemfromCart}
+                                            removeAllCart = {removeAllCart} 
+                                            changeItem = {changeCartItemPrice}/>
+                                    </GridColumn>
+                                </GridRow>
+                                </div>:null}
                         </div>
             case BarScreen.ADDSUPPLIER:   
                 //add a new supplier to DB
                     return <AddSupplier pushTop= {pushSupplier}/>
             case BarScreen.ADDSTOCK:  
                 //add new sellable item
-                    return <AddStock/>
+                    return <AddStock pushTop={addItem}/>
                    
         }
     }
@@ -118,6 +122,10 @@ function MainBar({startScreen}) {
 
         setBar({prods: bar.prods, cart: []})
 
+    }
+
+    const addItem = (item) => {
+        console.log(item)
     }
 
 
@@ -242,48 +250,35 @@ function MainBar({startScreen}) {
             </form>*/
     return (
         <div id='capture' className='mainbar' tyle={{ width: '100%' }} >
-            <Box display="flex" flexDirection="row" p={1} m={1} bgcolor="background.paper">
-            <Box >
             <Button 
                     className ='switchToSellBar'
                     variant="outline-primary" 
                     onClick ={() => setScreen(BarScreen.SELLBAR)}
                     > 
                     Bar
-            </Button></Box>
-
-            <Box >
+            </Button>
             <Button 
                     className ='switchToAddsupplier'
                     variant="outline-primary" 
                     onClick ={() => setScreen(BarScreen.ADDSUPPLIER)}
                     > 
                     Add Supplier
-            </Button></Box>
-
-            <Box >
+            </Button>
             <Button 
                     className ='switchToAddInvItem'
                     variant="outline-primary" 
                     onClick ={() => setScreen(BarScreen.ADDITEM)}
                     > 
                     Add Inventory Item
-            </Button></Box>
-
-
-            <Box >
+            </Button>
             <Button 
                     className ='switchToAddStock'
                     variant="outline-primary" 
                     onClick ={() => setScreen(BarScreen.ADDSTOCK)}
                     > 
                     Add Inventory
-            </Button></Box>
-
-            </Box>
-            <Box >
+            </Button>
             {Caller()}
-            </Box>
         </div>   
     )
 }
