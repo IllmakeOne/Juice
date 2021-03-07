@@ -19,6 +19,10 @@ export default function Cart(
         return sum
     }
     
+    const gasPrice = new Intl.NumberFormat('en-US',
+                        { style: 'currency', currency: 'RON',
+                          minimumFractionDigits: 1 });
+
 
     return (
         <React.Fragment>
@@ -54,7 +58,7 @@ export default function Cart(
             }
              </div>
             <div className='finalbasket'>
-                Finish total: {getSum()} lei
+                Finish total: {gasPrice.format(getSum())} lei
             </div>
             <Button 
                 className='finalbasket'

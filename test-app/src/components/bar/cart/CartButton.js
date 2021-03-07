@@ -1,4 +1,4 @@
-import { FiCheck, FiTrash } from "react-icons/fi"
+import { FiCheck, FiEdit, FiTrash } from "react-icons/fi"
 import ChangePriceB from './ChangePriceB'
 
 import React, {  useState } from 'react'
@@ -25,8 +25,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
 
     const [dialogValue, setDialogValue] = useState({
       id: item.id,
-      price: 0, 
-      amount: 0,
+      amount: 0
     });
 
     const handleClose = () => {
@@ -67,7 +66,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
                     // onClick ={()=>removeItem(item.id)}
                     onClick={()=>handleOpen()} 
                     >
-                       <FiCheck />
+                       <FiEdit size={25} />
                 </Button>
 
                 
@@ -76,7 +75,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
                     variant="contained"
                     color="secondary"
                     size="large"
-                    startIcon={<FiTrash />}
+                    startIcon={<FiTrash size={25}/>}
                     onClick ={()=>removeItem(item.id)}
                     >
                 </Button>
@@ -110,7 +109,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
                                 >+
                             </Button>
                             <br/>
-                            <TextField
+                            {/* <TextField
                                 autoFocus
                                 margin="dense"
                                 id="price"
@@ -118,7 +117,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
                                 onChange={(event) => setDialogValue({ ...dialogValue, price: event.target.value })}
                                 label="Price"
                                 type="number"
-                            />
+                            /> */}
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleClose} color="primary">

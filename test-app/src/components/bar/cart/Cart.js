@@ -1,5 +1,5 @@
 
-import { Button } from '@material-ui/core';
+import { Button, Paper } from '@material-ui/core';
 import CartButton from './CartButton';
 import { FiTrash2, FiShoppingCart} from "react-icons/fi"
 import ChangePriceB from './ChangePriceB'
@@ -7,6 +7,8 @@ import React from 'react'
 
 import { css, cx } from '@emotion/css'
 
+
+import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
 import RecCartButton from './RecCartButton'
 
@@ -25,15 +27,23 @@ function Cart({basket, removeItem ,removeAllCart, changeItem}) {
     return (
         <React.Fragment>
         <div className='cart'>
-            <h2>Cart</h2>
-            <Button className = 'deleteAllcart'
-                    variant="outline-primary" 
-                    onClick ={()=>removeAllCart()}
-                    >
-                    Empty cart
-                       <FiTrash2 />
-                </Button>
-
+        <GridRow>
+            <GridColumn width={6}>
+             <h2>Cart Items</h2>
+            </GridColumn>
+            <GridColumn width={6}>
+             <Button className = 'deleteAllcart'
+                variant="contained" 
+                color="primary"
+                size="large"
+                startIcon={<FiTrash2 />}
+                onClick ={()=>removeAllCart()}
+                >
+                Empty cart
+             </Button>
+            </GridColumn>
+        </GridRow>
+            <Paper style={{maxHeight: 550, overflow: 'auto'}} >
             <div className ={css`
                     padding: 32px;
                     background-color: hotpink;
@@ -43,17 +53,19 @@ function Cart({basket, removeItem ,removeAllCart, changeItem}) {
                     white-space: nowrap;
                     `}>
                {basket.map((item) => 
-                (
+                ( 
                 <div key = {item.id} 
                     >
-                    <RecCartButton item = {item} 
+                    <CartButton item = {item} 
                         removeItem = {removeItem}
                         changeItem = {changeItem}/>
                 </div>            
                 )) 
             }
              </div>
-            <div className='finalbasket'>
+        </Paper>
+        
+        <div className='finalbasket'>
                 Finish total: {getSum()} lei
             </div>
             <Button 
@@ -65,7 +77,7 @@ function Cart({basket, removeItem ,removeAllCart, changeItem}) {
                 // onClick ={()=>removeItem(item.id)}
                 >
             </Button>
-        </div>
+        </div> 
         </React.Fragment>
     )
 }

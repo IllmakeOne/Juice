@@ -16,7 +16,7 @@ function MainRec() {
     
     useEffect(() =>{
         const getProds = async () => {
-            const serverProds = await fetchProds
+            const serverProds = await fetchProds()
             setItems({
                 prods: serverProds.filter(el=>el.type == 'Service'),
                 cart: []

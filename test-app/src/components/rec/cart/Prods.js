@@ -9,12 +9,12 @@ function Prods({items, addItem}) {
         items.map((prod,index) => {
                 ret.push(
                 <GridColumn width ={4} p={['m', 'm']}  >
-                    <div key = {prod.id} >
+                    <div key = {prod.id} onClick={()=>addItem(prod.id)}>
                         <div className = 'prodbutton' >
                             <h3>{prod.name}   </h3>
                             Price: {prod.price} <br/>
                             Stock: {prod.stock}
-                            <Button onClick ={()=>addItem(prod.id)} >Add</Button>
+                            {/* <Button onClick ={()=>addItem(prod.id)} >Add</Button> */}
                         </div>
                     </div>
                  </GridColumn>)
@@ -24,7 +24,6 @@ function Prods({items, addItem}) {
     }
 
     const makeGrid = () => {
-        var gridsize = 4
         var ret =[]
         // console.log(ret)
 

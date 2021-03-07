@@ -44,7 +44,7 @@ function MainBar({startScreen}) {
                     return <StockHandler prods={bar.prods} pushTop = {addItemtoDB}/>;
             case BarScreen.SELLBAR:
                 // selling cart and item display
-                    return <div>
+                    return <div> 
                             {bar ? <div>
                                 <GridRow wrap='wrap'>
                                     <GridColumn width={8}>
@@ -54,7 +54,7 @@ function MainBar({startScreen}) {
                                         <Cart  basket = {bar.cart} 
                                             removeItem = {removeItemfromCart}
                                             removeAllCart = {removeAllCart} 
-                                            changeItem = {changeCartItemPrice}/>
+                                            changeItem = {changeCartItem}/>
                                     </GridColumn>
                                 </GridRow>
                                 </div>:null}
