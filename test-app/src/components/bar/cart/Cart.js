@@ -5,6 +5,8 @@ import { FiTrash2, FiShoppingCart} from "react-icons/fi"
 import ChangePriceB from './ChangePriceB'
 import React from 'react'
 
+import { css, cx } from '@emotion/css'
+
 
 import RecCartButton from './RecCartButton'
 
@@ -32,9 +34,15 @@ function Cart({basket, removeItem ,removeAllCart, changeItem}) {
                        <FiTrash2 />
                 </Button>
 
-            { /*console.log('incart'),
-                console.log(basket.cart),*/
-                basket.map((item) => 
+            <div className ={css`
+                    padding: 32px;
+                    background-color: hotpink;
+                    font-size: 24px;
+                    border-radius: 4px;
+                    overflow: scroll;
+                    white-space: nowrap;
+                    `}>
+               {basket.map((item) => 
                 (
                 <div key = {item.id} 
                     >
@@ -44,6 +52,7 @@ function Cart({basket, removeItem ,removeAllCart, changeItem}) {
                 </div>            
                 )) 
             }
+             </div>
             <div className='finalbasket'>
                 Finish total: {getSum()} lei
             </div>

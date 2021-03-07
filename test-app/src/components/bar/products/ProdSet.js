@@ -7,6 +7,9 @@ import React from 'react'
 
 import Box from '@material-ui/core/Box';
 
+
+import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
+
 const  ProdSet = ({items, onClick}) => {
 
     
@@ -34,9 +37,10 @@ const  ProdSet = ({items, onClick}) => {
         
         <React.Fragment>
         <div className='prodset'>
-            {uniqueTypes}
-                        
+            <GridRow warp='nowrap '>
+            {/* {uniqueTypes} */}
             <div className='itemchangersdaddy'>
+                <GridColumn>
                 {uniqueTypes.map((t)=> {
                     return(
                     <Button
@@ -46,6 +50,7 @@ const  ProdSet = ({items, onClick}) => {
                     )
                     })  
                 }
+                </GridColumn>
             </div>
 
             <div className = 'display_prods'>
@@ -55,21 +60,7 @@ const  ProdSet = ({items, onClick}) => {
                     onClick = {onClick}
                      />
             </div>
-
-            
-            {/* <ProdTypeSet  items ={pordsWithCrtType}
-                type = {crtType}
-                onClick = {onClick}/>
-                */}
-            {/* <ProdTypeSet itesm/> */}
-            {/* {items.map((prod) => 
-            (
-            <div key = {prod.id} >
-                <h3>{prod.name}</h3>
-                <ProdButton prod = {prod}
-                     onClick = {addtoCart} />
-            </div>            
-            ))} */}
+            </GridRow>
         </div>
         </React.Fragment>
     )

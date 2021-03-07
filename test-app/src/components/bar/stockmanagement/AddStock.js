@@ -5,21 +5,10 @@ import MainBar from '../MainBar'
 import { TextField } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid'
 import { FiCheck } from 'react-icons/fi';
+import { fetchProds, fetchSuppliers } from '../../DBconn';
 
 
 
-const fetchProds = async () => {
-    const res = await fetch('http://localhost:3001/prods')
-    const data = await res.json()
-    return data
-}
-
-
-const fetchSuppliers = async () => {
-    const res = await fetch('http://localhost:3001/suppliers')
-    const data = await res.json()
-    return data
-}
 
 const  AddStock = () => {
 

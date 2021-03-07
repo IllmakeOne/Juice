@@ -1,4 +1,27 @@
 {
+
+  "appointments": [
+    { "id": "1", "startDate": "2021-03-03T09:45", "endDate": "2021-03-03T11:00", "title": "Meeting", 
+      "admin":"Radu", "area": "Tennis 1", "person": "Mircov","phone":"0720440760"},
+    { "id": "2", "startDate": "2021-03-04T17:00", "endDate": "2021-03-04T18:30", "title": "Go to a gym", 
+      "admin":"Robi", "area": "Tennis 1", "person": "Mihut","phone":"0720440763"},
+    { "id": "3", "startDate": "2021-03-02T12:00", "endDate": "2021-03-02T13:30", "title": "Go to a gym", 
+      "admin":"Sergiu", "area": "Tennis 1", "person": "Popovics","phone":"0720440761"},
+      
+    { "id": "4", "startDate": "2021-03-03T12:00", "endDate": "2021-03-03T13:30", "title": "Go to a gym", 
+      "admin":"Sergiu", "area": "Tennis 2", "person": "Popovics","phone":"0720440761"},
+    { "id": "5", "startDate": "2021-03-02T12:00", "endDate": "2021-03-02T13:30", "title": "Go to a gym", 
+      "admin":"Sergiu", "area": "Tennis 2", "person": "Popovics","phone":"0720440761"},
+  
+  
+    { "id": "6", "startDate": "2021-03-01T12:00", "endDate": "2021-03-01T13:30", "title": "Go to a gym", 
+      "admin":"Sergiu", "area": "Tennis 3", "person": "Popovics","phone":"0720440761"},
+    { "id": "7", "startDate": "2021-03-02T12:00", "endDate": "2021-03-02T13:30", "title": "Go to a gym", 
+      "admin":"Andrei", "area": "Tennis 3", "person": "Iudean","phone":"0720440762"},
+      
+    { "id": "8", "startDate": "2021-03-04T12:00", "endDate": "2021-03-04T13:30", "title": "Go to a gym", 
+      "admin":"Radu", "area": "OutDoor", "person": "Crenguta","phone":"0720440764","comment":"comment"}
+],
   "prods": [
     {
       "id": 1,
@@ -6,7 +29,8 @@
       "type": "Juice",
       "price": 6,
       "stock": 10,
-      "fixedPrice": true
+      "fixedPrice": true,
+      "image": "https://hawkesdesign.files.wordpress.com/2014/09/fantalogo-svg.png"
     },
     {
       "id": 2,
@@ -14,7 +38,8 @@
       "type": "Warm Drink",
       "price": 6,
       "stock": 20,
-      "fixedPrice": true
+      "fixedPrice": true,
+      "image": "https://hawkesdesign.files.wordpress.com/2014/09/fantalogo-svg.png"
     },
     {
       "id": 3,
@@ -22,7 +47,8 @@
       "type": "Juice",
       "price": 7,
       "stock": 20,
-      "fixedPrice": true
+      "fixedPrice": true,
+      "image": "https://1000logos.net/wp-content/uploads/2016/11/Coca-Cola-Logo.png"
     },
     {
       "id": 4,
@@ -30,15 +56,15 @@
       "type": "Juice",
       "price": 5,
       "stock": 50,
-      "fixedPrice": true
+      "fixedPrice": true,
+      "image": "https://www.coca-colahellenic.com/content/dam/cch/us/images/our-24-7-portfolio/brand-image/Dorna_logo_300x300.png"
     },
     {
       "id": 5,
       "name": "Tennis",
       "type": "Service",
-      "price": 6,
-      "stock": -1,
-      "fixedPrice": false
+      "price": 85,
+      "image": "https://hawkesdesign.files.wordpress.com/2014/09/fantalogo-svg.png"
     },
     {
       "id": 6,
@@ -46,7 +72,87 @@
       "type": "Warm Drink",
       "price": 6,
       "stock": 50,
-      "fixedPrice": true
+      "fixedPrice": true,
+      "image": "https://hawkesdesign.files.wordpress.com/2014/09/fantalogo-svg.png"
+    },
+    {
+      "id": 7,
+      "name": "Shweppes .5",
+      "type": "Juice",
+      "price": 6,
+      "stock": 50,
+      "fixedPrice": true,
+      "image": "https://seeklogo.com/images/S/schweppes-logo-7A8E4A77EC-seeklogo.com.png"
+    },
+    {
+      "id": 8,
+      "name": "Fuzetea .5",
+      "type": "Juice",
+      "price": 6,
+      "stock": 50,
+      "fixedPrice": true,
+      "image": "https://www.pngjoy.com/pngm/426/7798171_tea-logo-fuze-tea-logo-png-png-download.png"
+    },
+    {
+      "id": 9,
+      "name": "Cappy .25",
+      "type": "Juice",
+      "price": 6,
+      "stock": 50,
+      "fixedPrice": true,
+      "image": "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/0018/3252/brand.gif?itok=AWcFKJRX"
+    },
+    {
+      "id": 10,
+      "name": "Cappy .3",
+      "type": "Juice",
+      "price": 6,
+      "stock": 50,
+      "fixedPrice": true,
+      "image": "https://www.crostopizza.ro/wp-content/uploads/2020/05/logo-cappy.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Coke .3",
+      "type": "Juice",
+      "price": 6,
+      "stock": 50,
+      "fixedPrice": true,
+      "image": "https://1000logos.net/wp-content/uploads/2016/11/Coca-Cola-Logo.png"
+    },
+    {
+      "id": 12,
+      "name": "Sparkle .5",
+      "type": "Juice",
+      "price": 6,
+      "stock": 50,
+      "fixedPrice": true,
+      "image": "https://www.coca-colahellenic.com/content/dam/cch/us/images/our-24-7-portfolio/brand-image/Dorna_logo_300x300.png"
+    },
+    {
+      "id": 13,
+      "name": "OutDoor",
+      "type": "Service",
+      "price": 180
+    },
+    {
+      "id": 14,
+      "name": "Hall",
+      "type": "Service",
+      "price": 220
+   },
+    {
+      "id": 15,
+      "name": "Aerobic 10",
+      "type": "Service",
+      "price": 150
+      
+    },
+    {
+      "id": 16,
+      "name": "FF",
+      "type": "Service",
+      "price": 170
     }
   ],
   "posts": [
