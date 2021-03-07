@@ -8,10 +8,9 @@ import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
 const ProdTypeSet = ({items, onClick}) => {
 
-    const getSlice = (index) => {
+    const getSlice = () => {
         var ret = []
         items.map((el,index)=>{
-            if(!index % 4==0){
                 ret.push(<GridColumn width ={4} p={['m', 'm']}  >
                     <div key = {el.id} >
                              {/* <h3>{prod.name}</h3> */}{console.log(index)}
@@ -19,7 +18,6 @@ const ProdTypeSet = ({items, onClick}) => {
                                  onClick = {onClick} />
                          </div>
                  </GridColumn>)
-            }
 
         })
         return ret
@@ -29,18 +27,10 @@ const ProdTypeSet = ({items, onClick}) => {
     const makeGrid = () => {
         var gridsize = 4
         var ret =[]
-        var i, j
-        // for (i = 0;i <items.length ;i= i+4){
-        //     ret.push(<GridRow wrap='wrap'>
-        //         {getSlice(i)
-        //         // ,console.log(ret)
-        //         }
-        //     </GridRow>)
-        // }
         // console.log(ret)
 
         ret.push(<GridRow wrap='wrap'justify='around' >
-                {getSlice(i)
+                {getSlice()
                 // ,console.log(ret)
                 }
             </GridRow>)
@@ -52,18 +42,6 @@ const ProdTypeSet = ({items, onClick}) => {
         <div className='prodtypeset'>
             <h2>Type: {items[0].type}</h2>
             {makeGrid()}
-        
-            {/* <GridRow warp='nowrap '> */}
-            {/*items.map((prod) => {
-                        return (
-                    <div key = {prod.id} >
-                        {/* <h3>{prod.name}</h3> 
-                        <ProdButton prod = {prod}
-                            onClick = {onClick} />
-                    </div>
-                        )})*/
-             }
-             {/* </GridRow> */}
         </div>
     )
 }

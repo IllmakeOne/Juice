@@ -1,10 +1,71 @@
-import React from 'react'
+import React, { useEffect,  useState} from 'react'
+import { Button } from '@material-ui/core';
+import { FiTrash2, FiShoppingCart} from "react-icons/fi"
 
-export default function Cart() {
+import { css, cx } from '@emotion/css'
+
+import RecCartButton from './RecCartButton'
+
+
+export default function Cart(
+    {items, removeItem ,removeAllCart, changeItem}) {
+
+    const getSum = () => {
+        var sum = 0
+        var bruh =items? items.forEach(element => {
+            sum += element.price           
+        }) : null
+        
+        return sum
+    }
+    
+
     return (
-        <div>
-            <h1>Reception Cart</h1>
-            it will only be able o print out services
+        <React.Fragment>
+        <div className='cart'>
+            <h2>Cart</h2>
+            <Button className = 'deleteAllcart'
+                    variant="outline-primary" 
+                    onClick ={()=>removeAllCart()}
+                    >
+                    Empty cart
+                       <FiTrash2 />
+                </Button>
+
+            <div className ={css`
+                    padding: 32px;
+                    background-color: hotpink;
+                    font-size: 24px;
+                    border-radius: 4px;
+                    overflow: scroll;
+                    white-space: nowrap;
+                    `}>
+                {/* {console.log("in cart")}
+                {console.log(items)} */}
+               {items ? items.map((item) => 
+                (
+                <div key = {item.id} 
+                    >
+                    <RecCartButton item = {item} 
+                        removeItem = {removeItem}
+                        changeItem = {changeItem}/>
+                </div>            
+                )):null 
+            }
+             </div>
+            <div className='finalbasket'>
+                Finish total: {getSum()} lei
+            </div>
+            <Button 
+                className='finalbasket'
+                variant="contained"
+                color='green'
+                size="large"
+                startIcon={<FiShoppingCart />}
+                // onClick ={()=>removeItem(item.id)}
+                >
+            </Button>
         </div>
+        </React.Fragment>
     )
 }

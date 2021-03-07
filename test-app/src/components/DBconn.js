@@ -10,6 +10,12 @@ export  const fetchProds = async () => {
     return data
 }
 
+export const fetchSuppliers = async () => {
+    const res = await fetch('http://localhost:3001/suppliers')
+    const data = await res.json()
+    return data
+}
+
 export default function DBconn() {
     return (
         <div>

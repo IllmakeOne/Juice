@@ -1,5 +1,4 @@
 
-import Button from 'react-bootstrap/esm/Button';
 import { GridColumn } from 'emotion-flex-grid'
 import { FiPlus } from 'react-icons/fi';
 
@@ -9,7 +8,8 @@ const ProdButton = ({prod, onClick}) => {
             <div className = 'prodbutton' onClick ={()=>onClick(prod.id)}>
             {/* <GridColumn width = {4}> */}
                 
-            <h3>{prod.name}</h3>  <br/>
+            <h3>{prod.name}   </h3>
+            <img width = {40} height={40} src={prod.image}></img>  <br/>
             Price: {prod.price} <br/>
             Stock: {prod.stock}
 

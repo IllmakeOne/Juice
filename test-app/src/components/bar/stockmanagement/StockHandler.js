@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import { Autocomplete } from '@material-ui/lab';
 import TextField from '@material-ui/core/TextField';
 import AutoCompAddItem from '../pieces/AutoCompAddItem';
+import { fetchProds } from '../../DBconn';
 
-import {fetchProds} from '../DBconn'
+// import {fetchProds} from '.../DBconn'
 
 const arrayofTypes = ['Warm Drink', 'Snack', 'Ernergy Drink','Service']
 
@@ -15,7 +16,7 @@ function StockHandler({pushTop}) {
 
     useEffect(()=>{
         const gett = async () => {
-            const inprods = await fetchProds()
+            const inprods = await fetchProds
             setProds({prods: inprods})
         }
 
@@ -23,9 +24,9 @@ function StockHandler({pushTop}) {
 
     },[])
 
-    useEffect(()=>{
-        console.log(prods)
-    },[prods])
+    // useEffect(()=>{
+    //     console.log(prods)
+    // },[prods])
 
     const onSubmit = (e) => {
         e.preventDefault()

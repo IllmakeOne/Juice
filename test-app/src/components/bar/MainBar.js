@@ -11,6 +11,9 @@ import AddStock from  './stockmanagement/AddStock'
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
 
+import { fetchProds } from '../DBconn';
+
+
 // import Box from '@material-ui/core/Box';
 
 
@@ -22,34 +25,6 @@ export const BarScreen = {
 
 }
 
-
-
-const API = 'http://localhost:3001/'
-
-const fetchProds = async () => {
-    const res = await fetch('http://localhost:3001/prods')
-    const data = await res.json()
-    return data
-}
-//new Branch here
-
-const Phetch = async (method, endpoint, body) => {
-    try {
-      const response = await fetch(`${API}${endpoint}`, {
-        method,
-        body: body && JSON.stringify(body),
-        // headers: {
-        //   'content-type': 'application/json',
-        //   accept: 'application/json',
-        //   authorization: `Bearer ${await this.props.auth.getAccessToken()}`,
-        // },
-      });
-      return await response.json();
-    } catch (error) {
-      console.error(error);
-
-    }
-  }
    
 //----------------------------------------Main Component--------------------------------------------------------------------------
 
@@ -203,7 +178,7 @@ function MainBar({startScreen}) {
             //if it doesnt, add it wiht stock 1
             auxBasket[indexof].stock += 1
         }
-        console.log(bar.cart)
+        // console.log(bar.cart)
         setBar({prods: bruh, cart: auxBasket})
     }
 
