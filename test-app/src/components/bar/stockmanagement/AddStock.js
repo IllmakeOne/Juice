@@ -6,13 +6,23 @@ import { TextField } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid'
 import { FiCheck } from 'react-icons/fi';
 import { fetchProds, fetchSuppliers } from '../../DBconn';
+import { Autocomplete } from '@material-ui/lab';
+
+import InputLabel from '@material-ui/core/InputLabel';
+import { Input } from '@material-ui/core';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+import { css } from '@emotion/css'
 
 
+import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
 
 const  AddStock = () => {
 
-    const[suppliers, setSuppliers] = useState({sups: [], crt: ''})
+    const[suppliers, setSuppliers] = useState()
     const[crtSupp, setCrtSupp] = useState(null)
 
     /**
@@ -24,16 +34,6 @@ const  AddStock = () => {
      * upProds is the final output which will be sent to db
      */
     const[upProds, setUpProds] = useState([])
-
-    // /**
-    //  * upPrice is the price from supplier
-    //  */
-    // const[upPrice, setUpPrice] = useState(0)
-
-    // /**
-    //  * upStock is the number of an item purches
-    //  */
-    // const[upStock, setupStock] = useState(0)
 
     /**
      * current item being added
@@ -52,24 +52,24 @@ const  AddStock = () => {
             const serverProds = await fetchProds()
             const serverSuppliers = await fetchSuppliers()
 
-            setSuppliers({sups: serverSuppliers, crt: serverSuppliers[0]})
+            setSuppliers(serverSuppliers)
 
             setProds(serverProds)
 
-            setCrtSupp(suppliers[0])
+            // setCrtSupp(suppliers[0])
         }
         getProds()
     
     }, [])
 
-    // useEffect(()=>{
-    //     console.log('crt sup')
-    //     console.log(crtSupp)
-    //     console.log('crt up rpods')
-    //     console.log(upProds)
-    //     console.log('crt item')
-    //     console.log(crtItem)
-    // },[crtSupp, suppliers, upProds])
+    useEffect(()=>{
+        console.log('crt item')
+        console.log(crtItem)
+        // console.log('crt up rpods')
+        // console.log(upProds)
+        // console.log('crt item')
+        // console.log(crtItem)
+    },[crtItem])
 
 
     const onSelectItem = (item)=>{
@@ -107,12 +107,6 @@ const  AddStock = () => {
             total: resupp*crtItem.price})
     }
 
-    const bruhwaht= (e)=>{
-        console.log(e.target.value)
-        // console.log(JSON.stringify(crtSupp))
-        setSuppliers({sups: suppliers.sups,
-                      crt: e.target.value})
-    }
 
 
 //------------------------------------------------DEV----------------
@@ -144,47 +138,76 @@ const columns = [
     // },
   ];
 
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
-  
+  const handleChange = (e) => {
+    setCrtSupp(e.target.vale)
+  }
 
 
 //------------------------------------------------DEV/////////////----------------
     return (
         <div>
 
-            <div className='form-control'>
-                <label>Select Supplier</label>
-                <select name="suppliers" 
-                onChange={(e) => bruhwaht(e)
-                } >
-                    {
-                    suppliers.sups.map((el) => {
-                        return (
-                            <option value = {el}>{el.name}</option>
-                            )
-                    })}
-                </select>
-            </div>
+            <Autocomplete
+                id="combo-box"
+                options={suppliers}
+                getOptionLabel={(option) => option.name}
+                style={{ width: 300 }}
+                value={crtSupp}
+                selectOnFocus
+                clearOnBlur
+                freeSolo
+                handleHomeEndKeys
+                renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                onChange={(ev, newVal)=>{
+                    setCrtSupp(newVal)
+                }}
+            />
 
-            <div>bruh
-                {suppliers.crt != null&& <h2>{suppliers.crt.name}</h2>,
-                 suppliers.crt != undefined&&<h2>{suppliers.crt.bank}</h2>,
-                 suppliers.crt != undefined&&<h2>{suppliers.crt.cui}</h2>
+            <GridRow>
+                <GridColumn id='gc1'>
+                    <Autocomplete
+                        id="auto-prods"
+                        options={prods}
+                        getOptionLabel={(option) => option.name}
+                        style={{ width: 300 }}
+                        value={crtItem}
+                        selectOnFocus
+                        clearOnBlur
+                        freeSolo
+                        handleHomeEndKeys
+                        renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                        onChange={(ev, newVal)=>{
+                            setCrtItem({...newVal, stock : 0})
+                            // setCrtItem(newVal)
+                        }}
+                    /> 
+                </GridColumn>
+                <GridColumn id='gc2'>
+                    <Input
+                        type='number'
+                        placeholder={crtItem.stock}
+                        // value={crtItem.stock}
+                        onChange={(e) => setCrtItem({...crtItem, stock: e.currentTarget.value})}
+                    />
+                </GridColumn>
+                <GridColumn id='gc3'>
+                    
+                </GridColumn>
+                <GridColumn id='gc4'>
+                    
+                </GridColumn>
+
+            </GridRow>
+
+            <div>
+                {crtSupp && <h2>{crtSupp.name}</h2>}
+                {crtSupp &&<h3>{crtSupp.bank}</h3>}
+                { crtSupp &&<h3>{crtSupp.cui}</h3>
                 }   
             </div>
         
-            <div className='datagrid' style={{ height: 500, width: '50%'}}>
-                <DataGrid rows={prods} columns={columns} pageSize={8} checkboxSelection />
+            <div className='datagrid' style={{ height: 300, width: '50%'}}>
+                <DataGrid rows={upProds} columns={columns} pageSize={8} checkboxSelection />
             </div>
         </div>
 
