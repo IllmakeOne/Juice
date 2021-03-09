@@ -184,5 +184,20 @@
       "bank": "PNTX",
       "cui": "CBAA"
     }
+  ],
+
+  "productTypes": [
+    {
+      "name": "Juice",
+      "vat": 9
+    },
+    {
+      "name": "Service",
+      "vat": 5
+    },
+    {
+      "name": "Warm Drink",
+      "vat": 9
+    }
   ]
 }
