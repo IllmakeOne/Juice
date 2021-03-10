@@ -2,14 +2,13 @@ import { useState, useEffect} from 'react'
 import MainBar from '../MainBar'
 // import {Autocomplete} from '@material-ui/lab';
 // import { Table } from 'react-bootstrap'
-import { Button, TextField } from '@material-ui/core';
+import { Button, Input, TextField } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid'
 import { FiCheckSquare } from 'react-icons/fi';
 import { fetchProds, fetchSuppliers, fetchTypes } from '../../DBconn';
 import { Autocomplete } from '@material-ui/lab';
 
 import InputLabel from '@material-ui/core/InputLabel';
-import { Input } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';

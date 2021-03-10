@@ -20,6 +20,8 @@ import MainRec from './../rec/MainRec';
 import StartScreen from './../StartScreen';
 import StockHandler from './../bar/stockmanagement/StockHandler';
 import MainSche from './../rec/schedules/MainSche';
+import RestockPrinter from '../printers/RestockPrinter';
+import AddProfile from '../rec/clients/AddProfile';
 
 const history = createBrowserHistory();
 export default function MyDrawer(){
@@ -100,6 +102,28 @@ export default function MyDrawer(){
              />
           </ListItem>
 
+          <ListItem
+            button
+            component={Link}
+            to="/rest">
+
+            <ListItemText
+               disableTypography
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Print Restock</Typography>}
+             />
+          </ListItem>
+
+          <ListItem
+            button
+            component={Link}
+            to="/addprof">
+
+            <ListItemText
+               disableTypography
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Add Profile</Typography>}
+             />
+          </ListItem>
+
         </List>
         
         </Drawer>
@@ -108,6 +132,9 @@ export default function MyDrawer(){
         <Route path="/rec" component={MainRec} />   
         <Route path="/newitem" component={StockHandler} />  
         <Route path='/rec/sche' component={MainSche} />  
+        <Route path='/rest' component={RestockPrinter} />  
+        <Route path='/addprof' component={AddProfile} /> 
+
     </Router>
     );
 }
