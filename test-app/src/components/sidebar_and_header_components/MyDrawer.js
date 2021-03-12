@@ -94,7 +94,7 @@ export default function MyDrawer(){
           <ListItem
             button
             component={Link}
-            to="/rec/sche">
+            to="/sche">
 
             <ListItemText
                disableTypography
@@ -131,7 +131,7 @@ export default function MyDrawer(){
         <Route exact path="/bar" component={MainBar} />
         <Route path="/rec" component={MainRec} />   
         <Route path="/newitem" component={StockHandler} />  
-        <Route path='/rec/sche' component={MainSche} />  
+        <Route path='/sche' component={MainSche} />  
         <Route path='/rest' component={RestockPrinter} />  
         <Route path='/addprof' component={AddProfile} /> 
 

@@ -346,5 +346,34 @@
       "id": 17,
       "assigned": true
     }
+  ],
+  "apps":[
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    }
   ]
 }

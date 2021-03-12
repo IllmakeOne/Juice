@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
+import { fetchApprow } from '../../DBconn'
 
 const m = 36
 const n = 7
@@ -30,38 +31,62 @@ const Scheduler = ({apps}) => {
     // chunk the products into the array of rows
     const productRows = rows.map( (row, idx) => griVals.slice(idx * no, idx * no + no) )
 
-    const genTabale = () =>{
-        var x
-     }
+    const genLine = () => {
+        var ret = []
+        apps.map((el) => 
+            el.status == 'open' ?
+            ret.push(
+                <GridColumn width={1.5} p={['l', 'l']} >
+                    <div className='cell'>
+                        <div>AA</div>
+                    </div>
+                </GridColumn>)
+            : '')
+        return ret
+    }
        return (
 
-        <div>
+        <div className='cart_svlist'>
             <GridRow wrap='wrap'>
                 <GridColumn width={1.5}>
                 <div>Time</div>
+                {genLine()}
                 </GridColumn>
                 <GridColumn width={1.5}>
                 <div>Monday</div>
+                {genLine()}
                 </GridColumn>
                 <GridColumn width={1.5}>
                 <div>Tuesday</div>
+                {genLine()}
                 </GridColumn>
                 <GridColumn width={1.5}>
                 <div>Wednesday</div>
+                {genLine()}
                 </GridColumn>
                 <GridColumn width={1.5}> 
                 <div>Thursday</div>
+                {genLine()}
                 </GridColumn>
                 <GridColumn width={1.5}>
                 <div>Friday</div>
+                {genLine()}
                 </GridColumn>
                 <GridColumn width={1.5}>
                 <div>Saturday</div>
+                {genLine()}
                 </GridColumn>
                 <GridColumn width={1.5}>
                 <div>Sunday</div>
+                {genLine()}
                 </GridColumn>
             </GridRow>
+
+        {/* <GridRow direction ='column'>
+            {genLine()}
+        </GridRow> */}
+
+
         </div>
         //    <div className = 'grid-container'>
         //      {productRows.map((row, idx) => (

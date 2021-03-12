@@ -30,6 +30,20 @@ export  const fetchTypes = async () => {
     return data
 }
 
+export  const fetchApprow = async () => {
+    const res = await fetch('http://localhost:3001/apps')
+    const data = await res.json()
+    // console.log(data)
+    return data
+}
+
+export  const fetchAppoitments = async () => {
+    const res = await fetch('http://localhost:3001/appointments')
+    const data = await res.json()
+    // console.log(data)
+    return data
+}
+
 
 //-----------------------------Setters--------------
 export const addCartList = async (list)=>{
