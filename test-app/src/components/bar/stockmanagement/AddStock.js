@@ -238,7 +238,7 @@ const columns = [
                         <Input
                             name='stockInput'
                             type='number'
-                            error={crtItem.price < 0.1}
+                            error={crtItem.stock < 0.1}
                             // placeholder={crtItem.stock}
                             value={crtItem.stock}
                             onChange={handlechangeStock}

@@ -1,7 +1,7 @@
 import React, { useEffect,  useState} from 'react'
 import Cart from './cart/Cart'
 import Prods from './cart/Prods'
-
+import Keys from './clients/Keys'
 
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
@@ -111,6 +111,11 @@ function MainRec() {
                         changeItem = {changeCartItemPrice}/>
                 </GridColumn>
                 </GridRow> </div>: null}
+
+                <br/>
+                <br/>
+                <br/>
+                <Keys/>
         </div>
     )
 }

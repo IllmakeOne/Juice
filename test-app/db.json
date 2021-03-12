@@ -266,7 +266,7 @@
       "crtsub": {
         "type": "ffull",
         "left": 0,
-        "end":"02/05/2021"
+        "end": "02/05/2021"
       },
       "comment": "i tired this"
     },
@@ -278,7 +278,7 @@
       "crtsub": {
         "type": "f10",
         "left": 5,
-        "end":"03/05/2021"
+        "end": "03/05/2021"
       }
     },
     {
@@ -289,8 +289,62 @@
       "crtsub": {
         "type": "a10",
         "left": 8,
-        "end":"04/05/2021"
+        "end": "04/05/2021"
       }
+    }
+  ],
+  "keys": [
+    {
+      "id": 1,
+      "assigned": true
+    },
+    {
+      "id": 2,
+      "assigned": false
+    },
+    {
+      "id": 3,
+      "assigned": true
+    },
+    {
+      "id": 4,
+      "assigned": true
+    },
+    {
+      "id": 5,
+      "assigned": false
+    },
+    {
+      "id": 6,
+      "assigned": true
+    },
+    {
+      "id": 11,
+      "assigned": true
+    },
+    {
+      "id": 12,
+      "assigned": false
+    },
+    {
+      "id": 13,
+      "assigned": true
+    },
+    {
+      "id": 14,
+      "assigned": true
+    },
+    {
+      "id": 15,
+      "assigned": false
+    },
+    {
+      "id": 16,
+      "assigned": false
+    },
+    {
+      "id": 17,
+      "assigned": true
     }
   ]
 }

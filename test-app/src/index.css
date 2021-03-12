@@ -181,7 +181,7 @@ body {
 .prodset {
   /* height: 50%;
   width: 50%; */
-  background: red;
+  background:#f4f4f4;
   margin: 10px;
   padding: 10px 20px;
   /* position: absolute; */
@@ -196,6 +196,21 @@ body {
   position: absolute;
   background: rgb(245, 228, 228);
 
+}
+
+.dab{
+  background:#2dbd2d;
+  text-align: center;
+}
+
+.assigned{
+  background:rgb(224, 76, 212);
+  text-align: center;
+}
+
+.unassigned{
+  background:#37b604c7;
+  text-align: center;
 }
 
 .addprodbutt{
