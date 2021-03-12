@@ -11,7 +11,7 @@ import AddStock from  './stockmanagement/AddStock'
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
 
-import { fetchProds } from '../DBconn';
+import { fetchProds } from '../DBconn'
 
 
 // import Box from '@material-ui/core/Box';

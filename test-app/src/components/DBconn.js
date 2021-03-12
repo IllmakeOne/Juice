@@ -30,6 +30,13 @@ export  const fetchTypes = async () => {
     return data
 }
 
+
+//-----------------------------Setters--------------
+export const addCartList = async (list)=>{
+    //send to db new cartlist
+    console.log(list)
+}
+
 export default function DBconn() {
     return (
         <div>
