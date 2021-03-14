@@ -214,6 +214,25 @@
       "price": 170
     }
   ],
+
+  "cartlists": [
+    {
+      "id": 16,
+      "date": "30-05-21",
+      "prods": [
+        {
+          "id": 9,
+          "stock": 6
+        },
+        {
+          "id": 10,
+          "stock": 1
+        }
+      ],
+      "name":"Nicu"
+    }
+  ],
+
   "posts": [
     {
       "id": 1,
@@ -221,6 +240,7 @@
       "author": "typicode"
     }
   ],
+
   "comments": [
     {
       "id": 1,
@@ -243,6 +263,7 @@
       "cui": "CBAA"
     }
   ],
+
   "productTypes": [
     {
       "name": "Juice",
@@ -257,10 +278,11 @@
       "vat": 9
     }
   ],
+  
   "clients": [
     {
       "id": 1,
-      "name": "Decretan",
+      "name": "Decretann",
       "email": null,
       "phone": "0720440760",
       "crtsub": {
@@ -347,7 +369,7 @@
       "assigned": true
     }
   ],
-  "apps":[
+  "apps": [
     {
       "status": "open"
     },
@@ -374,6 +396,87 @@
     },
     {
       "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "ocasional"
+    },
+    {
+      "status": "ocasional"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "ocasional"
+    },
+    {
+      "status": "ocasional"
+    },
+    {
+      "status": "open"
+    },
+    {
+      "status": "ocasional"
+    },
+    {
+      "status": "ocasional"
     }
   ]
 }

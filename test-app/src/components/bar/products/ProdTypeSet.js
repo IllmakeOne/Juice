@@ -13,7 +13,6 @@ const ProdTypeSet = ({items, onClick}) => {
         items.map((el,index)=>{
                 ret.push(<GridColumn width ={4} p={['m', 'm']}  >
                     <div key = {el.id} >
-                             {/* <h3>{prod.name}</h3> */}{console.log(index)}
                              <ProdButton prod = {el}
                                  onClick = {onClick} />
                          </div>

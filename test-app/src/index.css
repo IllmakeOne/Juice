@@ -89,9 +89,6 @@ body {
 .barscreenbox{
   width: 100%;
 }
-.dx-scheduler-cell-sizes-horizontal {
-  width: 50px;
-}
 
 
 .product {
@@ -283,9 +280,23 @@ footer {
 
 
 
+.cellocasional{
+  /* width: 10%;
+  height: 10%; */
+  border-style: solid;
+  text-align: center;
+
+  border-width: 1px;
+  background: rgb(79, 248, 1)
+}
+
 .cell{
   /* width: 10%;
   height: 10%; */
+  border-style: solid;
+  text-align: center;
+
+  border-width: 1px;
   background: cyan
   
 }

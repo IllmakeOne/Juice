@@ -48,8 +48,17 @@ export  const fetchAppoitments = async () => {
 //-----------------------------Setters--------------
 export const addCartList = async (list)=>{
     //send to db new cartlist
-    console.log(list)
+    // console.log(list)
 }
+
+export  const fetchCartProdLists = async () => {
+    const res = await fetch('http://localhost:3001/cartlists')
+    const data = await res.json()
+    // console.log(data)
+    return data
+}
+
+
 
 export default function DBconn() {
     return (

@@ -4,9 +4,10 @@ import CartButton from './CartButton';
 import { FiTrash2, FiShoppingCart} from "react-icons/fi"
 import { Plus, Save, BookOpen} from 'react-feather'
 import ChangePriceB from './ChangePriceB'
-import React from 'react'
+import { useState, useEffect } from 'react'
+import MyDialogue from '../pieces/MyDialogue'
 
-import { addCartList } from '../../DBconn'
+import { addCartList, fetchCartProdLists } from '../../DBconn'
 
 import { css, cx } from '@emotion/css'
 
@@ -15,8 +16,20 @@ import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
 import RecCartButton from './RecCartButton'
 
-function Cart({basket, removeItem ,removeAllCart, changeItem}) {
+function Cart({basket, removeItem ,removeAllCart, changeItem, addtoCart}) {
 
+    const [prodLists, setProdLists] = useState([])
+    const [loadList, setLoadList] = useState([])
+
+    useEffect(() => {
+        const anon = async ()=>{
+            const serverLists = await fetchCartProdLists()
+            setProdLists(serverLists)
+            // console.log(serverLists)
+        }
+        anon()
+
+    }, [])
 
     const getSum = () => {
         var sum = 0
@@ -31,10 +44,36 @@ function Cart({basket, removeItem ,removeAllCart, changeItem}) {
         removeAllCart()
     }
 
+    const loadListButton = () => {
+        removeAllCart()
+        loadList.map(el => {
+            for(var i = 1; i <= el.stock; i++){
+                addtoCart(el.id)
+            }
+        })
+    }
+
+    const [open, setOpen] = useState(false)
+
+    const handleClickOpen = () => {
+        setOpen(true)
+    };
+
+    const handleClose = (value) => {
+        setOpen(false)
+        setLoadList(value)
+        loadListButton()
+    };
+
     
     return (
-        <React.Fragment>
         <div className='cart'>
+
+            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                Open simple dialog
+            </Button>
+            <MyDialogue open={open} selectedValue={loadList} onClose={handleClose} />
+
         <GridRow align='center ' justify="end ">
             <GridColumn width ={4}>
                 <Button className = 'cart_svlist'
@@ -53,7 +92,7 @@ function Cart({basket, removeItem ,removeAllCart, changeItem}) {
                     color="primary"
                     size="large"
                     startIcon={<BookOpen />}
-                    // onClick ={()=>removeAllCart()}
+                    onClick ={handleClickOpen}
                     >
                     Load List
                 </Button>
@@ -111,7 +150,6 @@ function Cart({basket, removeItem ,removeAllCart, changeItem}) {
                 >
             </Button>
         </div> 
-        </React.Fragment>
     )
 }
 

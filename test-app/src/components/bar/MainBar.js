@@ -54,7 +54,8 @@ function MainBar({startScreen}) {
                                         <Cart  basket = {bar.cart} 
                                             removeItem = {removeItemfromCart}
                                             removeAllCart = {removeAllCart} 
-                                            changeItem = {changeCartItem}/>
+                                            changeItem = {changeCartItem}
+                                            addtoCart = {addtoCart}/>
                                     </GridColumn>
                                 </GridRow>
                                 </div>:null}
@@ -100,7 +101,7 @@ function MainBar({startScreen}) {
     }
 
     const addItem = (item) => {
-        console.log(item)
+        // console.log(item)
     }
 
 
@@ -199,8 +200,8 @@ function MainBar({startScreen}) {
             ...item
         }
         // Phetch('post', `prods/`, to_send
-        console.log("bruh")
-        console.log(to_send)
+        // console.log("bruh")
+        // console.log(to_send)
 
     }
 
