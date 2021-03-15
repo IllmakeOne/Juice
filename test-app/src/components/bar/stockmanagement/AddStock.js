@@ -168,8 +168,11 @@ const columns = [
     setCrtItem({...crtItem, stock: e.target.value})
   }
 
-  const handFinalSubmit = () =>{
-        
+  const handFinalSubmit = () => {
+        //send restock order to db
+        return(
+            <div>asassa</div>
+        )
   }
 
 

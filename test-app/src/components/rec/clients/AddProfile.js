@@ -1,7 +1,8 @@
 import React from 'react'
 import { List, Datagrid, TextField, DateField, BooleanField, Admin, Resource } from 'react-admin';
 import jsonServerProvider from 'ra-data-json-server'
-import { ClientsList, ClientEdit, ClientCreate, PostIcon } from './clients'
+import { ClientsList, ClientEdit, ClientCreate, ClientIcon } from './clients'
+import { SubsList, SubsEdit, SubsCreate, SubsIcon } from './subscriptions'
 import simpleRestProvider from 'ra-data-simple-rest'
 import { Button } from '@material-ui/core';
 
@@ -33,13 +34,8 @@ function AddProfile() {
     return (
         <Admin dataProvider ={dataProvider}>
             
-            <Resource name="clients" list={ClientsList} edit={ClientEdit} create={ClientCreate} icon={PostIcon}/>
-
-            <Button
-                onClick={()=>trye()}
-            >
-                 asdasdsad
-            </Button>
+            <Resource name="clients" list={ClientsList} edit={ClientEdit} create={ClientCreate} icon={ClientIcon}/>
+            <Resource name="subs" list={SubsList} edit={SubsEdit} create={SubsCreate} icon={SubsIcon}/>
 
 
         </Admin>

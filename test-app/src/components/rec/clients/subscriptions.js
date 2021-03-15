@@ -6,17 +6,15 @@ import {    List,
             DateField, 
             TextField, 
             EditButton, 
-            Filter,
             TextInput, 
             Show, 
             SimpleShowLayout,
              RichTextField,
-            DateInput, 
-            SearchInput} from 'react-admin';
+            DateInput } from 'react-admin';
 import BookIcon from '@material-ui/icons/Book';
 import { Button } from '@material-ui/core';
-import { FiCheck, FiPlusSquare, } from "react-icons/fi"
-export const ClientIcon = BookIcon;
+import { FiFramer, FiPlusSquare, FiTrash } from "react-icons/fi"
+export const SubsIcon = FiFramer;
 
 
 
@@ -33,7 +31,7 @@ export const AddSub = (props) =>{
             <TextInput source="phone" />
             <TextInput source="email" />
             <TextInput label="Current Subscription" source="crtsub" />
-            <TextInput source="comment" />
+            <TextInput source="description" />
             {/* <DateInput label="Publication date" source="published_at" /> */}
             {/* <TextInput source="average_note" /> */}
         </SimpleForm>
@@ -41,7 +39,7 @@ export const AddSub = (props) =>{
 )
  }
 
- export const ClientShow = (props) => (
+ export const SubsShow = (props) => (
     <Show {...props} show=''>
         <SimpleShowLayout>
             <TextField label="Current Subscription Type "  source="crtsub.type" />
@@ -51,7 +49,7 @@ export const AddSub = (props) =>{
     </Show>
 )
 
-export const ClientEdit = (props) => (
+export const SubsEdit = (props) => (
     <Edit title={<PostTitle />} {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
@@ -66,7 +64,7 @@ export const ClientEdit = (props) => (
     </Edit>
 )
 
-export const ClientCreate = (props) => (
+export const SubsCreate = (props) => (
     <Create title="Create a Post" {...props}>
         <SimpleForm>
             <TextInput required source="name" />
@@ -78,9 +76,9 @@ export const ClientCreate = (props) => (
     </Create>
 )
 
-export const ClientsList = (props) => (
-    <List {...props} filters={<ClientsFilter/>}>
-        <Datagrid expand={ClientShow}>
+export const SubsList = (props) => (
+    <List {...props}>
+        <Datagrid expand={SubsShow}>
             <TextField source="id" />
             <TextField source="name" />
             <TextField source="phone" />
@@ -96,7 +94,7 @@ export const ClientsList = (props) => (
     </List>
 )
 
-export const ClientShowSpecific = (props) => (
+export const SubsShowSpecific = (props) => (
     <Show {...props} show=''>
         <SimpleShowLayout>
             <TextField source="title" />
@@ -110,13 +108,4 @@ export const ClientShowSpecific = (props) => (
             <DateField label="Publication date" source="created_at" />
         </SimpleShowLayout>
     </Show>
-)
-
-const ClientsFilter = (props) => (
-    <Filter {...props}>
-        <SearchInput  source="q" alwaysOn inputProps={{autocomplete: 'off'}} />
-        <TextInput label="Name" source="name" defaultValue='' inputProps={{autocomplete: 'off'}}/>
-        <TextInput label="Subscription" source="crtsub.type" defaultValue='' inputProps={{autocomplete: 'off'}}/>
-    </Filter>
-)
-
+);
