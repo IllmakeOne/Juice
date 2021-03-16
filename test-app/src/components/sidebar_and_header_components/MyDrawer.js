@@ -14,14 +14,15 @@ import HomeIcon from '@material-ui/icons/Home'
 
 import logo from "../../assets/logo.png"
 
-import { Route, Link, BrowserRouter as Router } from "react-router-dom";
+import { Route, Link, BrowserRouter as Router } from "react-router-dom"
 import MainBar from './../bar/MainBar'
-import MainRec from './../rec/MainRec';
-import StartScreen from './../StartScreen';
-import StockHandler from './../bar/stockmanagement/StockHandler';
-import MainSche from './../rec/schedules/MainSche';
-import RestockPrinter from '../printers/RestockPrinter';
-import AddProfile from '../rec/clients/AddProfile';
+import MainRec from './../rec/MainRec'
+import StartScreen from './../StartScreen'
+import Bill from './../Bill'
+import StockHandler from './../bar/stockmanagement/StockHandler'
+import MainSche from './../rec/schedules/MainSche'
+import RestockPrinter from '../printers/RestockPrinter'
+import AddProfile from '../rec/clients/AddProfile'
 
 const history = createBrowserHistory();
 export default function MyDrawer(){
@@ -120,7 +121,18 @@ export default function MyDrawer(){
 
             <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Add Profile</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Resources</Typography>}
+             />
+          </ListItem>
+
+          <ListItem
+            button
+            component={Link}
+            to="/bill">
+
+            <ListItemText
+               disableTypography
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Bill</Typography>}
              />
           </ListItem>
 
@@ -134,6 +146,7 @@ export default function MyDrawer(){
         <Route path='/sche' component={MainSche} />  
         <Route path='/rest' component={RestockPrinter} />  
         <Route path='/addprof' component={AddProfile} /> 
+        <Route path='/bill' component={Bill} /> 
 
     </Router>
     );

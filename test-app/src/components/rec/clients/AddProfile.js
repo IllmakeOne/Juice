@@ -3,6 +3,7 @@ import { List, Datagrid, TextField, DateField, BooleanField, Admin, Resource } f
 import jsonServerProvider from 'ra-data-json-server'
 import { ClientsList, ClientEdit, ClientCreate, ClientIcon } from './clients'
 import { SubsList, SubsEdit, SubsCreate, SubsIcon } from './subscriptions'
+import { ItemList, ItemEdit, ItemCreate, ItemIcon } from './items'
 import simpleRestProvider from 'ra-data-simple-rest'
 import { Button } from '@material-ui/core';
 
@@ -20,7 +21,7 @@ export const nope = (props) => (
     </List>
 );
 
-const dataProvider = jsonServerProvider('http://localhost:3001');
+const dataProvider = jsonServerProvider('http://localhost:3001')
 
 const trye = () =>{
 dataProvider
@@ -36,6 +37,7 @@ function AddProfile() {
             
             <Resource name="clients" list={ClientsList} edit={ClientEdit} create={ClientCreate} icon={ClientIcon}/>
             <Resource name="subs" list={SubsList} edit={SubsEdit} create={SubsCreate} icon={SubsIcon}/>
+            <Resource name="prods" list={ItemList} edit={ItemEdit} create={ItemCreate} icon={ItemIcon}/>
 
 
         </Admin>
