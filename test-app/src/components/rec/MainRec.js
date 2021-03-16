@@ -61,36 +61,19 @@ function MainRec() {
     }
 
 
-    /**
-     * Broken idk why
-     * it set the price for botht eh cart item and the prod item
-     * which should not happne and i cant figure out why
-     */
+    
     const changeCartItemPrice =  ({id, price}) => {
-        
-        // console.log(id)
-        items.cart.forEach((el)=>{
-            if(el.id == id){
-                el.price = price             
-            }
+        const auxCart = items.cart.map(el=>{
+                            if(el.id == id){
+                                return {...el, price:  price}
+                            } else {
+                                return el
+                            }})
+        setItems({
+            prods: items.prods,
+            cart: auxCart
         })
 
-        // const aux1 = items.cart.map( el =>{
-        //     if(el.id== id){
-        //         el.price = price
-        //         return el
-        //     } else {
-        //         return el
-        //     }
-        // })
-        // const aux2 = items.prods.filter(el=>el.id===id)
-        // console.log(aux1)
-        // console.log(aux2)
-        // console.log(items.cart)
-        // console.log(items.prods)
-        
-        // console.log(items.cart)
-        setItems({...items, cart: items.cart})
     }
 
     return (

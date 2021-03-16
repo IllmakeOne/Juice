@@ -55,7 +55,8 @@ function MainBar({startScreen}) {
                                             removeItem = {removeItemfromCart}
                                             removeAllCart = {removeAllCart} 
                                             changeItem = {changeCartItem}
-                                            addtoCart = {addtoCart}/>
+                                            addtoCart = {addtoCart}
+                                            addBulkItem={addBulkItem}/>
                                     </GridColumn>
                                 </GridRow>
                                 </div>:null}
@@ -88,15 +89,17 @@ function MainBar({startScreen}) {
 
 
     
-    const removeAllCart = async () => {
-        bar.cart.map((el) => {
-            bar.prods.map((prd)=>{
+    const removeAllCart = () => {
+        const auxProds = bar.prods
+        const auxBasket = bar.cart
+        auxBasket.map((el) => {
+            auxProds.map((prd)=>{
                 if(prd.id==el.id)
                     prd.stock+=el.stock
             })
         })
 
-        setBar({prods: bar.prods, cart: []})
+        setBar({prods: auxProds, cart: []})
 
     }
 
@@ -149,38 +152,67 @@ function MainBar({startScreen}) {
         setBar({prods: bar.prods, cart: bar.cart})
     }
      
-    const addtoCart = async  (id) => {
+    const addtoCart =  (id) => {
         // console.log(id)
+        var flag = 0
         const bruh = bar.prods
         const auxBasket = bar.cart
         var aux = null
        bruh.map(
             function(prod) {
                 if(prod.id == id){
-                    if(prod.type != 'Service'){
+                    console.log(prod.stock)
+                    if(prod.type != 'Service' && prod.stock > 0){
                         prod.stock = prod.stock - 1
-                    }
-                    aux = {
-                        id: prod.id,
-                        name: prod.name,
-                        stock: 1,
-                        price: prod.price,
-                        fixedPrice: prod.fixedPrice
+                        aux = {
+                            id: prod.id,
+                            name: prod.name,
+                            stock: 1,
+                            price: prod.price,
+                            fixedPrice: prod.fixedPrice
+                        }
+                    } else {
+                        flag = 1
+                        console.log('dirtier')
                     }
                     
                 }
             })
-            
-        const indexof = auxBasket.findIndex(elem => elem.id == id)
-        if(indexof== -1){
-            //if it finds it , increase basket stock
-            auxBasket.push(aux)
-        } else {
-            //if it doesnt, add it wiht stock 1
-            auxBasket[indexof].stock += 1
+        
+        if(flag == 0){console.log('dirty')
+            const indexof = auxBasket.findIndex(elem => elem.id == id)
+            if(indexof== -1){
+                //if it finds it , increase basket stock
+                auxBasket.push(aux)
+            } else {
+                //if it doesnt, add it wiht stock 1
+                auxBasket[indexof].stock += 1
+            }
+            // console.log(bar.cart)
+            setBar({prods: bruh, cart: auxBasket})
         }
-        // console.log(bar.cart)
-        setBar({prods: bruh, cart: auxBasket})
+    }
+
+    const addBulkItem =  (cart) => {
+        // console.log(cart)
+        let auxProds = bar.prods
+        let result = []
+        cart.map(element => {
+            var item = bar.prods.filter(el=>el.id===element.id)[0]
+            var aux = item
+            if(item.stock > 0){
+                if(element.stock <= item.stock){
+                    aux = {...aux, stock: element.stock}
+                    auxProds.forEach(el=>{if(el.id == element.id) el.stock -= element.stock})
+                } else {
+                    aux = {...aux, stock: item.stock}
+                    auxProds.forEach(el=>{if(el.id == element.id) el.stock = 0})
+                }
+                result.push(aux)    
+            }
+        })
+
+        setBar({prods: auxProds, cart: result})
     }
 
 

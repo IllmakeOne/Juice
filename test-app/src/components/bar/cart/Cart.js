@@ -16,7 +16,7 @@ import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
 import RecCartButton from './RecCartButton'
 
-function Cart({basket, removeItem ,removeAllCart, changeItem, addtoCart}) {
+function Cart({basket, removeItem ,removeAllCart, changeItem, addtoCart, addBulkItem}) {
 
     const [prodLists, setProdLists] = useState([])
     const [loadList, setLoadList] = useState([])
@@ -44,35 +44,30 @@ function Cart({basket, removeItem ,removeAllCart, changeItem, addtoCart}) {
         removeAllCart()
     }
 
-    const loadListButton = () => {
-        removeAllCart()
-        loadList.map(el => {
-            for(var i = 1; i <= el.stock; i++){
-                addtoCart(el.id)
-            }
-        })
-    }
-
     const [open, setOpen] = useState(false)
 
     const handleClickOpen = () => {
         setOpen(true)
     };
 
-    const handleClose = (value) => {
+    const handleSubmit = (value) => {
         setOpen(false)
-        setLoadList(value)
-        loadListButton()
-    };
+        removeAllCart()
+        addBulkItem(value)
+    }
+
+    const handleClose = () => {
+        setOpen(false)
+    }
 
     
     return (
         <div className='cart'>
 
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+            {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                 Open simple dialog
-            </Button>
-            <MyDialogue open={open} selectedValue={loadList} onClose={handleClose} />
+            </Button> */}
+            <MyDialogue open={open} selectedValue={loadList} onSubmit={handleSubmit} onClose={handleClose} />
 
         <GridRow align='center ' justify="end ">
             <GridColumn width ={4}>

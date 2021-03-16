@@ -17,9 +17,7 @@ const  ProdSet = ({items, onClick}) => {
     const[uniqueTypes, setUniqueTypes] = useState([])
 
     useEffect(() => {
-        const types = items.map((elem)=>{
-            return elem.type
-        })
+        const types = items.map((elem)=>elem.type).filter((el) => el != 'Service')
     
         setUniqueTypes(types.filter(function(elem, pos) {
             return types.indexOf(elem) == pos
@@ -55,7 +53,7 @@ const  ProdSet = ({items, onClick}) => {
 
             <div className = 'display_prods'>
                  <ProdTypeSet items =  
-                    {items.filter((el) => {if(el.type == crtType) return el})}
+                    {items.filter((el) => {if(el.type == crtType) return el}).filter((el)=> el.stock > 0)}
                     //  type = {crtType}
                     onClick = {onClick}
                      />

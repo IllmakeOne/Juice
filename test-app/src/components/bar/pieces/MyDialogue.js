@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     },
   });
 
-const MyDialogue = ({ onClose, selectedValue, open }) => {
+const MyDialogue = ({ onClose, selectedValue, open, onSubmit}) => {
     const classes = useStyles();
     const [prodLists, setProdLists] = useState([])
 
@@ -32,7 +32,7 @@ const MyDialogue = ({ onClose, selectedValue, open }) => {
         const anon = async ()=>{
             const serverLists = await fetchCartProdLists()
             setProdLists(serverLists)
-            console.log(serverLists)
+            // console.log(serverLists)
         }
         anon()
 
@@ -44,7 +44,7 @@ const MyDialogue = ({ onClose, selectedValue, open }) => {
     };
   
     const handleListItemClick = (value) => {
-      onClose(value);
+      onSubmit(value);
     };
   
     return (

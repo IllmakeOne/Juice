@@ -217,19 +217,29 @@
 
   "cartlists": [
     {
-      "id": 16,
+      "id": 16,      
+      "name":"Nicu",
       "date": "30-05-21",
       "prods": [
         {
-          "id": 9,
-          "stock": 6
+          "id": 1,
+          "stock": 10
         },
         {
-          "id": 10,
-          "stock": 1
+          "id": 2,
+          "stock": 20
         }
-      ],
-      "name":"Nicu"
+      ]
+    },{
+      "id": 11,      
+      "name":"Keni",
+      "date": "30-05-21",
+      "prods": [
+        {
+          "id": 1,
+          "stock": 11
+        }
+      ]
     }
   ],
 
