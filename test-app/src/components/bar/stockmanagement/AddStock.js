@@ -27,6 +27,8 @@ import Paper from '@material-ui/core/Paper';
 
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
+import RestockPrinter from '../../printers/RestockPrinter'
+
 const useStyles = makeStyles({
     table: {
       minWidth: 650,
@@ -167,11 +169,20 @@ const columns = [
   const handlechangeStock = e => {
     setCrtItem({...crtItem, stock: e.target.value})
   }
+  
+
+  const[dwn, setDwn] = useState(false)
 
   const handFinalSubmit = () => {
         //send restock order to db
+        /* catch and do thi
+        <RestockPrinter invoice={ {supp: crtSupp, 
+                            prods: upProds, 
+                            other: 'dav'}} />
+                            */
+        setDwn(true)
         return(
-            <div>asassa</div>
+            <div></div>
         )
   }
 
@@ -330,6 +341,12 @@ const columns = [
                     >
                 </Button>
             </div>
+            
+
+            {/* {dwn && <RestockPrinter invoice={ {supp: crtSupp, 
+                prods: upProds, 
+                other: 'dav'}} />} */}
+
 
         </div>
 

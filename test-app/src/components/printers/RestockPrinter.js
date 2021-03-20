@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Button, Input, TextField } from '@material-ui/core';
 
@@ -23,21 +23,25 @@ const styles = StyleSheet.create({
 });
 
 
-const MyDocument = () => (
+
+const  RestockPrinter = (invoice) => {
+
+  const [invoices, setInvoice] = useState({other: 'dab'})
+
+
+    
+  const MyDocument = () => (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text>Section #1</Text>
+          <Text>{invoices.other}</Text>
         </View>
         <View style={styles.section}>
           <Text>Section #2</Text>
         </View>
       </Page>
     </Document>
-  );
-
-
-function RestockPrinter() {
+  )
 
     // useEffect = (() =>{
     //     setTimeout(_exportPdf(),10000)

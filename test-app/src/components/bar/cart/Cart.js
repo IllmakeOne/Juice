@@ -1,15 +1,18 @@
 
-import { Button, Paper } from '@material-ui/core';
-import CartButton from './CartButton';
-import { FiTrash2, FiShoppingCart} from "react-icons/fi"
-import { Plus, Save, BookOpen} from 'react-feather'
-import ChangePriceB from './ChangePriceB'
-import { useState, useEffect } from 'react'
-import MyDialogue from '../pieces/MyDialogue'
+import { Button, Paper } from '@material-ui/core'
+import CartButton from './CartButton'
 
-import { addCartList, fetchCartProdLists } from '../../DBconn'
-
+import { GiCash } from "react-icons/gi";
+import { FiTrash2, FiSave, FiBookOpen} from "react-icons/fi"
+import { IoIosCash } from "react-icons/io"
+import { GoCreditCard } from "react-icons/go"
 import { css, cx } from '@emotion/css'
+
+import { useState, useEffect } from 'react'
+
+import MyDialogue from '../pieces/MyDialogue'
+import { addCartList, fetchCartProdLists } from '../../DBconn'
+import ChangePriceB from './ChangePriceB'
 
 
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
@@ -62,20 +65,23 @@ function Cart({basket, removeItem ,removeAllCart, changeItem, addtoCart, addBulk
 
     
     return (
-        <div className='cart'>
+        <div >
 
+        <MyDialogue open={open} selectedValue={loadList} onSubmit={handleSubmit} onClose={handleClose} />
+            
+        <div className='cart'>
             {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                 Open simple dialog
             </Button> */}
-            <MyDialogue open={open} selectedValue={loadList} onSubmit={handleSubmit} onClose={handleClose} />
+            
 
-        <GridRow align='center ' justify="end ">
+        <GridRow className='test' align='center ' justify="end ">
             <GridColumn width ={4}>
                 <Button className = 'cart_svlist'
-                    variant="contained" 
+                    variant="outlined" 
                     color="primary"
                     size="large"
-                    startIcon={<Save />}
+                    startIcon={<FiSave />}
                     onClick ={()=>saveList()}
                     >
                     Save List
@@ -83,10 +89,10 @@ function Cart({basket, removeItem ,removeAllCart, changeItem, addtoCart, addBulk
             </GridColumn>
             <GridColumn width ={4}>
                 <Button className = 'cart_svlist'
-                    variant="contained" 
+                    variant="outlined" 
                     color="primary"
                     size="large"
-                    startIcon={<BookOpen />}
+                    startIcon={<FiBookOpen />}
                     onClick ={handleClickOpen}
                     >
                     Load List
@@ -94,7 +100,7 @@ function Cart({basket, removeItem ,removeAllCart, changeItem, addtoCart, addBulk
             </GridColumn>
             <GridColumn width={4}>
              <Button className = 'cart_svlist'
-                variant="contained" 
+                variant="outlined" 
                 color="primary"
                 size="large"
                 startIcon={<FiTrash2 />}
@@ -104,24 +110,25 @@ function Cart({basket, removeItem ,removeAllCart, changeItem, addtoCart, addBulk
              </Button>
             </GridColumn>
         </GridRow>
-        <GridRow>
+             <h2>Cart Items</h2>
+        {/* <GridRow>
             <GridColumn width={6}>
              <h2>Cart Items</h2>
             </GridColumn>
             
-        </GridRow>
-            <Paper style={{maxHeight: 550, overflow: 'auto'}} >
+        </GridRow> */}
+            <Paper style={{maxHeight: 550, overflow: 'scroll'}} >
             <div className ={css`
-                    padding: 32px;
-                    background-color: hotpink;
+                    padding: 12px;
+                    background-color: white;
                     font-size: 24px;
+                    height: 100%;
                     border-radius: 4px;
-                    overflow: scroll;
                     white-space: nowrap;
                     `}>
                {basket.map((item) => 
                 ( 
-                <div key = {item.id} 
+                <div key = {item.id} className ='cartbutton' 
                     >
                     <CartButton item = {item} 
                         removeItem = {removeItem}
@@ -133,9 +140,9 @@ function Cart({basket, removeItem ,removeAllCart, changeItem, addtoCart, addBulk
         </Paper>
         
         <div className='finalbasket'>
-                Finish total: {getSum()} lei
-            </div>
-            <Button 
+            <h2>Finish total: {getSum()} lei</h2>
+        </div>
+            {/* <Button 
                 className='finalbasket'
                 variant="contained"
                 color='green'
@@ -143,7 +150,45 @@ function Cart({basket, removeItem ,removeAllCart, changeItem, addtoCart, addBulk
                 startIcon={<FiShoppingCart />}
                 // onClick ={()=>removeItem(item.id)}
                 >
-            </Button>
+            </Button> */}
+        <GridRow>
+            <GridColumn width ={4}>
+                <Button className = 'cart_svlist'
+                        variant="outlined" 
+                        color="primary"
+                        size="large"
+                        startIcon={<IoIosCash />}
+                        // onClick ={handleClickOpen}
+                        >
+                        Cash
+                </Button>
+            </GridColumn>
+            <GridColumn width={4}>
+                <Button className = 'cart_svlist'
+                    variant="outlined" 
+                    color="primary"
+                    size="large"
+                    startIcon={<GoCreditCard />}
+                    // onClick ={()=>removeAllCart()}
+                    >
+                    Carad
+                </Button>
+            </GridColumn>
+            
+            <GridColumn width={4}>
+                <Button className = 'cart_svlist'
+                    variant="outlined" 
+                    color="primary"
+                    size="large"
+                    startIcon={<GiCash />}
+                    // onClick ={()=>removeAllCart()}
+                    >
+                    CandC
+                </Button>
+            </GridColumn>
+        </GridRow>
+
+        </div>  
         </div> 
     )
 }

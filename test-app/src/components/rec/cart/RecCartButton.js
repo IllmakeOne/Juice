@@ -21,7 +21,7 @@ const RecCartButton= ({item, removeItem, changeItem}) =>{
     const [price, setPrice] = useState(0)
     const [newprice, setNewPrice] = useState(0)
 
-    const handleSubmitPrice = (value) => {
+    const handleSubmitPrice = () => {
         changeItem({id: item.id, price: newprice})
         setPrice(newprice)
         // console.log(newprice)

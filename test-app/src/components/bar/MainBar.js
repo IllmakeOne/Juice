@@ -46,11 +46,11 @@ function MainBar({startScreen}) {
                 // selling cart and item display
                     return <div> 
                             {bar ? <div>
-                                <GridRow wrap='wrap'>
-                                    <GridColumn width={8}>
+                                <GridRow wrap='wrap' >
+                                    <GridColumn width={9}>
                                          <ProdSet items = {bar.prods} onClick = {addtoCart}/>
                                     </GridColumn>
-                                    <GridColumn width={4}>
+                                    <GridColumn width={3} className='test'>
                                         <Cart  basket = {bar.cart} 
                                             removeItem = {removeItemfromCart}
                                             removeAllCart = {removeAllCart} 
@@ -257,7 +257,7 @@ function MainBar({startScreen}) {
                 <input type="text" value = {ACTION.GET}/>
             </form>*/
     return (
-        <div id='capture' className='mainbar' tyle={{ width: '100%' }} >
+        <div id='capture' className='mainbar' >
             <Button 
                     className ='switchToSellBar'
                     variant="outline-primary" 

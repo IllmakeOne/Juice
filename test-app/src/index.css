@@ -81,10 +81,12 @@ body {
 
 
 .cart {
-  /* height: 50%;
-  width: 30%; */
+  /* height: 20%; */
+ /* width: 30%; */
   padding-top: 20px;
-  background: #2dbd2d;
+  /* background: #2dbd2d; */
+  /* max-height: 850;
+  overflow: 'scroll'; */
 }
 .barscreenbox{
   width: 100%;
@@ -99,9 +101,15 @@ body {
 }
 
 .prodtypeset{
-  background: rgb(162, 13, 207);
-  /* height: 1000%;
-  width: 80%; */
+  background: rgb(255, 255, 255);
+  
+  overflow: scroll;
+  /* height: 1000%;*/
+  /* height: 100%;  */
+}
+
+.test{
+ height: 90;
 }
 
 .changeprice{
@@ -109,10 +117,10 @@ body {
 }
 
 .mainbar{
-  height: 90%;
+  height: 100%;
   width: 80%;
   padding-top: 20px;
-  background: orange;
+  /* background: orange; */
   
   position: absolute;
   left: 200px;
@@ -135,6 +143,7 @@ body {
   background: rgb(214, 216, 97);
   /* height: 50%;
   width: 100%; */
+  
   padding: 20px 20px;
   border-color: white;
   border-style: dashed;
@@ -142,9 +151,9 @@ body {
 }
 
 .finalbasket{
-  background: rgb(87, 13, 13);
-  height: 20%;
-  width: 50%;
+  background: rgb(11, 184, 77);
+  height: 100%;
+  width: 100%;
   color: white
 }
 
@@ -152,6 +161,8 @@ body {
   background: rgb(57, 200, 112);
   border-color: black;
   border-style: solid;
+  text-align: center;
+  /* height: 200px; */
   /* padding: 5px; */
   /* border-radius: 5px */
 
@@ -159,18 +170,19 @@ body {
 
 .display_prods {
   background: black;
-  height: 100%;
-  width: 100%;
+  /* height: 100%;
+  width: 100%; */
   /* position: absolute;
   left: 40%;
   top:100%; */
 
 }
-.itemchangersdaddy{
-  /* background: greenyellow; */
-  /* height: 100%;
-  width: 25%;
-  position: absolute;
+.changeitemtype{
+  background: greenyellow;
+  /* height: 100%;*/
+  width: 18%;
+  /* height : 100% */
+ /* position: absolute;
   left: -0.5px;
   top:50px; */
 }
@@ -179,7 +191,7 @@ body {
   /* height: 50%;
   width: 50%; */
   background:#f4f4f4;
-  margin: 10px;
+  margin: 2px;
   padding: 10px 20px;
   /* position: absolute; */
   /* border-color: coral;  */
@@ -218,30 +230,6 @@ body {
 
 }
 
-.task.reminder {
-  border-left: 5px solid green;
-}
-
-.task h3 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.add-form {
-  margin-bottom: 40px;
-}
-
-.form-control {
-  margin: 20px 0;
-  width: 50%
-}
-
-.type-control {
-  width: 100%;
-  height: 40px;
-  font-size: 17px;
-}
 
 .form-control label {
   display: block;

@@ -24,7 +24,6 @@ const ProdTypeSet = ({items, onClick}) => {
     
 
     const makeGrid = () => {
-        var gridsize = 4
         var ret =[]
         // console.log(ret)
 

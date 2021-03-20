@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import ProdButton from './ProdButton'
 import React from 'react'
 
-import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 
 
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
@@ -36,9 +36,8 @@ const  ProdSet = ({items, onClick}) => {
         <React.Fragment>
         <div className='prodset'>
             <GridRow warp='nowrap '>
-            {/* {uniqueTypes} */}
-            <div className='itemchangersdaddy'>
-                <GridColumn>
+            {/* {uniqueTypes} */} 
+                <GridColumn className='changeitemtype' width={2}>
                 {uniqueTypes.map((t)=> {
                     return(
                     <Button
@@ -49,15 +48,15 @@ const  ProdSet = ({items, onClick}) => {
                     })  
                 }
                 </GridColumn>
-            </div>
-
-            <div className = 'display_prods'>
-                 <ProdTypeSet items =  
-                    {items.filter((el) => {if(el.type == crtType) return el}).filter((el)=> el.stock > 0)}
-                    //  type = {crtType}
-                    onClick = {onClick}
-                     />
-            </div>
+                <GridColumn width={13} >
+                    <Paper style={{maxHeight: 690, overflow: 'auto'}} >   
+                        <ProdTypeSet items =  
+                            {items.filter((el) => {if(el.type == crtType) return el}).filter((el)=> el.stock > 0)}
+                            //  type = {crtType}
+                            onClick = {onClick}
+                            />
+                    </Paper>   
+                </GridColumn>
             </GridRow>
         </div>
         </React.Fragment>

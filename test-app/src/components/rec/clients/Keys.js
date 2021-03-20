@@ -33,6 +33,12 @@ function Keys() {
         Aux()
     },[])
 
+    // const switchColor = (id)=>{
+
+    //     const aux = keys
+    //     aux.map(el => el.id == id )
+    // }
+
     const createButton = ({id, assigned}) => {
         return(
             <div key = {id} className={assigned? 'assigned':'unassigned'}>

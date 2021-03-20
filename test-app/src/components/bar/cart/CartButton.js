@@ -51,11 +51,11 @@ const CartButton = ({item, removeItem, changeItem}) => {
      //make so it can demove from basket
     //and allowe modifyin price if Modifiable=true   onClick={toggleOpen(true)}
         return (
-            <div className = 'cartbutton' >
+            <div>
 
-                    Name: <h3>{item.name}</h3> <br/>
-                    Number Selected: <h3>{item.stock}</h3> <br/>
-                    Price of Item: <h3>{item.price}</h3><br/>
+                    <h3>{item.name}</h3> 
+                    <h4>{item.stock} items </h4> 
+                    <h4>{item.price} RON</h4>
 
 
                 <Button 
