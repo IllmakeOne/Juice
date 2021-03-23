@@ -237,7 +237,6 @@ const columns = [
                         onChange={(ev, newVal)=>{
                             setCrtItem({...newVal, stock : 0, price: 0})
                             // setCrtItem(newVal)
-                            console.log(crtItem)
                         }}
                     /> 
                 </GridColumn>

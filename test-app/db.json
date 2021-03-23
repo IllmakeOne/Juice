@@ -310,7 +310,7 @@
   "clients": [
     {
       "id": 1,
-      "name": "Decretann",
+      "name": "Decretann Ioana",
       "email": null,
       "phone": "0720440760",
       "crtsub": {
@@ -322,7 +322,7 @@
     },
     {
       "id": 3,
-      "name": "Calutu",
+      "name": "Calutu Camelia",
       "email": null,
       "phone": "0720440761",
       "crtsub": {
@@ -333,7 +333,7 @@
     },
     {
       "id": 2,
-      "name": "Neamu",
+      "name": "Neamu Gatu",
       "email": "@gasdas",
       "phone": "0720440763",
       "crtsub": {

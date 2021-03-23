@@ -15,9 +15,26 @@ import {    List,
             SearchInput} from 'react-admin';
 import BookIcon from '@material-ui/icons/Book';
 import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import { FiCheck, FiPlusSquare, } from "react-icons/fi"
+
+
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+
+
+
 export const ClientIcon = BookIcon;
 
+
+const useStyles = makeStyles({
+    actions: {
+        backgroundColor: '#ccc',
+    },
+    table: {
+        width: 1100
+    },
+});
 
 
 const PostTitle = ({ record }) => {
@@ -25,6 +42,7 @@ const PostTitle = ({ record }) => {
 };
 
 export const AddSub = (props) =>{
+
     return (
     <Edit title={<PostTitle />} {...props}>
         <SimpleForm>
@@ -41,15 +59,17 @@ export const AddSub = (props) =>{
 )
  }
 
- export const ClientShow = (props) => (
+ export const ClientShow = (props) => {
+     const classes = useStyles()
+     return (
     <Show {...props} show=''>
-        <SimpleShowLayout>
+        <SimpleShowLayout className={classes.actions}>
             <TextField label="Current Subscription Type "  source="crtsub.type" />
             <DateField label="End Date"  source="crtsub.end" />
             <TextField source="comment" />
         </SimpleShowLayout>
     </Show>
-)
+)}
 
 export const ClientEdit = (props) => (
     <Edit title={<PostTitle />} {...props}>
@@ -78,8 +98,10 @@ export const ClientCreate = (props) => (
     </Create>
 )
 
-export const ClientsList = (props) => (
-    <List {...props} filters={<ClientsFilter/>}>
+export const ClientsList = (props) => {
+    const classes = useStyles()
+    return(
+    <List {...props} filters={<ClientsFilter/>} className={classes.table}>
         <Datagrid expand={ClientShow}>
             <TextField source="id" />
             <TextField source="name" />
@@ -88,13 +110,45 @@ export const ClientsList = (props) => (
             <TextField label="Current Subscription"  source="crtsub.type" />
             <div><Button
                 startIcon={<FiPlusSquare/>}
+                onClick= {()=>props.opendialog()}
                 >
             </Button></div>
             <TextField source="comment" />
             {/* <EditButton basePath="/clients" /> */}
         </Datagrid>
     </List>
+)}
+
+const ClientsFilter = (props) => (
+    <Filter {...props}>
+        <SearchInput  source="q" alwaysOn inputProps={{autocomplete: 'off'}} />
+        <TextInput label="Name" source="name" defaultValue='' inputProps={{autocomplete: 'off'}}/>
+        <TextInput label="Subscription" source="crtsub.type" defaultValue='' inputProps={{autocomplete: 'off'}}/>
+    </Filter>
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const ClientShowSpecific = (props) => (
     <Show {...props} show=''>
@@ -111,12 +165,3 @@ export const ClientShowSpecific = (props) => (
         </SimpleShowLayout>
     </Show>
 )
-
-const ClientsFilter = (props) => (
-    <Filter {...props}>
-        <SearchInput  source="q" alwaysOn inputProps={{autocomplete: 'off'}} />
-        <TextInput label="Name" source="name" defaultValue='' inputProps={{autocomplete: 'off'}}/>
-        <TextInput label="Subscription" source="crtsub.type" defaultValue='' inputProps={{autocomplete: 'off'}}/>
-    </Filter>
-)
-

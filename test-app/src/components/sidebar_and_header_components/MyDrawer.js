@@ -23,6 +23,7 @@ import StockHandler from './../bar/stockmanagement/StockHandler'
 import MainSche from './../rec/schedules/MainSche'
 import RestockPrinter from '../printers/RestockPrinter'
 import AddProfile from '../rec/clients/AddProfile'
+import Clients from '../resources/Clients'
 
 const history = createBrowserHistory();
 export default function MyDrawer(){
@@ -136,6 +137,17 @@ export default function MyDrawer(){
              />
           </ListItem>
 
+          <ListItem
+            button
+            component={Link}
+            to="/clients">
+
+            <ListItemText
+               disableTypography
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Clients</Typography>}
+             />
+          </ListItem>
+
         </List>
         
         </Drawer>
@@ -147,6 +159,7 @@ export default function MyDrawer(){
         <Route path='/rest' component={RestockPrinter} />  
         <Route path='/addprof' component={AddProfile} /> 
         <Route path='/bill' component={Bill} /> 
+        <Route path='/clients' component={Clients} /> 
 
     </Router>
     );
