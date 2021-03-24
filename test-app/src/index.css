@@ -212,6 +212,11 @@ body {
 
 }
 
+.clientInfoTabs{
+  background:#ff6500;
+  color: #0707a0;
+
+}
 .dab{
   background:#2dbd2d;
   text-align: center;

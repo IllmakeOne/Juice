@@ -4,13 +4,17 @@ import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
+import TextField from '@material-ui/core/TextField'
 import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button'
 import { FiSave } from 'react-icons/fi'
 
 
+import { Autocomplete } from '@material-ui/lab'
 
-function EditData({client, setClient}) {
+
+
+function EditData({clients, client, setClient, Submit}) {
 
     const onSubmit = () => {
 
@@ -33,6 +37,31 @@ function EditData({client, setClient}) {
     return (
         <div>
             <GridRow direction = 'column' align='center'>
+
+                <GridColumn textAlign={'center'}  p={['s', 's']}> 
+                    <Autocomplete
+                        className={''}
+                            id="auto-clients"
+                            options={clients}
+                            getOptionLabel={(option) => option.name}
+                            style={{ width: 300 }}
+                            value={client}
+                            selectOnFocus
+                            clearOnBlur
+                            // getOptionSelected={defaultValue}
+                            handleHomeEndKeys
+                            renderInput={(params) => <TextField {...params} label='Find Client' variant='outlined' />}
+                            onChange={(ev, newVal)=>{
+                                if(newVal) {setClient({name:newVal.name,
+                                            phone: newVal.phone?newVal.phone:'',
+                                            email: newVal.email?newVal.email:'',
+                                            comment: newVal.comment?newVal.comment:''})
+                                // setCrtItem(newVal)
+                                console.log(newVal)}
+                            }}
+                    /> 
+                </GridColumn>
+
 
                 <GridColumn textAlign={'center'}  p={['s', 's']}> 
                     <FormControl >
@@ -100,7 +129,7 @@ function EditData({client, setClient}) {
                             color="primary"
                             size='large'
                             startIcon={<FiSave />}
-                            onClick ={()=>onSubmit()}
+                            onClick ={()=>Submit()}
                             >
                                 Save
                         </Button>
