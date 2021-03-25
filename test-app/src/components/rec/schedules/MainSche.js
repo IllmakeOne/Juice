@@ -28,6 +28,7 @@ function MainSche() {
         const getReservs = async () => {
             const data = await fetchApprow()
             setApps(data)
+            console.log(data)
         }
         getReservs()
     }, [])
@@ -56,6 +57,10 @@ function MainSche() {
 
     return (
         <div className='cart_svlist'>
+        <br/>
+        {/* <br/>
+        <br/>
+        <br/>
             <Autocomplete
                 id="field-picker"
                 value={crtField}
@@ -71,7 +76,7 @@ function MainSche() {
                 style={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />
                 }
-            />
+            /> */}
             <br/>
             <br/>
             <br/>
