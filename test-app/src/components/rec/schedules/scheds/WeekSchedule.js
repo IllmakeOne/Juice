@@ -51,9 +51,11 @@ const WeekSchedule = () => {
             } else {//if there is nothing scheudle for this hour
                 const aux = i
                 ret.push(
-                    <Paper elevation={1} >
-                        {/* <div className={classes.emptycell} onMouseEnter={()=>onHoover()} onClick={()=>abprt(aux)}></div> */}
-                        <EmptyCell/>
+                    <Paper elevation={2} >
+                                        {/* // height: 25,
+                                         textAlign: 'center',
+                                         background: auxcolor}}>  */}
+                        <EmptyCell i={i}/> 
                     </Paper>
                     )
             }
@@ -74,7 +76,11 @@ const WeekSchedule = () => {
             <GridRow wrap='wrap' >
                 <GridColumn width= {1} className = {classes.column}>
                     <Paper elevation={3} >
-                         <div className={classes.emptycell}>Times</div> 
+                         <div style={{    
+                            height: 35,   
+                            textAlign: 'center',
+                            fontSize: 20,
+                                }}>Times</div> 
                     </Paper>
                     <GridColumn >
                         {times.map((el)=>(
@@ -87,8 +93,10 @@ const WeekSchedule = () => {
 
                 {weekDays.map((el)=>{
                     return(
-                        <GridColumn width={1.4} className = {classes.column}>
-                        <div className={classes.daynameCell}>{el[0]}</div>
+                        <GridColumn width={1.4} >
+                        <Paper elevation={3} className={classes.daynameCell}>
+                            <div >{el[0]}</div>
+                        </Paper>
                         {genLine(el[1])}
                         </GridColumn>                        
                     )
@@ -107,7 +115,7 @@ const WeekSchedule = () => {
 
 const useStyles = makeStyles({
     column:{
-        margin: 4,
+        margin: 1,
 
     },
 
@@ -149,12 +157,13 @@ const useStyles = makeStyles({
 
     daynameCell:{
         background: '#0cbff5',    
-        height: 25,   
+        height: 35,   
         borderLeft: 'solid',
         borderRight: 'solid',
         borderWidth: 1,
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: 23,
+
         position: 'sticky',
         top: 73,
 

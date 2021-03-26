@@ -90,7 +90,7 @@
       "price": 6,
       "stock": 10,
       "fixedPrice": true,
-      "fav": false,
+      "fav": true,
       "image": "https://hawkesdesign.files.wordpress.com/2014/09/fantalogo-svg.png"
     },
     {
@@ -428,7 +428,7 @@
       "duration": 3
     },
     {
-      "id": 38,
+      "id": 36,
       "name": "frank",
       "field": "A 1",
       "date": "04-06-21",

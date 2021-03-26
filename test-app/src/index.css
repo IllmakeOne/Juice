@@ -284,39 +284,43 @@ body {
 footer {
   margin-top: 30px;
   text-align: center;
-}
+  }
 
 
 
-.emptycell{
-  background: white;
-  height: 25;
-  text-align: center;
-  color: #fff;
 
-}
+  .cellwhite{
+    background: rgb(100, 125, 235);
+  }
+
 
 
 .cellocasional{
-  background: rgb(79, 248, 1)
+  background: rgb(124, 255, 174)
 }
 
 .cellsub{
-  background: #f4ff94
+  background: #f6ffa6
 }
 
 .celltrainer{
-  background: #0aeefa ;
+  background: #b8dfff ;
 }
 
 .cell{
   height: 100%;
+  border-radius: 11px ;
   border-style: solid;
   border-width: 1px;
   border-color: #f28313;
-  text-align: center;
-  
+  text-align: center;  
 }
+.cell:hover {
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgb(100, 125, 235);
+} 
+
 
 
 .cart_svlist{

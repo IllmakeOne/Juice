@@ -24,6 +24,7 @@ import MainSche from './../rec/schedules/MainSche'
 import RestockPrinter from '../printers/RestockPrinter'
 import AddProfile from '../rec/clients/AddProfile'
 import Clients from '../resources/Clients'
+import Scanner from '../rec/mainpage/Scanner'
 
 const history = createBrowserHistory();
 export default function MyDrawer(){
@@ -85,11 +86,11 @@ export default function MyDrawer(){
           <ListItem
             button
             component={Link}
-            to="/newitem"
+            to="/scanner"
           >
             <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>New Item</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Scanner</Typography>}
              />
           </ListItem>
 
@@ -154,7 +155,7 @@ export default function MyDrawer(){
         <Route exact path="/" component={StartScreen} />
         <Route exact path="/bar" component={MainBar} />
         <Route path="/rec" component={MainRec} />   
-        <Route path="/newitem" component={StockHandler} />  
+        <Route path="/scanner" component={Scanner} />  
         <Route path='/sche' component={MainSche} />  
         <Route path='/rest' component={RestockPrinter} />  
         <Route path='/addprof' component={AddProfile} /> 
