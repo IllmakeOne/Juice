@@ -48,7 +48,7 @@ function MainBar({startScreen}) {
                             {bar ? <div>
                                 <GridRow wrap='wrap' >
                                     <GridColumn width={9}>
-                                         <ProdSet items = {bar.prods} onClick = {addtoCart}/>
+                                         <ProdSet items = {bar.prods} onClick = {addtoCart} changeFav ={changeFav}/>
                                     </GridColumn>
                                     <GridColumn width={3} className='test'>
                                         <Cart  basket = {bar.cart} 
@@ -107,6 +107,18 @@ function MainBar({startScreen}) {
         // console.log(item)
     }
 
+    const changeFav = (id) => {
+        bar.cart.forEach((el)=>{
+            if(el.id == id){
+                el.fav = !el.fav
+                console.log(el.fav)
+                console.log(id)
+            }
+        })
+        setBar({prods: bar.prods, cart: bar.cart})
+        
+    }
+
 
     const removeItemfromCart = async (id) => {
 
@@ -142,16 +154,6 @@ function MainBar({startScreen}) {
         setBar({prods: bar.prods, cart: bar.cart})
     }
 
-    const changeCartItemPrice =  ({id, price}) => {
-        // console.log(id)
-        bar.cart.forEach((el)=>{
-            if(el.id == id){
-                el.price = price
-            }
-        })
-        setBar({prods: bar.prods, cart: bar.cart})
-    }
-     
     const addtoCart =  (id) => {
         // console.log(id)
         var flag = 0
@@ -215,10 +217,6 @@ function MainBar({startScreen}) {
         setBar({prods: auxProds, cart: result})
     }
 
-
-    const aux = (item) => {
-        console.log(item.id)
-    }
 
     /**
      * adds item to db, with stock .

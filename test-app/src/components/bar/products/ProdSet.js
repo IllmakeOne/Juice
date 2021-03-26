@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
-const  ProdSet = ({items, onClick}) => {
+const  ProdSet = ({items, onClick, changeFav}) => {
 
     
     const[crtType, setCrtType] = useState('Juice')
@@ -18,6 +18,7 @@ const  ProdSet = ({items, onClick}) => {
 
     useEffect(() => {
         const types = items.map((elem)=>elem.type).filter((el) => el != 'Service')
+        types.unshift('Favorites')
     
         setUniqueTypes(types.filter(function(elem, pos) {
             return types.indexOf(elem) == pos
@@ -36,7 +37,6 @@ const  ProdSet = ({items, onClick}) => {
         <React.Fragment>
         <div className='prodset'>
             <GridRow warp='nowrap '>
-            {/* {uniqueTypes} */} 
                 <GridColumn className='changeitemtype' width={2}>
                 {uniqueTypes.map((t)=> {
                     return(
@@ -50,11 +50,18 @@ const  ProdSet = ({items, onClick}) => {
                 </GridColumn>
                 <GridColumn width={13} >
                     <Paper style={{maxHeight: 690, overflow: 'auto'}} >   
+                        {crtType == 'Favorites'? 
                         <ProdTypeSet items =  
-                            {items.filter((el) => {if(el.type == crtType) return el}).filter((el)=> el.stock > 0)}
-                            //  type = {crtType}
+                        ///////////////////////bugggggg hereee , if he filter coems out empty it crashes
+                            {items.filter((el) => {if(el.fav) return el})}
                             onClick = {onClick}
+                            changeFav = {changeFav}
                             />
+                        :<ProdTypeSet items =  
+                            {items.filter((el) => {if(el.type == crtType) return el})}
+                            onClick = {onClick}
+                            changeFav ={changeFav}
+                            />}
                     </Paper>   
                 </GridColumn>
             </GridRow>

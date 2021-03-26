@@ -1,18 +1,28 @@
 import { useState, useEffect } from 'react'
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
-import { fetchApprow } from '../../DBconn'
+import { fetchApprow } from '../../../DBconn'
 import { Paper } from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core/styles'      
+import FullCell from '../cells/FullCell'    
+import EmptyCell from '../cells/EmptyCell'
 
+ 
 
-
-const Scheduler = ({apps}) => {
+const WeekSchedule = () => {
     // console.log(apps)
-    
-    
 
     const classes = useStyles()
+
+    const [apps,setApps] = useState([])
+
+    useEffect(() =>{
+        const getApps = async () => {
+            const serverApps = await fetchApprow()
+            setApps(serverApps)
+        }
+        getApps()
+    }, [])
 
     const abprt = (id) =>{
         console.log(id)
@@ -25,49 +35,27 @@ const Scheduler = ({apps}) => {
     const generateLine = (apps) => {
         var ret = []
         var i
-        for ( i = 1;i < dayLenght ; i++){
+        for ( i = 1;i <= dayLenght ; i++){
             const aux = apps.filter(el => el.id==i)
             if (aux.length != 0){
                 const el = aux[0]
-                console.log(el.duration)
                 
-                i+= el.duration -1
+                i+= el.duration - 1
 
-                switch(el.status){
-                    case 'ocasional':{
-                        const aux = el.duration * 25
-                        ret.push(
-                        <Paper elevation={3} style={{height:aux }}>
-                            <div className={classes.cellocasional} onMouseEnter={()=>onHoover()} onClick={()=>abprt(el.id)}>AA</div>
-                        </Paper>)
-                        break
-                        }
-                        
-                    case 'trainer':{
-                        const aux = el.duration * 25
-                        ret.push(
-                        <Paper elevation={3} style={{height:aux }}>
-                            <div className={classes.celltrainer} onMouseEnter={()=>onHoover()} onClick={()=>abprt(el.id)}>AA</div>
-                        </Paper>)
-                        break
-                        }
-                        
-                    case 'sub':{
-                        const aux = el.duration * 25
-                        ret.push(
-                        <Paper elevation={3} style={{height:aux }}>
-                            <div className={classes.cellsub} onMouseEnter={()=>onHoover()} onClick={()=>abprt(el.id)}>AA</div>
-                        </Paper>)
-                        break
-                        } 
-                }
+                const height = el.duration * 25
+                ret.push(
+                    <Paper elevation={3} style={{height:height }}>
+                        <FullCell app={el}/>
+                    </Paper>)
 
-            } else {
+            } else {//if there is nothing scheudle for this hour
                 const aux = i
                 ret.push(
                     <Paper elevation={1} >
-                        <div className={classes.emptycell} onMouseEnter={()=>onHoover()} onClick={()=>abprt(aux)}></div>
-                    </Paper>)
+                        {/* <div className={classes.emptycell} onMouseEnter={()=>onHoover()} onClick={()=>abprt(aux)}></div> */}
+                        <EmptyCell/>
+                    </Paper>
+                    )
             }
         }
         return ret 
@@ -81,11 +69,13 @@ const Scheduler = ({apps}) => {
 
        return (
 
-        <div className='cart_svlist'>
+        <div className=''>
             
             <GridRow wrap='wrap' >
-                <GridColumn width= {.7} className = {classes.column}>
-                    <div className={classes.emptycell}>Times</div> 
+                <GridColumn width= {1} className = {classes.column}>
+                    <Paper elevation={3} >
+                         <div className={classes.emptycell}>Times</div> 
+                    </Paper>
                     <GridColumn >
                         {times.map((el)=>(
                             <Paper elevation={3} >
@@ -97,7 +87,7 @@ const Scheduler = ({apps}) => {
 
                 {weekDays.map((el)=>{
                     return(
-                        <GridColumn width={1.5} className = {classes.column}>
+                        <GridColumn width={1.4} className = {classes.column}>
                         <div className={classes.daynameCell}>{el[0]}</div>
                         {genLine(el[1])}
                         </GridColumn>                        
@@ -165,6 +155,8 @@ const useStyles = makeStyles({
         borderWidth: 1,
         textAlign: 'center',
         fontSize: 20,
+        position: 'sticky',
+        top: 73,
 
     }
   });
@@ -179,7 +171,7 @@ const useStyles = makeStyles({
         ['Saturday','04-06-21'],
         ['Sunday','05-06-21']]
 
-    const times = [//'Times',
+    export const times = [//'Times',
         '07:00-07:30',
         '07:30-08:00',
         '08:00-08:30',
@@ -220,4 +212,4 @@ const useStyles = makeStyles({
         '01:30-02:00',
     ]
 
-export default Scheduler
+export default WeekSchedule

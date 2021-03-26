@@ -101,15 +101,15 @@ body {
 }
 
 .prodtypeset{
-  background: rgb(255, 255, 255);
+  background: rgb(255, 241, 214);
   
-  overflow: scroll;
+  /* overflow: scroll; */
   /* height: 1000%;*/
   /* height: 100%;  */
 }
 
 .test{
- height: 90;
+  
 }
 
 .changeprice{
@@ -139,17 +139,30 @@ body {
 
 } */
 
+.favButton{
+  position: relative;
+  left: 10;
+  top: 40;
+}
+
 .prodbutton {
   background: rgb(214, 216, 97);
-  /* height: 50%;
-  width: 100%; */
+  /* padding: 10px 0px; */
+  border-color: white;
+  border-style: dashed;
+  border-radius: 15px;
+  padding: 20px 20px;
+}
+.unavailableprodbutton{
+  background:rgb(197, 195, 195);
+	filter: grayscale(1);
   
   padding: 20px 20px;
   border-color: white;
   border-style: dashed;
   border-radius: 15px;
-}
 
+}
 .finalbasket{
   background: rgb(11, 184, 77);
   height: 100%;
@@ -275,27 +288,33 @@ footer {
 
 
 
+.emptycell{
+  background: white;
+  height: 25;
+  text-align: center;
+  color: #fff;
 
+}
 
 
 .cellocasional{
-  /* width: 10%;
-  height: 10%; */
-  border-style: solid;
-  text-align: center;
-
-  border-width: 1px;
   background: rgb(79, 248, 1)
 }
 
-.cell{
-  /* width: 10%;
-  height: 10%; */
-  border-style: solid;
-  text-align: center;
+.cellsub{
+  background: #f4ff94
+}
 
+.celltrainer{
+  background: #0aeefa ;
+}
+
+.cell{
+  height: 100%;
+  border-style: solid;
   border-width: 1px;
-  background: cyan
+  border-color: #f28313;
+  text-align: center;
   
 }
 

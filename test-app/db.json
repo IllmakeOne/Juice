@@ -90,6 +90,7 @@
       "price": 6,
       "stock": 10,
       "fixedPrice": true,
+      "fav": false,
       "image": "https://hawkesdesign.files.wordpress.com/2014/09/fantalogo-svg.png"
     },
     {
@@ -98,8 +99,9 @@
       "type": "Warm Drink",
       "price": 6,
       "stock": 20,
+      "fav": false,
       "fixedPrice": true,
-      "image": "https://hawkesdesign.files.wordpress.com/2014/09/fantalogo-svg.png"
+      "image": "https://i.pinimg.com/originals/07/e5/0f/07e50f0b99276f62c13b6df25a765d0c.jpg"
     },
     {
       "id": 3,
@@ -107,6 +109,7 @@
       "type": "Juice",
       "price": 7,
       "stock": 20,
+      "fav": false,
       "fixedPrice": true,
       "image": "https://1000logos.net/wp-content/uploads/2016/11/Coca-Cola-Logo.png"
     },
@@ -116,24 +119,7 @@
       "type": "Juice",
       "price": 5,
       "stock": 50,
-      "fixedPrice": true,
-      "image": "https://www.coca-colahellenic.com/content/dam/cch/us/images/our-24-7-portfolio/brand-image/Dorna_logo_300x300.png"
-    },
-    {
-      "id": 4,
-      "name": "Water .5",
-      "type": "Juice",
-      "price": 5,
-      "stock": 50,
-      "fixedPrice": true,
-      "image": "https://www.coca-colahellenic.com/content/dam/cch/us/images/our-24-7-portfolio/brand-image/Dorna_logo_300x300.png"
-    },
-    {
-      "id": 4,
-      "name": "Water .5",
-      "type": "Juice",
-      "price": 5,
-      "stock": 50,
+      "fav": false,
       "fixedPrice": true,
       "image": "https://www.coca-colahellenic.com/content/dam/cch/us/images/our-24-7-portfolio/brand-image/Dorna_logo_300x300.png"
     },
@@ -150,6 +136,7 @@
       "type": "Warm Drink",
       "price": 6,
       "stock": 50,
+      "fav": false,
       "fixedPrice": true,
       "image": "https://hawkesdesign.files.wordpress.com/2014/09/fantalogo-svg.png"
     },
@@ -159,6 +146,7 @@
       "type": "Juice",
       "price": 6,
       "stock": 50,
+      "fav": false,
       "fixedPrice": true,
       "image": "https://seeklogo.com/images/S/schweppes-logo-7A8E4A77EC-seeklogo.com.png"
     },
@@ -168,6 +156,7 @@
       "type": "Juice",
       "price": 6,
       "stock": 50,
+      "fav": false,
       "fixedPrice": true,
       "image": "https://www.pngjoy.com/pngm/426/7798171_tea-logo-fuze-tea-logo-png-png-download.png"
     },
@@ -177,6 +166,7 @@
       "type": "Juice",
       "price": 6,
       "stock": 50,
+      "fav": false,
       "fixedPrice": true,
       "image": "https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/0018/3252/brand.gif?itok=AWcFKJRX"
     },
@@ -186,6 +176,7 @@
       "type": "Juice",
       "price": 6,
       "stock": 50,
+      "fav": false,
       "fixedPrice": true,
       "image": "https://www.crostopizza.ro/wp-content/uploads/2020/05/logo-cappy.jpg"
     },
@@ -195,6 +186,7 @@
       "type": "Juice",
       "price": 6,
       "stock": 50,
+      "fav": false,
       "fixedPrice": true,
       "image": "https://1000logos.net/wp-content/uploads/2016/11/Coca-Cola-Logo.png"
     },
@@ -204,6 +196,7 @@
       "type": "Juice",
       "price": 6,
       "stock": 50,
+      "fav": false,
       "fixedPrice": true,
       "image": "https://www.coca-colahellenic.com/content/dam/cch/us/images/our-24-7-portfolio/brand-image/Dorna_logo_300x300.png"
     },
@@ -232,11 +225,10 @@
       "price": 170
     }
   ],
-
   "cartlists": [
     {
-      "id": 16,      
-      "name":"Nicu",
+      "id": 16,
+      "name": "Nicu",
       "date": "30-05-21",
       "prods": [
         {
@@ -248,9 +240,10 @@
           "stock": 20
         }
       ]
-    },{
-      "id": 11,      
-      "name":"Keni",
+    },
+    {
+      "id": 11,
+      "name": "Keni",
       "date": "30-05-21",
       "prods": [
         {
@@ -260,7 +253,6 @@
       ]
     }
   ],
-
   "posts": [
     {
       "id": 1,
@@ -268,7 +260,6 @@
       "author": "typicode"
     }
   ],
-
   "comments": [
     {
       "id": 1,
@@ -291,7 +282,6 @@
       "cui": "CBAA"
     }
   ],
-
   "productTypes": [
     {
       "name": "Juice",
@@ -306,7 +296,6 @@
       "vat": 9
     }
   ],
-  
   "clients": [
     {
       "id": 1,
@@ -399,37 +388,49 @@
   ],
   "apps": [
     {
-      "id": 10,
+      "id": 1,
+      "name": "dan",
+      "field": "T 1",
       "date": "30-05-21",
       "status": "ocasional",
       "duration": 1
     },
     {
-      "id": 9,
+      "id": 5,
+      "name": "robi",
+      "field": "T 2",
       "date": "31-05-21",
       "status": "ocasional",
       "duration": 1
     },
     {
-      "id": 15,
+      "id": 10,
+      "name": "puste",
+      "field": "T 3",
       "date": "01-06-21",
       "status": "trainer",
       "duration": 2
     },
     {
-      "id": 21,
+      "id": 15,
+      "name": "N",
+      "field": "Hall",
       "date": "02-06-21",
       "status": "trainer",
       "duration": 2
     },
     {
       "id": 20,
+      "name": "kosta",
+      "field": "OutDoor",
       "date": "03-06-21",
       "status": "sub",
       "duration": 3
     },
     {
-      "id": 34,
+      "id": 38,
+      "name": "frank",
+      "field": "A 1",
       "date": "04-06-21",
       "status": "sub",
       "duration": 3

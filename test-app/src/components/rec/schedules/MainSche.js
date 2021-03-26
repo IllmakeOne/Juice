@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Scheduler from './Scheduler'
+import ScheduleTabs from './pieces/ScheduleTabs'
 
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
@@ -28,7 +28,6 @@ function MainSche() {
         const getReservs = async () => {
             const data = await fetchApprow()
             setApps(data)
-            console.log(data)
         }
         getReservs()
     }, [])
@@ -80,9 +79,8 @@ function MainSche() {
             <br/>
             <br/>
             <br/>
-            <br/>
 
-            <Scheduler apps={apps}/>
+        <ScheduleTabs/>
             {/* {getAppsbyField(), apps ? <div key={getAppsbyField()} ><Scheduler  apps={getAppsbyField()}
                                                     upApp = {addApp}
                                      /></div> : null  } */}

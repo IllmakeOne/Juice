@@ -1,5 +1,22 @@
+import axios from 'axios'
 
 
+export const switchFavoriteItem = (newprod) => {
+    console.log(newprod.fav)
+    axios({
+        method: 'put',
+        url: `http://localhost:3001/prods/${newprod.id}`,
+        data: newprod
+      });
+}
+
+
+export const getAppsByDateandField = (date, field) => {
+    axios({
+        method: 'get',
+        url: `http://localhost:3001/apps?date=${date}&field=${field}`
+      });
+}
 
 const API = 'http://localhost:3001/'
 
