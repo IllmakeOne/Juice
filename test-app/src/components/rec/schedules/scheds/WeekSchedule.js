@@ -1,20 +1,24 @@
 import { useState, useEffect } from 'react'
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 import { fetchApprow } from '../../../DBconn'
-import { Paper } from '@material-ui/core'
+import { Button, Paper } from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core/styles'      
 import FullCell from '../cells/FullCell'    
 import EmptyCell from '../cells/EmptyCell'
+import ColumnDateField from '../pieces/ColumnDateField'
 
  
 
-const WeekSchedule = () => {
+const WeekSchedule = ( {field} ) => {
     // console.log(apps)
 
     const classes = useStyles()
 
     const [apps,setApps] = useState([])
+    const [crtField, setCrtField] = useState('Hall')
+
+    const [timeHighlight,setTimeHighlight] = useState(-1)
 
     useEffect(() =>{
         const getApps = async () => {
@@ -68,10 +72,33 @@ const WeekSchedule = () => {
         return generateLine(apps.filter(el => el.date == today))
     }
 
+    const handleMousemove = (id) => {
+        setTimeHighlight(id)
+    }
+
+    const changeCrtField = (newField) => {
+        // console.log(newField)
+        setCrtField(newField)
+    }
+
 
        return (
 
         <div className=''>
+
+            {/* <GridRow>
+                {fields.map( el => {
+                    return (
+                        <GridColumn>
+                            <Button
+                                onClick={()=>changeCrtField(el)}
+                                >
+                                {el}
+                            </Button>
+                        </GridColumn>
+                    )
+                })}
+            </GridRow> */}
             
             <GridRow wrap='wrap' >
                 <GridColumn width= {1} className = {classes.column}>
@@ -83,9 +110,9 @@ const WeekSchedule = () => {
                                 }}>Times</div> 
                     </Paper>
                     <GridColumn >
-                        {times.map((el)=>(
+                        {times.map((el,index)=>(
                             <Paper elevation={3} >
-                                <div className={classes.emptycell}>{el}</div>
+                                <div className={index == timeHighlight? classes.timeCellHighlight:classes.emptycell}>{el}</div>
                             </Paper>)
                         )}
                     </GridColumn>
@@ -94,10 +121,12 @@ const WeekSchedule = () => {
                 {weekDays.map((el)=>{
                     return(
                         <GridColumn width={1.4} >
-                        <Paper elevation={3} className={classes.daynameCell}>
-                            <div >{el[0]}</div>
-                        </Paper>
-                        {genLine(el[1])}
+                            <Paper elevation={3} className={classes.daynameCell}>
+                                <div >{el[0]}</div>
+                            </Paper>
+                            <ColumnDateField date= {el[1]} field= {field} _mouseMove ={handleMousemove} />
+
+                        {/* {genLine(el[1])} */}
                         </GridColumn>                        
                     )
                 })}
@@ -155,6 +184,16 @@ const useStyles = makeStyles({
         textAlign: 'center',
     },
 
+    timeCellHighlight:{
+        background: 'white',    
+        height: 25,   
+        textAlign: 'center',
+        
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: 'rgb(100, 125, 235)'
+    },
+
     daynameCell:{
         background: '#0cbff5',    
         height: 35,   
@@ -169,6 +208,8 @@ const useStyles = makeStyles({
 
     }
   });
+
+  const fields = ['Tennis', 'Hall', 'Aerobic', 'OutDoor']
 
   const dayLenght = 38 //it is counted in half hours 
     const weekDays=[//this will be made into a function for the current day

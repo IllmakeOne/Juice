@@ -4,7 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 import { pink, lightBlue} from '@material-ui/core/colors';
-import { Key } from 'react-feather'
+import { FiKey } from 'react-icons/fi'
+
+import { switchKeyAssignment } from '../../DBconn'
 
 
 const useStyles = makeStyles({
@@ -24,31 +26,26 @@ function Keys() {
     const classes = useStyles();
     const [keys, setKeys] = useState([])
 
+    
+    const getKeys = async() => {
+        var serverKeys = await fetchKeys()
+        setKeys(serverKeys)
+        // console.log(serverKeys)
+    }
+
     useEffect(()=>{
-        const Aux = async() => {
-            var serverKeys = await fetchKeys()
-            setKeys(serverKeys)
-            // console.log(serverKeys)
-        }
-        Aux()
+        getKeys()
     },[])
 
-    // const switchColor = (id)=>{
+    // useEffect(()=>{
+    //     console.log(keys)
+    // },[keys])
 
-    //     const aux = keys
-    //     aux.map(el => el.id == id )
-    // }
-
-    const createButton = ({id, assigned}) => {
+    const createButton = (key) => {
         return(
-            <div key = {id} className={assigned? 'assigned':'unassigned'}>
-                {/* {createButton(key)} */}
-                <Button className='dab'
-                    size="large"
-                    onClick={()=>Switch(id)}>
-                        <h3>{id} </h3><br/>
-                                {/* <Key size={15}/> */}
-                </Button>
+            <div key = {key.id} className={key.assigned? 'assigned':'unassigned'} onClick={()=>Switch(key)}>
+                <h3>{key.id} </h3><br/>
+                    <FiKey size={20}/>
             </div>
         )
     }
@@ -57,36 +54,34 @@ function Keys() {
         var ret = []
         keys.map((key,index) => {
                 ret.push(
-                <GridColumn width ={1.1} p={['l', 'l']}  >
+                <GridColumn p={['m', 'm']}  >
                     {createButton(key)}
                  </GridColumn>)
 
         })
         return ret
     }
-
-    const makeGrid = () => {
-        var ret =[]
-        // console.log(ret)
-
-        ret.push(<GridRow wrap='wrap'justify='around' >
-                {getSlice()
-                // ,console.log(ret)
-                }
-            </GridRow>)
-        return ret
-    }
     
-    const Switch = (id) => {
-        console.log(id)
+    const Switch = async (key) => {
+        console.log(key)
+        const newKey = await switchKeyAssignment(key)
+        console.log(newKey)
+        var aux = keys.map(el => {
+            if( el.id == newKey.id)
+                return newKey
+            else 
+                return el
+        })
+        console.log(aux)
+        setKeys(aux)
     }
 
     return (
         <div>
             <h1>Kyes</h1>
                 <div >
-                    <GridRow warp='nowrap '>
-                        {keys? makeGrid():null}
+                    <GridRow wrap='wrap'justify='around' >
+                        {keys? getSlice():null}
                     </GridRow>
                 </div>
         </div>

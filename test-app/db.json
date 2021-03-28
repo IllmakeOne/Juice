@@ -90,7 +90,7 @@
       "price": 6,
       "stock": 10,
       "fixedPrice": true,
-      "fav": true,
+      "fav": false,
       "image": "https://hawkesdesign.files.wordpress.com/2014/09/fantalogo-svg.png"
     },
     {
@@ -335,19 +335,19 @@
   "keys": [
     {
       "id": 1,
-      "assigned": true
+      "assigned": false
     },
     {
       "id": 2,
       "assigned": false
     },
     {
-      "id": 3,
+      "id": 68,
       "assigned": true
     },
     {
       "id": 4,
-      "assigned": true
+      "assigned": false
     },
     {
       "id": 5,
@@ -355,7 +355,7 @@
     },
     {
       "id": 6,
-      "assigned": true
+      "assigned": false
     },
     {
       "id": 11,
@@ -363,11 +363,11 @@
     },
     {
       "id": 12,
-      "assigned": false
+      "assigned": true
     },
     {
       "id": 13,
-      "assigned": true
+      "assigned": false
     },
     {
       "id": 14,
@@ -375,15 +375,15 @@
     },
     {
       "id": 15,
-      "assigned": false
+      "assigned": true
     },
     {
       "id": 16,
-      "assigned": false
+      "assigned": true
     },
     {
       "id": 17,
-      "assigned": true
+      "assigned": false
     }
   ],
   "apps": [

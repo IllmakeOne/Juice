@@ -1,17 +1,16 @@
 import React from 'react'
+import WeekSchedule from './WeekSchedule'
 
 function TennisSchedule() {
     return (
         <div>
+
+            <WeekSchedule filed = {field} />
             
         </div>
     )
 }
 
-const tennisCourts = [
-    'T 1',
-    'T 2',
-    'T 3'
-]
+const field = 'Tennis'
 
 export default TennisSchedule

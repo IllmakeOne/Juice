@@ -10,12 +10,27 @@ export const switchFavoriteItem = (newprod) => {
       });
 }
 
-
-export const getAppsByDateandField = (date, field) => {
-    axios({
-        method: 'get',
-        url: `http://localhost:3001/apps?date=${date}&field=${field}`
+export const switchKeyAssignment = (newKey) => {
+    return axios({
+        method: 'put',
+        url: `http://localhost:3001/keys/${newKey.id}`,
+        data: {...newKey, assigned: !newKey.assigned}
+      }).then(response => {
+          return response.data
       });
+}
+
+
+export const getAppsByDateandField = async ({date, field}) => {
+    return axios.get(`http://localhost:3001/apps?date=${date}&field=${field}`)
+         .then(function (response) {
+            // console.log(response.data);
+            // console.log(response.status);
+            // console.log(response.statusText);
+            // console.log(response.headers);
+            // console.log(response.config);
+            return response.data
+      })
 }
 
 const API = 'http://localhost:3001/'

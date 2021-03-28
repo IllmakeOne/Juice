@@ -91,7 +91,6 @@ function DaySchedule() {
         ret.push([])
         ret.push([])
         ret.push([])
-        console.log(ret)
         var i
 
         tennisCourts.map((court) => {
@@ -137,7 +136,6 @@ function DaySchedule() {
 
                 } else {
                     const aux = i
-                    console.log(ret)
                     ret[crtField].push(
                         <Paper elevation={1} >
                             <div className={classes.emptycell} onMouseEnter={()=>onHoover()} onClick={()=>abprt(aux)}></div>
@@ -145,7 +143,6 @@ function DaySchedule() {
                 }
             }
         })
-        console.log(ret[1])
         return (
             <div>
                 <GridRow wrap='wrap' >

@@ -32,7 +32,7 @@ function SubHBox({sub}) {
     const today = dateToText(new Date())
     const classes = useStyles()
     const color = determineExpired()
-    console.log(sub.end+ ' '+ today + ' '+ sub.end.localeCompare(today))
+    // console.log(sub.end+ ' '+ today + ' '+ sub.end.localeCompare(today))
 
 
 

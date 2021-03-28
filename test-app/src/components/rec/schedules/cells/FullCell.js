@@ -2,7 +2,7 @@ import React from 'react'
 import {  Paper } from '@material-ui/core'
 
 function FullCell({app}) {
-    console.log(app)
+    // console.log(app)
     const clsname= 'cell' + app.status
     return ( 
             <div className={`${clsname} cell `} 

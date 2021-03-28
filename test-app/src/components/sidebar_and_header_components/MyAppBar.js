@@ -38,7 +38,7 @@ export default function MyAppBar(){
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}>
 
-        <IconButton aria-label="money" color="inherit">
+        {/* <IconButton aria-label="money" color="inherit">
               <MoneyIcon />
           </IconButton>
 
@@ -64,11 +64,11 @@ export default function MyAppBar(){
             <Badge badgeContent={17} color="secondary">
               <NotificationsIcon />
             </Badge>
-          </IconButton>
-
+          </IconButton>*/}
+{/* 
           <IconButton aria-label="show 17 new notifications" color="inherit">
               <TranslateIcon />
-          </IconButton>
+          </IconButton>  */}
 
           {/* <IconButton
             edge="end"
@@ -105,7 +105,7 @@ export default function MyAppBar(){
   const drawerWidth = 200
   const appBarStyles = makeStyles((theme) => ({
     grow: {
-      flexGrow: 1,
+      flexGrow: 100,
       
     },
   
@@ -120,6 +120,7 @@ export default function MyAppBar(){
         borderLeft: "1px solid white",
         background:"#1565c0",
         width: `calc(100% - ${drawerWidth}px)`,
+        height:  '4.5%' ,
         marginLeft: drawerWidth,
       },
   

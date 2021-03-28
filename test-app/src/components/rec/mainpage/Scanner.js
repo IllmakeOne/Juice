@@ -5,23 +5,52 @@ import useKeypress from './keypress'
 
 import { css }  from '@emotion/css'
 
-function Scanner() {
+import loading from '../loading.gif'
+
+const Scanner = ({upScanned}) => {
 
     const [scanned, setScanned] = useState('')
-
-    // useKeypress('L', () => {
-    //     alert('you pressed E!')
-    // });
+    const [focused, setFocused] = useState(true)
 
 
+    useKeypress(' ' , () => {
+        focusMethod()
+    });
+
+    useKeypress('Enter' , () => {
+        focusMethod()
+    });
+
+    const focusMethod = () =>{
+        setFocused(true)
+        document.getElementById("scanner").focus()
+    }
     
-    const handleScan = (value) => {
-        setScanned(value)
+    const handleScan = e => {
+        setScanned(e.target.value)
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        setScanned('')
+        upScanned(scanned)
     }
 
     return (
         <div>
-            <br/>
+            <form  noValidate autoComplete="off" onSubmit={handleSubmit} >
+            <div >
+                <label>Scanner</label>
+                <input
+                    id = {'scanner'}
+                    autoFocus = {true}
+                    onBlur = {()=>setFocused(false)}
+                    type='text'
+                    placeholder='scanner'
+                    value={scanned}
+                    onChange={handleScan}/>
+            </div>
+            </form>
             <br/>
             <br/>
             <br/>
@@ -32,23 +61,15 @@ function Scanner() {
                     value={scanned}
                     // onChange={handleScan}   
                   /> */}
-
-                
-            <form  noValidate autoComplete="off">
-            <div >
-                <label>Scanner</label>
-                <input
-                    type='text'
-                    placeholder='scanner'
-                    value={scanned}
-                    onChange={(e) => handleScan(e.target.value)}
-                    className={css`
-                    background: red;
-                    width: 1000px;
-                    height: 1000px;
-                `}/>
+            <div className={css`
+                border-style: solid;
+                border-width: 5px;
+                border-color: ${focused? 'red':'white'};
+                // width: 1000px;
+                // height: 1000px;
+                `}>
+                <img src={loading} onClick={focusMethod} />
             </div>
-            </form>
         </div>
     )
 }
