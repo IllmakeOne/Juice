@@ -80,7 +80,8 @@ function ScheduleTabs() {
           </TabPanel>
           <TabPanel value={value} index={2}>
               
-              {/* <ColumnDateField date={'02-06-21'} field = {'Hall'}/> */}
+              <ColumnDateField date={'02-06-21'} field = {'Hall'} _mouseMove={()=>{}}/>
+              
           </TabPanel>
           <TabPanel value={value} index={3}>
             <TennisSchedule />

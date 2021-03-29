@@ -7,12 +7,15 @@ import FullCell from '../cells/FullCell'
 import EmptyCell from '../cells/EmptyCell'
 import { Paper } from '@material-ui/core'
 
+import  {getCrtWeek, getNextWeek } from '../pieces/DatesMethods'
+
 
 
 
 const dayLenght = 38
 
 function ColumnDateField({date, field, _mouseMove}) {
+
 
 
     const [apps, setApps] = useState([])
@@ -78,8 +81,12 @@ function ColumnDateField({date, field, _mouseMove}) {
         }
         return ret
     }
+
+
+
     return (
         <div>
+            {/* {console.log(getNextWeek(new Date))} */}
             {generateLine()}
         </div>
     )

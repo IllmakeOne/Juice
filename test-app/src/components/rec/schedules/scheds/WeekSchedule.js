@@ -8,9 +8,14 @@ import FullCell from '../cells/FullCell'
 import EmptyCell from '../cells/EmptyCell'
 import ColumnDateField from '../pieces/ColumnDateField'
 
+
+import  {getCrtWeek, getNextWeek, formatDate, getPrevWeek} from '../pieces/DatesMethods'
+
  
 
 const WeekSchedule = ( {field} ) => {
+
+    const thisWeek = getPrevWeek(new Date)
     // console.log(apps)
 
     const classes = useStyles()
@@ -118,11 +123,13 @@ const WeekSchedule = ( {field} ) => {
                     </GridColumn>
                 </GridColumn>
 
-                {weekDays.map((el)=>{
+                {thisWeek.map((el)=>{
                     return(
                         <GridColumn width={1.4} >
                             <Paper elevation={3} className={classes.daynameCell}>
-                                <div >{el[0]}</div>
+                                <div >{el[0]} 
+                                   <br/> {formatDate(el[1])}
+                                </div>
                             </Paper>
                             <ColumnDateField date= {el[1]} field= {field} _mouseMove ={handleMousemove} />
 
@@ -213,13 +220,22 @@ const useStyles = makeStyles({
 
   const dayLenght = 38 //it is counted in half hours 
     const weekDays=[//this will be made into a function for the current day
-        ['Monday','30-05-21'],
-        ['Tuesday','31-05-21'],
-        ['Wednesday','01-06-21'],
-        ['Thursday','02-06-21'],
-        ['Friday','03-06-21'],
-        ['Saturday','04-06-21'],
-        ['Sunday','05-06-21']]
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday']
+        
+    const zileleSaptamanii=[
+        'Luni', 
+        'Marti',
+        'Miercuri',
+        'Vineri', 
+        'Sambata',
+        'Duminica']
+    
 
     export const times = [//'Times',
         '07:00-07:30',
