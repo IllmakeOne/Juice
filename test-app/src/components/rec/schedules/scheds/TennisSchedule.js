@@ -5,7 +5,7 @@ function TennisSchedule() {
     return (
         <div>
 
-            <WeekSchedule filed = {field} />
+            <WeekSchedule filed = {field}  date = {new Date}/>
             
         </div>
     )

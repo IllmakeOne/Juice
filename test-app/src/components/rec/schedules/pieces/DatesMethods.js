@@ -20,8 +20,10 @@ export const getCrtWeek = (date) => {
     const pairs = weekDays.map((el, index) => {
         const aux = firstday.getDate() - firstday.getDay() + index + 1
         const auxdate = new Date(firstday.setDate(aux) )
-        // console.log(auxdate)
-        return [el, auxdate]
+        const xoxoxo = formatDate(auxdate)
+        // console.log(xoxoxo)
+
+        return [el, xoxoxo]
 
     })
 
@@ -29,23 +31,15 @@ export const getCrtWeek = (date) => {
 
 }
 
-export const getNextWeek = (inDate, multiplier) => {
-    var auxMutiplier =7
-    if(multiplier != undefined ){ // if multiplier specified, then mutiply
-        auxMutiplier *= multiplier
+export const getWeek = (inDate, multiplier) => {
+    var auxMutiplier = 7
+    if(multiplier == 0 ){ // if multiplier specified, then mutiply
+        return getCrtWeek(inDate)
     }//otherwise it will simply return next week
     const nextweek = new Date(inDate.getFullYear(), inDate.getMonth(), inDate.getDate()+auxMutiplier)
     return getCrtWeek(nextweek)
 }
 
-export const getPrevWeek = (inDate, multiplier) => { //same as getNextWeek but with - instead of +
-    var auxMutiplier = 7
-    if(multiplier != undefined ){ // if multiplier specified, then mutiply
-        auxMutiplier *= multiplier
-    }//otherwise it will simply return next week
-    const nextweek = new Date(inDate.getFullYear(), inDate.getMonth(), inDate.getDate() - auxMutiplier)
-    return getCrtWeek(nextweek)
-}
 
 
 const weekDays=[//this will be made into a function for the current day

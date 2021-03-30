@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 
-import { getAppsByDateandField }  from '../../../DBconn'
+import { getAppsByDateandField, getTennisCourts }  from '../../../DBconn'
+import { GridRow, GridColumn } from 'emotion-flex-grid'
 
       
 import FullCell from '../cells/FullCell'    
@@ -25,18 +26,11 @@ function ColumnDateField({date, field, _mouseMove}) {
     }
 
     useEffect(() =>{
-        console.log(field)
+        // console.log(date)
+        // console.log(field)
         const getApps = async () => {
-            if(field == 'Tennis') {
-                var serverApps = []
-                const t1 = await getAppsByDateandField({date,field: 'T 1'})
-                const t2 = await getAppsByDateandField({date,field: 'T 2'})
-                const t3 = await getAppsByDateandField({date,field: 'T 3'})
-
-                serverApps.push(t1)
-                serverApps.push(t2)
-                serverApps.push(t3)
-
+            if(field === 'Tennis') {
+                var serverApps = await getTennisCourts({date})
                 // console.log(serverApps)
                 setApps(serverApps)
 
@@ -52,34 +46,89 @@ function ColumnDateField({date, field, _mouseMove}) {
 
     const generateLine = () => {
         var ret = []
-        ret.push()
-        var i
-        for ( i = 0;i < dayLenght ; i++){
-            const aux = apps.filter(el => el.id==i)
-            if (aux.length != 0){
-                const el = aux[0]
-                
-                i+= el.duration - 1
+        var i, j
 
-                const height = el.duration * 25
-                ret.push(
-                    <Paper elevation={3} style={{height:height }} onMouseMove={()=>handleMouseMove(el.id)}>
-                        <FullCell app={el}/>
-                    </Paper>)
 
-            } else {//if there is nothing scheudle for this hour
-                const aux = i
-                ret.push(
-                    <Paper elevation={2} onMouseMove={()=>handleMouseMove(aux)}>
-                                        {/* // height: 25,
-                                         textAlign: 'center',
-                                         background: auxcolor}}>  */}
-                        <EmptyCell i={i}/> 
-                    </Paper>
-                    )
+        if(field ==  'Tennis') { 
+            ret.push([])
+            ret.push([])
+            ret.push([])                
+        // apps.map(dayApps => {console.log(dayApps) })
+
+
+            tennisCourts.map((court) => {
+                const crtField = parseInt(court.substring(1)) - 1
+
+                for ( i = 0;i < dayLenght ; i++) {
+
+                    const aux = apps.filter(el => el.field == court).filter(el => el.id==i).filter(el => el.date===date )
+
+                    if (aux.length != 0){
+                        const el = aux[0]
+                        i+= el.duration - 1
+                        const height = el.duration * 25
+
+                        ret[crtField].push(
+                            <Paper elevation={3} style={{height:height }} onMouseMove={()=>handleMouseMove(el.id)}>
+                                <FullCell app={el}/>
+                            </Paper>)
+                    } else {
+                        const aux = i
+                        ret[crtField].push(
+                            <Paper elevation={2} onMouseMove={()=>handleMouseMove(aux)}>
+                                                {/* // height: 25,
+                                                textAlign: 'center',
+                                                background: auxcolor}}>  */}
+                                <EmptyCell i={i}/> 
+                            </Paper>
+                        )
+                    }
+                }
+            })
+                return (
+                    <div>
+                        <GridRow wrap='wrap' >
+                            <GridColumn width={4}>
+                                {ret[0]}
+                            </GridColumn>
+                            <GridColumn width={4}>
+                                {ret[1]}
+                            </GridColumn>
+                            <GridColumn width={4}>
+                                {ret[2]}
+                            </GridColumn>
+                        </GridRow>
+                    </div>
+                )
+
+        } else { // if it not tennis(or aerobic) fill it normally
+            for ( i = 0;i < dayLenght ; i++){
+                const aux = apps.filter(el => el.id==i).filter(el => el.date === date)
+                if (aux.length != 0){
+                    const el = aux[0]
+                    
+                    i+= el.duration - 1
+
+                    const height = el.duration * 25
+                    ret.push(
+                        <Paper elevation={3} style={{height:height }} onMouseMove={()=>handleMouseMove(el.id)}>
+                            <FullCell app={el}/>
+                        </Paper>)
+
+                } else {//if there is nothing scheudle for this hour
+                    const aux = i
+                    ret.push(
+                        <Paper elevation={2} onMouseMove={()=>handleMouseMove(aux)}>
+                                            {/* // height: 25,
+                                            textAlign: 'center',
+                                            background: auxcolor}}>  */}
+                            <EmptyCell i={i}/> 
+                        </Paper>
+                        )
             }
         }
-        return ret
+            return ret
+        }
     }
 
 
@@ -91,5 +140,18 @@ function ColumnDateField({date, field, _mouseMove}) {
         </div>
     )
 }
+
+
+const columns = [
+    'Hall',
+    'OutDoor',
+    'Aerobic',
+]
+
+const tennisCourts = [
+    'T1',
+    'T2',
+    'T3'
+]
 
 export default ColumnDateField

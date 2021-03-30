@@ -22,13 +22,22 @@ export const switchKeyAssignment = (newKey) => {
 
 
 export const getAppsByDateandField = async ({date, field}) => {
+    console.log(date + ' ' + field)
     return axios.get(`http://localhost:3001/apps?date=${date}&field=${field}`)
          .then(function (response) {
-            // console.log(response.data);
+            console.log(response.data)
             // console.log(response.status);
             // console.log(response.statusText);
             // console.log(response.headers);
             // console.log(response.config);
+            return response.data
+      })
+}
+
+export const getTennisCourts = async ({date}) => {
+    return axios.get(`http://localhost:3001/tennis`)
+         .then(function (response) {
+            // console.log(response.data)
             return response.data
       })
 }

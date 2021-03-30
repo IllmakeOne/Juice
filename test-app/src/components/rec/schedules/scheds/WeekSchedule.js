@@ -9,19 +9,19 @@ import EmptyCell from '../cells/EmptyCell'
 import ColumnDateField from '../pieces/ColumnDateField'
 
 
-import  {getCrtWeek, getNextWeek, formatDate, getPrevWeek} from '../pieces/DatesMethods'
+import  {getCrtWeek, getWeek, formatDate } from '../pieces/DatesMethods'
 
  
 
-const WeekSchedule = ( {field} ) => {
+const WeekSchedule = ( {field, today} ) => {
 
-    const thisWeek = getPrevWeek(new Date)
+    const thisWeek = getWeek(today,0)
+    // const [weekMorf, setWeekMorf]
     // console.log(apps)
 
     const classes = useStyles()
 
     const [apps,setApps] = useState([])
-    const [crtField, setCrtField] = useState('Hall')
 
     const [timeHighlight,setTimeHighlight] = useState(-1)
 
@@ -41,75 +41,19 @@ const WeekSchedule = ( {field} ) => {
         // console.log('aaaaa')
     }
 
-    const generateLine = (apps) => {
-        var ret = []
-        var i
-        for ( i = 1;i <= dayLenght ; i++){
-            const aux = apps.filter(el => el.id==i)
-            if (aux.length != 0){
-                const el = aux[0]
-                
-                i+= el.duration - 1
-
-                const height = el.duration * 25
-                ret.push(
-                    <Paper elevation={3} style={{height:height }}>
-                        <FullCell app={el}/>
-                    </Paper>)
-
-            } else {//if there is nothing scheudle for this hour
-                const aux = i
-                ret.push(
-                    <Paper elevation={2} >
-                                        {/* // height: 25,
-                                         textAlign: 'center',
-                                         background: auxcolor}}>  */}
-                        <EmptyCell i={i}/> 
-                    </Paper>
-                    )
-            }
-        }
-        return ret 
-
-    }
-
-    const genLine = (today) => {
-        return generateLine(apps.filter(el => el.date == today))
-    }
-
     const handleMousemove = (id) => {
         setTimeHighlight(id)
     }
 
-    const changeCrtField = (newField) => {
-        // console.log(newField)
-        setCrtField(newField)
-    }
-
-
        return (
 
         <div className=''>
-
-            {/* <GridRow>
-                {fields.map( el => {
-                    return (
-                        <GridColumn>
-                            <Button
-                                onClick={()=>changeCrtField(el)}
-                                >
-                                {el}
-                            </Button>
-                        </GridColumn>
-                    )
-                })}
-            </GridRow> */}
             
             <GridRow wrap='wrap' >
                 <GridColumn width= {1} className = {classes.column}>
                     <Paper elevation={3} >
                          <div style={{    
-                            height: 35,   
+                            height: 60,   
                             textAlign: 'center',
                             fontSize: 20,
                                 }}>Times</div> 
@@ -123,12 +67,13 @@ const WeekSchedule = ( {field} ) => {
                     </GridColumn>
                 </GridColumn>
 
-                {thisWeek.map((el)=>{
+                {//console.log(thisWeek),
+                thisWeek.map((el)=>{
                     return(
-                        <GridColumn width={1.4} >
+                        <GridColumn width={1.4} className = {classes.column}> 
                             <Paper elevation={3} className={classes.daynameCell}>
                                 <div >{el[0]} 
-                                   <br/> {formatDate(el[1])}
+                                   <br/> {el[1]}
                                 </div>
                             </Paper>
                             <ColumnDateField date= {el[1]} field= {field} _mouseMove ={handleMousemove} />
@@ -151,7 +96,7 @@ const WeekSchedule = ( {field} ) => {
 
 const useStyles = makeStyles({
     column:{
-        margin: 1,
+        margin: 3,
 
     },
 
@@ -203,10 +148,10 @@ const useStyles = makeStyles({
 
     daynameCell:{
         background: '#0cbff5',    
-        height: 35,   
-        borderLeft: 'solid',
-        borderRight: 'solid',
-        borderWidth: 1,
+        height: 60,   
+        // borderLeft: 'solid',
+        // borderRight: 'solid',
+        // borderWidth: 1,
         textAlign: 'center',
         fontSize: 23,
 
@@ -215,8 +160,6 @@ const useStyles = makeStyles({
 
     }
   });
-
-  const fields = ['Tennis', 'Hall', 'Aerobic', 'OutDoor']
 
   const dayLenght = 38 //it is counted in half hours 
     const weekDays=[//this will be made into a function for the current day

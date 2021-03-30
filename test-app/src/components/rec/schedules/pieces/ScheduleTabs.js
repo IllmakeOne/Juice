@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper'
 import { Button, Input, TextField } from '@material-ui/core'
+import { GridRow, GridColumn } from 'emotion-flex-grid'
 
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -57,6 +58,16 @@ function ScheduleTabs() {
     };
   }
 
+  
+
+  const changeCrtField = (newField) => {
+    console.log(newField)
+    setCrtField(newField)
+}
+
+
+const [crtField, setCrtField] = useState('Hall')
+
     
 
   const [mouse, setMouse] = useState({x:0, y:0})
@@ -73,23 +84,39 @@ function ScheduleTabs() {
               </Tabs>
           </AppBar>
           <TabPanel value={value} index={0}>
-              <WeekSchedule />
+              <GridRow>
+                  {fields.map( el => {
+                      return (
+                          <GridColumn>
+                              <Button
+                                  onClick={()=>changeCrtField(el)}
+                                  >
+                                  {el}
+                              </Button>
+                          </GridColumn>
+                      )
+                  })}
+              </GridRow>
+            
+              <WeekSchedule field = {crtField} today = {new Date }/>
           </TabPanel>
           <TabPanel value={value} index={1}>
               <DaySchedule/>
           </TabPanel>
-          <TabPanel value={value} index={2}>
-              
-              <ColumnDateField date={'02-06-21'} field = {'Hall'} _mouseMove={()=>{}}/>
-              
+          <TabPanel value={value} index={2}>              
+              <ColumnDateField date={'02-06-21'} field = {'Hall'} _mouseMove={()=>{}}/>               
           </TabPanel>
           <TabPanel value={value} index={3}>
-            <TennisSchedule />
+              <WeekSchedule field = 'Tennis' today = {new Date }/>
           </TabPanel>
       </div>
     )
 }
 
+
+
+
+const fields = ['Hall', 'OutDoor', 'Tennis', 'Aerobic']
 
 const useStyles = makeStyles({
   tab: {

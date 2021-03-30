@@ -386,36 +386,41 @@
       "assigned": false
     }
   ],
-  "apps": [
+
+  "tennis" :[
     {
       "id": 1,
       "name": "dan",
-      "field": "T 1",
-      "date": "30-05-21",
+      "field": "T1",
+      "date": "29-3-2021",
       "status": "ocasional",
-      "duration": 1
+      "duration": 3
     },
     {
       "id": 5,
       "name": "robi",
-      "field": "T 2",
-      "date": "31-05-21",
+      "field": "T2",
+      "date": "31-3-2021",
       "status": "ocasional",
-      "duration": 1
+      "duration": 4
     },
     {
       "id": 10,
       "name": "puste",
-      "field": "T 3",
-      "date": "01-06-21",
+      "field": "T3",
+      "date": "31-3-2021",
       "status": "trainer",
       "duration": 2
-    },
+    }
+    
+  ],
+  
+  "apps": [
     {
       "id": 15,
       "name": "N",
       "field": "Hall",
-      "date": "02-06-21",
+      "date": "2-4-2021",
       "status": "trainer",
       "duration": 2
     },
@@ -423,15 +428,15 @@
       "id": 20,
       "name": "kosta",
       "field": "OutDoor",
-      "date": "03-06-21",
+      "date": "3-4-2021",
       "status": "sub",
       "duration": 3
     },
     {
       "id": 36,
       "name": "frank",
-      "field": "A 1",
-      "date": "04-06-21",
+      "field": "A1",
+      "date": "4-3-2021",
       "status": "sub",
       "duration": 3
     }
