@@ -13,25 +13,14 @@ import  {getCrtWeek, getWeek, formatDate } from '../pieces/DatesMethods'
 
  
 
-const WeekSchedule = ( {field, today} ) => {
+const WeekSchedule = ( {field, today, week} ) => {
 
-    const thisWeek = getWeek(today,0)
-    // const [weekMorf, setWeekMorf]
-    // console.log(apps)
+    const thisWeek = getWeek(today,week)
 
     const classes = useStyles()
 
-    const [apps,setApps] = useState([])
-
     const [timeHighlight,setTimeHighlight] = useState(-1)
 
-    useEffect(() =>{
-        const getApps = async () => {
-            const serverApps = await fetchApprow()
-            setApps(serverApps)
-        }
-        getApps()
-    }, [])
 
     const abprt = (id) =>{
         console.log(id)

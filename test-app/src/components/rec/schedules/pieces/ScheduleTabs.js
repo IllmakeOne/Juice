@@ -9,13 +9,15 @@ import Paper from '@material-ui/core/Paper'
 import { Button, Input, TextField } from '@material-ui/core'
 import { GridRow, GridColumn } from 'emotion-flex-grid'
 
+import { FiPlus, FiMinus } from 'react-icons/fi'
+
 
 import { makeStyles } from '@material-ui/core/styles'
 
 import WeekSchedule from '../scheds/WeekSchedule'
 import DaySchedule from '../scheds/DaySchedule'
-import ColumnDateField from './ColumnDateField';
-import TennisSchedule from '../scheds/TennisSchedule';
+import ColumnDateField from './ColumnDateField'
+import TennisSchedule from '../scheds/TennisSchedule'
 
 import moment  from 'moment'
 
@@ -66,11 +68,22 @@ function ScheduleTabs() {
 }
 
 
-const [crtField, setCrtField] = useState('Hall')
+  const [crtField, setCrtField] = useState('Hall')
 
-    
-
-  const [mouse, setMouse] = useState({x:0, y:0})
+  const [weekMutiplier, setWeekMutiplier] = useState(0)
+  const upOneWeek = (mult) => {
+    var newMutip
+    if(mult == -1){
+      newMutip = weekMutiplier - 1
+    } else if (mult == 0){
+      newMutip = 0
+    } else {
+      newMutip = weekMutiplier + 1
+    }
+    // console.log(newMutip)
+    setWeekMutiplier(newMutip)
+      
+  }
 
 
   return (
@@ -89,6 +102,7 @@ const [crtField, setCrtField] = useState('Hall')
                       return (
                           <GridColumn>
                               <Button
+                                  variant="outlined"
                                   onClick={()=>changeCrtField(el)}
                                   >
                                   {el}
@@ -96,9 +110,32 @@ const [crtField, setCrtField] = useState('Hall')
                           </GridColumn>
                       )
                   })}
+                  <GridColumn>
+                    <div>
+                      <Button
+                          variant="outlined"
+                          size= 'small'
+                          onClick= {()=>upOneWeek(-1)}
+                          startIcon={<FiMinus />}
+                          />
+                      <Button 
+                          variant="outlined"
+                          onClick= {()=>upOneWeek(0)}
+                          >                        
+                          Today
+                      </Button>
+                      
+                      <Button
+                          variant="outlined"
+                          size= 'small'
+                          onClick= {()=>upOneWeek(1)}
+                          startIcon={<FiPlus />}
+                          />
+                    </div>
+                  </GridColumn>
               </GridRow>
             
-              <WeekSchedule field = {crtField} today = {new Date }/>
+              <WeekSchedule field = {crtField} today = {new Date} week = {weekMutiplier}/>
           </TabPanel>
           <TabPanel value={value} index={1}>
               <DaySchedule/>

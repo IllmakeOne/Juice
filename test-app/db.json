@@ -355,7 +355,7 @@
     },
     {
       "id": 6,
-      "assigned": false
+      "assigned": true
     },
     {
       "id": 11,
@@ -386,8 +386,7 @@
       "assigned": false
     }
   ],
-
-  "tennis" :[
+  "tennis": [
     {
       "id": 1,
       "name": "dan",
@@ -412,9 +411,7 @@
       "status": "trainer",
       "duration": 2
     }
-    
   ],
-  
   "apps": [
     {
       "id": 15,

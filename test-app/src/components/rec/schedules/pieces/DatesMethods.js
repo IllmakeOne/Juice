@@ -21,11 +21,9 @@ export const getCrtWeek = (date) => {
         const aux = firstday.getDate() - firstday.getDay() + index + 1
         const auxdate = new Date(firstday.setDate(aux) )
         const xoxoxo = formatDate(auxdate)
-        // console.log(xoxoxo)
-
         return [el, xoxoxo]
-
     })
+    // console.log(pairs)
 
     return pairs
 
@@ -36,6 +34,7 @@ export const getWeek = (inDate, multiplier) => {
     if(multiplier == 0 ){ // if multiplier specified, then mutiply
         return getCrtWeek(inDate)
     }//otherwise it will simply return next week
+    auxMutiplier *= multiplier
     const nextweek = new Date(inDate.getFullYear(), inDate.getMonth(), inDate.getDate()+auxMutiplier)
     return getCrtWeek(nextweek)
 }
