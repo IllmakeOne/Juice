@@ -99,7 +99,7 @@
       "type": "Warm Drink",
       "price": 6,
       "stock": 20,
-      "fav": false,
+      "fav": true,
       "fixedPrice": true,
       "image": "https://i.pinimg.com/originals/07/e5/0f/07e50f0b99276f62c13b6df25a765d0c.jpg"
     },
@@ -156,7 +156,7 @@
       "type": "Juice",
       "price": 6,
       "stock": 50,
-      "fav": false,
+      "fav": true,
       "fixedPrice": true,
       "image": "https://www.pngjoy.com/pngm/426/7798171_tea-logo-fuze-tea-logo-png-png-download.png"
     },
@@ -176,7 +176,7 @@
       "type": "Juice",
       "price": 6,
       "stock": 50,
-      "fav": false,
+      "fav": true,
       "fixedPrice": true,
       "image": "https://www.crostopizza.ro/wp-content/uploads/2020/05/logo-cappy.jpg"
     },

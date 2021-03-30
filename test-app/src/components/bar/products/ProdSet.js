@@ -17,24 +17,16 @@ const  ProdSet = ({items, onClick, changeFav}) => {
     const[uniqueTypes, setUniqueTypes] = useState([])
 
     useEffect(() => {
-        const types = items.map((elem)=>elem.type).filter((el) => el != 'Service')
+        var types = items.map((elem)=>elem.type).filter((el) => el != 'Service')
         types.unshift('Favorites')
     
-        setUniqueTypes(types.filter(function(elem, pos) {
+        setUniqueTypes(types.filter(function(elem, pos) { //this makes it so there are no doubles
             return types.indexOf(elem) == pos
-        }))
-
-        // console.log(crtType)
-        // console.log(uniqueTypes)
-
-        
+        }))        
     },[])   
 
-    // const bruh = pordsWithCrtType
 
     return (
-        
-        <React.Fragment>
         <div className='prodset'>
             <GridRow warp='nowrap '>
                 <GridColumn className='changeitemtype' width={2}>
@@ -50,23 +42,23 @@ const  ProdSet = ({items, onClick, changeFav}) => {
                 </GridColumn>
                 <GridColumn width={13} >
                     <Paper style={{maxHeight: 690, overflow: 'auto'}} >   
-                        {crtType == 'Favorites'? 
-                        <ProdTypeSet items =  
-                        ///////////////////////bugggggg hereee , if he filter coems out empty it crashes
-                            {items.filter((el) => {if(el.fav) return el})}
-                            onClick = {onClick}
-                            changeFav = {changeFav}
-                            />
-                        :<ProdTypeSet items =  
-                            {items.filter((el) => {if(el.type == crtType) return el})}
-                            onClick = {onClick}
-                            changeFav ={changeFav}
-                            />}
+                        {//console.log(items),
+                        crtType.localeCompare('Favorites') == 0? 
+                            <ProdTypeSet 
+                                items = {items.filter((el) => {if(el.fav) return el})} 
+                                //bugggggg hereee , if he filter coems out empty it crashes
+                                onClick = {onClick}
+                                changeFav = {changeFav}
+                                />
+                            :<ProdTypeSet 
+                                items = {items.filter((el) => {if(el.type == crtType) return el})}
+                                onClick = {onClick}
+                                changeFav ={changeFav}
+                                />}
                     </Paper>   
                 </GridColumn>
             </GridRow>
         </div>
-        </React.Fragment>
     )
 }
 

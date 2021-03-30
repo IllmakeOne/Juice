@@ -19,7 +19,7 @@ import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
 import RecCartButton from './RecCartButton'
 
-function Cart({basket, removeItem ,removeAllCart, changeItem, addtoCart, addBulkItem}) {
+function Cart({basket, removeItem ,removeAllCart, changeItem, addBulkItem}) {
 
     const [prodLists, setProdLists] = useState([])
     const [loadList, setLoadList] = useState([])

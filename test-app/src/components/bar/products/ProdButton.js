@@ -5,15 +5,17 @@ import { IconContext } from 'react-icons'
 
 import { switchFavoriteItem } from '../../DBconn'
 
+import Button from '@material-ui/core/Button'
+
 const ProdButton = ({prod, onClick, className, changeFav}) => {  
 
         const starColor = prod.fav? 'orange': 'lightblue'
 
-        const addToFav = () => {
+        const addToFav = async () => {
             //change item's fav to the oposite
-            const newprod = {...prod, fav: !prod.fav}
-            // console.log(newprod)
-            switchFavoriteItem(newprod)
+            var aux = await switchFavoriteItem(prod)
+            changeFav(prod.id)//triggeres rerender in parent
+            console.log(aux)
         }
 
 
@@ -35,16 +37,22 @@ const ProdButton = ({prod, onClick, className, changeFav}) => {
                         </GridRow>           
                     </div>
                 </GridColumn>
-                <GridColumn width = {1}style={{ background: starColor}} onClick={()=>addToFav(prod.id)}>
-                    {/* <div className = 'favButton'>
+                <GridColumn width = {1} 
+                    // style={{ background: starColor}} onClick={()=>addToFav(prod.id)}
+                    >
+                    <div className = 'favButton'>
                         <IconContext.Provider
                         value={{ color: starColor, size: '25px' }}
                         >
-                            <div onClick = {()=>addToFav(prod.id)}>
-                                <AiFillStar />
-                            </div>
+                            <Button 
+                                // variant="outlined"
+                                size= 'small'
+                                startIcon={<AiFillStar size = {20}/>}
+                                variant = 'outlined'
+                                onClick = {()=>addToFav()}
+                                    />
                         </IconContext.Provider>
-                    </div> */}
+                    </div>
                 </GridColumn>
             </GridRow>
             </div>

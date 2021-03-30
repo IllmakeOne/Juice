@@ -57,7 +57,7 @@ const ProdTypeSet = ({items, onClick, changeFav}) => {
 
     return (
         <div className='prodtypeset'>
-            <h2>Type: {items[0].type}</h2>
+            {/* <h2>Type: {items[0].type}</h2> */}
             {makeGrid()}
         </div>
     )

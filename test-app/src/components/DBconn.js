@@ -2,12 +2,14 @@ import axios from 'axios'
 
 
 export const switchFavoriteItem = (newprod) => {
-    console.log(newprod.fav)
+    // console.log(newprod.fav)
     axios({
         method: 'put',
         url: `http://localhost:3001/prods/${newprod.id}`,
-        data: newprod
-      });
+        data: {...newprod, fav: !newprod.fav}
+      }).then(response => {
+        return response.data
+    })
 }
 
 export const switchKeyAssignment = (newKey) => {
@@ -16,8 +18,9 @@ export const switchKeyAssignment = (newKey) => {
         url: `http://localhost:3001/keys/${newKey.id}`,
         data: {...newKey, assigned: !newKey.assigned}
       }).then(response => {
+          console.log(response.data)
           return response.data
-      });
+      })
 }
 
 

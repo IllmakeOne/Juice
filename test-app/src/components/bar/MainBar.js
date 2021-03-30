@@ -55,7 +55,6 @@ function MainBar({startScreen}) {
                                             removeItem = {removeItemfromCart}
                                             removeAllCart = {removeAllCart} 
                                             changeItem = {changeCartItem}
-                                            addtoCart = {addtoCart}
                                             addBulkItem={addBulkItem}/>
                                     </GridColumn>
                                 </GridRow>
@@ -108,15 +107,14 @@ function MainBar({startScreen}) {
     }
 
     const changeFav = (id) => {
-        bar.cart.forEach((el)=>{
+        const aux = bar.prods.map((el)=>{
             if(el.id == id){
-                el.fav = !el.fav
-                console.log(el.fav)
-                console.log(id)
+                return {...el, fav: !el.fav}
+            } else {
+                return el
             }
         })
-        setBar({prods: bar.prods, cart: bar.cart})
-        
+        setBar({prods: aux, cart: bar.cart})   
     }
 
 
