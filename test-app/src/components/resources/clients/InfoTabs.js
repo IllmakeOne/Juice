@@ -12,13 +12,15 @@ import { Button, Input, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import SubHBox from './SubHBox'
+import CliententryHTable from '../../rec/pieces/CliententryHTable';
+import EditData from './EditData';
 
 
 
 
-function InfoTabs({subH, entryH}) {
+function InfoTabs({subH, entryH, client}) {
   
-    const classes = useStyles()
+    const C = useStyles()
 
     const [value, setValue] = useState(0)
 
@@ -56,26 +58,31 @@ function InfoTabs({subH, entryH}) {
     return (
         <div>
             <AppBar position="static" >
-                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" className= 'clientInfoTabs'>
-                    <Tab className={classes.tab} label="Sub History" {...a11yProps(0)} />
-                    <Tab className={classes.tab} label="Entry History" {...a11yProps(1)} />
-                    <Tab className={classes.tab} label="Other" {...a11yProps(2)} />
+                <Tabs value={value} onChange={handleChange} className= {C.clientInfoTabs}>
+                    <Tab className={C.tab} label="Sub History" {...a11yProps(0)} />
+                    <Tab className={C.tab} label="Entry History" {...a11yProps(1)} />
+                    <Tab className={C.tab} label="Other" {...a11yProps(2)} />
                 </Tabs>
             </AppBar>
+            
             <TabPanel value={value} index={0}>
-               <Paper style={{height: 650, overflow: 'scroll'}}>
+               <Paper style={{height: 650, overflow: 'auto'}}>
                   {/* <div className={`${classes.subsriptionH} ${classes.shadow}`} > */}
-                      {basicSubscribtionHistory.map( (el) =>(
+                      {subH.map( (el) =>(
                               <SubHBox sub = {el}/>
                       ))}
                   {/* </div> */}
                 </Paper>
             </TabPanel>
-            <TabPanel value={value} index={1}>
-                {/* display all entries*/}
+
+
+            <TabPanel value={value} index={1}>               
+              <CliententryHTable H = {entryH} />
             </TabPanel>
+
+
             <TabPanel value={value} index={2}>
-                Item Three
+                <EditData client = {client} />
             </TabPanel>
         </div>
     )
@@ -86,82 +93,14 @@ const useStyles = makeStyles({
   tab: {
       fontWeight: 'bold',
   },
+  clientInfoTabs: {
+      fontWeight: 'bold',
+      background:'#f6a269',
+      color: '#0707a0',
+  },
 
 })
 
 
-
-
-const basicSubscribtionHistory=[{
-  "type": "F10",
-  "left": 10,
-  'start': '2/4/2021',
-  "end": "8/8/2021"
-},
-{
-  "type": "FF",
-  "left": -1,
-  'start': '15/4/2021',
-  "end": "15/5/2021"
-},{
-  "type": "F10",
-  "left": 10,
-  'start': '2/4/2021',
-  "end": "2/5/2021"
-},
-{
-  "type": "FF",
-  "left": -1,
-  'start': '15/04/2021',
-  "end": "15/05/2021"
-},{
-  "type": "F10",
-  "left": 10,
-  'start': '02/04/2021',
-  "end": "02/05/2021"
-},
-{
-  "type": "FF",
-  "left": -1,
-  'start': '15/04/2021',
-  "end": "15/05/2021"
-},
-{
-  "type": "FF",
-  "left": -1,
-  'start': '15/04/2021',
-  "end": "15/05/2021"
-},
-{
-  "type": "FF",
-  "left": -1,
-  'start': '15/04/2021',
-  "end": "15/05/2021"
-},
-{
-  "type": "FF",
-  "left": -1,
-  'start': '15/04/2021',
-  "end": "15/05/2021"
-},
-{
-  "type": "FF",
-  "left": -1,
-  'start': '15/04/2021',
-  "end": "15/05/2021"
-},
-{
-  "type": "FF",
-  "left": -1,
-  'start': '15/04/2021',
-  "end": "15/05/2021"
-},
-{
-  "type": "FF",
-  "left": -1,
-  'start': '15/04/2021',
-  "end": "15/05/2021"
-},
-]
 
 export default InfoTabs

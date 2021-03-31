@@ -23,6 +23,21 @@ export const switchKeyAssignment = (newKey) => {
       })
 }
 
+export const getSpecificKey = (keyId) => {
+    return axios.get(`http://localhost:3001/keys?id=${keyId}`)
+         .then(function (response) {
+            // console.log(response.data)
+            return response.data
+      })
+}
+
+export const getSpecificClient = (clientId) => {
+    return axios.get(`http://localhost:3001/clients?id=${clientId}`)
+         .then(function (response) {
+            // console.log(response.data)
+            return response.data
+      })
+}
 
 export const getAppsByDateandField = async ({date, field}) => {
     // console.log(date + ' ' + field)
@@ -42,6 +57,17 @@ export const getTennisCourts = async ({date}) => {
          .then(function (response) {
             // console.log(response.data)
             return response.data
+      })
+}
+
+export const updateClient = async (client) => {
+    return axios({
+        method: 'put',
+        url: `http://localhost:3001/clients/${client.id}`,
+        data: client
+      }).then(response => {
+          console.log(response.data)
+          return response.data
       })
 }
 

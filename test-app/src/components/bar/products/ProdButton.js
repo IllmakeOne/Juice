@@ -4,6 +4,7 @@ import { AiFillStar } from 'react-icons/ai'
 import { IconContext } from 'react-icons'
 
 import { switchFavoriteItem } from '../../DBconn'
+import Fab from '@material-ui/core/Fab'
 
 import Button from '@material-ui/core/Button'
 
@@ -37,20 +38,19 @@ const ProdButton = ({prod, onClick, className, changeFav}) => {
                         </GridRow>           
                     </div>
                 </GridColumn>
-                <GridColumn width = {1} 
+                <GridColumn width = {1.5} 
                     // style={{ background: starColor}} onClick={()=>addToFav(prod.id)}
                     >
-                    <div className = 'favButton'>
+                    <div className = '' 
+                                >
                         <IconContext.Provider
-                        value={{ color: starColor, size: '25px' }}
-                        >
-                            <Button 
-                                // variant="outlined"
-                                size= 'small'
-                                startIcon={<AiFillStar size = {20}/>}
-                                variant = 'outlined'
-                                onClick = {()=>addToFav()}
-                                    />
+                            value={{ color: starColor }}
+                            >
+                            <Fab 
+                                size = 'small'
+                                onClick = {()=>addToFav()} >
+                                <AiFillStar size = {25}/>
+                            </Fab>
                         </IconContext.Provider>
                     </div>
                 </GridColumn>

@@ -126,6 +126,10 @@
 
 } */
 
+.orangeShadow: {
+  box-shadow: 7px 9px 19px -1px rgb(255, 173, 51);
+}
+
 .favButton{
   position: relative;
   left: 10;
@@ -133,7 +137,7 @@
 }
 
 .prodbutton {
-  background: rgb(214, 216, 97);
+  background: rgb(97, 139, 216);
   /* padding: 10px 0px; */
   border-color: white;
   border-style: dashed;
@@ -212,20 +216,15 @@
 
 }
 
-.clientInfoTabs{
-  background:#ff6500;
-  color: #0707a0;
-
-}
 
 .assigned{
-  background:rgb(224, 76, 212);
+  background:rgb(235, 73, 100);
   text-align: center;
   width: 50px;
 }
 
 .unassigned{
-  background:#37b604c7;
+  background:hsla(103, 84%, 63%, 0.78);
   text-align: center;
   width: 50px;
 }

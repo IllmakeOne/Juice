@@ -12,33 +12,39 @@ import { FiSave } from 'react-icons/fi'
 
 import { Autocomplete } from '@material-ui/lab'
 
+import { updateClient } from '../../DBconn'
 
 
-function EditData({clients, client, setClient, Submit}) {
+function EditData({ client }) {
 
-    const onSubmit = () => {
+    const [crtClient, setCrtClient] = useState()
 
-        //send item to db
+    useEffect (()=>{
+        setCrtClient(client)
+    },[])
+
+    const onSubmit = async () => {
+        setCrtClient(updateClient(crtClient))
     }
 
     const handleCangeName = e => {
-        setClient({...client, name: e.target.value})
+        setCrtClient({...crtClient, name: e.target.value})
     }
     const handleChangePhone = e => {
-        setClient({...client, phone: e.target.value})
+        setCrtClient({...crtClient, phone: e.target.value})
     }
     const handleChangeEmail = e => {
-        setClient({...client, email: e.target.value})
+        setCrtClient({...crtClient, email: e.target.value})
     }
     const handleChangeComment = e => {
-        setClient({...client, comment: e.target.value})
+        setCrtClient({...crtClient, comment: e.target.value})
     }
 
     return (
         <div>
             <GridRow direction = 'column' align='center'>
 
-                <GridColumn textAlign={'center'}  p={['s', 's']}> 
+                {/* <GridColumn textAlign={'center'}  p={['s', 's']}> 
                     <Autocomplete
                         className={''}
                             id="auto-clients"
@@ -60,7 +66,7 @@ function EditData({clients, client, setClient, Submit}) {
                                 console.log(newVal)}
                             }}
                     /> 
-                </GridColumn>
+                </GridColumn> */}
 
 
                 <GridColumn textAlign={'center'}  p={['s', 's']}> 
@@ -69,7 +75,7 @@ function EditData({clients, client, setClient, Submit}) {
                         <Input  
                             name='nameInput'
                             type='text'
-                            value={client? client.name: ''}
+                            value={crtClient? crtClient.name: ''}
                             defaultValue={0} 
                             onChange={handleCangeName}
                         />
@@ -83,8 +89,8 @@ function EditData({clients, client, setClient, Submit}) {
                             name='phoneInput'
                             type='text'
                             // placeholder={crtItem.stock}
-                            value={client? client.phone: ''}
-                            error={client.phone.lenght < 10}
+                            value={crtClient? crtClient.phone: ''}
+                            // error={crtClient.phone.lenght < 10}
                             defaultValue={0} 
                             onChange={handleChangePhone}
                         />
@@ -98,7 +104,7 @@ function EditData({clients, client, setClient, Submit}) {
                             name='emailInput'
                             type='text'
                             // placeholder={crtItem.stock}
-                            value={client? client.email: ''}
+                            value={crtClient? crtClient.email: ''}
                             // error={client.phone.lenght < 10}
                             defaultValue={0} 
                             onChange={handleChangeEmail}
@@ -113,7 +119,7 @@ function EditData({clients, client, setClient, Submit}) {
                             name='commentInput'
                             type='text'
                             placeholder={'comment'}
-                            value={client? client.comment: ''}
+                            value={crtClient? crtClient.comment: ''}
                             // error={client.phone.lenght < 10}
                             // defaultValue={0} 
                             onChange={handleChangeComment}
@@ -129,7 +135,7 @@ function EditData({clients, client, setClient, Submit}) {
                             color="primary"
                             size='large'
                             startIcon={<FiSave />}
-                            onClick ={()=>Submit()}
+                            onClick ={()=>onSubmit()}
                             >
                                 Save
                         </Button>

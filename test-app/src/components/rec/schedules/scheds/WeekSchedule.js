@@ -65,6 +65,7 @@ const WeekSchedule = ( {field, today, week} ) => {
                                    <br/> {el[1]}
                                 </div>
                             </Paper>
+                            
                             <ColumnDateField date= {el[1]} field= {field} _mouseMove ={handleMousemove} />
 
                         {/* {genLine(el[1])} */}

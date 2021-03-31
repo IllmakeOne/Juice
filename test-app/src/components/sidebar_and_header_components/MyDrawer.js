@@ -26,6 +26,9 @@ import AddProfile from '../rec/clients/AddProfile'
 import Clients from '../resources/Clients'
 import Scanner from '../rec/mainpage/Scanner'
 import MaineRecScreen from '../rec/mainpage/MaineRecScreen';
+import AddApp from '../rec/schedules/pieces/AddApp';
+import Canvas from '../drage/Canvas';
+import DisplaySubs from '../rec/pieces/DisplaySubs'
 
 const history = createBrowserHistory();
 export default function MyDrawer(){
@@ -150,6 +153,17 @@ export default function MyDrawer(){
              />
           </ListItem>
 
+          <ListItem
+            button
+            component={Link}
+            to="/test">
+
+            <ListItemText
+               disableTypography
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Testing</Typography>}
+             />
+          </ListItem>
+
         </List>
         
         </Drawer>
@@ -162,6 +176,9 @@ export default function MyDrawer(){
         <Route path='/addprof' component={AddProfile} /> 
         <Route path='/bill' component={Bill} /> 
         <Route path='/clients' component={Clients} /> 
+        <Route path='/test' component={DisplaySubs} /> 
+
+        
 
     </Router>
     );

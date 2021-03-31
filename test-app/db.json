@@ -90,7 +90,7 @@
       "price": 6,
       "stock": 10,
       "fixedPrice": true,
-      "fav": false,
+      "fav": true,
       "image": "https://hawkesdesign.files.wordpress.com/2014/09/fantalogo-svg.png"
     },
     {
@@ -136,7 +136,7 @@
       "type": "Warm Drink",
       "price": 6,
       "stock": 50,
-      "fav": false,
+      "fav": true,
       "fixedPrice": true,
       "image": "https://hawkesdesign.files.wordpress.com/2014/09/fantalogo-svg.png"
     },
@@ -145,7 +145,7 @@
       "name": "Shweppes .5",
       "type": "Juice",
       "price": 6,
-      "stock": 50,
+      "stock": 49,
       "fav": false,
       "fixedPrice": true,
       "image": "https://seeklogo.com/images/S/schweppes-logo-7A8E4A77EC-seeklogo.com.png"
@@ -305,9 +305,10 @@
       "crtsub": {
         "type": "ffull",
         "left": 0,
-        "end": "02/05/2021"
+        "start": "2/4/2021",
+        "end": "2/5/2021"
       },
-      "comment": "i tired this"
+      "comment": "Changed Comment"
     },
     {
       "id": 3,
@@ -339,11 +340,11 @@
     },
     {
       "id": 2,
-      "assigned": false
+      "assigned": true
     },
     {
       "id": 68,
-      "assigned": true
+      "assigned": false
     },
     {
       "id": 4,
@@ -351,11 +352,11 @@
     },
     {
       "id": 5,
-      "assigned": false
+      "assigned": true
     },
     {
       "id": 6,
-      "assigned": true
+      "assigned": false
     },
     {
       "id": 11,
@@ -383,7 +384,7 @@
     },
     {
       "id": 17,
-      "assigned": false
+      "assigned": true
     }
   ],
   "tennis": [

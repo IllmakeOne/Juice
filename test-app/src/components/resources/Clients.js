@@ -62,7 +62,7 @@ function Clients() {
 
 
                     <GridColumn p = 'm' width = {8}>
-                        <InfoTabs/>
+                        {/* <InfoTabs/> */}
                     </GridColumn>
 
                 </GridRow>

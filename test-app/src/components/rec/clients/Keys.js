@@ -7,6 +7,7 @@ import { pink, lightBlue} from '@material-ui/core/colors';
 import { FiKey } from 'react-icons/fi'
 
 import { switchKeyAssignment } from '../../DBconn'
+import { Paper } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
@@ -18,12 +19,17 @@ const useStyles = makeStyles({
       color: 'white',
       height: 48,
       padding: '0 30px',
+    },
+
+    
+    orangeShadow: {
+        boxShadow: '7px 9px 19px -1px rgb(255, 173, 51)',
     }
   });
 
 function Keys() {
 
-    const classes = useStyles();
+    const C = useStyles();
     const [keys, setKeys] = useState([])
 
     
@@ -77,14 +83,14 @@ function Keys() {
     }
 
     return (
-        <div>
+        <Paper className={C.orangeShadow}>
             <h1>Kyes</h1>
-                <div >
-                    <GridRow wrap='wrap'justify='around' >
-                        {keys? getSlice():null}
-                    </GridRow>
-                </div>
-        </div>
+            <div >
+                <GridRow wrap='wrap'justify='around' >
+                    {keys? getSlice():null}
+                </GridRow>
+            </div>
+        </Paper>
     )
 }
 
