@@ -24,9 +24,11 @@ function SubHBox({sub}) {
     const determineExpired = () =>{
         if(sub.end.localeCompare(today)==-1){ 
             return classes.expired
+        } else if(sub.left == 0) {
+            return classes.expired
         } else if(sub.end.localeCompare(today)==1) {
             return classes.available
-        }
+        } 
     }
 
     const today = dateToText(new Date())

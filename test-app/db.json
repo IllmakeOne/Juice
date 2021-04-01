@@ -298,13 +298,26 @@
   ],
   "clients": [
     {
+      "id": 0,
+      "name": "Robert Banu",
+      "email": "lmao",
+      "phone": "0720440760",
+      "crtsub": {
+        "type": "ffull",
+        "left": -1,
+        "start": "1/4/2021",
+        "end": "2/5/2021"
+      },
+      "comment": "Changed Comment"
+    },
+    {
       "id": 1,
       "name": "Decretann Ioana",
       "email": null,
       "phone": "0720440760",
       "crtsub": {
         "type": "ffull",
-        "left": 0,
+        "left": -1,
         "start": "2/4/2021",
         "end": "2/5/2021"
       },
@@ -344,7 +357,7 @@
     },
     {
       "id": 68,
-      "assigned": false
+      "assigned": true
     },
     {
       "id": 4,

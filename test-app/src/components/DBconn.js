@@ -23,6 +23,17 @@ export const switchKeyAssignment = (newKey) => {
       })
 }
 
+export const unlockKey = (key) => {
+    return axios({
+        method: 'put',
+        url: `http://localhost:3001/keys/${key.id}`,
+        data: {...key, assigned: false}
+      }).then(response => {
+        //   console.log(response.data)
+          return response.data
+      })
+}
+
 export const getSpecificKey = (keyId) => {
     return axios.get(`http://localhost:3001/keys?id=${keyId}`)
          .then(function (response) {
@@ -30,6 +41,7 @@ export const getSpecificKey = (keyId) => {
             return response.data
       })
 }
+
 
 export const getSpecificClient = (clientId) => {
     return axios.get(`http://localhost:3001/clients?id=${clientId}`)

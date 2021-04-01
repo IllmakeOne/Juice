@@ -18,9 +18,10 @@ import {
   } from "react-router-dom";
 import DisplaySubs from '../pieces/DisplaySubs'
 import SubHBox from '../../resources/clients/SubHBox'
+import KeyBox from './pieces/KeyBox'
 
 
-function ClientIn({client}) {
+function ClientIn({client, crtkey,unFocus}) {
     const C = useStyles()
     // let { url } = useRouteMatch()
     // let { clientId } = useParams()
@@ -33,25 +34,33 @@ function ClientIn({client}) {
     // },[])
 
 
-    const details = () => {
-        console.log(client)
-        if(client != undefined && client != 0){
+    const detailsClient = () => {
+        // console.log(client)
+        if(client != 0){
             return (
                 <GridRow  direction='row' wrap='wrap' >
                     <GridColumn width={4} p = 's'>
-                        {client.name}
+                        <KeyBox crtKey = {crtkey}/>
                     </GridColumn>
 
 
                     <GridColumn p = 'm' width = {8}>
-                        <SubHBox sub = {client.crtsub}/>
+                        <h2>{client.name}</h2>
+                        <SubHBox sub = {client.crtsub} unFocus={unFocus}/>
                     </GridColumn>
                 </GridRow>
 
             )
         }  else {
             return (
-                <h3>uncanned</h3>
+                <GridRow  direction='row' wrap='wrap' >
+                    <GridColumn width={4} p = 's'>
+                        <KeyBox crtKey = {crtkey} unFocus={unFocus}/>
+                    </GridColumn>
+                    <GridColumn width={8} p = 's'>
+                        <h3>uncanned</h3>
+                    </GridColumn>
+                </GridRow>
             )
         }
     }
@@ -60,8 +69,8 @@ function ClientIn({client}) {
     return (
         <div>
             <br/>
-            <Paper  elevation={3} className={C.orangeShadow}>
-                {details()}
+            <Paper  elevation={3} className={C.paper}>
+                {detailsClient()}
 
             </Paper>
             <br/>
@@ -82,8 +91,11 @@ const useStyles = makeStyles({
       padding: '0 30px',
     },
 
-    orangeShadow: {
+    paper: {
         boxShadow: '7px 9px 19px -1px rgb(255, 173, 51)',
+        height: 500,
+        width:  500,
+        padding: 15,
     }
 
   }); 

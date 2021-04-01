@@ -21,7 +21,7 @@ import Capture from './pieces/Capture.PNG'
 import { makeStyles } from '@material-ui/core/styles'
 
 
-import { getSpecificClient, getSpecificKey } from '../../DBconn'
+import { getSpecificClient, getSpecificKey, unlockKey,switchKeyAssignment } from '../../DBconn'
 
 
 import {
@@ -33,9 +33,9 @@ import {
     useRouteMatch,
     useParams,
     useHistory 
-  } from "react-router-dom";
-import KeyBox from './pieces/KeyBox';
-import { GridColumn, GridRow } from 'emotion-flex-grid';
+  } from "react-router-dom"
+import KeyBox from './pieces/KeyBox'
+import { GridColumn, GridRow } from 'emotion-flex-grid'
 // import { List } from '@material-ui/core'
 
 
@@ -51,8 +51,10 @@ const getClient = (id) => {
 const getKey = (id) => {
     const NameLess = async(id)=>{
         const aux = await getSpecificKey(id)
-        // console.log(aux)
-        return aux[0]
+        console.log(aux)
+        const auxx = await switchKeyAssignment(aux[0])
+        console.log(auxx)
+        return auxx
     }
     return NameLess(id)
 }
@@ -68,19 +70,25 @@ function MaineRecScreen() {
 
 
     const scannedSomething = (scanText) => {
-        console.log(scanText)
+        // console.log(scanText)
         if(scanText.substr(0,2) == 'LK'){
-            console.log('key sncaed')
+            // console.log('key sncaed')
+            //gets the key from the databse
             getKey(scanText.substr(2,2)).then(
                 ret=>{console.log(ret) 
                     setKey(ret)}
                 )
         } else {
             // getClient(scanText.substr(scanText.length - 1)).then(
-            getClient(1).then(
+            if(scanText == 'lmao')
+            getClient(0).then(
                 ret=>{setClient(ret)}
                 )
         }
+    }
+
+    const unFocus = () => {
+        setKey({id:0})
     }
 
     return (
@@ -97,13 +105,9 @@ function MaineRecScreen() {
                             />
                     </div>
                 </GridColumn>
-
-                <GridColumn >
-                    <KeyBox crtKey = {key}/>
-                </GridColumn>
                 
                 <GridColumn >
-                    <ClientIn client = {client}/><br/>
+                    <ClientIn client = {client} crtkey={key} unFocus = {unFocus}/><br/>
                 </GridColumn>
             </GridRow>
             
