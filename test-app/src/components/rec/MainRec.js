@@ -1,7 +1,7 @@
 import React, { useEffect,  useState} from 'react'
 import Cart from './cart/Cart'
 import Prods from './cart/Prods'
-
+import Keys from './clients/Keys'
 
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
@@ -16,7 +16,7 @@ function MainRec() {
     
     useEffect(() =>{
         const getProds = async () => {
-            const serverProds = await fetchProds
+            const serverProds = await fetchProds()
             setItems({
                 prods: serverProds.filter(el=>el.type == 'Service'),
                 cart: []
@@ -61,36 +61,19 @@ function MainRec() {
     }
 
 
-    /**
-     * Broken idk why
-     * it set the price for botht eh cart item and the prod item
-     * which should not happne and i cant figure out why
-     */
+    
     const changeCartItemPrice =  ({id, price}) => {
-        
-        // console.log(id)
-        items.cart.forEach((el)=>{
-            if(el.id == id){
-                el.price = price             
-            }
+        const auxCart = items.cart.map(el=>{
+                            if(el.id == id){
+                                return {...el, price:  price}
+                            } else {
+                                return el
+                            }})
+        setItems({
+            prods: items.prods,
+            cart: auxCart
         })
 
-        // const aux1 = items.cart.map( el =>{
-        //     if(el.id== id){
-        //         el.price = price
-        //         return el
-        //     } else {
-        //         return el
-        //     }
-        // })
-        // const aux2 = items.prods.filter(el=>el.id===id)
-        // console.log(aux1)
-        // console.log(aux2)
-        // console.log(items.cart)
-        // console.log(items.prods)
-        
-        // console.log(items.cart)
-        setItems({...items, cart: items.cart})
     }
 
     return (
@@ -111,6 +94,11 @@ function MainRec() {
                         changeItem = {changeCartItemPrice}/>
                 </GridColumn>
                 </GridRow> </div>: null}
+
+                <br/>
+                <br/>
+                <br/>
+                <Keys/>
         </div>
     )
 }

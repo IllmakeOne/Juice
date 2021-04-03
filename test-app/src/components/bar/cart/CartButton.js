@@ -1,4 +1,4 @@
-import { FiCheck, FiTrash } from "react-icons/fi"
+import { FiCheck, FiEdit, FiTrash } from "react-icons/fi"
 import ChangePriceB from './ChangePriceB'
 
 import React, {  useState } from 'react'
@@ -25,8 +25,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
 
     const [dialogValue, setDialogValue] = useState({
       id: item.id,
-      price: 0, 
-      amount: 0,
+      amount: 0
     });
 
     const handleClose = () => {
@@ -52,11 +51,11 @@ const CartButton = ({item, removeItem, changeItem}) => {
      //make so it can demove from basket
     //and allowe modifyin price if Modifiable=true   onClick={toggleOpen(true)}
         return (
-            <div className = 'cartbutton' >
+            <div>
 
-                    Name: <h3>{item.name}</h3> <br/>
-                    Number Selected: <h3>{item.stock}</h3> <br/>
-                    Price of Item: <h3>{item.price}</h3><br/>
+                    <h3>{item.name}</h3> 
+                    <h4>{item.stock} items </h4> 
+                    <h4>{item.price} RON</h4>
 
 
                 <Button 
@@ -67,7 +66,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
                     // onClick ={()=>removeItem(item.id)}
                     onClick={()=>handleOpen()} 
                     >
-                       <FiCheck />
+                       <FiEdit size={25} />
                 </Button>
 
                 
@@ -76,7 +75,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
                     variant="contained"
                     color="secondary"
                     size="large"
-                    startIcon={<FiTrash />}
+                    startIcon={<FiTrash size={25}/>}
                     onClick ={()=>removeItem(item.id)}
                     >
                 </Button>
@@ -110,7 +109,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
                                 >+
                             </Button>
                             <br/>
-                            <TextField
+                            {/* <TextField
                                 autoFocus
                                 margin="dense"
                                 id="price"
@@ -118,7 +117,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
                                 onChange={(event) => setDialogValue({ ...dialogValue, price: event.target.value })}
                                 label="Price"
                                 type="number"
-                            />
+                            /> */}
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleClose} color="primary">

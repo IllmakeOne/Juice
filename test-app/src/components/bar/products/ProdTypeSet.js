@@ -6,18 +6,36 @@ import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 
 
 
-const ProdTypeSet = ({items, onClick}) => {
+const ProdTypeSet = ({items, onClick, changeFav}) => {
+    const aux = (id) =>{
+        changeFav(id)
+    }
+
 
     const getSlice = () => {
         var ret = []
         items.map((el,index)=>{
+            if(el.stock == 0){ ret.push(<GridColumn width ={4} p={['m', 'm']}  >
+                    <div key = {el.id} >
+                            <ProdButton prod = {el}
+                                onClick = {aux} 
+                                changeFav ={changeFav}
+                                className ='unavailableprodbutton'
+                                />
+                        </div>
+                </GridColumn>)
+
+            } else {
                 ret.push(<GridColumn width ={4} p={['m', 'm']}  >
                     <div key = {el.id} >
-                             {/* <h3>{prod.name}</h3> */}{console.log(index)}
                              <ProdButton prod = {el}
-                                 onClick = {onClick} />
+                                 onClick = {onClick} 
+                                 className ='prodbutton'
+                                 changeFav ={changeFav}
+                                 />
                          </div>
                  </GridColumn>)
+            }
 
         })
         return ret
@@ -25,7 +43,6 @@ const ProdTypeSet = ({items, onClick}) => {
     
 
     const makeGrid = () => {
-        var gridsize = 4
         var ret =[]
         // console.log(ret)
 
@@ -40,7 +57,7 @@ const ProdTypeSet = ({items, onClick}) => {
 
     return (
         <div className='prodtypeset'>
-            <h2>Type: {items[0].type}</h2>
+            {/* <h2>Type: {items[0].type}</h2> */}
             {makeGrid()}
         </div>
     )

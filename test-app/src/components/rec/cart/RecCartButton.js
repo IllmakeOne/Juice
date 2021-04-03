@@ -21,7 +21,7 @@ const RecCartButton= ({item, removeItem, changeItem}) =>{
     const [price, setPrice] = useState(0)
     const [newprice, setNewPrice] = useState(0)
 
-    const handleSubmitPrice = (value) => {
+    const handleSubmitPrice = () => {
         changeItem({id: item.id, price: newprice})
         setPrice(newprice)
         // console.log(newprice)
@@ -38,18 +38,7 @@ const RecCartButton= ({item, removeItem, changeItem}) =>{
         <div className = 'cartbutton' >
 
                 Name: <h3>{item.name}</h3> <br/>
-                Number Selected: <h3>{item.stock}</h3> <br/>
                 Price of Item: <h3>{item.price}</h3><br/>
-
-                <Button 
-                    className='cart_button'
-                    variant="contained"
-                    color="secondary"
-                    size="large"
-                    startIcon={<FiTrash />}
-                    onClick ={()=>removeItem(item.id)}
-                    >
-                </Button>
             
             {/* <NumPad.Number
                 // onChange={(value) => updatePrice(value)}
@@ -88,7 +77,18 @@ const RecCartButton= ({item, removeItem, changeItem}) =>{
                 startIcon={<FiCheckSquare />}
                 onClick ={()=>handleSubmitPrice()}
                 >
-            </Button>
+            </Button><br/>
+
+            
+            <Button 
+                    className='cart_button'
+                    variant="contained"
+                    color="secondary"
+                    size="large"
+                    startIcon={<FiTrash />}
+                    onClick ={()=>removeItem(item.id)}
+                    >
+                </Button>
 
             </div>
     )

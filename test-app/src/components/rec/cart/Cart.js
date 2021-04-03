@@ -1,5 +1,5 @@
 import React, { useEffect,  useState} from 'react'
-import { Button } from '@material-ui/core';
+import { Button, Paper } from '@material-ui/core';
 import { FiTrash2, FiShoppingCart} from "react-icons/fi"
 
 import { css, cx } from '@emotion/css'
@@ -19,6 +19,10 @@ export default function Cart(
         return sum
     }
     
+    const gasPrice = new Intl.NumberFormat('en-US',
+                        { style: 'currency', currency: 'RON',
+                          minimumFractionDigits: 1 });
+
 
     return (
         <React.Fragment>
@@ -31,35 +35,38 @@ export default function Cart(
                     Empty cart
                        <FiTrash2 />
                 </Button>
+                
+            <Paper style={{maxHeight: 550, overflow: 'auto'}} >
+                <div className ={css`
+                        padding: 32px;
+                        background-color: hotpink;
+                        font-size: 24px;
+                        border-radius: 4px;
+                        overflow: scroll;
+                        white-space: nowrap;
+                        `}>
+                    {/* {console.log("in cart")}
+                    {console.log(items)} */}
+                {items ? items.map((item) => 
+                    (
+                    <div key = {item.id} 
+                        >
+                        <RecCartButton item = {item} 
+                            removeItem = {removeItem}
+                            changeItem = {changeItem}/>
+                    </div>            
+                    )):null 
+                }
+                </div>
+             </Paper>
 
-            <div className ={css`
-                    padding: 32px;
-                    background-color: hotpink;
-                    font-size: 24px;
-                    border-radius: 4px;
-                    overflow: scroll;
-                    white-space: nowrap;
-                    `}>
-                {/* {console.log("in cart")}
-                {console.log(items)} */}
-               {items ? items.map((item) => 
-                (
-                <div key = {item.id} 
-                    >
-                    <RecCartButton item = {item} 
-                        removeItem = {removeItem}
-                        changeItem = {changeItem}/>
-                </div>            
-                )):null 
-            }
-             </div>
+
             <div className='finalbasket'>
-                Finish total: {getSum()} lei
+                Finish total: {gasPrice.format(getSum())} lei
             </div>
             <Button 
                 className='finalbasket'
                 variant="contained"
-                color='green'
                 size="large"
                 startIcon={<FiShoppingCart />}
                 // onClick ={()=>removeItem(item.id)}

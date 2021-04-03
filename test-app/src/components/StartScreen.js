@@ -3,7 +3,7 @@ function StartScreen() {
 
     return (
         <div>
-            StartScreen
+            StartScreenasdasdasdasdasdasdadsadasasd
         </div>
     )
 }

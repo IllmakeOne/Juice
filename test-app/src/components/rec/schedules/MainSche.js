@@ -1,16 +1,12 @@
 import { useState, useEffect } from 'react'
-import Scheduler from './Scheduler'
+import ScheduleTabs from './pieces/ScheduleTabs'
 
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
+import { fetchAppoitments, fetchApprow} from '../../DBconn'
 // import SchedulerII from './SchedulerII'
 
-export  const fetchProds = async () => {
-    const res = await fetch('http://localhost:3001/appointments')
-    const data = await res.json()
-    // console.log(data)
-    return data
-}
+
 
 export const FIELDS = {
     T1: 'Tennis 1',
@@ -30,7 +26,7 @@ function MainSche() {
 
     useEffect(() =>{
         const getReservs = async () => {
-            const data = await fetchProds()
+            const data = await fetchApprow()
             setApps(data)
         }
         getReservs()
@@ -59,7 +55,11 @@ function MainSche() {
 
 
     return (
-        <div>
+        <div className='cart_svlist'>
+        <br/>
+        {/* <br/>
+        <br/>
+        <br/>
             <Autocomplete
                 id="field-picker"
                 value={crtField}
@@ -75,7 +75,12 @@ function MainSche() {
                 style={{ width: 300 }}
                 renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />
                 }
-            />
+            /> */}
+            <br/>
+            <br/>
+            <br/>
+
+        <ScheduleTabs/>
             {/* {getAppsbyField(), apps ? <div key={getAppsbyField()} ><Scheduler  apps={getAppsbyField()}
                                                     upApp = {addApp}
                                      /></div> : null  } */}

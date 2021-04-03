@@ -2,18 +2,66 @@ import { useState, useEffect} from 'react'
 import MainBar from '../MainBar'
 // import {Autocomplete} from '@material-ui/lab';
 // import { Table } from 'react-bootstrap'
-import { TextField } from '@material-ui/core';
+import { Button, Input, TextField } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid'
-import { FiCheck } from 'react-icons/fi';
-import { fetchProds, fetchSuppliers } from '../../DBconn';
+import { FiCheckSquare } from 'react-icons/fi';
+import { fetchProds, fetchSuppliers, fetchTypes } from '../../DBconn';
+import { Autocomplete } from '@material-ui/lab';
+
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+import { css } from '@emotion/css'
 
 
+import { makeStyles } from '@material-ui/core/styles';      
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
+import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
+
+import RestockPrinter from '../../printers/RestockPrinter'
+
+const useStyles = makeStyles({
+    table: {
+      minWidth: 650,
+    }
+  });
 
 const  AddStock = () => {
 
-    const[suppliers, setSuppliers] = useState({sups: [], crt: ''})
+    const defaultupProds =  [
+        {
+            id: 2,
+            name: 'Tennis',
+            vat: 5,
+            type: 'Service',
+            stock: 2,
+            price: 3                                       
+        },
+        {
+            id: 4,
+            name: 'Applejuice',
+            vat: 8,
+            type: 'Juice',
+            stock: 3,
+            price: 3                                       
+        }    
+    ]
+    
+    const classes = useStyles();
+
+
+    const[suppliers, setSuppliers] = useState()
     const[crtSupp, setCrtSupp] = useState(null)
+    const[prodTypes, setprodTypes] = useState([])
 
     /**
      * items currently in stock , used for autocomplet
@@ -25,24 +73,15 @@ const  AddStock = () => {
      */
     const[upProds, setUpProds] = useState([])
 
-    // /**
-    //  * upPrice is the price from supplier
-    //  */
-    // const[upPrice, setUpPrice] = useState(0)
-
-    // /**
-    //  * upStock is the number of an item purches
-    //  */
-    // const[upStock, setupStock] = useState(0)
-
     /**
      * current item being added
      */
     const[crtItem, setCrtItem] = useState({
                                         id: '',
                                         vat: 0,
+                                        type: '',
                                         stock: 0,
-                                        total: 0                                        
+                                        price: 0                                       
                                     })
 
 
@@ -51,71 +90,51 @@ const  AddStock = () => {
         const getProds = async () => {
             const serverProds = await fetchProds()
             const serverSuppliers = await fetchSuppliers()
+            const serverTypes = await fetchTypes()
 
-            setSuppliers({sups: serverSuppliers, crt: serverSuppliers[0]})
+            setSuppliers(serverSuppliers)
 
             setProds(serverProds)
 
-            setCrtSupp(suppliers[0])
+            setprodTypes(serverTypes)
+
+            // setCrtSupp(suppliers[0])
         }
         getProds()
     
     }, [])
 
-    // useEffect(()=>{
-    //     console.log('crt sup')
-    //     console.log(crtSupp)
-    //     console.log('crt up rpods')
-    //     console.log(upProds)
-    //     console.log('crt item')
-    //     console.log(crtItem)
-    // },[crtSupp, suppliers, upProds])
-
-
-    const onSelectItem = (item)=>{
-        // console.log(item)
-        setCrtItem({
-            ...crtItem,
-            id: item.id,
-            vat: item.type =='Service'? 5:9,
-        })
-    }
-
-    const finalSubmit = () =>{
-        //send upProds to db
-        //TODO
-    }
-
-    const upItem= () => {
-        // e.preventDefault()
-        upProds.push(crtItem)
-        setUpProds(upProds)
-        //IT DOEST REFESH HERE AND IDK WHYYYYY
+    useEffect(()=>{
+        // console.log('crt item')
+        // console.log(crtItem)
+        console.log('crt up rpods')
         console.log(upProds)
-        
+        // console.log('crt item')
+        // console.log(crtItem)
+    },[upProds])   
+
+
+    const handleSubmitCrtItme =()=>{
+
+        if(crtItem.price < 0.1){
+            alert('Invalid Price') 
+        } else if(upProds.map(el=>el.name).includes(crtItem.name)){
+            alert('This item has already been adeded') 
+        } else {
+            upProds.push(crtItem)
+            setUpProds(upProds)
+            setCrtItem({
+                id: '',
+                vat: 0,
+                type: '',
+                stock: 0,
+                price: 0                                       
+            })
+        }
+        console.log(upProds)
     }
 
-    const selectedsetUpPrice = (buyprice) =>{
-        setCrtItem({...crtItem, 
-            price: buyprice,
-            total: buyprice*crtItem.stock})
-    }
-
-    const selectedsetUpStock = (resupp) =>{
-        setCrtItem({...crtItem, 
-            stock: resupp,
-            total: resupp*crtItem.price})
-    }
-
-    const bruhwaht= (e)=>{
-        console.log(e.target.value)
-        // console.log(JSON.stringify(crtSupp))
-        setSuppliers({sups: suppliers.sups,
-                      crt: e.target.value})
-    }
-
-
-//------------------------------------------------DEV----------------
+//----------------------------------------------------------------
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -133,59 +152,201 @@ const columns = [
         type: 'number',
         width: 90,
     },
-    // {
-    //   field: 'fullName',
-    //   headerName: 'Full name',
-    //   description: 'This column has a value getter and is not sortable.',
-    //   sortable: false,
-    //   width: 160,
-    //   valueGetter: (params) =>
-    //     `${params.getValue('firstName') || ''} ${params.getValue('lastName') || ''}`,
-    // },
   ];
 
-  const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-  ];
+  const getCrtVat=()=>{
+    const res = prodTypes.map(el=>{
+        if(el.name == crtItem.type)
+            return el.vat
+            })
+    return res
+  }
+
+  const handlechangePrice = e => {
+    setCrtItem({...crtItem, price: e.target.value})
+  }
+
+  const handlechangeStock = e => {
+    setCrtItem({...crtItem, stock: e.target.value})
+  }
   
+
+  const[dwn, setDwn] = useState(false)
+
+  const handFinalSubmit = () => {
+        //send restock order to db
+        /* catch and do thi
+        <RestockPrinter invoice={ {supp: crtSupp, 
+                            prods: upProds, 
+                            other: 'dav'}} />
+                            */
+        setDwn(true)
+        return(
+            <div></div>
+        )
+  }
 
 
 //------------------------------------------------DEV/////////////----------------
     return (
         <div>
 
-            <div className='form-control'>
-                <label>Select Supplier</label>
-                <select name="suppliers" 
-                onChange={(e) => bruhwaht(e)
-                } >
-                    {
-                    suppliers.sups.map((el) => {
-                        return (
-                            <option value = {el}>{el.name}</option>
-                            )
-                    })}
-                </select>
+
+            {/**
+             *  Combo box for selecting supplier for current items being added
+             */}
+            <Autocomplete
+                id="supplier-box"
+                options={suppliers}
+                getOptionLabel={(option) => option.name}
+                style={{ width: 300 }}
+                value={crtSupp}
+                selectOnFocus
+                clearOnBlur
+                freeSolo
+                handleHomeEndKeys
+                renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                onChange={(ev, newVal)=>{
+                    setCrtSupp(newVal)
+                }}
+            />
+            <div>
+                {crtSupp ? <h2>{crtSupp.name}</h2>:<h2>________</h2>}
+                {crtSupp ? <h3>{crtSupp.bank}</h3>:<h2>________</h2>}
+                {crtSupp ? <h3>{crtSupp.cui}</h3>:<h2>________</h2>} 
             </div>
 
-            <div>bruh
-                {suppliers.crt != null&& <h2>{suppliers.crt.name}</h2>,
-                 suppliers.crt != undefined&&<h2>{suppliers.crt.bank}</h2>,
-                 suppliers.crt != undefined&&<h2>{suppliers.crt.cui}</h2>
-                }   
-            </div>
+            {/**
+             *  Imput area for items 
+             */}
+            <GridRow>
+                
+                
+                <GridColumn id='gc1'>
+                    <Autocomplete
+                        id="auto-prods"
+                        options={prods}
+                        getOptionLabel={(option) => option.name}
+                        style={{ width: 300 }}
+                        value={crtItem}
+                        selectOnFocus
+                        clearOnBlur
+                        freeSolo
+                        handleHomeEndKeys
+                        renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                        onChange={(ev, newVal)=>{
+                            setCrtItem({...newVal, stock : 0, price: 0})
+                            // setCrtItem(newVal)
+                        }}
+                    /> 
+                </GridColumn>
+
+                <GridColumn id='gc5'>
+                    <h3>TVA:{getCrtVat()} %</h3>
+                </GridColumn>
+
+                <GridColumn id='gc2'>
+                    <FormControl>
+                        <InputLabel htmlFor="component-simple">Stock</InputLabel>
+                        <Input
+                            name='stockInput'
+                            type='number'
+                            error={crtItem.stock < 0.1}
+                            // placeholder={crtItem.stock}
+                            value={crtItem.stock}
+                            onChange={handlechangeStock}
+                        />
+                    </FormControl>
+
+                </GridColumn>
+                <GridColumn id='gc4'>
+                    <FormControl >
+                        <InputLabel htmlFor="component-simple">Price</InputLabel>
+                        <Input  
+                            name='priceInput'
+                            type='number'
+                            // placeholder={crtItem.stock}
+                            value={crtItem.price}
+                            error={crtItem.price < 0.1}
+                            defaultValue={0} 
+                            onChange={handlechangePrice}
+                        />
+                    </FormControl>
+                </GridColumn>
+
+                <GridColumn id='gc3'>
+                    <h3>Total: {crtItem.price * crtItem.stock} </h3>
+                </GridColumn>
+
+                <GridColumn id='gc6'>
+                    <Button 
+                        // className='b.changeprice'
+                        // variant="contained"
+                        color="primary"
+                        size='large'
+                        startIcon={<FiCheckSquare />}
+                        onClick ={()=>handleSubmitCrtItme()}
+                        >
+                    </Button><br/>
+                </GridColumn>
+
+            </GridRow>
         
-            <div className='datagrid' style={{ height: 500, width: '50%'}}>
-                <DataGrid rows={prods} columns={columns} pageSize={8} checkboxSelection />
+
+            {/**
+             *  Table for dislpaying current items being added
+             * 
+             * checkboxSelection
+             */}
+            {/* <div className='datagrid' style={{ height: 400, width: '90%'}}>
+                {upProds && <DataGrid rows={upProds} columns={columns} pageSize={8} />}
+            </div> */}
+            <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell align="right">Type</TableCell>
+                    <TableCell align="right">Stock</TableCell>
+                    <TableCell align="right">Cost</TableCell>
+                    <TableCell align="right">Total</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {upProds.map((row) => (
+                    <TableRow key={row.name}>
+                        <TableCell component="th" scope="row">{row.name} </TableCell>
+                        <TableCell align="right">{row.type}</TableCell>
+                        <TableCell align="right">{row.stock}</TableCell>
+                        <TableCell align="right">{row.price}</TableCell>
+                        <TableCell align="right">{row.price*row.stock}</TableCell>
+                    </TableRow>
+                    ))}
+                </TableBody>
+                </Table>
+            </TableContainer>
+
+             <div 
+                className={css`
+                background-color: hotpink
+                `}>         
+                <Button 
+                    // className='b.changeprice'
+                    // variant="contained"
+                    color="primary"
+                    size='large'
+                    startIcon={<FiCheckSquare />}
+                    onClick ={()=>handFinalSubmit()}
+                    >
+                </Button>
             </div>
+            
+
+            {/* {dwn && <RestockPrinter invoice={ {supp: crtSupp, 
+                prods: upProds, 
+                other: 'dav'}} />} */}
+
+
         </div>
 
         
