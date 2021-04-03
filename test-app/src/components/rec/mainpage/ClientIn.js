@@ -68,12 +68,10 @@ function ClientIn({client, crtkey,unFocus}) {
 
     return (
         <div>
-            <br/>
-            <Paper  elevation={3} className={C.paper}>
+            <div>
                 {detailsClient()}
 
-            </Paper>
-            <br/>
+            </div>
 
             
         </div>
@@ -93,8 +91,8 @@ const useStyles = makeStyles({
 
     paper: {
         boxShadow: '7px 9px 19px -1px rgb(255, 173, 51)',
-        height: 500,
-        width:  500,
+        height: 400,
+        width:  600,
         padding: 15,
     }
 

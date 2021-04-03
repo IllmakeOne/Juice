@@ -23,6 +23,28 @@ export const switchKeyAssignment = (newKey) => {
       })
 }
 
+export const putClient = (newClient) => {
+    return axios({
+        method: 'put',
+        url: `http://localhost:3001/keys/${newClient.id}`,
+        data: newClient
+      }).then(response => {
+        //   console.log(response.data)
+          return response.data
+      })
+}
+
+export const putKey = (newKey) => {
+    return axios({
+        method: 'put',
+        url: `http://localhost:3001/keys/${newKey.id}`,
+        data: newKey
+      }).then(response => {
+        //   console.log(response.data)
+          return response.data
+      })
+}
+
 export const unlockKey = (key) => {
     return axios({
         method: 'put',
