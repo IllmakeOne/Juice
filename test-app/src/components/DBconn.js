@@ -12,6 +12,17 @@ export const switchFavoriteItem = (newprod) => {
     })
 }
 
+export const addAppointment = (app) => {
+    // console.log(newprod.fav)
+    axios({
+        method: 'put',
+        url: `http://localhost:3001/prods/${app.id}`,
+        data: app
+      }).then(response => {
+        return response.data
+    })
+}
+
 export const switchKeyAssignment = (newKey) => {
     return axios({
         method: 'put',

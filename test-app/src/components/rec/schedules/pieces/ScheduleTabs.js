@@ -20,12 +20,15 @@ import ColumnDateField from './ColumnDateField'
 import TennisSchedule from '../scheds/TennisSchedule'
 
 import moment  from 'moment'
+import DateChanger from './DateChanger';
+import FieldChanger from './FieldChanger';
 
 
 function ScheduleTabs() {
       
   const classes = useStyles()
 
+  const [today, setToday] = useState(new Date)
 
   const [value, setValue] = useState(0)
 
@@ -71,19 +74,7 @@ function ScheduleTabs() {
   const [crtField, setCrtField] = useState('Hall')
 
   const [weekMutiplier, setWeekMutiplier] = useState(0)
-  const upOneWeek = (mult) => {
-    var newMutip
-    if(mult == -1){
-      newMutip = weekMutiplier - 1
-    } else if (mult == 0){
-      newMutip = 0
-    } else {
-      newMutip = weekMutiplier + 1
-    }
-    // console.log(newMutip)
-    setWeekMutiplier(newMutip)
-      
-  }
+
 
 
   return (
@@ -97,43 +88,24 @@ function ScheduleTabs() {
               </Tabs>
           </AppBar>
           <TabPanel value={value} index={0}>
-              <GridRow>
-                  {fields.map( el => {
-                      return (
-                          <GridColumn>
-                              <Button
-                                  variant="outlined"
-                                  onClick={()=>changeCrtField(el)}
-                                  >
-                                  {el}
-                              </Button>
-                          </GridColumn>
-                      )
-                  })}
-                  <GridColumn>
-                    <div>
-                      <Button
-                          variant="outlined"
-                          size= 'small'
-                          onClick= {()=>upOneWeek(-1)}
-                          startIcon={<FiMinus />}
-                          />
-                      <Button 
-                          variant="outlined"
-                          onClick= {()=>upOneWeek(0)}
-                          >                        
-                          Today
-                      </Button>
-                      
-                      <Button
-                          variant="outlined"
-                          size= 'small'
-                          onClick= {()=>upOneWeek(1)}
-                          startIcon={<FiPlus />}
-                          />
-                    </div>
-                  </GridColumn>
-              </GridRow>
+
+
+            <GridRow>
+                <FieldChanger 
+                    changeField = {setCrtField}
+                    />
+                  
+                <GridColumn offset ={6}>
+                    <DateChanger 
+                        weekMutiplier = {weekMutiplier}
+                        changeDateMultiplier = {setWeekMutiplier}
+                        today = {today}
+                        settoday = {setToday}
+                        />
+                </GridColumn>
+            </GridRow>
+
+
             
               <WeekSchedule field = {crtField} today = {new Date} week = {weekMutiplier}/>
           </TabPanel>
@@ -144,7 +116,9 @@ function ScheduleTabs() {
               <ColumnDateField date={'02-06-21'} field = {'Hall'} _mouseMove={()=>{}}/>               
           </TabPanel>
           <TabPanel value={value} index={3}>
-              <WeekSchedule field = 'Tennis' today = {new Date }/>
+              <WeekSchedule 
+                field = 'Tennis' 
+                today = {today}/>
           </TabPanel>
       </div>
     )

@@ -15,7 +15,7 @@ import  {getCrtWeek, getNextWeek } from '../pieces/DatesMethods'
 
 const dayLenght = 38
 
-function ColumnDateField({date, field, _mouseMove}) {
+function ColumnDateField({date, field, _mouseMove, onCellClick}) {
 
 
 
@@ -70,7 +70,7 @@ function ColumnDateField({date, field, _mouseMove}) {
 
                         ret[crtField].push(
                             <Paper elevation={3} style={{height:height }} onMouseMove={()=>handleMouseMove(el.id)}>
-                                <FullCell app={el}/>
+                                <FullCell app={el} onCellClick ={onCellClick}/>
                             </Paper>)
                     } else {
                         const aux = i
@@ -112,7 +112,7 @@ function ColumnDateField({date, field, _mouseMove}) {
                     const height = el.duration * 25
                     ret.push(
                         <Paper elevation={3} style={{height:height }} onMouseMove={()=>handleMouseMove(el.id)}>
-                            <FullCell app={el}/>
+                            <FullCell app={el} onCellClick ={onCellClick}/>
                         </Paper>)
 
                 } else {//if there is nothing scheudle for this hour

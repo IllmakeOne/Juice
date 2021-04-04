@@ -13,7 +13,7 @@ import  {getCrtWeek, getWeek, formatDate } from '../pieces/DatesMethods'
 
  
 
-const WeekSchedule = ( {field, today, week} ) => {
+const WeekSchedule = ( {field, today, week, onCellClick} ) => {
 
     const thisWeek = getWeek(today,week)
 
@@ -66,7 +66,11 @@ const WeekSchedule = ( {field, today, week} ) => {
                                 </div>
                             </Paper>
                             
-                            <ColumnDateField date= {el[1]} field= {field} _mouseMove ={handleMousemove} />
+                            <ColumnDateField
+                                    date= {el[1]}
+                                    field= {field} 
+                                    _mouseMove ={handleMousemove}
+                                    onCellClick ={onCellClick} />
 
                         {/* {genLine(el[1])} */}
                         </GridColumn>                        

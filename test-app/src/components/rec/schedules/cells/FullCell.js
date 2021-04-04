@@ -1,13 +1,13 @@
 import React from 'react'
 import {  Paper } from '@material-ui/core'
 
-function FullCell({app}) {
+function FullCell({app, onCellClick}) {
     // console.log(app)
     const clsname= 'cell' + app.status
     return ( 
             <div className={`${clsname} cell `} 
             // onMouseEnter={()=>onHoover()} 
-            // onClick={()=>abprt(el.id)}
+            onClick={()=>onCellClick(app.id)}
             >
                {app.name} 
             </div>
