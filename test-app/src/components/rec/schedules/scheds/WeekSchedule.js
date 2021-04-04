@@ -13,7 +13,7 @@ import  {getCrtWeek, getWeek, formatDate } from '../pieces/DatesMethods'
 
  
 
-const WeekSchedule = ( {field, today, week, onCellClick} ) => {
+const WeekSchedule = ( {field, today, week, setDialog} ) => {
 
     const thisWeek = getWeek(today,week)
 
@@ -22,9 +22,6 @@ const WeekSchedule = ( {field, today, week, onCellClick} ) => {
     const [timeHighlight,setTimeHighlight] = useState(-1)
 
 
-    const abprt = (id) =>{
-        console.log(id)
-    }
 
     const onHoover = () =>{ 
         // console.log('aaaaa')
@@ -33,6 +30,15 @@ const WeekSchedule = ( {field, today, week, onCellClick} ) => {
     const handleMousemove = (id) => {
         setTimeHighlight(id)
     }
+
+    const onCellClick = (id) => {
+        console.log(id)
+    }
+
+    const onDubClick = (id, date) => {
+        setDialog(true)
+    }
+
 
        return (
 
@@ -70,7 +76,8 @@ const WeekSchedule = ( {field, today, week, onCellClick} ) => {
                                     date= {el[1]}
                                     field= {field} 
                                     _mouseMove ={handleMousemove}
-                                    onCellClick ={onCellClick} />
+                                    onCellClick ={onCellClick}
+                                    onDubClick = {onDubClick} />
 
                         {/* {genLine(el[1])} */}
                         </GridColumn>                        

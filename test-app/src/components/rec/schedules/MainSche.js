@@ -10,6 +10,7 @@ import { GridRow, GridColumn } from 'emotion-flex-grid'
 import WeekSchedule from '../schedules/scheds/WeekSchedule'
 import FieldChanger from './pieces/FieldChanger'
 import DateChanger from './pieces/DateChanger'
+import AddApp from './pieces/AddApp'
 
 
 
@@ -34,6 +35,10 @@ function MainSche() {
 
     const StartSchedule=()=>{
 
+    }
+
+    const setDialog = (state) =>{
+        setOpen(state)
     }
 
 
@@ -62,14 +67,24 @@ function MainSche() {
                         changeDateMultiplier = {setWeekMutiplier}
                         today = {today}
                         settoday = {setToday}
+                        onCellClick={onCellClick}
                         />
                 </GridColumn>
             </GridRow>
 
-
             
-              <WeekSchedule field = {crtField} today = {new Date} week = {weekMutiplier}/>
+              <WeekSchedule 
+                field = {crtField} 
+                today = {today} 
+                week = {weekMutiplier}
+                setDialog = {setDialog}
+                />
          
+
+            <AddApp 
+                open = {open} 
+                setDialog = {setDialog}
+                />
         </div>
     )
 }

@@ -14,16 +14,18 @@ import Modal from '@material-ui/core/Modal'
 
 import { addAppointment } from '../../../DBconn'
 
-function AddApp({open, info}) {
+function AddApp({open,setDialog, info}) {
 
     const [crtApp, setCrtApp]= useState(defaultApp)
 
     const handleClose = () => {
-
+        setDialog(false)
     }
 
     const DialogContenence = () => {
-
+        return(
+            <h1>Hello it is me</h1>
+        )
     }
 
 
@@ -41,20 +43,21 @@ function AddApp({open, info}) {
     }
 
     const makeAppointment = () => {
-        if(checkOut(crtApp) == true){
-            addAppointment(crtApp)
-            setCrtApp(defaultApp)
-        }
+        setDialog(false)
+        // if(checkOut(crtApp) == true){
+        //     addAppointment(crtApp)
+        //     setCrtApp(defaultApp)
+        // }
     }
 
     return (
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" 
-                maxWidth='md?????????????'>
+        <Dialog open={open} onClose={handleClose} aria-labelledby='addappdialog' 
+                fullWidth={true}>
             <form onSubmit={makeAppointment}>
-            <DialogTitle id="form-dialog-title">Change Number of Product</DialogTitle>
+            <DialogTitle id="form-dialog-title">Make An Appointment</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Change the amount of an item in cart
+                    Some Field Are obligatory, some not
                 </DialogContentText>
                 {DialogContenence()}
             </DialogContent>
@@ -63,7 +66,7 @@ function AddApp({open, info}) {
                     Cancel
                 </Button>
                 <Button color="primary" onClick={makeAppointment}>{/*type="submit" */}
-                     Crete App
+                     Create Appointment
                 </Button>
             </DialogActions>
             </form>

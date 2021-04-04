@@ -7,7 +7,7 @@ function FullCell({app, onCellClick}) {
     return ( 
             <div className={`${clsname} cell `} 
             // onMouseEnter={()=>onHoover()} 
-            onClick={()=>onCellClick(app.id)}
+            // onClick={()=>onCellClick(app.id)}
             >
                {app.name} 
             </div>

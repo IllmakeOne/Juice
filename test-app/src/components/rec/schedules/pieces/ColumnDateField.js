@@ -15,7 +15,7 @@ import  {getCrtWeek, getNextWeek } from '../pieces/DatesMethods'
 
 const dayLenght = 38
 
-function ColumnDateField({date, field, _mouseMove, onCellClick}) {
+function ColumnDateField({date, field, _mouseMove, onDubClick}) {
 
 
 
@@ -24,6 +24,12 @@ function ColumnDateField({date, field, _mouseMove, onCellClick}) {
     const handleMouseMove = (id) => {
         _mouseMove(id)
     }
+
+    const makeApp = (id) => {
+        onDubClick(id, date)
+    }
+
+    
 
     useEffect(() =>{
         // console.log(date)
@@ -69,16 +75,19 @@ function ColumnDateField({date, field, _mouseMove, onCellClick}) {
                         const height = el.duration * 25
 
                         ret[crtField].push(
-                            <Paper elevation={3} style={{height:height }} onMouseMove={()=>handleMouseMove(el.id)}>
-                                <FullCell app={el} onCellClick ={onCellClick}/>
+                            <Paper 
+                                elevation={3} style={{height:height }} 
+                                onClick={()=>handleMouseMove(el.id)}
+                                >
+                                <FullCell app={el}/>
                             </Paper>)
                     } else {
-                        const aux = i
+                        const auxi = i
                         ret[crtField].push(
-                            <Paper elevation={2} onMouseMove={()=>handleMouseMove(aux)}>
-                                                {/* // height: 25,
-                                                textAlign: 'center',
-                                                background: auxcolor}}>  */}
+                            <Paper 
+                                elevation={2} 
+                                onDoubleClick = {()=>makeApp(auxi)}
+                                onClick={()=>handleMouseMove(auxi)}>
                                 <EmptyCell i={i}/> 
                             </Paper>
                         )
@@ -101,7 +110,7 @@ function ColumnDateField({date, field, _mouseMove, onCellClick}) {
                     </div>
                 )
 
-        } else { // if it not tennis(or aerobic) fill it normally
+        } else { // if it not tennis(or aerobic) fill it normally, with one column for each day
             for ( i = 0;i < dayLenght ; i++){
                 const aux = apps.filter(el => el.id==i).filter(el => el.date === date)
                 if (aux.length != 0){
@@ -111,18 +120,20 @@ function ColumnDateField({date, field, _mouseMove, onCellClick}) {
 
                     const height = el.duration * 25
                     ret.push(
-                        <Paper elevation={3} style={{height:height }} onMouseMove={()=>handleMouseMove(el.id)}>
-                            <FullCell app={el} onCellClick ={onCellClick}/>
+                        <Paper elevation={3} style={{height:height }} 
+                            onClick={()=>handleMouseMove(el.id)}>
+                            <FullCell app={el} />
                         </Paper>)
 
                 } else {//if there is nothing scheudle for this hour
-                    const aux = i
+                    const auxi=i
                     ret.push(
-                        <Paper elevation={2} onMouseMove={()=>handleMouseMove(aux)}>
-                                            {/* // height: 25,
-                                            textAlign: 'center',
-                                            background: auxcolor}}>  */}
-                            <EmptyCell i={i}/> 
+                        <Paper 
+                            elevation={2} 
+                            onDoubleClick = {()=>makeApp(auxi)}
+                            onClick={()=>handleMouseMove(auxi)}
+                            >
+                                <EmptyCell i={i}/> 
                         </Paper>
                         )
             }

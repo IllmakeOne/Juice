@@ -122,7 +122,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
 
                 <React.Fragment >
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" 
-                            maxWidth='md?????????????'>
+                           >
                         <form onSubmit={updateCartItem}>
                         <DialogTitle id="form-dialog-title">Change Number of Product</DialogTitle>
                         <DialogContent>
@@ -132,7 +132,7 @@ const CartButton = ({item, removeItem, changeItem}) => {
                             {DialogContenence()}
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleClose} color="primary">
+                            <Button onClick={handleClose} color="primary"> 
                                 Cancel
                             </Button>
                             <Button color="primary" onClick={updateCartItem}>{/*type="submit" */}
