@@ -19,9 +19,12 @@ import {
 import DisplaySubs from '../pieces/DisplaySubs'
 import SubHBox from '../../resources/clients/SubHBox'
 import KeyBox from './pieces/KeyBox'
+import IconButton from '@material-ui/core/IconButton'
+
+import {AiOutlineCloseCircle} from 'react-icons/ai'
 
 
-function ClientIn({client, crtkey,unFocus}) {
+function ClientIn({client, crtkey,unFocus,resetClient}) {
     const C = useStyles()
     // let { url } = useRouteMatch()
     // let { clientId } = useParams()
@@ -38,24 +41,28 @@ function ClientIn({client, crtkey,unFocus}) {
         // console.log(client)
         if(client != 0){
             return (
-                <GridRow  direction='row' wrap='wrap' >
-                    <GridColumn width={4} p = 's'>
-                        <KeyBox crtKey = {crtkey}/>
+                <GridRow  direction='column' wrap='wrap' >
+                    <GridColumn p = 'm' width = {8}>
+                        <GridRow>
+                            <GridColumn width= {8}><h2>{client.name}</h2></GridColumn>
+                            <GridColumn offset= {8}><h2>{client.key}</h2></GridColumn>
+                        </GridRow>
+                        <SubHBox sub = {client.crtsub}/>
                     </GridColumn>
 
-
-                    <GridColumn p = 'm' width = {8}>
-                        <h2>{client.name}</h2>
-                        <SubHBox sub = {client.crtsub} unFocus={unFocus}/>
+                    <GridColumn width={4} p = 's'>
+                        <KeyBox crtKey = {crtkey}/>
                     </GridColumn>
                 </GridRow>
 
             )
+
+
         }  else {
             return (
                 <GridRow  direction='row' wrap='wrap' >
                     <GridColumn width={4} p = 's'>
-                        <KeyBox crtKey = {crtkey} unFocus={unFocus}/>
+                        <KeyBox crtKey = {crtkey} />
                     </GridColumn>
                     <GridColumn width={8} p = 's'>
                         <h3>uncanned</h3>
@@ -69,7 +76,15 @@ function ClientIn({client, crtkey,unFocus}) {
     return (
         <div>
             <div>
+                <GridRow justify ='end'>
+                    <GridColumn offset= {11}>
+                        <IconButton onClick = {() => resetClient()}>
+                            <AiOutlineCloseCircle/>
+                        </IconButton>
+                    </GridColumn>
+                </GridRow>
                 {detailsClient()}
+
 
             </div>
 

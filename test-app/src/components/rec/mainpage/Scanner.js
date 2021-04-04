@@ -45,12 +45,12 @@ const Scanner = ({upScanned, image}) => {
     //         return (
 
     //         )
-    // }
+    // } style={{display: 'none'}}
 
     return (
         <div>
             <form  noValidate autoComplete="off" onSubmit={handleSubmit} >
-                <div style={{display: 'none'}} >
+                <div >
                     <label>Scanner</label>
                     <input
                         id = {'scanner'}

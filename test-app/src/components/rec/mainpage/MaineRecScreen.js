@@ -57,7 +57,7 @@ const getKey = (id) => {
         console.log(aux)
         const auxx = await switchKeyAssignment(aux[0])
         console.log(auxx)
-        return auxx
+        return auxx 
     }
     return NameLess(id)
 }
@@ -71,42 +71,67 @@ function MaineRecScreen() {
 
     const [key, setKey] = useState({id:0})
 
+    /**
+     * this is the clients taht are currently in the building
+     */
+    const[inHouse, setInHouse] = useState([])
+
+
 
     const scannedSomething = (scanText) => {
+        console.log(scanText)
         if(scanText.substr(0,2) == 'LK'){
             // console.log('key sncaed')
             //gets the key from the databse
+            if(client.id == 0){
+
+            } else {
             getKey(scanText.substr(2,2)).then(
                 ret=>{
                     // console.log(ret) 
                     setKey(ret)
-                    addToHistory(ret)
                 })
+            }
         } else {
             // getClient(scanText.substr(scanText.length - 1)).then(
-            if(scanText == 'lmao')
-            getClient(0).then(
+            // if(scanText == 'lmao')
+            getClient(scanText.substr(2,3)).then(
                 ret=>{
-                    // console.log(ret) 
                     setClient(ret)
-                    addToHistory(ret)
+                    console.log(inHouse.push(ret))
+
+                    // addToHistory(ret)
                 })
         }
     }
 
    const addToHistory = (entry) =>{
-        const aux = scanHistory
+        const aux = inHouse
         aux.push(entry)
-        setScanHistory(aux)
+        setInHouse(aux)
    }
 
     const unFocus = () => {
         setKey({id:0})
     }
 
+    useEffect(()=>{
+        const now = new Date
+        if(client != 0)
+            addToHistory({...client, timeofEntry: now})
+
+    },[client])
+
+    const resetClient = () => {
+        getClient(0).then(
+            ret=>{
+                console.log(ret) 
+                setClient(ret)
+            })
+    }
+
     return (
         <div>
-            <br/>
             <br/>
             <br/>
 
@@ -121,7 +146,12 @@ function MaineRecScreen() {
                 
                 <GridColumn p='m' >
                     <Paper  elevation={3} className={C.paper}>
-                        <ClientIn client = {client} crtkey={key} unFocus = {unFocus}/>
+                        <ClientIn 
+                            client = {client} 
+                            crtkey={key} 
+                            unFocus = {unFocus}
+                            resetClient = {resetClient}
+                            />
                     </Paper>
                 </GridColumn>
             </GridRow>
@@ -129,7 +159,7 @@ function MaineRecScreen() {
             <GridRow>
                 <GridColumn p='m' >
                     <Paper  elevation={3} className={C.paper}>
-                        <ScanHisotory entries = {scanHistory} />
+                        <ScanHisotory entries = {inHouse} />
                     </Paper>
                 </GridColumn>
                 
@@ -140,7 +170,7 @@ function MaineRecScreen() {
                 </GridColumn>
             </GridRow>
             
-            <Keys/>
+            {/* <Keys/> */}
             {/* {ScreenPick()} */}
 
         </div>

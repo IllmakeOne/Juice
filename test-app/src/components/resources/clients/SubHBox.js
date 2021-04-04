@@ -15,23 +15,42 @@ import Box from '@material-ui/core/Box';
 function SubHBox({sub}) {
 
     const dateToText = (date) =>{
-        var rest = date.getDate()+'/'
-        rest += (date.getMonth() + 1) + '/'
+        var rest = date.getDate()+'-'
+        rest += (date.getMonth() + 1) + '-'
         rest += date.getFullYear()
         return rest
     }
 
+    const reverseString = (string) =>{
+        return string.split('').reverse().join('')
+    }
+
+    /**
+     * This Need REWORK, after db is changed so it uses dates not dumb strings
+     * 
+     * @returns 
+     */
     const determineExpired = () =>{
-        if(sub.end.localeCompare(today)==-1){ 
+        console.log(today)
+        const revTodauy = reverseString(today)
+        console.log(revTodauy)
+
+        console.log(sub.end)
+        const revnd = reverseString(sub.end)
+        console.log(revnd)
+        console.log(sub.end.localeCompare(today))
+        if(sub.left == 0) { 
             return classes.expired
-        } else if(sub.left == 0) {
+        } else if(revnd.localeCompare(revTodauy)==-1) { 
             return classes.expired
-        } else if(sub.end.localeCompare(today)==1) {
+        } else { 
             return classes.available
         } 
     }
 
-    const today = dateToText(new Date())
+
+
+    const today = dateToText(new Date)
     const classes = useStyles()
     const color = determineExpired()
     // console.log(sub.end+ ' '+ today + ' '+ sub.end.localeCompare(today))

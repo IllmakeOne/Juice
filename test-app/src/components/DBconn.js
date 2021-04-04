@@ -54,6 +54,10 @@ export const unlockKey = (key) => {
         //   console.log(response.data)
           return response.data
       })
+
+      //TODO!!
+      //in the server this should also release the key from the cient
+      //and check out the client from the 
 }
 
 export const getSpecificKey = (keyId) => {
