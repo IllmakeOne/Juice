@@ -57,7 +57,7 @@ function AddApp({open,setDialog, info}) {
             <DialogTitle id="form-dialog-title">Make An Appointment</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Some Field Are obligatory, some not
+                    Some Fields are obligatory, some not
                 </DialogContentText>
                 {DialogContenence()}
             </DialogContent>

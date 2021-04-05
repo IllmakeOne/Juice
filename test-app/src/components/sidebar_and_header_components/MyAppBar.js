@@ -1,10 +1,13 @@
-import React from 'react';
+import {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
 
+import Button from '@material-ui/core/Button'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
@@ -19,83 +22,57 @@ import TranslateIcon from '@material-ui/icons/Translate';
 import ContactsIcon from '@material-ui/icons/ImportContacts';
 
 
-export default function MyAppBar(){
+export default function MyAppBar({changeGlobal}){
     const classes = appBarStyles()
     return(
       <AppBar position="fixed" className={classes.appBar}>
-      <MyToolBar></MyToolBar>
+      <MyToolBar changeGlobal={changeGlobal}></MyToolBar>
       </AppBar>
-    );
+    )
   }
-
-
   
 
-  function MyToolBar(){
+  function MyToolBar({changeGlobal}){
     const classes = appBarStyles()
+
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget)
+    }
+
+    const handleCloseButton = (language) => {
+      changeGlobal({lg: language})
+      setAnchorEl(null)
+    }
+
+    
+    const handleClose = () => {
+      setAnchorEl(null)
+    }
       return(
         <Toolbar>
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}>
 
-        {/* <IconButton aria-label="money" color="inherit">
-              <MoneyIcon />
-          </IconButton>
+          <Button aria-controls="simple-menu" aria-haspopup="true" 
+                className={classes.menubutton} onClick={handleClick}>
+              Change Language
+          </Button>
 
-          <IconButton aria-label="descripion" color="inherit">
-              <DescriptionIcon />
-          </IconButton>
-
-          <IconButton aria-label="contacts" color="inherit">
-              <ContactsIcon />
-          </IconButton>
-
-        <IconButton aria-label="shopping cart" color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <ShoppingCartIcon />
-            </Badge>
-          </IconButton>
-
-          <IconButton aria-label="wrench " color="inherit">
-              <BuildIcon />
-          </IconButton>
-
-          <IconButton aria-label="notifications" color="inherit">
-            <Badge badgeContent={17} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>*/}
-{/* 
-          <IconButton aria-label="show 17 new notifications" color="inherit">
-              <TranslateIcon />
-          </IconButton>  */}
-
-          {/* <IconButton
-            edge="end"
-            aria-label="account of current user"
-            aria-controls={menuId}
-            aria-haspopup="true"
-            onClick={handleProfileMenuOpen}
-            color="inherit"
-          >
-            <AccountCircle /> 
-          </IconButton>*/}
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+            >
+            <MenuItem  onClick={()=>handleCloseButton('en')}>English</MenuItem>
+            <MenuItem  onClick={()=>handleCloseButton('ro')}>Romanian</MenuItem>            
+          </Menu>
         </div>
 
-        
-        {/* FOR MOBILE/SMALLER SCREENS. Might be unnecessary to implement
-         <div className={classes.sectionMobile}>
-          <IconButton
-            aria-label="show more"
-            aria-controls={mobileMenuId}
-            aria-haspopup="true"
-            onClick={handleMobileMenuOpen}
-            color="inherit"
-          >
-            <MoreIcon />
-          </IconButton>
-        </div> 
-        */}
+  
 
       </Toolbar>
       )
@@ -123,5 +100,10 @@ export default function MyAppBar(){
         height:  '4.5%' ,
         marginLeft: drawerWidth,
       },
+
+      menubutton:{
+      background: 'lightblue'
+
+    }
   
   }));

@@ -1,11 +1,16 @@
-import React from 'react'
+import {useContext} from 'react'
 
 import Button from '@material-ui/core/Button'
 import {  GridColumn, GridRow } from 'emotion-flex-grid'
+import { MyContext } from '../../../../App'
 
 function FieldChanger({changeField}) {
 
-    
+    const cx = useContext(MyContext)
+    const fields =cx.lg=='en' ?
+             ['Hall', 'OutDoor', 'Tennis', 'Aerobic']:
+             ['Sala Polivalenta', 'Fotbal', 'Tenis', 'Aerobic']
+
     const changeCrtField = (field) => {
         changeField(field)
     }
@@ -28,7 +33,5 @@ function FieldChanger({changeField}) {
         </GridRow>
     )
 }
-
-const fields = ['Hall', 'OutDoor', 'Tennis', 'Aerobic']
 
 export default FieldChanger

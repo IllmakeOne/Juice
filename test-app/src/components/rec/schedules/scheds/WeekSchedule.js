@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 import { fetchApprow } from '../../../DBconn'
 import { Button, Paper } from '@material-ui/core'
@@ -11,11 +11,16 @@ import ColumnDateField from '../pieces/ColumnDateField'
 
 import  {getCrtWeek, getWeek, formatDate } from '../pieces/DatesMethods'
 
+import { MyContext } from '../../../../App'
+
  
 
 const WeekSchedule = ( {field, today, week, setDialog} ) => {
 
-    const thisWeek = getWeek(today,week)
+    
+    const cx = useContext(MyContext) 
+
+    const thisWeek = getWeek(today,week, cx.lg)
 
     const classes = useStyles()
 
@@ -51,7 +56,7 @@ const WeekSchedule = ( {field, today, week, setDialog} ) => {
                             height: 60,   
                             textAlign: 'center',
                             fontSize: 20,
-                                }}>Times</div> 
+                                }}>{cx.lg=='en'? 'Times':'Ore'}</div> 
                     </Paper>
                     <GridColumn >
                         {times.map((el,index)=>(

@@ -1,4 +1,4 @@
-import React from 'react';
+import {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { ListItemIcon, Typography } from '@material-ui/core';
@@ -30,9 +30,17 @@ import AddApp from '../rec/schedules/pieces/AddApp';
 import Canvas from '../drage/Canvas';
 import DisplaySubs from '../rec/pieces/DisplaySubs'
 
+import { MyContext } from '../../App'
+
+
+
+
+
 const history = createBrowserHistory();
 export default function MyDrawer(){
   const classes = drawerStyles();
+
+  const cx = useContext(MyContext) //cx for context
 
     return(
     <Router history={history}>
@@ -61,7 +69,7 @@ export default function MyDrawer(){
 
              <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Home</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Home':'Acasa'}</Typography>}
              />
           </ListItem>
         
@@ -83,7 +91,7 @@ export default function MyDrawer(){
           >
             <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Reception</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Reception':'Receptie'}</Typography>}
              />
           </ListItem>
 
@@ -94,7 +102,7 @@ export default function MyDrawer(){
           >
             <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Maine</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Scanning Scree':'Ecran Scanare'}</Typography>}
              />
           </ListItem>
 
@@ -105,7 +113,7 @@ export default function MyDrawer(){
 
             <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Scheduler</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Schedule':'Orar'}</Typography>}
              />
           </ListItem>
 
@@ -116,7 +124,7 @@ export default function MyDrawer(){
 
             <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Print Restock</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Restock':'Aprovizionare'}</Typography>}
              />
           </ListItem>
 
@@ -127,7 +135,7 @@ export default function MyDrawer(){
 
             <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Resources</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Resources':'Resurse'}</Typography>}
              />
           </ListItem>
 
@@ -138,7 +146,7 @@ export default function MyDrawer(){
 
             <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Bill</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Bill':'Bon'}</Typography>}
              />
           </ListItem>
 
@@ -149,7 +157,7 @@ export default function MyDrawer(){
 
             <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Clients</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Clients':'Clienti'}</Typography>}
              />
           </ListItem>
 
@@ -160,7 +168,7 @@ export default function MyDrawer(){
 
             <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>Testing</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Testing':'Testare'}</Typography>}
              />
           </ListItem>
 
@@ -181,7 +189,7 @@ export default function MyDrawer(){
         
 
     </Router>
-    );
+    )
 }
 
 
