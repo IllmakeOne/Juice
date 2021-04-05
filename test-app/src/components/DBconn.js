@@ -92,7 +92,7 @@ export const getAppsByDateandField = async ({date, field}) => {
     // console.log(date + ' ' + field)
     return axios.get(`http://localhost:3001/apps?date=${date}&field=${field}`)
          .then(function (response) {
-            // console.log(response.data)
+            console.log(response.data)
             // console.log(response.status);
             // console.log(response.statusText);
             // console.log(response.headers);

@@ -19,18 +19,19 @@ import MainBar from './../bar/MainBar'
 import MainRec from './../rec/MainRec'
 import StartScreen from './../StartScreen'
 import Bill from './../Bill'
-import StockHandler from './../bar/stockmanagement/StockHandler'
 import MainSche from './../rec/schedules/MainSche'
 import RestockPrinter from '../printers/RestockPrinter'
 import AddProfile from '../rec/clients/AddProfile'
 import Clients from '../resources/Clients'
 import Scanner from '../rec/mainpage/Scanner'
-import MaineRecScreen from '../rec/mainpage/MaineRecScreen';
-import AddApp from '../rec/schedules/pieces/AddApp';
-import Canvas from '../drage/Canvas';
+
+import MaineRecScreen from '../rec/mainpage/MaineRecScreen'
+import AddApp from '../rec/schedules/pieces/AddApp'
+import Canvas from '../drage/Canvas'
 import DisplaySubs from '../rec/pieces/DisplaySubs'
 
 import { MyContext } from '../../App'
+import RestockMain from '../resources/RestockMain';
 
 
 
@@ -120,7 +121,7 @@ export default function MyDrawer(){
           <ListItem
             button
             component={Link}
-            to="/rest">
+            to="/addinv">
 
             <ListItemText
                disableTypography
@@ -181,6 +182,7 @@ export default function MyDrawer(){
         <Route path="/mainrec" component={MaineRecScreen} />  
         <Route path='/sche' component={MainSche} />  
         <Route path='/rest' component={RestockPrinter} />  
+        <Route path='/addinv' component={RestockMain} />  
         <Route path='/addprof' component={AddProfile} /> 
         <Route path='/bill' component={Bill} /> 
         <Route path='/clients' component={Clients} /> 

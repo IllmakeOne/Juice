@@ -17,8 +17,6 @@ const dayLenght = 38
 
 function ColumnDateField({date, field, _mouseMove, onDubClick}) {
 
-
-
     const [apps, setApps] = useState([])
 
     const handleMouseMove = (id) => {
@@ -32,22 +30,34 @@ function ColumnDateField({date, field, _mouseMove, onDubClick}) {
     
 
     useEffect(() =>{
+        console.log('column')
+        // console.log(field)
         // console.log(date)
         // console.log(field)
         const getApps = async () => {
-            if(field === 'Tennis') {
+            if(field == 'Tennis' || field =='Tenis') {
                 var serverApps = await getTennisCourts({date})
                 // console.log(serverApps)
                 setApps(serverApps)
 
-            } else {
-                const serverApps = await getAppsByDateandField({date,field})
+            } else if(field == 'OutDoor' || field =='Fotbal') {
+                const serverApps = await getAppsByDateandField({date: date,field: 'OutDoor'})
                 // console.log(serverApps)
                 setApps(serverApps)
-            }
+            
+            } else if(field == 'Sala Polivalenta' || field =='Hall') {
+                const serverApps = await getAppsByDateandField({date:date,field: 'Hall'})
+                setApps(serverApps)
+            
+                
+            } else if(field == 'Aerobic') {
+                const serverApps = await getAppsByDateandField({date,field})
+                setApps(serverApps)
+                
+            } 
         }
         getApps()
-    }, [])
+    }, [date, field])
 
 
     const generateLine = () => {
@@ -55,7 +65,7 @@ function ColumnDateField({date, field, _mouseMove, onDubClick}) {
         var i, j
 
 
-        if(field ==  'Tennis') { 
+        if(field ==  'Tennis'|| field == 'Tenis') { 
             ret.push([])
             ret.push([])
             ret.push([])                

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import ScheduleTabs from './pieces/ScheduleTabs'
 
 import TextField from '@material-ui/core/TextField'
@@ -11,6 +11,8 @@ import WeekSchedule from '../schedules/scheds/WeekSchedule'
 import FieldChanger from './pieces/FieldChanger'
 import DateChanger from './pieces/DateChanger'
 import AddApp from './pieces/AddApp'
+import { MyContext } from '../../../App'
+import { getWeek } from './pieces/DatesMethods'
 
 
 
@@ -24,6 +26,7 @@ export const area = ['Tennis 1','Tennis 2','Tennis 3','OutDoor', 'Tennis']
 
 
 function MainSche() {
+    const cx = useContext(MyContext) 
 
     
     const [open, setOpen] = useState(false)
@@ -32,9 +35,12 @@ function MainSche() {
     const [today, setToday] = useState(new Date)
     const [weekMutiplier, setWeekMutiplier] = useState(0)
 
-
     const StartSchedule=()=>{
 
+    }
+
+    const chageField = (newF) =>{
+        setCrtField(newF)
     }
 
     const setDialog = (state) =>{
@@ -58,7 +64,7 @@ function MainSche() {
 
             <GridRow>
                 <FieldChanger 
-                    changeField = {setCrtField}
+                    changeField = {chageField}
                     />
                   
                 <GridColumn offset ={6}>
@@ -75,8 +81,8 @@ function MainSche() {
             
               <WeekSchedule 
                 field = {crtField} 
-                today = {today} 
-                week = {weekMutiplier}
+                today = {today}
+                weekMutiplier = {weekMutiplier}
                 setDialog = {setDialog}
                 />
          

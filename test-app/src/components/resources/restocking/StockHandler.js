@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Autocomplete } from '@material-ui/lab';
 import TextField from '@material-ui/core/TextField';
-import AutoCompAddItem from '../pieces/AutoCompAddItem';
+import AutoCompAddItem from './AutoCompAddItem';
 import { fetchProds } from '../../DBconn';
 
 // import {fetchProds} from '.../DBconn'
@@ -39,13 +39,7 @@ function StockHandler({pushTop}) {
             alert('Add valid price')
             return 
         }
-        
-        // prods.map((el) => {
-        //     if(el.name == name){
-        //         alert(`Item with nane ${name} already exists`)
-        //         return
-        //     }
-        // })
+    
 
         pushTop({name, type, price, vat})
         console.log({name, type, price, vat})
@@ -68,21 +62,7 @@ function StockHandler({pushTop}) {
   const [price, setPrice] = useState(-1)
   const [vat, setVat] = useState(1)
 
-    // useEffect(()=>{
-    //     console.log('Name: ' +name)
-    // },[name])
-    // useEffect(()=>{
-    //     console.log('Type: ' +type)
-    // },[type])
-    // useEffect(()=>{
-    //     console.log('Price: ' + price)
-    // },[price])
-    // useEffect(()=>{
-    //     console.log('Vat: ' +vat)
-    // },[vat])
-
     return (
-    // <div>
     <form className='add-form' onSubmit={onSubmit}>
         <div className='form-control'>
             <label>Name</label>
@@ -106,20 +86,9 @@ function StockHandler({pushTop}) {
             onChange={(e) => setPrice(e.currentTarget.value)}
             />
         </div>
-        
-        {/* <div>
-        <label>VAT  </label>
-                <select name="prodTypes" 
-                    onChange={(e) => setVat(e.target.value)}>
-                          <option value ={1}>5% (service) </option>
-                          <option value ={2}>9% (juice/snack)</option>
-                          <option value ={3}>19% (alchool) </option>
-                 </select>
-        </div> */}
 
         <input type='submit' value='Save Product' className='btn btn-block' />
         
-    {/* </div> */}
     </form>
     )
 }

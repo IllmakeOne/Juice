@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react'
-import MainBar from '../MainBar'
+import MainBar from '../../bar/MainBar'
 // import {Autocomplete} from '@material-ui/lab';
 // import { Table } from 'react-bootstrap'
 import { Button, Input, TextField } from '@material-ui/core';
@@ -233,7 +233,7 @@ const columns = [
                         clearOnBlur
                         freeSolo
                         handleHomeEndKeys
-                        renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                        renderInput={(params) => <TextField {...params} label="Choose Item" variant="outlined" />}
                         onChange={(ev, newVal)=>{
                             setCrtItem({...newVal, stock : 0, price: 0})
                             // setCrtItem(newVal)

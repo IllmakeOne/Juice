@@ -9,20 +9,19 @@ import EmptyCell from '../cells/EmptyCell'
 import ColumnDateField from '../pieces/ColumnDateField'
 
 
-import  {getCrtWeek, getWeek, formatDate } from '../pieces/DatesMethods'
+import  { getWeek } from '../pieces/DatesMethods'
 
 import { MyContext } from '../../../../App'
 
  
 
-const WeekSchedule = ( {field, today, week, setDialog} ) => {
-
-    
+const WeekSchedule = ( {field,today, weekMutiplier, setDialog} ) => {
     const cx = useContext(MyContext) 
 
-    const thisWeek = getWeek(today,week, cx.lg)
-
     const classes = useStyles()
+
+    const week = getWeek(today,weekMutiplier, cx.lg)
+    console.log("weel")
 
     const [timeHighlight,setTimeHighlight] = useState(-1)
 
@@ -68,7 +67,7 @@ const WeekSchedule = ( {field, today, week, setDialog} ) => {
                 </GridColumn>
 
                 {//console.log(thisWeek),
-                thisWeek.map((el)=>{
+                week.map((el)=>{
                     return(
                         <GridColumn width={1.4} className = {classes.column}> 
                             <Paper elevation={3} className={classes.daynameCell}>

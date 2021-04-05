@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -6,7 +6,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete'
+
+import { MyContext } from '../../../App'
 
 
 const filter = createFilterOptions({
@@ -17,7 +19,9 @@ const filter = createFilterOptions({
 
 // const filter = createFilterOptions();
 
-export default function AutoCompAddItem({upValue}) {
+export default function AutoCompAddItem({open,setOpen, upValue}) {
+
+  const cx = useContext(MyContext)
 
   const types = [
     {name: 'Warm Drink', vat: 9},
@@ -28,31 +32,20 @@ export default function AutoCompAddItem({upValue}) {
   ]
 
   const [value, setValue] = useState(null); 
-  const [open, toggleOpen] = useState(false); 
 
-  const [dialogValue, setDialogValue] = React.useState({
+
+  const [dialogValue, setDialogValue] = useState({
     name: '',
-    vat: '',
+    vat: 1,
   });
-
-  // useEffect(() =>{
-  //   upValue(value)
-  // }, [value])
-
-  const onChange = (newvalue) => {}
 
   const handleClose = () => {
     setDialogValue({
       name: '',
-      vat: '',
-    });
-
-    setDialogValue({
-      name: dialogValue.name,
-      vat: parseInt(dialogValue.vat, 10),
+      vat: 1,
     })
-
-    toggleOpen(false);
+    
+    setOpen(false)
   };
 
 
@@ -65,41 +58,37 @@ export default function AutoCompAddItem({upValue}) {
       name: dialogValue.name,
       vat: parseInt(dialogValue.vat, 10),
     })
+
     handleClose();
   };
 
   return (
-    <React.Fragment>
+    <div>
       <Autocomplete
-        value={value}
+        value={dialogValue}
         onChange={(event, newValue) => {
-          if (typeof newValue === 'string') {
+          if (typeof newValue.name === 'string') {
             // timeout to avoid instant validation of the dialog's form.
-            // console.log('I   ' + JSON.stringify(newValue))
+            console.log('I   ' + JSON.stringify(newValue))
             setTimeout(() => {
-              toggleOpen(true);
+              // setOpen(true);
               setDialogValue({
                 name: newValue.name,
                 vat: newValue.vat,
               });
             });
           } else if (newValue && newValue.inputValue) {
-            // console.log('I I    ' + JSON.stringify(newValue))
-            toggleOpen(true);
+            console.log('I I    ' + JSON.stringify(newValue))
+            setOpen(true);
             setDialogValue({
               name: newValue.name,
               vat: newValue.vat,
             });
           } else {
-            // console.log('I I I   ' + JSON.stringify(newValue))
-            setValue({
-              name: newValue.name,
-              vat: newValue.vat,
-            });
-
-            upValue({
-              name: newValue.name,
-              vat: newValue.vat,
+            console.log('I I I   ' + JSON.stringify(newValue))
+            setDialogValue({
+              name: '',
+              vat: 1,
             })
           }
         }}
@@ -114,7 +103,7 @@ export default function AutoCompAddItem({upValue}) {
           if (params.inputValue !== '') {
             filtered.push({
               inputValue: params.inputValue,
-              name: `Add "${params.inputValue}"`,
+              name: params.inputValue,
             });
           }
 
@@ -126,14 +115,15 @@ export default function AutoCompAddItem({upValue}) {
         getOptionLabel={(option) => {
           // e.g value selected with enter, right from the input
           // console.log(option)
-          if (typeof option.name === 'string') {
-            return option.name;
-          }
-          if (option.inputValue) {
-            return option.inputValue;
-          }
-          return option.name;
+          // if (typeof option.name === 'string') {
+          //   return option.name;
+          // }
+          // if (option.inputValue) {
+          //   return option.inputValue;
+          // }
+          return option.name
         }}
+
         selectOnFocus
         clearOnBlur
         handleHomeEndKeys
@@ -141,7 +131,7 @@ export default function AutoCompAddItem({upValue}) {
         style={{ width: 300 }}
         freeSolo
         renderInput={(params) => (
-          <TextField {...params} label="Free solo dialog" variant="outlined" />
+          <TextField {...params} label="Select Type" variant="outlined" />
         )}
       />
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -152,18 +142,22 @@ export default function AutoCompAddItem({upValue}) {
               Alchool, Juices, Bars, etc
             </DialogContentText>
             <TextField
+              autoComplete='off'
               autoFocus
               margin="dense"
               id="name"
               value={dialogValue.name}
+              error={dialogValue.name.length < 3}
               onChange={(event) => setDialogValue({ ...dialogValue, name: event.target.value })}
               label="Type name"
               type="text"
             />
             <TextField
+              autoComplete='off'
               margin="dense"
               id="name"
               value={dialogValue.vat}
+              error={dialogValue.vat < 0.1}
               onChange={(event) => setDialogValue({ ...dialogValue, vat: event.target.value })}
               label="TVA"
               type="number"
@@ -171,14 +165,14 @@ export default function AutoCompAddItem({upValue}) {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
-              Cancel
+                {cx.lg =='en'? 'Cancel':'Anuleaza'}
             </Button>
-            <Button type="submit" color="primary">
-              Add
+            <Button type="submit" color="primary" onClick={handleSubmit}>
+                {cx.lg =='en'? 'Add':'Adauga'}
             </Button>
           </DialogActions>
         </form>
       </Dialog>
-    </React.Fragment>
+      </div>
   );
 }

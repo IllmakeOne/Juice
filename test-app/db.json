@@ -176,7 +176,7 @@
       "type": "Juice",
       "price": 6,
       "stock": 50,
-      "fav": true,
+      "fav": false,
       "fixedPrice": true,
       "image": "https://www.crostopizza.ro/wp-content/uploads/2020/05/logo-cappy.jpg"
     },
