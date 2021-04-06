@@ -20,7 +20,7 @@ const  ProdSet = ({items, onClick, changeFav}) => {
         var types = items.map((elem)=>elem.type).filter((el) => el != 'Service')
         types.unshift('Favorites')
     
-        setUniqueTypes(types.filter(function(elem, pos) { //this makes it so there are no doubles
+        setUniqueTypes(types.filter((elem, pos)=> { //this makes it so there are no doubles
             return types.indexOf(elem) == pos
         }))        
     },[])   

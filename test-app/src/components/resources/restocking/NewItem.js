@@ -22,6 +22,7 @@ import { GridRow, GridColumn } from 'emotion-flex-grid'
 
 function NewItem() {
     const [prods, setProds] = useState([])
+    const [uniqueTypes, setUniqueTypes] = useState([])
     const [open, setOpen] = useState(false)
     const [crtItem, setCrtItem] = useState(emptyItem)
 
@@ -30,10 +31,19 @@ function NewItem() {
 
     useEffect(()=>{
         const gett = async () => {
-            const inprods = await fetchProds
-            setProds({prods: inprods})
+            const inprods = await fetchProds()
+            setProds(inprods)
+
+            var types = inprods.map((elem)=>{return elem.type}).filter((el) => el != 'Service')
+            types = types.filter((elem, index)=> { return types.indexOf(elem) == index})
+            var auxtypes = types.map(el => {
+                var vat = inprods.filter(e=>e.type == el)
+                return {name: el , vat: vat[0].vat}
+            })
+            setUniqueTypes(auxtypes)
+            console.log(auxtypes)    
         }
-        gett()
+        gett()  
     },[])
 
     // useEffect(()=>{
@@ -74,6 +84,9 @@ function NewItem() {
                     <h3>{cx.lg=='en'? 'Price':'Pret'}</h3>
                 </GridColumn>
                 <GridColumn p='m'>
+                    <h3>{cx.lg=='en'? 'Product Type and VAT ':'Tip produs si TVA'}</h3>
+                </GridColumn>
+                <GridColumn p='m'>
                     <h3>{cx.lg=='en'? 'Product Image ':'Imagine Produs'}</h3>
                 </GridColumn>
                 <GridColumn p='m'>
@@ -95,35 +108,8 @@ function NewItem() {
                 </GridColumn>
                 <GridColumn p='m'>
                     <h3>{cx.lg=='en'? 'Fixed Price?':'Pret Fix?'}</h3>
-                </GridColumn>
-            </GridRow>
-            </GridColumn>
-
-            <GridColumn>
-            <GridRow direction = 'column' align='center'>
-                <GridColumn >
-                    <Input 
-                        type='text'
-                        value={crtItem.image}
-                        onChange={(e) => setCrtItem({...crtItem, image: e.currentTarget.value})}
-                    />
-                </GridColumn>
-                <GridColumn >
-                    <Input 
-                        type='number'
-                        inputProps={{min: 1, style: { textAlign: 'center' }}}
-                        value={crtItem.price}
-                        error={crtItem.price < 1}
-                        onChange={(e) => setCrtItem({...crtItem, price: e.currentTarget.value})}
-                    />
-                </GridColumn>
-            <GridColumn>
-                    <img width = {110} height={110} 
-                        src={crtItem.image==''?
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpyx9AbdQE6YZ6lm5IAXeDtOz7wbSiXskAVekYJAsvVMQVsOXUquOrex5Rt9qArV6tojs&usqp=CAU':crtItem.image}
-                        />
-                </GridColumn>             
-                <GridColumn >        
+                </GridColumn>    
+                <GridColumn p='m'>        
                     <Switch
                         checked={crtItem.fixedPrice}
                         onChange={(e) => setCrtItem({...crtItem, fixedPrice: e.target.checked })}
@@ -132,6 +118,47 @@ function NewItem() {
                         inputProps={{ 'aria-label': 'primary checkbox' }}
                     />
                 </GridColumn>
+            </GridRow>
+            </GridColumn>
+
+            <GridColumn>
+            <GridRow direction = 'column' align='center'>
+                <GridColumn p='m'>
+                    <Input 
+                        type='text'
+                        value={crtItem.name}
+                        onChange={(e) => setCrtItem({...crtItem, name: e.currentTarget.value})}
+                    />
+                </GridColumn>
+                <GridColumn p='m'>
+                    <Input 
+                        type='number'
+                        inputProps={{min: 1, style: { textAlign: 'center' }}}
+                        value={crtItem.price}
+                        error={crtItem.price < 1}
+                        onChange={(e) => setCrtItem({...crtItem, price: e.currentTarget.value})}
+                    />
+                </GridColumn>
+                <GridColumn p='m'>
+                    <AutoCompAddItem 
+                        open = {open} setOpen = {setOpen}
+                        types= {uniqueTypes}
+                        upValue={setTypeandVAT}
+                        />
+                </GridColumn>
+                <GridColumn p='m'>
+                    <Input 
+                        type='text'
+                        value={crtItem.image}
+                        onChange={(e) => setCrtItem({...crtItem, image: e.currentTarget.value})}
+                    />
+                </GridColumn>
+                <GridColumn p='m'>
+                    <img width = {110} height={110} 
+                        src={crtItem.image==''?
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpyx9AbdQE6YZ6lm5IAXeDtOz7wbSiXskAVekYJAsvVMQVsOXUquOrex5Rt9qArV6tojs&usqp=CAU':crtItem.image}
+                        />
+                </GridColumn>         
             </GridRow></GridColumn>
             </GridRow>
 

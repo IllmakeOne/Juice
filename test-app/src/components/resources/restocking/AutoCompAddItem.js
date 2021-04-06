@@ -19,20 +19,9 @@ const filter = createFilterOptions({
 
 // const filter = createFilterOptions();
 
-export default function AutoCompAddItem({open,setOpen, upValue}) {
+export default function AutoCompAddItem({open, setOpen, types, upValue}) {
 
   const cx = useContext(MyContext)
-
-  const types = [
-    {name: 'Warm Drink', vat: 9},
-    {name: 'Snack', vat: 9},
-    {name: 'Ernergy Drink', vat: 9},
-    {name: 'Service', vat: 5},
-    {name: 'Alchool', vat: 19}
-  ]
-
-  const [value, setValue] = useState(null); 
-
 
   const [dialogValue, setDialogValue] = useState({
     name: '',
