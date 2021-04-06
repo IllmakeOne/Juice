@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -20,6 +20,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import BuildIcon from '@material-ui/icons/Build';
 import TranslateIcon from '@material-ui/icons/Translate';
 import ContactsIcon from '@material-ui/icons/ImportContacts';
+import { MyContext } from '../../App';
 
 
 export default function MyAppBar({changeGlobal}){
@@ -34,6 +35,8 @@ export default function MyAppBar({changeGlobal}){
 
   function MyToolBar({changeGlobal}){
     const classes = appBarStyles()
+
+    const cx = useContext(MyContext)
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -57,7 +60,7 @@ export default function MyAppBar({changeGlobal}){
 
           <Button aria-controls="simple-menu" aria-haspopup="true" 
                 className={classes.menubutton} onClick={handleClick}>
-              Change Language
+              {cx.lg=='en'? 'Schimba Limba':'Change Language'}
           </Button>
 
           <Menu

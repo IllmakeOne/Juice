@@ -28,7 +28,9 @@ const ProdButton = ({prod, onClick, className, changeFav}) => {
                 <GridColumn> 
                     <div onClick ={()=>onClick(prod.id)} >
                         <GridRow>
-                            <GridColumn><img width = {80} height={80} src={prod.image}></img></GridColumn>
+                            <GridColumn>
+                                <img width = {80} height={80} src={prod.image}></img>
+                            </GridColumn>
                             <GridColumn>
                                 <h3>{prod.name}   </h3> <br/>
                                 

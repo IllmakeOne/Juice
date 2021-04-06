@@ -59,7 +59,7 @@ export default function AutoCompAddItem({open,setOpen, upValue}) {
       vat: parseInt(dialogValue.vat, 10),
     })
 
-    handleClose();
+    setOpen(false)
   };
 
   return (
@@ -67,29 +67,23 @@ export default function AutoCompAddItem({open,setOpen, upValue}) {
       <Autocomplete
         value={dialogValue}
         onChange={(event, newValue) => {
-          if (typeof newValue.name === 'string') {
-            // timeout to avoid instant validation of the dialog's form.
-            console.log('I   ' + JSON.stringify(newValue))
-            setTimeout(() => {
-              // setOpen(true);
-              setDialogValue({
-                name: newValue.name,
-                vat: newValue.vat,
-              });
-            });
-          } else if (newValue && newValue.inputValue) {
-            console.log('I I    ' + JSON.stringify(newValue))
-            setOpen(true);
-            setDialogValue({
-              name: newValue.name,
-              vat: newValue.vat,
-            });
-          } else {
-            console.log('I I I   ' + JSON.stringify(newValue))
+          if ( newValue == null) {
+            // console.log('I   ' + JSON.stringify(newValue))
             setDialogValue({
               name: '',
               vat: 1,
             })
+          } else if (newValue && newValue.inputValue) {
+            // console.log('I I    ' + JSON.stringify(newValue))
+            setOpen(true);
+            setDialogValue({
+              name: newValue.name,
+              vat: 1,
+            })
+          } else {
+            // console.log('I I I   ' + JSON.stringify(newValue))
+            upValue(newValue)
+            setDialogValue(newValue)
           }
         }}
 
