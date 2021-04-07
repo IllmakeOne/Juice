@@ -3,16 +3,13 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { GridColumn, GridRow } from 'emotion-flex-grid'
 import Paper from '@material-ui/core/Paper' 
-import StockHandler from './restocking/StockHandler'
 import NewItem from './restocking/NewItem'
+import AddStock from './restocking/AddStock'
 
 function RestockMain() {
     const C = useStyles()
     return (
-        <div>
-            <br/>
-            <br/>
-            <br/>
+        <div className= 'ScreenElement'>
         <GridRow>
             <GridColumn p='m' >
                 <Paper  elevation={3} className={C.paper}>
@@ -22,7 +19,7 @@ function RestockMain() {
             
             <GridColumn p='m' >
                 <Paper  elevation={3} className={C.paper}>
-                    aaa
+                    <AddStock />
                 </Paper>
             </GridColumn>
         </GridRow>

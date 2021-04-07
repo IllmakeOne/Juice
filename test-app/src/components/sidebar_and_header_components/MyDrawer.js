@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { ListItemIcon, Typography } from '@material-ui/core';
@@ -11,6 +11,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { createBrowserHistory } from "history";
 
 import HomeIcon from '@material-ui/icons/Home'
+
+
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
+import Collapse from '@material-ui/core/Collapse';
 
 import logo from "../../assets/logo.png"
 
@@ -31,7 +37,10 @@ import Canvas from '../drage/Canvas'
 import DisplaySubs from '../rec/pieces/DisplaySubs'
 
 import { MyContext } from '../../App'
-import RestockMain from '../resources/RestockMain';
+import RestockMain from '../resources/RestockMain'
+import NewItem from '../resources/restocking/NewItem'
+import AddSupplier from '../resources/restocking/AddSupplier'
+import AddStock from '../resources/restocking/AddStock'
 
 
 
@@ -42,6 +51,11 @@ export default function MyDrawer(){
   const classes = drawerStyles();
 
   const cx = useContext(MyContext) //cx for context
+  
+  const [stockOpen, setStockOpen] = useState(false)
+  const openStockmenu = () =>{
+    setStockOpen(!stockOpen)
+  }
 
     return(
     <Router history={history}>
@@ -173,6 +187,46 @@ export default function MyDrawer(){
              />
           </ListItem>
 
+          
+
+          <ListItem button onClick={openStockmenu}>
+            <ListItemText primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'?'Products and suppliers':'Produse si inventar'}</Typography>}/>
+              {stockOpen ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={stockOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding >
+              <ListItem 
+                button
+                component={Link}
+                to="/newProduct">
+                <ListItemText
+                  disableTypography
+                  primary={<Typography type="body2" style={{ color: '#FFFFFF' }}><h4>{cx.lg=='en'? 'Add new product':'Adauga produs nou'}</h4></Typography>}
+                  />
+              </ListItem>
+
+              <ListItem 
+                button
+                component={Link}
+                to="/newSupplier">
+                <ListItemText
+                  disableTypography
+                  primary={<Typography type="body2" style={{ color: '#FFFFFF' }}><h4>{cx.lg=='en'? 'Add new supplier':'Adauga aprov. nou'}</h4></Typography>}
+                  />
+              </ListItem>
+
+              <ListItem 
+                button
+                component={Link}
+                to="/addStock">
+                <ListItemText
+                  disableTypography
+                  primary={<Typography type="body2" style={{ color: '#FFFFFF' }}><h4>{cx.lg=='en'? 'Restock':'Aprovizionare'}</h4></Typography>}
+                  />
+              </ListItem>
+            </List>
+          </Collapse>
+
         </List>
         
         </Drawer>
@@ -188,6 +242,11 @@ export default function MyDrawer(){
         <Route path='/clients' component={Clients} /> 
         <Route path='/test' component={DisplaySubs} /> 
 
+        
+
+        <Route path='/newProduct' component={NewItem} /> 
+        <Route path='/newSupplier' component={AddSupplier} /> 
+        <Route path='/addStock' component={AddStock} /> 
         
 
     </Router>
@@ -217,6 +276,7 @@ logoDivStyle: {
   justifyContent: "center",
   alignItems: "center",
 },
+
 
 
 

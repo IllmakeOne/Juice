@@ -234,7 +234,41 @@
   padding: 5px 10px; */
   position: relative;
   left: 50%;
+}
 
+h4 {
+  /* font-weight: bold; */
+  color: rgb(255, 170, 86);
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+h5 {
+  color: #00539CFF;
+  font-size: 16px;
+}
+
+.hdBB {/*header blue bold*/
+  font-weight: bold;
+  color: #00539CFF;
+  font-size: 16px;
+}
+
+.hdBS {/*header blue skinny*/
+  color: #00539CFF;
+  font-size: 16px;
+  /* background: #EEA47FFF; */
+}
+h6 {
+  color: rgb(255, 170, 86);
+  font-size: 30px;
+
+}
+
+.ScreenElement {
+  position: absolute;
+  left: 12%;
+  top: 8%;
 }
 
 

@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useContext} from 'react'
 
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -11,9 +11,13 @@ import { Button, Input, TextField } from '@material-ui/core'
 import { FiPlus, FiMinus } from 'react-icons/fi'
 
 
-import DatePicker from "react-datepicker"
+import { GridRow } from 'emotion-flex-grid';
+import PickDate from './PickDate';
+import { MyContext } from '../../../../App';
 
 function DateChanger({weekMutiplier, changeDateMultiplier,today, settoday}) {
+
+    const cx = useContext(MyContext)
 
     const upOneWeek = (mult) => {
         var newMutip
@@ -30,6 +34,7 @@ function DateChanger({weekMutiplier, changeDateMultiplier,today, settoday}) {
 
     return (
         <div>
+            <GridRow>
             <Button
                 variant="outlined"
                 size= 'small'
@@ -41,13 +46,9 @@ function DateChanger({weekMutiplier, changeDateMultiplier,today, settoday}) {
                 variant="outlined"
                 onClick= {()=>upOneWeek(0)}
                 >                        
-                Today
+                {cx.lg=='en'? 'Today':'Azi'}
             </Button>
-{/* 
-            <DatePicker 
-                selected={today} 
-                onChange={date => settoday(date)} 
-                /> */}
+
             
             <Button
                 variant="outlined"
@@ -55,6 +56,11 @@ function DateChanger({weekMutiplier, changeDateMultiplier,today, settoday}) {
                 onClick= {()=>upOneWeek(1)}
                 startIcon={<FiPlus />}
                 />
+            </GridRow>
+
+            <GridRow>
+                <PickDate date={today} changeDate={settoday} />
+            </GridRow>
         </div>
     )
 }

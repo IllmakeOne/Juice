@@ -38,6 +38,10 @@ function MainSche() {
     const StartSchedule=()=>{
 
     }
+    const changeToday = (newDate) =>{
+        setToday(newDate)
+        console.log(newDate)
+    }
 
     const chageField = (newF) =>{
         setCrtField(newF)
@@ -59,8 +63,6 @@ function MainSche() {
             <br/>
             <br/>
             <br/>
-{/* 
-        <ScheduleTabs /> */}
 
             <GridRow>
                 <FieldChanger 
@@ -72,8 +74,7 @@ function MainSche() {
                         weekMutiplier = {weekMutiplier}
                         changeDateMultiplier = {setWeekMutiplier}
                         today = {today}
-                        settoday = {setToday}
-                        onCellClick={onCellClick}
+                        settoday = {changeToday}
                         />
                 </GridColumn>
             </GridRow>

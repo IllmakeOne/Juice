@@ -46,6 +46,7 @@ const  AddSupplier = ({pushTop}) => {
       const [iban, setIban] = useState('')
     
         return (
+            <div className= 'ScreenElement'>
         <form className='add-form-supplier' onSubmit={onSubmit}>
             <div className='form-control'>
                 <label>Name</label>
@@ -109,6 +110,7 @@ const  AddSupplier = ({pushTop}) => {
     
             <input type='submit' value='Save Product' className='btn btn-block' width = '50px' />
         </form>
+        </div>
         )
 }
 

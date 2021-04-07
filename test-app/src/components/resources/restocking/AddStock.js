@@ -1,11 +1,11 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useContext} from 'react'
 import MainBar from '../../bar/MainBar'
 // import {Autocomplete} from '@material-ui/lab';
 // import { Table } from 'react-bootstrap'
 import { Button, Input, TextField } from '@material-ui/core';
 import { DataGrid } from '@material-ui/data-grid'
 import { FiCheckSquare } from 'react-icons/fi';
-import { fetchProds, fetchSuppliers, fetchTypes } from '../../DBconn';
+import { fetchProds, fetchSuppliers } from '../../DBconn';
 import { Autocomplete } from '@material-ui/lab';
 
 import InputLabel from '@material-ui/core/InputLabel';
@@ -24,16 +24,16 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {KeyboardDatePicker,
+    MuiPickersUtilsProvider } from '@material-ui/pickers'
+import DateFnsUtils from '@date-io/date-fns'
 
-import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
+
+import {  GridRow, GridColumn } from 'emotion-flex-grid'
 
 import RestockPrinter from '../../printers/RestockPrinter'
-
-const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    }
-  });
+import { MyContext } from '../../../App';
+import PickDate from '../../rec/schedules/pieces/PickDate';
 
 const  AddStock = () => {
 
@@ -57,11 +57,12 @@ const  AddStock = () => {
     ]
     
     const classes = useStyles();
-
+    const cx = useContext(MyContext)
 
     const[suppliers, setSuppliers] = useState()
     const[crtSupp, setCrtSupp] = useState(null)
-    const[prodTypes, setprodTypes] = useState([])
+
+    const[date, setDate] = useState(new Date)
 
     /**
      * items currently in stock , used for autocomplet
@@ -90,13 +91,10 @@ const  AddStock = () => {
         const getProds = async () => {
             const serverProds = await fetchProds()
             const serverSuppliers = await fetchSuppliers()
-            const serverTypes = await fetchTypes()
 
             setSuppliers(serverSuppliers)
 
             setProds(serverProds)
-
-            setprodTypes(serverTypes)
 
             // setCrtSupp(suppliers[0])
         }
@@ -136,38 +134,16 @@ const  AddStock = () => {
 
 //----------------------------------------------------------------
 
-const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'Name', width: 130 },
-    { field: 'type', headerName: 'Prod Type', width: 130 },
-    {
-        field: 'price',
-        headerName: 'Price',
-        type: 'number',
-        width: 90,
-    },
-    {
-        field: 'stock',
-        headerName: 'stock',
-        type: 'number',
-        width: 90,
-    },
-  ];
-
-  const getCrtVat=()=>{
-    const res = prodTypes.map(el=>{
-        if(el.name == crtItem.type)
-            return el.vat
-            })
-    return res
-  }
-
   const handlechangePrice = e => {
     setCrtItem({...crtItem, price: e.target.value})
   }
 
   const handlechangeStock = e => {
     setCrtItem({...crtItem, stock: e.target.value})
+  }
+
+  const changeDate = datein =>{
+      setDate(datein)
   }
   
 
@@ -189,7 +165,7 @@ const columns = [
 
 //------------------------------------------------DEV/////////////----------------
     return (
-        <div>
+        <div className= 'ScreenElement'>
 
 
             {/**
@@ -205,7 +181,7 @@ const columns = [
                 clearOnBlur
                 freeSolo
                 handleHomeEndKeys
-                renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+                renderInput={(params) => <TextField {...params} label={cx.lg=='en'?'Select Supplier':'Selecteaza Aprovizionator'} variant="outlined" />}
                 onChange={(ev, newVal)=>{
                     setCrtSupp(newVal)
                 }}
@@ -216,13 +192,15 @@ const columns = [
                 {crtSupp ? <h3>{crtSupp.cui}</h3>:<h2>________</h2>} 
             </div>
 
+            <PickDate  date={date} changeDate={changeDate}/>
+
             {/**
              *  Imput area for items 
              */}
             <GridRow>
                 
                 
-                <GridColumn id='gc1'>
+                <GridColumn m='m'>
                     <Autocomplete
                         id="auto-prods"
                         options={prods}
@@ -233,7 +211,7 @@ const columns = [
                         clearOnBlur
                         freeSolo
                         handleHomeEndKeys
-                        renderInput={(params) => <TextField {...params} label="Choose Item" variant="outlined" />}
+                        renderInput={(params) => <TextField {...params} label={cx.lg=='en'?'Select Item':'Selecteaza Produs'} variant="outlined" />}
                         onChange={(ev, newVal)=>{
                             setCrtItem({...newVal, stock : 0, price: 0})
                             // setCrtItem(newVal)
@@ -241,11 +219,11 @@ const columns = [
                     /> 
                 </GridColumn>
 
-                <GridColumn id='gc5'>
-                    <h3>TVA:{getCrtVat()} %</h3>
+                <GridColumn m='m' pt='m'>
+                    <h3>TVA:{crtItem.vat} %</h3>
                 </GridColumn>
 
-                <GridColumn id='gc2'>
+                <GridColumn m='m'>
                     <FormControl>
                         <InputLabel htmlFor="component-simple">Stock</InputLabel>
                         <Input
@@ -259,7 +237,7 @@ const columns = [
                     </FormControl>
 
                 </GridColumn>
-                <GridColumn id='gc4'>
+                <GridColumn m='m'>
                     <FormControl >
                         <InputLabel htmlFor="component-simple">Price</InputLabel>
                         <Input  
@@ -274,11 +252,11 @@ const columns = [
                     </FormControl>
                 </GridColumn>
 
-                <GridColumn id='gc3'>
+                <GridColumn m='m'>
                     <h3>Total: {crtItem.price * crtItem.stock} </h3>
                 </GridColumn>
 
-                <GridColumn id='gc6'>
+                <GridColumn m='m'>
                     <Button 
                         // className='b.changeprice'
                         // variant="contained"
@@ -291,23 +269,14 @@ const columns = [
                 </GridColumn>
 
             </GridRow>
-        
 
-            {/**
-             *  Table for dislpaying current items being added
-             * 
-             * checkboxSelection
-             */}
-            {/* <div className='datagrid' style={{ height: 400, width: '90%'}}>
-                {upProds && <DataGrid rows={upProds} columns={columns} pageSize={8} />}
-            </div> */}
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} className={classes.tableback} >
                 <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell align="right">Type</TableCell>
-                    <TableCell align="right">Stock</TableCell>
+                    <TableCell>{cx.lg=='en'?'Product Name':'Nume Produs'}</TableCell>
+                    <TableCell align="right">{cx.lg=='en'?'VAT':'TVA'}</TableCell>
+                    <TableCell align="right">{cx.lg=='en'?'No. Product':'Nr. Produse'}</TableCell>
                     <TableCell align="right">Cost</TableCell>
                     <TableCell align="right">Total</TableCell>
                     </TableRow>
@@ -316,7 +285,7 @@ const columns = [
                     {upProds.map((row) => (
                     <TableRow key={row.name}>
                         <TableCell component="th" scope="row">{row.name} </TableCell>
-                        <TableCell align="right">{row.type}</TableCell>
+                        <TableCell align="right">{row.vat}%</TableCell>
                         <TableCell align="right">{row.stock}</TableCell>
                         <TableCell align="right">{row.price}</TableCell>
                         <TableCell align="right">{row.price*row.stock}</TableCell>
@@ -326,31 +295,30 @@ const columns = [
                 </Table>
             </TableContainer>
 
-             <div 
-                className={css`
-                background-color: hotpink
-                `}>         
-                <Button 
-                    // className='b.changeprice'
-                    // variant="contained"
-                    color="primary"
-                    size='large'
-                    startIcon={<FiCheckSquare />}
-                    onClick ={()=>handFinalSubmit()}
-                    >
-                </Button>
-            </div>
-            
-
-            {/* {dwn && <RestockPrinter invoice={ {supp: crtSupp, 
-                prods: upProds, 
-                other: 'dav'}} />} */}
-
-
+            <GridColumn offset={10}>
+            <Button 
+                // className='b.changeprice'
+                // variant="contained"
+                color="primary"
+                size='large'
+                startIcon={<FiCheckSquare />}
+                onClick ={()=>handFinalSubmit()}
+                >
+            </Button></GridColumn> 
         </div>
-
-        
     )
 }
+
+const useStyles = makeStyles({
+    table: {
+      minWidth: 650,
+    },
+
+    tableback:{
+        position: 'absolute',
+        top: '100%',
+    }
+
+  });
 
 export default AddStock

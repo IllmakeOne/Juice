@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@date-io/date-fns": "^1.3.13",
     "@devexpress/dx-react-core": "^2.7.4",
     "@devexpress/dx-react-scheduler": "^2.7.4",
     "@devexpress/dx-react-scheduler-material-ui": "^2.7.4",
@@ -20,6 +21,7 @@
     "@testing-library/user-event": "^12.7.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "date-fns": "^2.19.0",
     "devextreme": "^20.2.5",
     "devextreme-react": "^20.2.5",
     "emotion-flex-grid": "^1.5.0",

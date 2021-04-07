@@ -14,7 +14,6 @@ function App() {
   }
 
 
-
   return (
     <MyContext.Provider value={global}>
       <SideBarAndHeader changeGlobal={changeGlobal} />
