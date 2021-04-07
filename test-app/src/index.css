@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
+
+/*
+#00539CFF<-good blue
+*/
 * {
   box-sizing: border-box;
   margin: 0;
@@ -236,9 +240,15 @@
   left: 50%;
 }
 
+h3 {
+  color: #00539CFF;
+  font-size: 17px;
+  /* font-weight: bold; */
+}
+
 h4 {
   /* font-weight: bold; */
-  color: rgb(255, 170, 86);
+  color: rgb(233, 119, 98);
   font-size: 16px;
   margin-left: 20px;
 }
@@ -247,6 +257,7 @@ h5 {
   color: #00539CFF;
   font-size: 16px;
 }
+5
 
 .hdBB {/*header blue bold*/
   font-weight: bold;

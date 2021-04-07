@@ -183,7 +183,7 @@ function NewItem() {
 const emptyItem = {
     name: '',
     type: '',
-    vat: -1,
+    vat: '',
     price: 0,
     stock: 0,
     fixedPrice: true, 

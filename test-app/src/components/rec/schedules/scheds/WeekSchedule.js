@@ -15,21 +15,14 @@ import { MyContext } from '../../../../App'
 
  
 
-const WeekSchedule = ( {field,today, weekMutiplier, setDialog} ) => {
+const WeekSchedule = ( {field,today, weekMutiplier, setDialog, closeDialogue} ) => {
     const cx = useContext(MyContext) 
 
     const classes = useStyles()
 
     const week = getWeek(today,weekMutiplier, cx.lg)
-    console.log("weel")
 
     const [timeHighlight,setTimeHighlight] = useState(-1)
-
-
-
-    const onHoover = () =>{ 
-        // console.log('aaaaa')
-    }
 
     const handleMousemove = (id) => {
         setTimeHighlight(id)
@@ -40,7 +33,7 @@ const WeekSchedule = ( {field,today, weekMutiplier, setDialog} ) => {
     }
 
     const onDubClick = (id, date) => {
-        setDialog(true)
+        setDialog(id, date)
     }
 
 

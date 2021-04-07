@@ -34,10 +34,8 @@ function MainSche() {
     const [crtField, setCrtField] = useState('Hall')
     const [today, setToday] = useState(new Date)
     const [weekMutiplier, setWeekMutiplier] = useState(0)
+    const [info, setInfo] = useState({})
 
-    const StartSchedule=()=>{
-
-    }
     const changeToday = (newDate) =>{
         setToday(newDate)
         console.log(newDate)
@@ -47,8 +45,12 @@ function MainSche() {
         setCrtField(newF)
     }
 
-    const setDialog = (state) =>{
-        setOpen(state)
+    const setDialog = (id, date) =>{
+        setInfo({time: id, date: date})
+        setOpen(true)
+    }
+    const closeAppDialog = () => {
+        setOpen(false)
     }
 
 
@@ -90,7 +92,8 @@ function MainSche() {
 
             <AddApp 
                 open = {open} 
-                setDialog = {setDialog}
+                closeAppDialog = {closeAppDialog}
+                info={{...info, field: crtField}}
                 />
         </div>
     )

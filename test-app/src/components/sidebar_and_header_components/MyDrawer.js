@@ -32,8 +32,6 @@ import Clients from '../resources/Clients'
 import Scanner from '../rec/mainpage/Scanner'
 
 import MaineRecScreen from '../rec/mainpage/MaineRecScreen'
-import AddApp from '../rec/schedules/pieces/AddApp'
-import Canvas from '../drage/Canvas'
 import DisplaySubs from '../rec/pieces/DisplaySubs'
 
 import { MyContext } from '../../App'

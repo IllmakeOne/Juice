@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { GridColumn, GridRow } from "emotion-flex-grid"
 import { useContext } from 'react'
 import { MyContext } from "../../App"
+import { AiOutlineWarning } from 'react-icons/ai'
+import { IconContext } from "react-icons";
 
 function ShowProduct({item}) {
     const C = useStyles()
@@ -13,6 +15,19 @@ function ShowProduct({item}) {
         else 
             return ro
     }
+
+    const Checkempty = (el)=>{
+        if(el=='')
+            return (
+            <IconContext.Provider value={{ color: "red" }}>
+                <div>
+                    <AiOutlineWarning />
+                </div>
+            </IconContext.Provider>
+            )
+        else 
+            return el
+    }
     return (
         <div>
             <GridRow direction='column'>
@@ -20,21 +35,21 @@ function ShowProduct({item}) {
                     {decidelg('Product name: ', 'Nume Produs:')}
                 </GridColumn>
                 <GridColumn align='center' m='s' className ='hdBB'>
-                    {item.name}
+                    {Checkempty(item.name)}
                 </GridColumn>
                 
                 <GridColumn align='center'  className='hdBS'>
                     {decidelg('Product type:', 'Nume Produs:')}
                 </GridColumn>
                 <GridColumn align='center' m='s' className ='hdBB'>
-                    {item.type}
+                    {Checkempty(item.type)}
                 </GridColumn>
                 
                 <GridColumn align='center'  className='hdBS'>
                     {decidelg('Product VAT:', 'TVA Produs:')}
                 </GridColumn>
                 <GridColumn align='center' m='s' className ='hdBB'>
-                    {item.vat}
+                    {Checkempty(item.vat)}
                 </GridColumn>
                 
                 <GridColumn align='center'  className='hdBS'>
