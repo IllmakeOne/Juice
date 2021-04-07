@@ -1,10 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import ScheduleTabs from './pieces/ScheduleTabs'
 
 import TextField from '@material-ui/core/TextField'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { fetchAppoitments, fetchApprow} from '../../DBconn'
-// import SchedulerII from './SchedulerII'
+import { GridRow, GridColumn } from 'emotion-flex-grid'
+
+
+import WeekSchedule from '../schedules/scheds/WeekSchedule'
+import FieldChanger from './pieces/FieldChanger'
+import DateChanger from './pieces/DateChanger'
+import AddApp from './pieces/AddApp'
+import { MyContext } from '../../../App'
+import { getWeek } from './pieces/DatesMethods'
 
 
 
@@ -18,72 +26,75 @@ export const area = ['Tennis 1','Tennis 2','Tennis 3','OutDoor', 'Tennis']
 
 
 function MainSche() {
- 
-    const [apps, setApps] = useState([]); 
-    const [crtField, setCrtField] = useState('Tennis 1')
+    const cx = useContext(MyContext) 
 
+    
+    const [open, setOpen] = useState(false)
+    
+    const [crtField, setCrtField] = useState('Hall')
+    const [today, setToday] = useState(new Date)
+    const [weekMutiplier, setWeekMutiplier] = useState(0)
+    const [info, setInfo] = useState({})
 
-
-    useEffect(() =>{
-        const getReservs = async () => {
-            const data = await fetchApprow()
-            setApps(data)
-        }
-        getReservs()
-    }, [])
-
-    const StartSchedule=()=>{
-
+    const changeToday = (newDate) =>{
+        setToday(newDate)
+        console.log(newDate)
     }
 
-    const getAppsbyField = () =>{
-        if(crtField == 'Tennis'){
-            return apps.filter((el)=>el.area== 'Tennis 1' || el.area== 'Tennis 2' || el.area== 'Tennis 3')
-        } else  {
-            return apps.filter((el)=>el.area== crtField)
-        }
-        // console.log(aux)
+    const chageField = (newF) =>{
+        setCrtField(newF)
+    }
+
+    const setDialog = (id, date) =>{
+        setInfo({time: id, date: date})
+        setOpen(true)
+    }
+    const closeAppDialog = () => {
+        setOpen(false)
     }
 
 
-    const addApp = (newapp) =>{
-        // console.log(newapp)
-        apps.push(newapp)
-        // console.log(apps)
-        setApps(apps)
+    const onCellClick = (id) => {
+        console.log(id)
     }
 
 
     return (
         <div className='cart_svlist'>
         <br/>
-        {/* <br/>
-        <br/>
-        <br/>
-            <Autocomplete
-                id="field-picker"
-                value={crtField}
-                onChange={(event, newValue) => {
-                    setCrtField(newValue);
-                }}
-                // inputValue={inputValue}
-                // onInputChange={(event, newInputValue) => {
-                //     setCrtField(newInputValue);
-                // }}
-                options={area}
-                getOptionLabel={(option) => option}
-                style={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />
-                }
-            /> */}
             <br/>
             <br/>
             <br/>
 
-        <ScheduleTabs/>
-            {/* {getAppsbyField(), apps ? <div key={getAppsbyField()} ><Scheduler  apps={getAppsbyField()}
-                                                    upApp = {addApp}
-                                     /></div> : null  } */}
+            <GridRow>
+                <FieldChanger 
+                    changeField = {chageField}
+                    />
+                  
+                <GridColumn offset ={6}>
+                    <DateChanger 
+                        weekMutiplier = {weekMutiplier}
+                        changeDateMultiplier = {setWeekMutiplier}
+                        today = {today}
+                        settoday = {changeToday}
+                        />
+                </GridColumn>
+            </GridRow>
+
+            
+              <WeekSchedule 
+                field = {crtField} 
+                today = {today}
+                weekMutiplier = {weekMutiplier}
+                setDialog = {setDialog}
+                />
+         
+
+            <AddApp 
+                open = {open} 
+                closeAppDialog = {closeAppDialog}
+                info={{...info, field: crtField}}
+                />
         </div>
     )
 }

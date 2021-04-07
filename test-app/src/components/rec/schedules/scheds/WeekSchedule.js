@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 import { fetchApprow } from '../../../DBconn'
 import { Button, Paper } from '@material-ui/core'
@@ -9,30 +9,33 @@ import EmptyCell from '../cells/EmptyCell'
 import ColumnDateField from '../pieces/ColumnDateField'
 
 
-import  {getCrtWeek, getWeek, formatDate } from '../pieces/DatesMethods'
+import  { getWeek } from '../pieces/DatesMethods'
+
+import { MyContext } from '../../../../App'
 
  
 
-const WeekSchedule = ( {field, today, week} ) => {
-
-    const thisWeek = getWeek(today,week)
+const WeekSchedule = ( {field,today, weekMutiplier, setDialog, closeDialogue} ) => {
+    const cx = useContext(MyContext) 
 
     const classes = useStyles()
 
+    const week = getWeek(today,weekMutiplier, cx.lg)
+
     const [timeHighlight,setTimeHighlight] = useState(-1)
-
-
-    const abprt = (id) =>{
-        console.log(id)
-    }
-
-    const onHoover = () =>{ 
-        // console.log('aaaaa')
-    }
 
     const handleMousemove = (id) => {
         setTimeHighlight(id)
     }
+
+    const onCellClick = (id) => {
+        console.log(id)
+    }
+
+    const onDubClick = (id, date) => {
+        setDialog(id, date)
+    }
+
 
        return (
 
@@ -45,7 +48,7 @@ const WeekSchedule = ( {field, today, week} ) => {
                             height: 60,   
                             textAlign: 'center',
                             fontSize: 20,
-                                }}>Times</div> 
+                                }}>{cx.lg=='en'? 'Times':'Ore'}</div> 
                     </Paper>
                     <GridColumn >
                         {times.map((el,index)=>(
@@ -57,7 +60,7 @@ const WeekSchedule = ( {field, today, week} ) => {
                 </GridColumn>
 
                 {//console.log(thisWeek),
-                thisWeek.map((el)=>{
+                week.map((el)=>{
                     return(
                         <GridColumn width={1.4} className = {classes.column}> 
                             <Paper elevation={3} className={classes.daynameCell}>
@@ -66,7 +69,12 @@ const WeekSchedule = ( {field, today, week} ) => {
                                 </div>
                             </Paper>
                             
-                            <ColumnDateField date= {el[1]} field= {field} _mouseMove ={handleMousemove} />
+                            <ColumnDateField
+                                    date= {el[1]}
+                                    field= {field} 
+                                    _mouseMove ={handleMousemove}
+                                    onCellClick ={onCellClick}
+                                    onDubClick = {onDubClick} />
 
                         {/* {genLine(el[1])} */}
                         </GridColumn>                        

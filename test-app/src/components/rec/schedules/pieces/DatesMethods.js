@@ -8,7 +8,12 @@ export const formatDate = (date) =>{
     return res
 }
 
-export const getCrtWeek = (date) => {
+export const getCrtWeek = (date, language) => {
+    var zileleweek
+    if(language == 'en')
+        zileleweek= weekDays
+    else 
+        zileleweek = zileleSaptamanii
     var curr = date
     var first = curr.getDate() - curr.getDay() + 1
     // var last = first + 6 
@@ -17,7 +22,7 @@ export const getCrtWeek = (date) => {
     // var lastday = new Date(curr.setDate(last))
     // console.log(firstday)
 
-    const pairs = weekDays.map((el, index) => {
+    const pairs = zileleweek.map((el, index) => {
         const aux = firstday.getDate() - firstday.getDay() + index + 1
         const auxdate = new Date(firstday.setDate(aux) )
         const xoxoxo = formatDate(auxdate)
@@ -29,14 +34,14 @@ export const getCrtWeek = (date) => {
 
 }
 
-export const getWeek = (inDate, multiplier) => {
+export const getWeek = (inDate, multiplier,language) => {
     var auxMutiplier = 7
     if(multiplier == 0 ){ // if multiplier specified, then mutiply
-        return getCrtWeek(inDate)
+        return getCrtWeek(inDate,language)
     }//otherwise it will simply return next week
     auxMutiplier *= multiplier
     const nextweek = new Date(inDate.getFullYear(), inDate.getMonth(), inDate.getDate()+auxMutiplier)
-    return getCrtWeek(nextweek)
+    return getCrtWeek(nextweek,language)
 }
 
 
@@ -54,6 +59,7 @@ const zileleSaptamanii=[
     'Luni', 
     'Marti',
     'Miercuri',
+    'Joi',
     'Vineri', 
     'Sambata',
     'Duminica']

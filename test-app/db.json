@@ -87,6 +87,7 @@
       "id": 1,
       "name": "Fanta .5",
       "type": "Juice",
+      "vat": 9,
       "price": 6,
       "stock": 8,
       "fixedPrice": true,
@@ -98,6 +99,7 @@
       "name": "Coffee",
       "type": "Warm Drink",
       "price": 6,
+      "vat": 9,
       "stock": 20,
       "fav": true,
       "fixedPrice": true,
@@ -108,6 +110,7 @@
       "name": "Cola .5",
       "type": "Juice",
       "price": 7,
+      "vat": 9,
       "stock": 19,
       "fav": false,
       "fixedPrice": true,
@@ -117,6 +120,7 @@
       "id": 4,
       "name": "Water .5",
       "type": "Juice",
+      "vat": 9,
       "price": 5,
       "stock": 50,
       "fav": false,
@@ -134,6 +138,7 @@
       "id": 6,
       "name": "Tea",
       "type": "Warm Drink",
+      "vat": 9,
       "price": 6,
       "stock": 50,
       "fav": false,
@@ -144,6 +149,7 @@
       "id": 7,
       "name": "Shweppes .5",
       "type": "Juice",
+      "vat": 9,
       "price": 6,
       "stock": 49,
       "fav": true,
@@ -152,8 +158,9 @@
     },
     {
       "id": 8,
-      "name": "Fuzetea .5",
-      "type": "Juice",
+      "name": "Timisoreana",
+      "type": "Beer",
+      "vat": 19,
       "price": 6,
       "stock": 50,
       "fav": true,
@@ -164,6 +171,7 @@
       "id": 9,
       "name": "Cappy .25",
       "type": "Juice",
+      "vat": 9,
       "price": 6,
       "stock": 50,
       "fav": false,
@@ -174,9 +182,10 @@
       "id": 10,
       "name": "Cappy .3",
       "type": "Juice",
+      "vat": 9,
       "price": 6,
       "stock": 50,
-      "fav": true,
+      "fav": false,
       "fixedPrice": true,
       "image": "https://www.crostopizza.ro/wp-content/uploads/2020/05/logo-cappy.jpg"
     },
@@ -184,6 +193,7 @@
       "id": 11,
       "name": "Coke .3",
       "type": "Juice",
+      "vat": 9,
       "price": 6,
       "stock": 50,
       "fav": false,
@@ -194,6 +204,7 @@
       "id": 12,
       "name": "Sparkle .5",
       "type": "Juice",
+      "vat": 9,
       "price": 6,
       "stock": 50,
       "fav": false,
@@ -223,6 +234,28 @@
       "name": "FF",
       "type": "Service",
       "price": 170
+    },
+    {
+      "name": "asdasd",
+      "type": "Warm Drink",
+      "vat": 9,
+      "price": "2",
+      "stock": 0,
+      "fixedPrice": false,
+      "fav": false,
+      "image": "",
+      "id": 17
+    },
+    {
+      "name": "Aplinca",
+      "type": "Tarie",
+      "vat": 19,
+      "price": "3",
+      "stock": 0,
+      "fixedPrice": false,
+      "fav": false,
+      "image": "",
+      "id": 18
     }
   ],
   "cartlists": [
@@ -282,31 +315,18 @@
       "cui": "CBAA"
     }
   ],
-  "productTypes": [
-    {
-      "name": "Juice",
-      "vat": 9
-    },
-    {
-      "name": "Service",
-      "vat": 5
-    },
-    {
-      "name": "Warm Drink",
-      "vat": 9
-    }
-  ],
   "clients": [
     {
       "id": 0,
+      "key": 1,
       "name": "Robert Banu",
       "email": "lmao",
       "phone": "0720440760",
       "crtsub": {
         "type": "ffull",
         "left": -1,
-        "start": "1/4/2021",
-        "end": "2/5/2021"
+        "start": "1-4-2021",
+        "end": "2-5-2021"
       },
       "comment": "Changed Comment"
     },
@@ -318,8 +338,8 @@
       "crtsub": {
         "type": "ffull",
         "left": -1,
-        "start": "2/4/2021",
-        "end": "2/5/2021"
+        "start": "2-4-2021",
+        "end": "2-5-2021"
       },
       "comment": "Changed Comment"
     },
@@ -331,18 +351,51 @@
       "crtsub": {
         "type": "f10",
         "left": 5,
-        "end": "03/05/2021"
+        "end": "03-05-2021"
       }
     },
     {
-      "id": 2,
+      "id": 4,
       "name": "Neamu Gatu",
       "email": "@gasdas",
       "phone": "0720440763",
       "crtsub": {
         "type": "a10",
         "left": 8,
-        "end": "04/05/2021"
+        "end": "04-05-2021"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Neamu Gatu",
+      "email": "@gasdas",
+      "phone": "0720440763",
+      "crtsub": {
+        "type": "a10",
+        "left": 8,
+        "end": "04-05-2021"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Neamu Gatu",
+      "email": "@gasdas",
+      "phone": "0720440763",
+      "crtsub": {
+        "type": "a10",
+        "left": 8,
+        "end": "04-05-2021"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Neamu Gatu",
+      "email": "@gasdas",
+      "phone": "0720440763",
+      "crtsub": {
+        "type": "a10",
+        "left": 8,
+        "end": "04-05-2021"
       }
     }
   ],
@@ -357,7 +410,7 @@
     },
     {
       "id": 68,
-      "assigned": true
+      "assigned": false
     },
     {
       "id": 4,

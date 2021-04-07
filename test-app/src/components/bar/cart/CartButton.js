@@ -9,8 +9,12 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogActions from '@material-ui/core/DialogActions'
-import { Button } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+
+
+import { makeStyles } from '@material-ui/core/styles'
   
+import { GridColumn, GridRow } from 'emotion-flex-grid'
 
 
 // _makeApiCall(endpoint) {
@@ -19,7 +23,8 @@ import { Button } from '@material-ui/core'
 //       .then((response) => this.setState({ response }));
 //   }
 
-const CartButton = ({item, removeItem, changeItem}) => {     
+const CartButton = ({item, removeItem, changeItem}) => {  
+    const C = useStyles()   
 
     const [open, setOpen] = useState(false); 
 
@@ -47,6 +52,40 @@ const CartButton = ({item, removeItem, changeItem}) => {
         handleClose()
     }
   
+
+    const DialogContenence=() =>{
+        return (
+            <GridRow>
+                <GridColumn>
+                    <br/>
+                    <Button 
+                        variant="contained"
+                        onClick ={()=>setDialogValue({...dialogValue, amount: dialogValue.amount-1})}
+                        >-
+                    </Button>
+                </GridColumn>
+                <GridColumn>
+                    <TextField
+                        className= {C.amountTextBox}
+                        margin="dense"
+                        id="amount"
+                        value={dialogValue.amount}
+                        onChange={(event) => setDialogValue({ ...dialogValue, amount: event.target.value })}
+                        label="No. of Items"
+                        type="number"
+                    />
+                </GridColumn>
+                <GridColumn>
+                    <br/>
+                    <Button 
+                        variant="contained"
+                        onClick ={()=>setDialogValue({...dialogValue, amount: dialogValue.amount+1})}
+                        >+
+                    </Button>
+                </GridColumn>                 
+        </GridRow>
+        )
+    }
 
      //make so it can demove from basket
     //and allowe modifyin price if Modifiable=true   onClick={toggleOpen(true)}
@@ -83,48 +122,21 @@ const CartButton = ({item, removeItem, changeItem}) => {
 
                 <React.Fragment >
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" 
-                            maxWidth='md?????????????'>
+                           >
                         <form onSubmit={updateCartItem}>
-                        <DialogTitle id="form-dialog-title">Modift Cart Item</DialogTitle>
+                        <DialogTitle id="form-dialog-title">Change Number of Product</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                Change the price or the amount of an iteam
+                                Change the amount of an item in cart
                             </DialogContentText>
-                            <Button 
-                                variant="contained"
-                                onClick ={()=>setDialogValue({...dialogValue, amount: dialogValue.amount-1})}
-                                >-
-                            </Button>
-                            <TextField
-                                margin="dense"
-                                id="amount"
-                                value={dialogValue.amount}
-                                onChange={(event) => setDialogValue({ ...dialogValue, amount: event.target.value })}
-                                label="No. of Items"
-                                type="number"
-                            />
-                              <Button 
-                                variant="contained"
-                                onClick ={()=>setDialogValue({...dialogValue, amount: dialogValue.amount+1})}
-                                >+
-                            </Button>
-                            <br/>
-                            {/* <TextField
-                                autoFocus
-                                margin="dense"
-                                id="price"
-                                value={dialogValue.price}
-                                onChange={(event) => setDialogValue({ ...dialogValue, price: event.target.value })}
-                                label="Price"
-                                type="number"
-                            /> */}
+                            {DialogContenence()}
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleClose} color="primary">
+                            <Button onClick={handleClose} color="primary"> 
                                 Cancel
                             </Button>
                             <Button color="primary" onClick={updateCartItem}>{/*type="submit" */}
-                                 Add
+                                 OK
                             </Button>
                         </DialogActions>
                         </form>
@@ -136,7 +148,23 @@ const CartButton = ({item, removeItem, changeItem}) => {
                 {/* {item.type==='Service'?  */}
 
             </div>
-        );
+        )
 }
+
+
+
+const useStyles = makeStyles({
+
+    orangeShadow: {
+        boxShadow: '7px 9px 19px -1px rgb(255, 173, 51)',
+    },
+
+    amountTextBox: {
+        width: 100,
+        padding: 10,
+        textAlign: 'center'
+    },
+
+  });  
 
 export default CartButton

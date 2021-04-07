@@ -3,15 +3,14 @@ import Cart from './cart/Cart'
 import ProdSet from './products/ProdSet'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
-import StockHandler from './stockmanagement/StockHandler'
-import AddSupplier from './stockmanagement/AddSupplier'
+import AddSupplier from '../resources/restocking/AddSupplier'
 import Button from 'react-bootstrap/Button'
-import AddStock from  './stockmanagement/AddStock'
 
-import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
+import { GridRow, GridColumn } from 'emotion-flex-grid'
 
 
 import { fetchProds } from '../DBconn'
+import AddStock from '../resources/restocking/AddStock'
 
 
 // import Box from '@material-ui/core/Box';
@@ -39,9 +38,6 @@ function MainBar({startScreen}) {
 
     const Caller = () =>{
         switch(screen){
-            case BarScreen.ADDITEM:
-                //page to add item to invetory
-                    return <StockHandler prods={bar.prods} pushTop = {addItemtoDB}/>;
             case BarScreen.SELLBAR:
                 // selling cart and item display
                     return <div> 

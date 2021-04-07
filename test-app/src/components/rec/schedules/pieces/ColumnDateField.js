@@ -15,9 +15,7 @@ import  {getCrtWeek, getNextWeek } from '../pieces/DatesMethods'
 
 const dayLenght = 38
 
-function ColumnDateField({date, field, _mouseMove}) {
-
-
+function ColumnDateField({date, field, _mouseMove, onDubClick}) {
 
     const [apps, setApps] = useState([])
 
@@ -25,23 +23,41 @@ function ColumnDateField({date, field, _mouseMove}) {
         _mouseMove(id)
     }
 
+    const makeApp = (id) => {
+        onDubClick(id, date)
+    }
+
+    
+
     useEffect(() =>{
+        console.log('column')
+        // console.log(field)
         // console.log(date)
         // console.log(field)
         const getApps = async () => {
-            if(field === 'Tennis') {
+            if(field == 'Tennis' || field =='Tenis') {
                 var serverApps = await getTennisCourts({date})
                 // console.log(serverApps)
                 setApps(serverApps)
 
-            } else {
-                const serverApps = await getAppsByDateandField({date,field})
+            } else if(field == 'OutDoor' || field =='Fotbal') {
+                const serverApps = await getAppsByDateandField({date: date,field: 'OutDoor'})
                 // console.log(serverApps)
                 setApps(serverApps)
-            }
+            
+            } else if(field == 'Sala Polivalenta' || field =='Hall') {
+                const serverApps = await getAppsByDateandField({date:date,field: 'Hall'})
+                setApps(serverApps)
+            
+                
+            } else if(field == 'Aerobic') {
+                const serverApps = await getAppsByDateandField({date,field})
+                setApps(serverApps)
+                
+            } 
         }
         getApps()
-    }, [])
+    }, [date, field])
 
 
     const generateLine = () => {
@@ -49,7 +65,7 @@ function ColumnDateField({date, field, _mouseMove}) {
         var i, j
 
 
-        if(field ==  'Tennis') { 
+        if(field ==  'Tennis'|| field == 'Tenis') { 
             ret.push([])
             ret.push([])
             ret.push([])                
@@ -69,16 +85,19 @@ function ColumnDateField({date, field, _mouseMove}) {
                         const height = el.duration * 25
 
                         ret[crtField].push(
-                            <Paper elevation={3} style={{height:height }} onMouseMove={()=>handleMouseMove(el.id)}>
+                            <Paper 
+                                elevation={3} style={{height:height }} 
+                                onClick={()=>handleMouseMove(el.id)}
+                                >
                                 <FullCell app={el}/>
                             </Paper>)
                     } else {
-                        const aux = i
+                        const auxi = i
                         ret[crtField].push(
-                            <Paper elevation={2} onMouseMove={()=>handleMouseMove(aux)}>
-                                                {/* // height: 25,
-                                                textAlign: 'center',
-                                                background: auxcolor}}>  */}
+                            <Paper 
+                                elevation={2} 
+                                onDoubleClick = {()=>makeApp(auxi)}
+                                onClick={()=>handleMouseMove(auxi)}>
                                 <EmptyCell i={i}/> 
                             </Paper>
                         )
@@ -101,7 +120,7 @@ function ColumnDateField({date, field, _mouseMove}) {
                     </div>
                 )
 
-        } else { // if it not tennis(or aerobic) fill it normally
+        } else { // if it not tennis(or aerobic) fill it normally, with one column for each day
             for ( i = 0;i < dayLenght ; i++){
                 const aux = apps.filter(el => el.id==i).filter(el => el.date === date)
                 if (aux.length != 0){
@@ -111,18 +130,20 @@ function ColumnDateField({date, field, _mouseMove}) {
 
                     const height = el.duration * 25
                     ret.push(
-                        <Paper elevation={3} style={{height:height }} onMouseMove={()=>handleMouseMove(el.id)}>
-                            <FullCell app={el}/>
+                        <Paper elevation={3} style={{height:height }} 
+                            onClick={()=>handleMouseMove(el.id)}>
+                            <FullCell app={el} />
                         </Paper>)
 
                 } else {//if there is nothing scheudle for this hour
-                    const aux = i
+                    const auxi=i
                     ret.push(
-                        <Paper elevation={2} onMouseMove={()=>handleMouseMove(aux)}>
-                                            {/* // height: 25,
-                                            textAlign: 'center',
-                                            background: auxcolor}}>  */}
-                            <EmptyCell i={i}/> 
+                        <Paper 
+                            elevation={2} 
+                            onDoubleClick = {()=>makeApp(auxi)}
+                            onClick={()=>handleMouseMove(auxi)}
+                            >
+                                <EmptyCell i={i}/> 
                         </Paper>
                         )
             }

@@ -6,6 +6,14 @@ import { useState } from 'react'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 
+const dateToDisplay = (date) => {
+    const auxMonth = date.getMonth() + 1
+    var res = ''
+    res+= date.getHours()+':'+date.getMinutes()+' '
+    res+= date.getDate() +'-'+ auxMonth +'-' + date.getFullYear()
+    return res
+}
+
 function ScanHisotory({entries}) {
 
     
@@ -13,7 +21,7 @@ function ScanHisotory({entries}) {
 
     return (
         <div > 
-            <h1>Scan History</h1>
+            <h1>Entry History</h1>
             {entries.map(entry => {
                 if(entry.assigned == undefined)
                     return checkedInPerson(entry)
@@ -28,7 +36,7 @@ function ScanHisotory({entries}) {
 const checkedInPerson = (person) =>{
     return (
         <div>
-            <h3> {person.name} </h3> checked in at {new Date}
+            <h3> {person.name} </h3> checked in at {dateToDisplay(person.timeofEntry)}
         </div>
     )
 
