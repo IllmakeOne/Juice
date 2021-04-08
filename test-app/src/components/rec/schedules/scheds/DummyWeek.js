@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 import { fetchApprow } from '../../../DBconn'
 import { Button, Paper } from '@material-ui/core'
@@ -15,26 +15,31 @@ import  { getWeek } from '../pieces/DatesMethods'
 
 import { MyContext } from '../../../../App'
 
-function DummyWeek({field,today, weekMutiplier, setDialog}) {
+function DummyWeek({field,today, weekMutiplier, setDialog,
+                timeLight, setTimeLight, rowLight, setRowLight}) {
 
     const cx = useContext(MyContext) 
 
     const C = useStyles()
     const week = getWeek(today,weekMutiplier, cx.lg)
 
-    const [timeHighlight,setTimeHighlight] = useState(-1)
+    const [litRow, setLitRow] = useState(rowLight)
+    
+    useEffect(() => {
+        setRowLight(litRow) 
+        console.log(litRow)
+    }, [litRow])
 
-    const handleMousemove = (id) => {
-        setTimeHighlight(id)
-    }
-
-    const onCellClick = (id) => {
-        console.log(id)
+    const onMouseclick = (id) => {
+        setTimeLight(id)
     }
 
     const onDubClick = (id, date) => {
         setDialog(id, date)
     }
+    // const auxRowLight = (id)=>{
+    //     setRowLight(id)
+    // }
 
 
     return (
@@ -42,16 +47,20 @@ function DummyWeek({field,today, weekMutiplier, setDialog}) {
             
             <GridRow wrap='wrap' >
                 <GridColumn className = {C.column}>
-                    <TimesRow timeHighlight={timeHighlight}/>
+                    <TimesRow 
+                        timeHighlight={timeLight} 
+                        onCellClick ={setLitRow}
+                        />
                 </GridColumn>
 
                 <GridRow className={C.midrow}>
                 {week.map((el)=>{
                     return( 
                         <FullColumn
+                            rowLight={rowLight}
                             date={{date: el[1], name:el[0]}}
                             field={field} 
-                            _mouseMove={handleMousemove}
+                            _mouseMove={onMouseclick}
                             onDubClick={onDubClick}
                         
                         />                     
@@ -60,7 +69,10 @@ function DummyWeek({field,today, weekMutiplier, setDialog}) {
                 </GridRow>
                 
                 <GridColumn className = {C.column}>
-                    <TimesRow timeHighlight={timeHighlight}/>
+                    <TimesRow 
+                        timeHighlight={timeLight} 
+                        onCellClick ={setLitRow}
+                        />
                 </GridColumn>
             </GridRow>
         </div>

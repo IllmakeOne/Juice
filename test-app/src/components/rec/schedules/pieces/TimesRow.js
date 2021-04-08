@@ -4,9 +4,13 @@ import { MyContext } from '../../../../App'
 import {GridColumn } from 'emotion-flex-grid'
 import { useContext} from 'react'
 
-function TimesRow({timeHighlight}) {
+function TimesRow({timeHighlight,onCellClick}) {
     const C = useStyles()
     const cx = useContext(MyContext)
+
+    const selctedRow =(index)=>{
+        onCellClick(index)
+    }
     return (
         <div>
             <Paper elevation={3} >
@@ -18,8 +22,9 @@ function TimesRow({timeHighlight}) {
             </Paper>
             <GridColumn >
                         {tymes.map((el,index)=>(
-                            <Paper elevation={3} >
-                                <div className={index == timeHighlight? C.timeCellHighlight:C.emptycell}>{el}</div>
+                            <Paper elevation={3} onClick={()=>selctedRow(index)} >
+                                <div className={index == timeHighlight? C.timeCellHighlight:C.emptycell}
+                                    >{el}</div>
                             </Paper>)
                         )}
             </GridColumn>

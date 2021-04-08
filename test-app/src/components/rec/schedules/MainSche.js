@@ -40,18 +40,27 @@ function MainSche() {
     const [weekMutiplier, setWeekMutiplier] = useState(0)
     const [info, setInfo] = useState({})
 
+    const[timeLight, setTimeLight] = useState(-1)
+    const[rowLight, setRowLight] = useState(-1)
+
     const changeToday = (newDate) =>{
         setToday(newDate)
         setWeekMutiplier(0)
         // console.log(newDate)
     }
 
+    const changeTimeLight =(id)=>{
+        setTimeLight(id)
+    }
 
+    const changeRowLight =(id)=>{
+        console.log(id)
+        setRowLight(id)
+    }
 
-    // const settodaypicker = (newDate) =>{
-    //     setToday(newDate)
-    //     setWeekMutiplier(0)
-    // }
+    const changeWeekMultiplier = (newmult) => {
+        setWeekMutiplier(newmult)
+    }
 
     const chageField = (newF) =>{
         setCrtField(newF)
@@ -90,25 +99,30 @@ function MainSche() {
             <FieldAndDateChanger 
                 changeField = {chageField}
                 weekMutiplier = {weekMutiplier}
-                changeDateMultiplier = {setWeekMutiplier}
+                changeDateMultiplier = {changeWeekMultiplier}
                 today = {today}
-                settoday = {changeToday}
+                changeToday = {changeToday}
                 />
-          
+
 
             <WeekSchedule 
                 field = {crtField} 
                 today = {today}
                 weekMutiplier = {weekMutiplier}
                 setDialog = {openAppDialog}
+                
+                setTimeLight={changeTimeLight}
+                timeLight={timeLight}
+                setRowLight={changeRowLight}
+                rowLight={rowLight}
                 />
 
             <FieldAndDateChanger 
                 changeField = {chageField}
                 weekMutiplier = {weekMutiplier}
-                changeDateMultiplier = {setWeekMutiplier}
+                changeDateMultiplier = {changeWeekMultiplier}
                 today = {today}
-                settoday = {changeToday}
+                changeToday = {changeToday}
                 />
             
             <DummyWeek 
@@ -116,6 +130,11 @@ function MainSche() {
                 today = {today}
                 weekMutiplier = {weekMutiplier}
                 setDialog = {openDummyAppDialog}
+
+                setTimeLight={changeTimeLight}
+                timeLight={timeLight}
+                setRowLight={changeRowLight}
+                rowLight={rowLight}
                 />
 
 

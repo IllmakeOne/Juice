@@ -3,19 +3,28 @@ import DateChanger from '../DateChanger'
 import FieldChanger from '../FieldChanger'
 import { GridRow, GridColumn } from 'emotion-flex-grid'
 
-function FieldAndDateChanger({chageField,weekMutiplier,setWeekMutiplier,today,changeToday}) {
+function FieldAndDateChanger({changeField,weekMutiplier,changeDateMultiplier,today,changeToday}) {
+    const auxchangefield=(field)=>{
+        changeField(field)
+    }
+    const auxsetWeekMutiplier=(mlt)=>{
+        changeDateMultiplier(mlt)
+    }
+    const auxchangeToday=(day)=>{
+        changeToday(day)
+    }
     return (
         <GridRow style={{margin: 20}}>
             <FieldChanger 
-                changeField = {chageField}
+                changeField = {auxchangefield}
                 />
                 
             <GridColumn offset ={6}>
                 <DateChanger 
                     weekMutiplier = {weekMutiplier}
-                    changeDateMultiplier = {setWeekMutiplier}
+                    changeDateMultiplier = {auxsetWeekMutiplier}
                     today = {today}
-                    settoday = {changeToday}
+                    settoday = {auxchangeToday}
                     // settodaypicker = {settodaypicker}
                     />
             </GridColumn>

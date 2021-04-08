@@ -4,10 +4,10 @@ import ColumnDateField from '../ColumnDateField'
 import Paper  from '@material-ui/core/Paper'
 import { makeStyles } from '@material-ui/core/styles' 
 
-function FullColumn({field, date, _mouseMove, onDubClick}) {
+function FullColumn({field, date, _mouseMove, onDubClick, rowLight}) {
     const C = useStyles()
     return (
-            <GridColumn  className = {C.column}> 
+            <GridColumn width={12/7} className = {C.column}> 
             
                 <Paper elevation={3} className={C.daynameCell}>
                     {date.name}<br/>{date.date}
@@ -17,7 +17,8 @@ function FullColumn({field, date, _mouseMove, onDubClick}) {
                         date= {date.date}
                         field= {field} 
                         _mouseMove ={_mouseMove}
-                        onDubClick = {onDubClick} />
+                        onDubClick = {onDubClick}
+                        rowLight={rowLight} />
 
                 <Paper elevation={3} className={C.daynameBottom}>
                     {date.date}
