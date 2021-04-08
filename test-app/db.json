@@ -479,6 +479,22 @@
       "duration": 2
     }
   ],
+
+  "phones":[
+    {
+      "name": "Clara",
+      "phone": "0722527339"
+    },    
+    {
+      "name": "Rob",
+      "phone": "0720440760"
+    },
+    {
+      "name": "Dani",
+      "phone": "0722632228"
+    }
+  ],
+
   "apps": [
     {
       "id": 15,

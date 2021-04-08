@@ -13,6 +13,9 @@ import DateChanger from './pieces/DateChanger'
 import AddApp from './pieces/AddApp'
 import { MyContext } from '../../../App'
 import { getWeek } from './pieces/DatesMethods'
+import DummyWeek from './scheds/DummyWeek'
+import FieldAndDateChanger from './pieces/shedspieces/FieldAndDateChanger'
+import AddDummyApp from './pieces/shedspieces/AddDummyApp'
 
 
 
@@ -30,6 +33,7 @@ function MainSche() {
 
     
     const [open, setOpen] = useState(false)
+    const [openDubbmy, setOpenD] = useState(false)
     
     const [crtField, setCrtField] = useState('Hall')
     const [today, setToday] = useState(new Date)
@@ -38,19 +42,36 @@ function MainSche() {
 
     const changeToday = (newDate) =>{
         setToday(newDate)
-        console.log(newDate)
+        setWeekMutiplier(0)
+        // console.log(newDate)
     }
+
+
+
+    // const settodaypicker = (newDate) =>{
+    //     setToday(newDate)
+    //     setWeekMutiplier(0)
+    // }
 
     const chageField = (newF) =>{
         setCrtField(newF)
     }
 
-    const setDialog = (id, date) =>{
+    const openAppDialog = (id, date) =>{
         setInfo({time: id, date: date})
         setOpen(true)
     }
+    
     const closeAppDialog = () => {
         setOpen(false)
+    }
+
+    const openDummyAppDialog = (id, date) =>{
+        setInfo({time: id, date: date})
+        setOpenD(true)
+    }
+    const closeDummyApp= ()=>{
+        setOpenD(false)
     }
 
 
@@ -66,33 +87,48 @@ function MainSche() {
             <br/>
             <br/>
 
-            <GridRow>
-                <FieldChanger 
-                    changeField = {chageField}
-                    />
-                  
-                <GridColumn offset ={6}>
-                    <DateChanger 
-                        weekMutiplier = {weekMutiplier}
-                        changeDateMultiplier = {setWeekMutiplier}
-                        today = {today}
-                        settoday = {changeToday}
-                        />
-                </GridColumn>
-            </GridRow>
+            <FieldAndDateChanger 
+                changeField = {chageField}
+                weekMutiplier = {weekMutiplier}
+                changeDateMultiplier = {setWeekMutiplier}
+                today = {today}
+                settoday = {changeToday}
+                />
+          
 
-            
-              <WeekSchedule 
+            <WeekSchedule 
                 field = {crtField} 
                 today = {today}
                 weekMutiplier = {weekMutiplier}
-                setDialog = {setDialog}
+                setDialog = {openAppDialog}
                 />
-         
+
+            <FieldAndDateChanger 
+                changeField = {chageField}
+                weekMutiplier = {weekMutiplier}
+                changeDateMultiplier = {setWeekMutiplier}
+                today = {today}
+                settoday = {changeToday}
+                />
+            
+            <DummyWeek 
+                field = {crtField} 
+                today = {today}
+                weekMutiplier = {weekMutiplier}
+                setDialog = {openDummyAppDialog}
+                />
+
+
 
             <AddApp 
                 open = {open} 
                 closeAppDialog = {closeAppDialog}
+                info={{...info, field: crtField}}
+                />
+                
+            <AddDummyApp 
+                open = {openDubbmy} 
+                closeDummyAppDialog = {closeDummyApp}
                 info={{...info, field: crtField}}
                 />
         </div>

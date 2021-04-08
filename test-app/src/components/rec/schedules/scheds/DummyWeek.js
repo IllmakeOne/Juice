@@ -1,28 +1,25 @@
 import { useState, useContext } from 'react'
 import { GridWrap, GridRow, GridColumn } from 'emotion-flex-grid'
 import { fetchApprow } from '../../../DBconn'
-import Paper  from '@material-ui/core/Paper'
+import { Button, Paper } from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core/styles'      
 import FullCell from '../cells/FullCell'    
 import EmptyCell from '../cells/EmptyCell'
 import ColumnDateField from '../pieces/ColumnDateField'
 
-
 import TimesRow from '../pieces/TimesRow'
+import FullColumn from '../pieces/shedspieces/FullColumn'
+
 import  { getWeek } from '../pieces/DatesMethods'
 
 import { MyContext } from '../../../../App'
-import SticckyDateNames from '../pieces/shedspieces/SticckyDateNames'
-import FullColumn from '../pieces/shedspieces/FullColumn'
 
- 
+function DummyWeek({field,today, weekMutiplier, setDialog}) {
 
-const WeekSchedule = ( {field,today, weekMutiplier, setDialog} ) => {
     const cx = useContext(MyContext) 
 
     const C = useStyles()
-
     const week = getWeek(today,weekMutiplier, cx.lg)
 
     const [timeHighlight,setTimeHighlight] = useState(-1)
@@ -40,29 +37,28 @@ const WeekSchedule = ( {field,today, weekMutiplier, setDialog} ) => {
     }
 
 
-
-       return (
-
+    return (
         <div className=''>
             
             <GridRow wrap='wrap' >
-                <GridColumn  className = {C.column}>
+                <GridColumn className = {C.column}>
                     <TimesRow timeHighlight={timeHighlight}/>
                 </GridColumn>
-                
-                <GridRow className={C.midrow} >
+
+                <GridRow className={C.midrow}>
                 {week.map((el)=>{
-                    return(
+                    return( 
                         <FullColumn
                             date={{date: el[1], name:el[0]}}
                             field={field} 
                             _mouseMove={handleMousemove}
                             onDubClick={onDubClick}
+                        
                         />                     
                     )
                 })}
                 </GridRow>
-
+                
                 <GridColumn className = {C.column}>
                     <TimesRow timeHighlight={timeHighlight}/>
                 </GridColumn>
@@ -83,7 +79,6 @@ const useStyles = makeStyles({
         margin: 3,
     },
 
-    
     midrow: {
         width: '80%',
     },
@@ -137,15 +132,11 @@ const useStyles = makeStyles({
     daynameCell:{
         background: '#0cbff5',    
         height: 60,   
-        // borderLeft: 'solid',
-        // borderRight: 'solid',
-        // borderWidth: 1,
         textAlign: 'center',
         fontSize: 23,
 
         position: 'sticky',
-        top: 73,
-
+        bottom: 73,
     }
   });
 
@@ -166,5 +157,8 @@ const useStyles = makeStyles({
         'Vineri', 
         'Sambata',
         'Duminica']
+    
 
-export default WeekSchedule
+
+
+export default DummyWeek

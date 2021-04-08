@@ -21,17 +21,16 @@ import Switch from '@material-ui/core/Switch'
 import { makeStyles } from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
 
-import { addAppointment } from '../../../DBconn'
-import { MyContext } from '../../../../App'
+import { addAppointment } from '../../../../DBconn'
 import { GridColumn, GridRow } from 'emotion-flex-grid'
-import PickDate from './PickDate';
-import PickField from './PickField'
-import OrangePaper from '../../../../containers/papers/OrangePaper'
-import ShowAppointment from '../../../../containers/appointments/ShowAppointment'
-import PickClinetandNr from './PickClinetandNr'
+import { MyContext } from '../../../../../App'
+import ShowAppointment from '../../../../../containers/appointments/ShowAppointment'
+import PickField from '../PickField'
+import PickDate from '../PickDate'
+import PickClinetandNr from '../PickClinetandNr'
+import OrangePaper from '../../../../../containers/papers/OrangePaper'
 
-
-function AddApp({open,closeAppDialog, info}) {
+function AddDummyApp({open,closeDummyAppDialog, info}) {
     const C = useStyles()    
     const cx = useContext(MyContext)
     const decLg = (en, ro) => {
@@ -73,11 +72,11 @@ function AddApp({open,closeAppDialog, info}) {
 
 
     const handleClose = () => {
-        closeAppDialog()
+        closeDummyAppDialog()
     }
 
     const makeAppointment = () => {
-        closeAppDialog()
+        closeDummyAppDialog()
         // if(checkOut(crtApp) == true){
         //     addAppointment(crtApp)
         //     setCrtApp(defaultApp)
@@ -218,7 +217,7 @@ function AddApp({open,closeAppDialog, info}) {
                 <GridRow>
                     <GridColumn>
                         <h2 style={{color:'#00539CFF',fontSize:32}}>
-                            {decLg('Make An Appointment','Creeaza o Rezervare')}
+                            {decLg('Make an Awaitting Appointment','Creeaza o Rezervare in asteptare')}
                         </h2><br/>
                         <OrangePaper>
                             {DialogContenence()}
@@ -243,7 +242,7 @@ function AddApp({open,closeAppDialog, info}) {
                 </Button>
                 <Button  style ={{textTransform: 'none', background: '#7cfc9a'}} color="primary" variant="outlined"  onClick={makeAppointment}>{/*type="submit" */}
                         <h3>
-                            {decLg('Create Appointmen', 'Creaza rezerare')}
+                            {decLg('Create Temporary Appointmen', 'Creaza rezerare provizorie')}
                         </h3>
                 </Button>
             </DialogActions>
@@ -318,6 +317,5 @@ const tymes = [//'Times',
         '01:30',
     ]
 
-export default AddApp
 
-
+export default AddDummyApp

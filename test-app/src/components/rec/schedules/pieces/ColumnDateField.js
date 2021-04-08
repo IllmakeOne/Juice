@@ -30,10 +30,6 @@ function ColumnDateField({date, field, _mouseMove, onDubClick}) {
     
 
     useEffect(() =>{
-        console.log('column')
-        // console.log(field)
-        // console.log(date)
-        // console.log(field)
         const getApps = async () => {
             if(field == 'Tennis' || field =='Tenis') {
                 var serverApps = await getTennisCourts({date})

@@ -86,7 +86,7 @@ function PickField({changeField, field}) {
                 >
                 <Chip  
                     icon= {<GiWeightLiftingUp />}
-                    label={lgq('A1','A1 Alb')}   
+                    label={lgq('Aerobics 1','A1 Alb')}   
                     className={`${selected=='A1'?C.a1:C.grey}`}                  
                     />
             </GridColumn>
@@ -96,7 +96,7 @@ function PickField({changeField, field}) {
                 >
                 <Chip
                     icon={<GiWeightLiftingUp />}
-                    label={lgq('A2','A2 Verde')}   
+                    label={lgq('Aerobics 2','A2 Verde')}   
                     className={`${selected=='A2'?C.a2:C.grey}`}                           
                     />
             </GridColumn>
@@ -106,7 +106,7 @@ function PickField({changeField, field}) {
                 >
                 <Chip  
                     icon={<GiWeightLiftingUp />}
-                    label={lgq('A3','A3 Roz')}         
+                    label={lgq('Aerobics 3','A3 Roz')}         
                     className={`${selected=='A3'?C.a3:C.grey}`}                    
                     />
             </GridColumn>

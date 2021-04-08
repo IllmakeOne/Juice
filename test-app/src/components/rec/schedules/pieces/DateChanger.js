@@ -14,6 +14,10 @@ function DateChanger({weekMutiplier, changeDateMultiplier,today, settoday}) {
 
     const cx = useContext(MyContext)
 
+
+    const todayd =()=>{
+        settoday(new Date)
+    }
     const upOneWeek = (mult) => {
         var newMutip
         if(mult == -1){
@@ -28,7 +32,11 @@ function DateChanger({weekMutiplier, changeDateMultiplier,today, settoday}) {
     }
 
     return (
-        <div>
+        <div style={{
+            position: 'sticky',
+            top: 30,
+            // background: '#0cbff5',  
+            }}>
             <GridRow>
             <Button
                 variant="outlined"
@@ -39,7 +47,7 @@ function DateChanger({weekMutiplier, changeDateMultiplier,today, settoday}) {
 
             <Button 
                 variant="outlined"
-                onClick= {()=>upOneWeek(0)}
+                onClick= {()=>todayd()}
                 >                        
                 {cx.lg=='en'? 'Today':'Azi'}
             </Button>
