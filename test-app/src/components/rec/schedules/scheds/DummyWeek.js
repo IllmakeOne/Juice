@@ -34,8 +34,8 @@ function DummyWeek({field,today, weekMutiplier, setDialog,
         setTimeLight(id)
     }
 
-    const onDubClick = (id, date) => {
-        setDialog(id, date)
+    const onDubClick = (id, date, fieldd) => {
+        setDialog(id, date, fieldd)
     }
     // const auxRowLight = (id)=>{
     //     setRowLight(id)

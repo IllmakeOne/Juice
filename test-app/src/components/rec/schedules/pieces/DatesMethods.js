@@ -1,6 +1,7 @@
 
 
 export const formatDate = (date) =>{
+    if(date==null)return ''
     var res =''
     res += date.getDate() + '-'
     res += (date.getMonth() + 1 ) + '-'

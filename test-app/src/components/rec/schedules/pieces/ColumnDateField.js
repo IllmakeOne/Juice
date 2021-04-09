@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import { makeStyles } from '@material-ui/core/styles'      
 
-import { getAppsByDateandField, getTennisCourts }  from '../../../DBconn'
+import { getAppsByDateandField, getTennisCourts, getAppsByDateandFieldGhost, getGhosttennis }  from '../../../DBconn'
 import { GridRow, GridColumn } from 'emotion-flex-grid'
 
       
@@ -17,40 +17,65 @@ import { red } from '@material-ui/core/colors'
 
 const dayLenght = 38
 
-function ColumnDateField({date, field, _mouseMove, onDubClick, rowLight}) {
+function ColumnDateField({date,name, field, _mouseMove, onDubClick, 
+                        rowLight, openShowApp, variant}) {
     const C = useStyles()
     const [apps, setApps] = useState([])
+    // console.log(date)
+
+    const getallQ = variant=='all'
+
+    const getmaxappLengh = timestart => {
+
+    }
+
+    const fullcellDB = app =>{
+        openShowApp(app)
+    }
 
     const handleMouseMove = (id) => {
         _mouseMove(id)
     }
 
-    const makeApp = (id) => {
-        onDubClick(id, date)
+    const makeApp = (id, fieldd) => {
+        onDubClick(id, date, fieldd)
     }    
 
     useEffect(() =>{
         const getApps = async () => {
-            if(field == 'Tennis' || field =='Tenis') {
-                var serverApps = await getTennisCourts({date})
-                // console.log(serverApps)
-                setApps(serverApps)
-
-            } else if(field == 'OutDoor' || field =='Fotbal') {
-                const serverApps = await getAppsByDateandField({date: date,field: 'OutDoor'})
-                // console.log(serverApps)
-                setApps(serverApps)
-            
-            } else if(field == 'Sala Polivalenta' || field =='Hall') {
-                const serverApps = await getAppsByDateandField({date:date,field: 'Hall'})
-                setApps(serverApps)
-            
-                
-            } else if(field == 'Aerobic') {
-                const serverApps = await getAppsByDateandField({date,field})
-                setApps(serverApps)
-                
-            } 
+            if(getallQ){
+                if(field == 'Tennis' || field =='Tenis') {
+                    var serverApps = await getTennisCourts({date})
+                    // console.log(serverApps)
+                    setApps(serverApps)
+                } else if(field == 'OutDoor' || field =='Fotbal') {
+                    const serverApps = await getAppsByDateandField({date: date,field: 'OutDoor'})
+                    // console.log(serverApps)
+                    setApps(serverApps)
+                } else if(field == 'Sala Polivalenta' || field =='Hall') {
+                    const serverApps = await getAppsByDateandField({date:date,field: 'Hall'})
+                    setApps(serverApps)
+                } else if(field == 'Aerobic') {
+                    const serverApps = await getAppsByDateandField({date,field})
+                    setApps(serverApps)                    
+                } 
+            } else {
+                if(field == 'Tennis' || field =='Tenis') {
+                    var serverApps = await getGhosttennis({date})
+                    // console.log(serverApps)
+                    setApps(serverApps)
+                } else if(field == 'OutDoor' || field =='Fotbal') {
+                    const serverApps = await getAppsByDateandFieldGhost({date: date,field: 'OutDoor'})
+                    // console.log(serverApps)
+                    setApps(serverApps)
+                } else if(field == 'Sala Polivalenta' || field =='Hall') {
+                    const serverApps = await getAppsByDateandFieldGhost({date:date,field: 'Hall'})
+                    setApps(serverApps)
+                } else if(field == 'Aerobic') {
+                    const serverApps = await getAppsByDateandFieldGhost({date,field})
+                    setApps(serverApps)                    
+                } 
+            }
         }
         getApps()
     }, [date, field])
@@ -59,8 +84,6 @@ function ColumnDateField({date, field, _mouseMove, onDubClick, rowLight}) {
     const generateLine = () => {
         var ret = []
         var i
-
-
         if(field ==  'Tennis'|| field == 'Tenis') { 
             ret.push([])
             ret.push([])
@@ -81,16 +104,18 @@ function ColumnDateField({date, field, _mouseMove, onDubClick, rowLight}) {
                             <Paper 
                                 elevation={3} style={{height:height }} 
                                 onClick={()=>handleMouseMove(el.id)}
+                                onDoubleClick={()=>(fullcellDB(el))}
                                 >
                                 <FullCell app={el}/>
                             </Paper>)
                     } else {
                         const auxi = i
-                        const hilit = i==rowLight?'lit':''
+                        const Auxfield = 'T' + (crtField+1)
+                        const hilit = auxi==rowLight?'lit':''
                         ret[crtField].push(
                             <Paper 
                                 elevation={2} 
-                                onDoubleClick = {()=>makeApp(auxi)}
+                                onDoubleClick = {()=>makeApp(auxi,Auxfield)}
                                 onClick={()=>handleMouseMove(auxi)}
                                 className={hilit}
                                 >
@@ -116,6 +141,62 @@ function ColumnDateField({date, field, _mouseMove, onDubClick, rowLight}) {
                     </div>
                 )
 
+        } else if(field== 'Aerobic') { 
+            ret.push([])
+            ret.push([])
+            ret.push([])                
+            aerobicRooms.map((court) => {
+                const crtField = parseInt(court.substring(1)) - 1
+
+                for ( i = 0;i < dayLenght ; i++) {
+
+                    const aux = apps.filter(el => el.field == court).filter(el => el.id==i).filter(el => el.date===date )
+
+                    if (aux.length != 0){
+                        const el = aux[0]
+                        i+= el.duration - 1
+                        const height = el.duration * 25
+
+                        ret[crtField].push(
+                            <Paper 
+                                elevation={3} style={{height:height }} 
+                                onClick={()=>handleMouseMove(el.id)}
+                                onDoubleClick={()=>(fullcellDB(el))}
+                                >
+                                <FullCell app={el}/>
+                            </Paper>)
+                    } else {
+                        const auxi = i
+                        const Auxfield = 'A' + (crtField+1)
+                        const hilit = auxi==rowLight?'lit':''
+                        ret[crtField].push(
+                            <Paper 
+                                elevation={2} 
+                                onDoubleClick = {()=>makeApp(auxi,Auxfield)}
+                                onClick={()=>handleMouseMove(auxi)}
+                                className={hilit}
+                                >
+                                <EmptyCell i={i}/> 
+                            </Paper>
+                        )
+                    }
+                }
+            })
+                return (
+                    <div>
+                        <GridRow wrap='wrap' >
+                            <GridColumn width={4}>
+                                {ret[0]}
+                            </GridColumn>
+                            <GridColumn width={4}>
+                                {ret[1]}
+                            </GridColumn>
+                            <GridColumn width={4}>
+                                {ret[2]}
+                            </GridColumn>
+                        </GridRow>
+                    </div>
+                )
         } else { // if it not tennis(or aerobic) fill it normally, with one column for each day
             for ( i = 0;i < dayLenght ; i++){
                 const aux = apps.filter(el => el.id==i).filter(el => el.date === date)
@@ -127,38 +208,48 @@ function ColumnDateField({date, field, _mouseMove, onDubClick, rowLight}) {
                     const height = el.duration * 25
                     ret.push(
                         <Paper elevation={3} style={{height:height }} 
-                            onClick={()=>handleMouseMove(el.id)}>
+                            onClick={()=>handleMouseMove(el.id)}
+                            onDoubleClick={()=>(fullcellDB(el))}
+                            >
                             <FullCell app={el} />
                         </Paper>)
 
                 } else {//if there is nothing scheudle for this hour
                     const auxi = i
-                    const hilit = i==rowLight?'solid ':''
-                    if(hilit =='lit')console.log('lit')
+                    const hilit = auxi==rowLight?'solid ':''
                     ret.push(
                         <Paper 
                             elevation={2} 
-                            onDoubleClick = {()=>makeApp(auxi)}
+                            onDoubleClick = {()=>makeApp(auxi, field)}
                             onClick={()=>handleMouseMove(auxi)}
-                            style={{border: `4px ${hilit}#FFB231`, 
+                            style={{border: `2px ${hilit}#FFB231`, 
                                     margin: 0}}
                             >
                                 <EmptyCell i={i}/> 
                         </Paper>
                         )
+                }
             }
         }
             return ret
-        }
     }
 
 
 
     return (
-        <div>
+        <GridColumn width={12/7} className = {C.column}> 
+            
+                <Paper elevation={3} className={C.daynameCell}>
+                    {name}<br/>{date}
+                </Paper> 
             {/* {console.log(getNextWeek(new Date))} */}
             {generateLine()}
-        </div>
+            
+            <Paper elevation={3} className={C.daynameBottom}>
+                    {date}
+            </Paper>  
+
+        </GridColumn> 
     )
 }
 
@@ -168,6 +259,27 @@ const useStyles = makeStyles({
         borderColor: 'yellow',
         background: 'red',
     },
+    column:{
+        margin: 3,
+    },
+    daynameCell:{
+        background: '#0cbff5',    
+        height: 60,   
+        textAlign: 'center',
+        fontSize: 23,
+
+        position: 'sticky',
+        top: 73,
+    },
+
+    daynameBottom:{
+        background: '#0cbff5',    
+        height: 30,   
+        textAlign: 'center',
+        fontSize: 23,
+        position: 'sticky',
+        bottom: 5,
+    },
 });
 
 
@@ -176,7 +288,11 @@ const columns = [
     'OutDoor',
     'Aerobic',
 ]
-
+const aerobicRooms =[
+    'A1',
+    'A2',
+    'A3'    
+]
 const tennisCourts = [
     'T1',
     'T2',

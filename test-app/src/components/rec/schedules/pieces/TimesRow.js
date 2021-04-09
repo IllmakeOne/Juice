@@ -4,15 +4,23 @@ import { MyContext } from '../../../../App'
 import {GridColumn } from 'emotion-flex-grid'
 import { useContext} from 'react'
 
-function TimesRow({timeHighlight,onCellClick}) {
+function TimesRow({timeHighlight,onCellClick, upMouseScroll}) {
     const C = useStyles()
     const cx = useContext(MyContext)
 
     const selctedRow =(index)=>{
         onCellClick(index)
     }
+
+    const wheelMove = e =>{
+        if(e.deltaY < 0) 
+            upMouseScroll(-1)
+        else 
+            upMouseScroll(1)
+    }
+
     return (
-        <div>
+        <div onWheel={wheelMove}>
             <Paper elevation={3} >
                     <div style={{    
                     height: 60,   

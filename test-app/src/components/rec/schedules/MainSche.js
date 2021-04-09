@@ -33,12 +33,14 @@ function MainSche() {
 
     
     const [open, setOpen] = useState(false)
-    const [openDubbmy, setOpenD] = useState(false)
+    const [showAOpen, setShowAOpen] = useState(false)
     
     const [crtField, setCrtField] = useState('Hall')
     const [today, setToday] = useState(new Date)
     const [weekMutiplier, setWeekMutiplier] = useState(0)
     const [info, setInfo] = useState({})
+    
+    const [appShow, setAppShow] = useState({})
 
     const[timeLight, setTimeLight] = useState(-1)
     const[rowLight, setRowLight] = useState(-1)
@@ -55,7 +57,10 @@ function MainSche() {
 
     const changeRowLight =(id)=>{
         console.log(id)
-        setRowLight(id)
+        if(rowLight ==  id)
+            setRowLight(-1)
+        else 
+            setRowLight(id)
     }
 
     const changeWeekMultiplier = (newmult) => {
@@ -66,8 +71,8 @@ function MainSche() {
         setCrtField(newF)
     }
 
-    const openAppDialog = (id, date) =>{
-        setInfo({time: id, date: date})
+    const openAppDialog = (id, date, fieldd, variant) =>{
+        setInfo({time: id, date: date, var: variant, field:fieldd})
         setOpen(true)
     }
     
@@ -75,22 +80,16 @@ function MainSche() {
         setOpen(false)
     }
 
-    const openDummyAppDialog = (id, date) =>{
-        setInfo({time: id, date: date})
-        setOpenD(true)
+    const openShowApp = (app) =>{
+        setAppShow(app)
+        setShowAOpen(true)
     }
-    const closeDummyApp= ()=>{
-        setOpenD(false)
+    const closeShowAopen= ()=>{
+        setShowAOpen(false)
     }
-
-
-    const onCellClick = (id) => {
-        console.log(id)
-    }
-
 
     return (
-        <div className='cart_svlist'>
+        <div className='cart_svlist' >
         <br/>
             <br/>
             <br/>
@@ -106,10 +105,12 @@ function MainSche() {
 
 
             <WeekSchedule 
+                variant='all'
                 field = {crtField} 
                 today = {today}
                 weekMutiplier = {weekMutiplier}
                 setDialog = {openAppDialog}
+                openShowApp = {openShowApp}
                 
                 setTimeLight={changeTimeLight}
                 timeLight={timeLight}
@@ -125,12 +126,14 @@ function MainSche() {
                 changeToday = {changeToday}
                 />
             
-            <DummyWeek 
+            <WeekSchedule 
+                variant='dummy'
                 field = {crtField} 
                 today = {today}
                 weekMutiplier = {weekMutiplier}
-                setDialog = {openDummyAppDialog}
-
+                setDialog = {openAppDialog}
+                openShowApp = {openShowApp}
+                
                 setTimeLight={changeTimeLight}
                 timeLight={timeLight}
                 setRowLight={changeRowLight}
@@ -142,13 +145,13 @@ function MainSche() {
             <AddApp 
                 open = {open} 
                 closeAppDialog = {closeAppDialog}
-                info={{...info, field: crtField}}
+                info={info}
                 />
                 
             <AddDummyApp 
-                open = {openDubbmy} 
-                closeDummyAppDialog = {closeDummyApp}
-                info={{...info, field: crtField}}
+                open = {showAOpen} 
+                closeDummyAppDialog = {closeShowAopen}
+                app={appShow}
                 />
         </div>
     )

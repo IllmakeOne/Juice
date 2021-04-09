@@ -7,27 +7,96 @@ import { GridColumn, GridRow } from 'emotion-flex-grid'
 import { makeStyles } from '@material-ui/core/styles'
 
 
-function PickField({changeField, field}) {
+function PickField({field}) {
     const cx = useContext(MyContext)
     const C = useStyles()
 
-    const [selected, setSelected] = useState({})
-    useEffect (()=>{
-        setSelected(field)
-    },[])
-    const onChipClick = e =>{
-        setSelected(e)
-        changeField(e)
-    }
+    // const onChipClick = e =>{
+    //     setSelected(e)
+    //     changeField(e)
+    // }
     const unselected ='#feffeb'
     
     const lgq =(en, ro) => {
         return cx.lg=='en'?en:ro
     }
+    console.log(field)
+    
 
+    const getChip = ()=>{
+        switch(field){
+            case 'Hall': return(
+                <GridColumn >
+                    <Chip  
+                        icon= {<IoIosBasketball />}
+                        label={lgq('Great Hall','Sala Poli')}   
+                        className={C.hall}           
+                        />
+                </GridColumn>)
+            case 'T1': return(
+                <GridColumn >
+                    <Chip  
+                        icon= {<IoIosTennisball />}
+                        label={lgq('Tennis 1','Tenis 1')}   
+                        className={C.t}            
+                        />
+                </GridColumn>)
+            case 'T2': return(
+                <GridColumn >
+                    <Chip  
+                        icon= {<IoIosTennisball />}
+                        label={lgq('Tennis 2','Tenis 2')}   
+                        className={C.t}            
+                        />
+                </GridColumn>)
+            case 'T3': return(
+                <GridColumn >
+                    <Chip  
+                        icon= {<IoIosTennisball />}
+                        label={lgq('Tennis 3','Tenis 3')}   
+                        className={C.t}             
+                        />
+                </GridColumn>)
+            case 'OutDoor': return(
+                <GridColumn >
+                    <Chip  
+                        icon= {<IoMdFootball />}
+                        label={'OutDoor'}   
+                        className={C.outdoor}
+                        // onClick={(e)=>onChipClick(e)}               
+                        />
+                </GridColumn>)
+            case 'A1': return(
+                <GridColumn >
+                    <Chip  
+                        icon= {<GiWeightLiftingUp />}
+                        label={lgq('Aerobics 1','A1 Alb')}   
+                        className={C.a1}             
+                        />
+                </GridColumn>)
+            case 'A2': return(
+                <GridColumn >
+                    <Chip  
+                        icon= {<GiWeightLiftingUp />}
+                        label={lgq('Aerobics 2','A2 Verde')}   
+                        className={C.a2}            
+                        />
+                </GridColumn>)
+            case 'A3': return(
+                <GridColumn >
+                    <Chip  
+                        icon= {<GiWeightLiftingUp />}
+                        label={lgq('Aerobics 3','A3 Roz')}   
+                        className={C.a3}           
+                        />
+                </GridColumn>)
+            default: return(<h2>:(</h2>)
+        }
+    }
     return (
         <div>
-        <GridRow wrap='wrap'>
+            {getChip()}
+        {/*<GridRow wrap='wrap'>
             <GridColumn 
                 onClick={()=>onChipClick('Hall')}
                 >
@@ -110,7 +179,7 @@ function PickField({changeField, field}) {
                     className={`${selected=='A3'?C.a3:C.grey}`}                    
                     />
             </GridColumn>
-        </GridRow>
+        </GridRow> */}
        
         </div>
     )

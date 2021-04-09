@@ -111,10 +111,6 @@ export const getAppsByDateandField = async ({date, field}) => {
     return axios.get(`http://localhost:3001/apps?date=${date}&field=${field}`)
          .then(function (response) {
             // console.log(response.data)
-            // console.log(response.status);
-            // console.log(response.statusText);
-            // console.log(response.headers);
-            // console.log(response.config);
             return response.data
       })
 }
@@ -137,6 +133,35 @@ export const updateClient = async (client) => {
           return response.data
       })
 }
+//------------Ghostsss---------------//appointments that await confimation or are in waiting for a postion
+export const getAppsByDateandFieldGhost=async ({date, field}) => {
+    // console.log(date + ' ' + field)
+    return axios.get(`http://localhost:3001/apps?date=${date}&field=${field}&status=cw`)
+         .then(function (response) {
+            // console.log(response.data)
+            return response.data
+      })
+
+}
+export const getGhosttennis = async ({date}) => {
+    // console.log(date + ' ' + field)
+    return axios.get(`http://localhost:3001/apps?date=${date}&field=tennis&status=cw`)
+         .then(function (response) {
+            // console.log(response.data)
+            return response.data
+      })
+}
+
+//--------------------------Deletes----------------------
+
+export const DeleteAppointment = async ({app}) => {
+    return axios.delete(`http://localhost:3001/apps/${app.id}`)
+         .then(function (response) {
+            // console.log(response.data)
+            return response.data
+      })
+}
+
 
 const API = 'http://localhost:3001/'
 

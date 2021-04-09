@@ -18,8 +18,8 @@ import FullColumn from '../pieces/shedspieces/FullColumn'
 
  
 
-const WeekSchedule = ( {field,today, weekMutiplier, setDialog,
-    timeLight, setTimeLight, rowLight, setRowLight}) => {
+const WeekSchedule = ( {field,today, weekMutiplier, setDialog, openShowApp,
+    timeLight, setTimeLight, rowLight, setRowLight, variant}) => {
     const cx = useContext(MyContext) 
 
     const C = useStyles()
@@ -30,37 +30,49 @@ const WeekSchedule = ( {field,today, weekMutiplier, setDialog,
         setTimeLight(id)
     }
 
-    const onDubClick = (id, date) => {
-        setDialog(id, date)
+    const onDubClick = (id, date, fieldd) => {
+        setDialog(id, date,fieldd, variant)
     }
 
     const auxRowLight = (id)=>{
         setRowLight(id)
     }
 
+    const showapp = app => {
+        openShowApp(app)
+    }
+
+    const wheelcahngeHighlight = change =>{
+        const aux = rowLight + change
+        setRowLight(aux<0?-1:aux)
+    }
 
 
        return (
 
-        <div className=''>
+        <div className='' >
             
             <GridRow wrap='wrap' >
                 <GridColumn  className = {C.column}>
                     <TimesRow
                         timeHighlight={timeLight}
                         onCellClick ={auxRowLight}
+                        upMouseScroll={wheelcahngeHighlight}
                         />
                     </GridColumn>
                 
                 <GridRow className={C.midrow} >
                 {week.map((el)=>{
                     return(
-                        <FullColumn
+                        <ColumnDateField
+                            variant={variant}
                             rowLight={rowLight}
-                            date={{date: el[1], name:el[0]}}
+                            date={el[1]}
+                            name={el[0]}
                             field={field} 
                             _mouseMove={onMouseclick}
                             onDubClick={onDubClick}
+                            openShowApp={showapp}
                         />                     
                     )
                 })}
@@ -70,6 +82,7 @@ const WeekSchedule = ( {field,today, weekMutiplier, setDialog,
                     <TimesRow 
                         timeHighlight={timeLight} 
                         onCellClick = {auxRowLight}
+                        upMouseScroll={wheelcahngeHighlight}
                         />
                 </GridColumn>
             </GridRow>

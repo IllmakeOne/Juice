@@ -11,16 +11,27 @@ import MenuItem from '@material-ui/core/MenuItem'
 
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
+import { Route, Link, BrowserRouter as Router } from "react-router-dom"
+
+import { MyContext } from '../../App'
 
 
-import MoneyIcon from '@material-ui/icons/Money'
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import DescriptionIcon from '@material-ui/icons/Description';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import BuildIcon from '@material-ui/icons/Build';
-import TranslateIcon from '@material-ui/icons/Translate';
-import ContactsIcon from '@material-ui/icons/ImportContacts';
-import { MyContext } from '../../App';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import Typography from '@material-ui/core/Typography'
+
+import MainBar from './../bar/MainBar'
+import MainRec from './../rec/MainRec'
+import StartScreen from './../StartScreen'
+import Bill from './../Bill'
+import MainSche from './../rec/schedules/MainSche'
+import RestockPrinter from '../printers/RestockPrinter'
+import AddProfile from '../rec/clients/AddProfile'
+import Clients from '../resources/Clients'
+import Scanner from '../rec/mainpage/Scanner' 
 
 
 export default function MyAppBar({changeGlobal}){
@@ -53,9 +64,25 @@ export default function MyAppBar({changeGlobal}){
     const handleClose = () => {
       setAnchorEl(null)
     }
-      return(
+      return (
         <Toolbar>
         <div className={classes.grow} />
+        {/* <List>
+
+        <ListItem
+            button
+            component={Link}
+            to="/"
+          >
+            <ListItemIcon style={{color:"white"}}></ListItemIcon>
+
+             <ListItemText
+               disableTypography
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Home':'Acasa'}</Typography>}
+             />
+          </ListItem>
+          </List> */}
+
         <div className={classes.sectionDesktop}>
 
           <Button aria-controls="simple-menu" aria-haspopup="true" 
@@ -72,7 +99,7 @@ export default function MyAppBar({changeGlobal}){
             >
             <MenuItem  onClick={()=>handleCloseButton('en')}>English</MenuItem>
             <MenuItem  onClick={()=>handleCloseButton('ro')}>Romanian</MenuItem>            
-          </Menu>
+          </Menu> 
         </div>
 
   

@@ -14,9 +14,9 @@ function PickDate({date, changeDate}) {
         <MuiPickersUtilsProvider utils={DateFnsUtils}> 
             <KeyboardDatePicker
                 disableToolbar
+                // views={["year", "month", "day"]}
                 variant="inline"
-                format="dd/MM/yyyy"
-                id="date-picker-inline"
+                format="dd-MM"
                 label={cx.lg=='en'?'Pick date':'Alege data'}
                 value={date}
                 onChange={auxCangeDate}

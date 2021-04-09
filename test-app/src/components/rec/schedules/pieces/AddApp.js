@@ -30,8 +30,11 @@ import OrangePaper from '../../../../containers/papers/OrangePaper'
 import ShowAppointment from '../../../../containers/appointments/ShowAppointment'
 import PickClinetandNr from './PickClinetandNr'
 
+import {formatDate} from './DatesMethods'
+
 
 function AddApp({open,closeAppDialog, info}) {
+    // console.log(info)
     const C = useStyles()    
     const cx = useContext(MyContext)
     const decLg = (en, ro) => {
@@ -41,25 +44,17 @@ function AddApp({open,closeAppDialog, info}) {
             return ro
     }
 
-    const [date, setDate] = useState(new Date)
     const topSetDate = (date)=>{
-        setDate(date)
+        setCrtApp({...crtApp, date: formatDate(date)})
     }
 
     
     const [crtApp, setCrtApp]= useState(defaultApp)
     useEffect(() => {
-        setCrtApp({...crtApp,field: info.field, time: info.time, date:info.date})
-        setDate(info.date)
+        setCrtApp({...crtApp,field: info.field, time: info.time, date:info.date, field: info.field})
     }, [])
 
-    useEffect(()=>{console.log(date)},[date])
     useEffect(()=>{console.log(crtApp)},[crtApp])
-    
-    const changeField = (newfield) => {
-        // console.log(newfield)
-        setCrtApp({...crtApp, field: newfield})
-    }
 
     const changeAppStatus = e => {
         console.log(e.target.value)
@@ -84,6 +79,19 @@ function AddApp({open,closeAppDialog, info}) {
         // }
     }
 
+    const typeOptions = info.var =='all'?[
+        ['cw',decLg('Client Waiting','Client in asteptare')],
+        ['acc',decLg('Awaiting client confirmation ','Astepata cornfirmare client')],
+        ['oc','Ocasional'],
+        ['sub',decLg('Subscription','Abonament')],
+        ['corp',decLg('Corporation','Firma')],
+        ['tr',decLg('Trainer','Antrenor')]
+        ]:[
+        ['cw',decLg('Client Waiting','Client in asteptare')],
+        ['acc',decLg('Awaiting client confirmation ','Astepata cornfirmare client')]
+    ]
+        
+
     const DialogContenence = () => {
         return(
             <div>
@@ -92,7 +100,7 @@ function AddApp({open,closeAppDialog, info}) {
                 {PickFieldRow()}
                 {PickTimeRow()}
                 {PickDurationRow()}
-                <PickClinetandNr />
+                {/* <PickClinetandNr /> */}
             </div>
         )
     }
@@ -104,11 +112,12 @@ function AddApp({open,closeAppDialog, info}) {
                     <h3>{decLg('Appointment date: ','Data Rezervarii:')}</h3>
                 </GridColumn>
                 <GridColumn>
-                    <PickDate date={info.date} changeDate={topSetDate} />
+                    <PickDate date={crtApp.date} changeDate={topSetDate} />
                 </GridColumn>
             </GridRow>
         )
     }
+
 
     const PickAppTypeRow = () => {
         return(
@@ -124,12 +133,11 @@ function AddApp({open,closeAppDialog, info}) {
                             value={crtApp.status}
                             onChange={changeAppStatus}
                             >
-                                <MenuItem value='oc'>Ocasional</MenuItem>
-                                <MenuItem value='sub'>{decLg('Subscription','Abonament')}</MenuItem>
-                                <MenuItem value='corp'>{decLg('Corporation','Firma')}</MenuItem>
-                                <MenuItem value='cw'>{decLg('Client Waiting','Client in asteptare')}</MenuItem>
-                                <MenuItem value='acc'>{decLg('Awaiting client confirmation ','Astepata cornfirmare client')}</MenuItem>
-                                <MenuItem value='tr'>{decLg('Trainer','Antrenor')}</MenuItem>
+                            {typeOptions.map(el=>{
+                                return(
+                                    <MenuItem value={el[0]}>{el[1]}</MenuItem>
+                                )})
+                            }
                         </Select>
                     </FormControl>
                 </GridColumn>
@@ -144,7 +152,8 @@ function AddApp({open,closeAppDialog, info}) {
                     <h3>{decLg('Pick Field: ','Alege Teren:')}</h3>
                 </GridColumn>
                 <GridColumn m='m'>
-                    <PickField changeField={changeField} field={info.field} />
+                    {console.log(info)}
+                    <PickField field={info.field} />
                 </GridColumn>
             </GridRow>
         )
@@ -177,21 +186,34 @@ function AddApp({open,closeAppDialog, info}) {
         )
     }
 
+    const changeAppduration = e =>{
+        console.log(e.target.value)
+        var aux = 1 + e.target.value
+        setCrtApp({...crtApp, duration: aux})
+    }
+
     const PickDurationRow = () => {
         return(
             <GridRow>
                 <GridColumn p='m' align='center' width={5}>
                     <h3>{decLg('Pick appointment duration:','Alege durata rezervarii:')}</h3>
-                    <h5>{decLg('\n(in halves of hour) ','\n(in jumatati de ora')}</h5>
                 </GridColumn>
                 <GridColumn m='m'>
-                    <Input 
-                            type='number'
-                            inputProps={{min: 1, style: { textAlign: 'center' }}}
-                            value={crtApp.duration}
-                            error={crtApp.duration < 1 || crtApp.duration>36 }
-                            onChange={(e) => setCrtApp({...crtApp, duration: e.currentTarget.value})}
-                        />
+                    <FormControl align='center'>
+                            <InputLabel >{decLg('Apointment Duration','Lungime Rezervare')}</InputLabel>
+                            <Select
+                                className={C.inputbox}
+                                value={durations[crtApp.duration]}
+                                onChange={changeAppduration}
+                                >
+                                    {/* {console.log(tymes)} */}
+                                    {durations.map((el, index)=>{
+                                        return(
+                                            <MenuItem value={index}>{el}</MenuItem>
+                                        )
+                                    })}
+                            </Select>
+                        </FormControl>
                 </GridColumn>
             </GridRow>
         )
@@ -212,13 +234,11 @@ function AddApp({open,closeAppDialog, info}) {
                 </h2>
             </DialogTitle> */}
             <DialogContent>
-                {/* <DialogContentText>
-                    Some Fields are obligatory, some not
-                </DialogContentText> */}
                 <GridRow>
                     <GridColumn>
                         <h2 style={{color:'#00539CFF',fontSize:32}}>
-                            {decLg('Make An Appointment','Creeaza o Rezervare')}
+                            {info.var=='all'?   decLg('Make An Appointment','Creeaza o Rezervare'):
+                            decLg('Make an Awaitting Appointment','Creeaza o Rezervare in asteptare')}
                         </h2><br/>
                         <OrangePaper>
                             {DialogContenence()}
@@ -229,7 +249,7 @@ function AddApp({open,closeAppDialog, info}) {
                             {decLg('Review Appointment','Verifica Rezervare')}
                         </h2><br/>
                         <OrangePaper>
-                            <ShowAppointment />
+                            <ShowAppointment  app={crtApp} />
                         </OrangePaper>
                     </GridColumn>
                 </GridRow>
@@ -275,7 +295,24 @@ const useStyles = makeStyles({
     status: ``,
     duration: 0,
     time: 0,
+    phone: '005',
 }
+const durations = [
+    '30 min',
+    '60 min 1 ora',
+    '90 min',
+    '120 min 2 ore',
+    '150 min',
+    '180 min 3 ore',
+    '210 min',
+    '240 min 4 ore',
+    '270 min',
+    '300 min 5 ore',
+    '330 min',
+    '360 min 6 ore',
+    '390 min',
+    '420 min 7 ore',
+]
 
 const tymes = [//'Times',
         '07:00',

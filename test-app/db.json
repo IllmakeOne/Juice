@@ -458,7 +458,7 @@
       "id": 1,
       "name": "dan",
       "field": "T1",
-      "date": "29-3-2021",
+      "date": "9-4-2021",
       "status": "ocasional",
       "duration": 3
     },
@@ -466,7 +466,7 @@
       "id": 5,
       "name": "robi",
       "field": "T2",
-      "date": "31-3-2021",
+      "date": "7-4-2021",
       "status": "ocasional",
       "duration": 4
     },
@@ -474,7 +474,7 @@
       "id": 10,
       "name": "puste",
       "field": "T3",
-      "date": "31-3-2021",
+      "date": "10-4-2021",
       "status": "trainer",
       "duration": 2
     }
