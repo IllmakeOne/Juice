@@ -80,8 +80,8 @@ function AddApp({open,closeAppDialog, info}) {
     }
 
     const typeOptions = info.var =='all'?[
-        ['cw',decLg('Client Waiting','Client in asteptare')],
-        ['acc',decLg('Awaiting client confirmation ','Astepata cornfirmare client')],
+        // ['cw',decLg('Client Waiting','Client in asteptare')],
+        // ['acc',decLg('Awaiting client confirmation ','Astepata cornfirmare client')],
         ['oc','Ocasional'],
         ['sub',decLg('Subscription','Abonament')],
         ['corp',decLg('Corporation','Firma')],
@@ -111,8 +111,10 @@ function AddApp({open,closeAppDialog, info}) {
                 <GridColumn p='m' align='center' width={5}>
                     <h3>{decLg('Appointment date: ','Data Rezervarii:')}</h3>
                 </GridColumn>
-                <GridColumn>
-                    <PickDate date={crtApp.date} changeDate={topSetDate} />
+                <GridColumn m='m'>
+                    {console.log(info)}
+                    <h3>{info.date}</h3>{/* maybe make this prettier */}
+                    {/* <PickDate date={crtApp.date} changeDate={topSetDate} /> */}
                 </GridColumn>
             </GridRow>
         )
@@ -152,7 +154,6 @@ function AddApp({open,closeAppDialog, info}) {
                     <h3>{decLg('Pick Field: ','Alege Teren:')}</h3>
                 </GridColumn>
                 <GridColumn m='m'>
-                    {console.log(info)}
                     <PickField field={info.field} />
                 </GridColumn>
             </GridRow>
@@ -163,24 +164,10 @@ function AddApp({open,closeAppDialog, info}) {
         return(
             <GridRow>
                 <GridColumn p='m'  align='center' width={5}>
-                    <h3>{decLg('Pick Time: ','Alege Ora:')}</h3>
+                    <h3>{decLg('Appointment Time: ','Ora Rezervarii:')}</h3>
                 </GridColumn>
-                <GridColumn >
-                    <FormControl align='center'>
-                        <InputLabel >{decLg('Apointment Start','Start Rezervare')}</InputLabel>
-                        <Select
-                            className={C.inputbox}
-                            value={tymes[crtApp.time]}
-                            onChange={changeAppTime}
-                            >
-                                {/* {console.log(tymes)} */}
-                                {tymes.map((el)=>{
-                                    return(
-                                        <MenuItem value={el}>{el}</MenuItem>
-                                    )
-                                })}
-                        </Select>
-                    </FormControl>
+                <GridColumn m='m'>
+                    <h3>{tymes[info.time]}</h3>
                 </GridColumn>
             </GridRow>
         )
@@ -207,7 +194,7 @@ function AddApp({open,closeAppDialog, info}) {
                                 onChange={changeAppduration}
                                 >
                                     {/* {console.log(tymes)} */}
-                                    {durations.map((el, index)=>{
+                                    {durations.slice(0,info.maxLenght).map((el, index)=>{
                                         return(
                                             <MenuItem value={index}>{el}</MenuItem>
                                         )
@@ -288,7 +275,7 @@ const useStyles = makeStyles({
   })
 
   const defaultApp = {
-    id: 0,
+    time: 0,
     name: '',
     field: '',
     date: '' ,

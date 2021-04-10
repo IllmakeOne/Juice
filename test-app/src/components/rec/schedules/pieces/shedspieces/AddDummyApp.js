@@ -30,6 +30,8 @@ import PickDate from '../PickDate'
 import PickClinetandNr from '../PickClinetandNr'
 import OrangePaper from '../../../../../containers/papers/OrangePaper'
 
+
+//this has to be renamed to Show App dialogue
 function AddDummyApp({open,closeDummyAppDialog, app}) {
     const C = useStyles()    
     const cx = useContext(MyContext)
@@ -60,7 +62,7 @@ function AddDummyApp({open,closeDummyAppDialog, app}) {
         <Dialog open={open} 
                 onClose={handleClose}
                 maxWidth='l' 
-                fullWidth={true}
+                // fullWidth={true}
                 >
             <form onSubmit={handleClose}>
             {/* <DialogTitle id="form-dialog-title">

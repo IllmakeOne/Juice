@@ -116,11 +116,34 @@ export const getAppsByDateandField = async ({date, field}) => {
 }
 
 export const getTennisCourts = async ({date}) => {
-    return axios.get(`http://localhost:3001/tennis`)
+    var res=[]
+    const t1 = await axios.get(`http://localhost:3001/apps?date=${date}&field=T1`)
          .then(function (response) {
+        return response.data
+    })
+    
+    const t2 = await axios.get(`http://localhost:3001/apps?date=${date}&field=T2`)
+        .then(function (response) {
+        return response.data
+    })
+   
+    const t3 = await axios.get(`http://localhost:3001/apps?date=${date}&field=T3`)
+        .then(function (response) {
             // console.log(response.data)
-            return response.data
-      })
+        return response.data
+    })
+    
+    // console.log('t1')
+    // console.log(t1)
+    // console.log('t2')
+    // console.log(t2)
+    // console.log('t3')
+    // console.log(t3)
+    res.push(t1)
+    res.push(t2)
+    res.push(t3)
+    // console.log(res)
+        return await res
 }
 
 export const updateClient = async (client) => {

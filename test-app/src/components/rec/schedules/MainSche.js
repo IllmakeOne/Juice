@@ -71,8 +71,8 @@ function MainSche() {
         setCrtField(newF)
     }
 
-    const openAppDialog = (id, date, fieldd, variant) =>{
-        setInfo({time: id, date: date, var: variant, field:fieldd})
+    const openAppDialog = (id, date, fieldd, variant,maxL) =>{
+        setInfo({time: id, date: date, var: variant, field:fieldd, maxLenght: maxL})
         setOpen(true)
     }
     

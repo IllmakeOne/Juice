@@ -30,8 +30,8 @@ const WeekSchedule = ( {field,today, weekMutiplier, setDialog, openShowApp,
         setTimeLight(id)
     }
 
-    const onDubClick = (id, date, fieldd) => {
-        setDialog(id, date,fieldd, variant)
+    const onDubClick = (id, date, fieldd, maxL) => {
+        setDialog(id, date,fieldd, variant, maxL)
     }
 
     const auxRowLight = (id)=>{
@@ -56,7 +56,7 @@ const WeekSchedule = ( {field,today, weekMutiplier, setDialog, openShowApp,
                 <GridColumn  className = {C.column}>
                     <TimesRow
                         timeHighlight={timeLight}
-                        onCellClick ={auxRowLight}
+                        onCellClick ={setRowLight}
                         upMouseScroll={wheelcahngeHighlight}
                         />
                     </GridColumn>

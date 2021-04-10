@@ -327,7 +327,7 @@ footer {
 
 
 
-.cellocasional{
+.celloc{
   background: rgb(124, 255, 174)
 }
 
@@ -335,8 +335,20 @@ footer {
   background: #f6ffa6
 }
 
-.celltrainer{
-  background: #b8dfff ;
+.celltr{
+  background: #fdc27e ;
+}
+
+.cellcorp{
+  background: #80bff3 ;
+}
+
+.cellcw{
+  background: #f1de87 ;
+}
+
+.cellacc{
+  background: #ffbae4 ;
 }
 
 .cell{

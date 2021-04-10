@@ -25,20 +25,29 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
 
     const getallQ = variant=='all'
 
-    const getmaxappLengh = timestart => {
-
+    const getmaxappLengh = (timestart, court) => {
+        var res = 0
+        var i 
+        for(i = timestart ; i < (38-timestart);i++){
+            const nextone=apps.filter(el => el.field == court).filter(el => el.time==i)
+            if (nextone.length != 0){
+                return res
+            }
+            res++
+        }
+        return res
     }
 
     const fullcellDB = app =>{
         openShowApp(app)
     }
 
-    const handleMouseMove = (id) => {
-        _mouseMove(id)
+    const handleMouseMove = (time) => {
+        _mouseMove(time)
     }
 
-    const makeApp = (id, fieldd) => {
-        onDubClick(id, date, fieldd)
+    const makeApp = (time, fieldd, maxL) => {
+        onDubClick(time, date, fieldd,maxL)
     }    
 
     useEffect(() =>{
@@ -83,6 +92,7 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
 
     const generateLine = () => {
         var ret = []
+        // console.log(typeof ret)r
         var i
         if(field ==  'Tennis'|| field == 'Tenis') { 
             ret.push([])
@@ -90,23 +100,40 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
             ret.push([])                
             tennisCourts.map((court) => {
                 const crtField = parseInt(court.substring(1)) - 1
+                console.log(crtField)
+                // console.log('apps')
+                // console.log(apps)
+                const t1 = apps[crtField]
+                console.log(t1)
+                // console.log('t1')
+                // console.log(t1)
+                // console.log(typeof t1)
 
                 for ( i = 0;i < dayLenght ; i++) {
-
-                    const aux = apps.filter(el => el.field == court).filter(el => el.id==i).filter(el => el.date===date )
-
+                    var aux =[]
+                    if(t1!=undefined) 
+                        if(t1.length == 1 ){
+                            aux = t1
+                            // console.log('t1')
+                            // console.log(t1)
+                        } else if(t1.length > 1 ){
+                            aux = t1.filter(el=>el.time==i)
+    
+                        }
+                    console.log('aux')
+                    console.log(aux)
                     if (aux.length != 0){
-                        const el = aux[0]
-                        i+= el.duration - 1
-                        const height = el.duration * 25
+                        const app = aux[0]
+                        i+= app.duration - 1
+                        const height = app.duration * 25
 
                         ret[crtField].push(
                             <Paper 
                                 elevation={3} style={{height:height }} 
-                                onClick={()=>handleMouseMove(el.id)}
-                                onDoubleClick={()=>(fullcellDB(el))}
+                                onClick={()=>handleMouseMove(app.time)}
+                                onDoubleClick={()=>(fullcellDB(app))}
                                 >
-                                <FullCell app={el}/>
+                                <FullCell app={app}/>
                             </Paper>)
                     } else {
                         const auxi = i
@@ -115,7 +142,7 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
                         ret[crtField].push(
                             <Paper 
                                 elevation={2} 
-                                onDoubleClick = {()=>makeApp(auxi,Auxfield)}
+                                onDoubleClick = {()=>makeApp(auxi,Auxfield,getmaxappLengh(auxi, Auxfield))}
                                 onClick={()=>handleMouseMove(auxi)}
                                 className={hilit}
                                 >
@@ -150,7 +177,7 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
 
                 for ( i = 0;i < dayLenght ; i++) {
 
-                    const aux = apps.filter(el => el.field == court).filter(el => el.id==i).filter(el => el.date===date )
+                    const aux = apps.filter(el => el.field == court).filter(el => el.time==i).filter(el => el.date===date )
 
                     if (aux.length != 0){
                         const el = aux[0]
@@ -160,7 +187,7 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
                         ret[crtField].push(
                             <Paper 
                                 elevation={3} style={{height:height }} 
-                                onClick={()=>handleMouseMove(el.id)}
+                                onClick={()=>handleMouseMove(el.time)}
                                 onDoubleClick={()=>(fullcellDB(el))}
                                 >
                                 <FullCell app={el}/>
@@ -172,7 +199,7 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
                         ret[crtField].push(
                             <Paper 
                                 elevation={2} 
-                                onDoubleClick = {()=>makeApp(auxi,Auxfield)}
+                                onDoubleClick = {()=>makeApp(auxi,Auxfield,getmaxappLengh(auxi, Auxfield))}
                                 onClick={()=>handleMouseMove(auxi)}
                                 className={hilit}
                                 >
@@ -199,7 +226,7 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
                 )
         } else { // if it not tennis(or aerobic) fill it normally, with one column for each day
             for ( i = 0;i < dayLenght ; i++){
-                const aux = apps.filter(el => el.id==i).filter(el => el.date === date)
+                const aux = apps.filter(el => el.time==i).filter(el => el.date === date)
                 if (aux.length != 0){
                     const el = aux[0]
                     
@@ -208,7 +235,7 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
                     const height = el.duration * 25
                     ret.push(
                         <Paper elevation={3} style={{height:height }} 
-                            onClick={()=>handleMouseMove(el.id)}
+                            onClick={()=>handleMouseMove(el.time)}
                             onDoubleClick={()=>(fullcellDB(el))}
                             >
                             <FullCell app={el} />
@@ -220,7 +247,7 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
                     ret.push(
                         <Paper 
                             elevation={2} 
-                            onDoubleClick = {()=>makeApp(auxi, field)}
+                            onDoubleClick = {()=>makeApp(auxi, field,getmaxappLengh(auxi, field))}
                             onClick={()=>handleMouseMove(auxi)}
                             style={{border: `2px ${hilit}#FFB231`, 
                                     margin: 0}}
