@@ -19,6 +19,7 @@ import ShowProduct from '../../../containers/products/ShowProduct'
 import OrangePaper from '../../../containers/papers/OrangePaper'
 import { Button, Modal } from '@material-ui/core'
 import { FiCheckSquare } from 'react-icons/fi'
+import ScannedBarcode from '../../bar/ScannedBarcode'
 
 function NewItem() {
     const [prods, setProds] = useState([])
@@ -71,6 +72,11 @@ function NewItem() {
         // console.log(JSON.stringify(itemtyvat) + ' in newItem')
     }
 
+    const scannedBarrCode = (scanned) => {
+        // console.log(scanned)
+        setCrtItem({...crtItem, barcode: scanned})
+    }
+
 
     return (
         <div className= 'ScreenElement'>
@@ -88,6 +94,9 @@ function NewItem() {
                     </GridColumn>
                     <GridColumn p='l'>
                         <h3>{cx.lg=='en'? 'Product Type and VAT ':'Tip produs si TVA'}</h3>
+                    </GridColumn>
+                    <GridColumn p='xl'>
+                        <h3>{cx.lg=='en'? 'Product Barcode ':'Cod de bare '}</h3>
                     </GridColumn>
                     <GridColumn p='l' mt='l'>
                         <h3>{cx.lg=='en'? 'Product Image ':'Imagine Produs'}</h3>
@@ -107,6 +116,18 @@ function NewItem() {
                             name="checkedB"
                             inputProps={{ 'aria-label': 'primary checkbox' }}
                         />
+                    </GridColumn>
+
+                    <GridColumn p='m' offset={20}>
+                        <Button 
+                            variant="contained" 
+                            color="primary"
+                            size='large'
+                            startIcon={<FiCheckSquare/>}
+                            onClick={onSubmit}
+                            >
+                            {cx.lg=='en'?'Add Item': 'Adauga Produs'}
+                        </Button>
                     </GridColumn>
                 </GridRow>
             </GridColumn>
@@ -130,6 +151,7 @@ function NewItem() {
                             onChange={(e) => setCrtItem({...crtItem, price: e.currentTarget.value})}
                         />
                     </GridColumn>
+
                     <GridColumn p='m'>
                         <AutoCompAddItem 
                             open = {open} setOpen = {setOpen}
@@ -137,6 +159,14 @@ function NewItem() {
                             upValue={setTypeandVAT}
                             />
                     </GridColumn>
+
+                    <GridColumn p='l'>
+                        <ScannedBarcode
+                            styling = {C.scanner}
+                             upScanned = {scannedBarrCode} 
+                        />
+                    </GridColumn>
+
                     <GridColumn p='m'>
                         <Input 
                             type='text'
@@ -144,6 +174,7 @@ function NewItem() {
                             onChange={(e) => setCrtItem({...crtItem, image: e.currentTarget.value})}
                         />
                     </GridColumn>
+                    
                     <GridColumn p='m'>
                         <img width = {110} height={110} 
                             src={crtItem.image==''?
@@ -155,23 +186,11 @@ function NewItem() {
 
 
             <GridColumn width={6} align='center' p='xxl'>
-                <OrangePaper>
+                <OrangePaper height = {750}>
                     <ShowProduct item = {crtItem}/>
                 </OrangePaper>
             </GridColumn>
             </GridRow>
-
-            <GridRow direction='row'><GridColumn offset={11} align='end'>
-                <Button 
-                    variant="contained" 
-                    color="primary"
-                    size='large'
-                    startIcon={<FiCheckSquare/>}
-                    onClick={onSubmit}
-                    >
-                    {cx.lg=='en'?'Add Item': 'Adauga Produs'}
-                </Button>
-            </GridColumn></GridRow>
             
         </form>
 
@@ -203,6 +222,11 @@ const useStyles = makeStyles({
     },
     infobox:{
         width: 10,
+    },
+
+    scanner:{
+        borderStyle: 'solid',
+        borderColor: 'pink',
     },
 
     root:{

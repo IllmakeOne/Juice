@@ -56,7 +56,7 @@ function MainSche() {
     }
 
     const changeRowLight =(id)=>{
-        console.log(id)
+        // console.log(id)
         if(rowLight ==  id)
             setRowLight(-1)
         else 

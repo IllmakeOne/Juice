@@ -29,7 +29,7 @@ function ShowProduct({item}) {
             return el
     }
     return (
-        <div>
+        <div >
             <GridRow direction='column'>
                 <GridColumn align='center' className='hdBS'>
                     {decidelg('Product name: ', 'Nume Produs:')}
@@ -64,6 +64,13 @@ function ShowProduct({item}) {
                 </GridColumn>
                 <GridColumn align='center' m='s' className ='hdBB'>
                     {item.stock}
+                </GridColumn>
+
+                <GridColumn align='center'  className='hdBS'>
+                    {decidelg('Barcode: ', 'Cod de bare: ')}
+                </GridColumn>
+                <GridColumn align='center' m='s' className ='hdBB'>
+                    {item.barcode}
                 </GridColumn>
 
                 

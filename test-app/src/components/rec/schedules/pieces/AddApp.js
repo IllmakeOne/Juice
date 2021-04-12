@@ -31,6 +31,7 @@ import ShowAppointment from '../../../../containers/appointments/ShowAppointment
 import PickClinetandNr from './PickClinetandNr'
 
 import {formatDate} from './DatesMethods'
+import PickNamePhone from '../../../../containers/inputs/PickNamePhone'
 
 
 function AddApp({open,closeAppDialog, info}) {
@@ -50,9 +51,13 @@ function AddApp({open,closeAppDialog, info}) {
 
     
     const [crtApp, setCrtApp]= useState(defaultApp)
-    useEffect(() => {
-        setCrtApp({...crtApp,field: info.field, time: info.time, date:info.date, field: info.field})
-    }, [])
+    // useEffect(() => {
+    //     setCrtApp({...crtApp,
+    //         field: info.field, 
+    //         time: info.time, 
+    //         date:info.date
+    //         })
+    // }, [])
 
     useEffect(()=>{console.log(crtApp)},[crtApp])
 
@@ -95,6 +100,7 @@ function AddApp({open,closeAppDialog, info}) {
     const DialogContenence = () => {
         return(
             <div>
+                {PickName()}
                 {PickHourRow()}
                 {PickAppTypeRow()}
                 {PickFieldRow()}
@@ -112,7 +118,7 @@ function AddApp({open,closeAppDialog, info}) {
                     <h3>{decLg('Appointment date: ','Data Rezervarii:')}</h3>
                 </GridColumn>
                 <GridColumn m='m'>
-                    {console.log(info)}
+                    {/* {console.log(info)} */}
                     <h3>{info.date}</h3>{/* maybe make this prettier */}
                     {/* <PickDate date={crtApp.date} changeDate={topSetDate} /> */}
                 </GridColumn>
@@ -120,6 +126,22 @@ function AddApp({open,closeAppDialog, info}) {
         )
     }
 
+    const setNameandPhone = (inNP) =>{
+        setCrtApp({...crtApp, name: inNP.name, phone: inNP.phone})
+    }
+
+    const PickName = () =>{
+        return(
+            <GridRow>
+                <GridColumn p='m' align='center' width={5}>
+                    <h3>{decLg('Clinet Name and Phone: ','Nume si Telefon Client:')}</h3>
+                </GridColumn>
+                <GridColumn  p='m' align='center' width={5}>
+                    <PickNamePhone setNamePhone={setNameandPhone}/>
+                </GridColumn>
+            </GridRow>
+        )
+    }
 
     const PickAppTypeRow = () => {
         return(
@@ -174,7 +196,7 @@ function AddApp({open,closeAppDialog, info}) {
     }
 
     const changeAppduration = e =>{
-        console.log(e.target.value)
+        // console.log(e.target.value)
         var aux = 1 + e.target.value
         setCrtApp({...crtApp, duration: aux})
     }
@@ -190,7 +212,7 @@ function AddApp({open,closeAppDialog, info}) {
                             <InputLabel >{decLg('Apointment Duration','Lungime Rezervare')}</InputLabel>
                             <Select
                                 className={C.inputbox}
-                                value={durations[crtApp.duration]}
+                                value={crtApp.duration} 
                                 onChange={changeAppduration}
                                 >
                                     {/* {console.log(tymes)} */}
@@ -221,6 +243,7 @@ function AddApp({open,closeAppDialog, info}) {
                 </h2>
             </DialogTitle> */}
             <DialogContent>
+
                 <GridRow>
                     <GridColumn>
                         <h2 style={{color:'#00539CFF',fontSize:32}}>
@@ -231,12 +254,13 @@ function AddApp({open,closeAppDialog, info}) {
                             {DialogContenence()}
                         </OrangePaper>
                     </GridColumn>
+
                     <GridColumn>
                         <h2 style={{color:'#00539CFF', fontSize:32}}>
                             {decLg('Review Appointment','Verifica Rezervare')}
                         </h2><br/>
                         <OrangePaper>
-                            <ShowAppointment  app={crtApp} />
+                            <ShowAppointment  app={{...crtApp, ...info}} />
                         </OrangePaper>
                     </GridColumn>
                 </GridRow>

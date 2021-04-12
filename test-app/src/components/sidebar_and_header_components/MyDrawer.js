@@ -39,6 +39,7 @@ import RestockMain from '../resources/RestockMain'
 import NewItem from '../resources/restocking/NewItem'
 import AddSupplier from '../resources/restocking/AddSupplier'
 import AddStock from '../resources/restocking/AddStock'
+import PaymentBox from '../payment/PaymentBox';
 
 
 
@@ -115,7 +116,7 @@ export default function MyDrawer(){
           >
             <ListItemText
                disableTypography
-               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Scanning Scree':'Ecran Scanare'}</Typography>}
+               primary={<Typography type="body2" style={{ color: '#FFFFFF' }}>{cx.lg=='en'? 'Scanning Screen':'Ecran Scanare'}</Typography>}
              />
           </ListItem>
 
@@ -238,7 +239,7 @@ export default function MyDrawer(){
         <Route path='/addprof' component={AddProfile} /> 
         <Route path='/bill' component={Bill} /> 
         <Route path='/clients' component={Clients} /> 
-        <Route path='/test' component={DisplaySubs} /> 
+        <Route path='/test' component={PaymentBox} /> 
 
         
 

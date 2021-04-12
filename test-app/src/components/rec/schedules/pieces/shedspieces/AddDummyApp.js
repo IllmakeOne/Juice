@@ -32,7 +32,7 @@ import OrangePaper from '../../../../../containers/papers/OrangePaper'
 
 
 //this has to be renamed to Show App dialogue
-function AddDummyApp({open,closeDummyAppDialog, app}) {
+function AddDummyApp({open,closeDummyAppDialog, app, deteleApp}) {
     const C = useStyles()    
     const cx = useContext(MyContext)
     const decLg = (en, ro) => {
@@ -46,7 +46,7 @@ function AddDummyApp({open,closeDummyAppDialog, app}) {
         closeDummyAppDialog()
     }
 
-    const DeleteAppointment = () => {
+    const DellApp = () => {
         DeleteAppointment(app)
         // console.log(app)
         closeDummyAppDialog()
@@ -88,7 +88,7 @@ function AddDummyApp({open,closeDummyAppDialog, app}) {
             </DialogContent>
             <DialogActions>
                 <Button  style ={{textTransform: 'none', background: '#eb5b60'}} 
-                    color="primary" variant="outlined"  onClick={()=>DeleteAppointment()}>{/*type="submit" */}
+                    color="primary" variant="outlined"  onClick={()=>DellApp()}>{/*type="submit" */}
                         <h3>
                             {decLg('Delete Appointment', 'Anuleaza Rezervarea')}
                         </h3>

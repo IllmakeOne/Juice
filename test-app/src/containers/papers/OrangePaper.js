@@ -2,15 +2,8 @@
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 
-function OrangePaper({children}) {
-    const C = useStyles()
-    return (
-        <Paper elevation={2} className={C.paper}>
-            {children}
-        </Paper>
-    )
-}
-
+function OrangePaper({children, height}) {
+    
 const useStyles = makeStyles({
 
     paper: {
@@ -18,9 +11,19 @@ const useStyles = makeStyles({
         height: 400,
         width:  600,
         padding: 15,
-        height: 500, 
+        height: height==undefined?'500px':height,
         overflow: 'auto',
     },
   });
+
+    const C = useStyles()
+    return (
+        <Paper elevation={2} className={C.paper}>
+            {children}
+        </Paper>
+    )
+
+    
+}
 
 export default OrangePaper

@@ -166,6 +166,7 @@ export const getAppsByDateandFieldGhost=async ({date, field}) => {
       })
 
 }
+
 export const getGhosttennis = async ({date}) => {
     // console.log(date + ' ' + field)
     return axios.get(`http://localhost:3001/apps?date=${date}&field=tennis&status=cw`)
@@ -175,14 +176,23 @@ export const getGhosttennis = async ({date}) => {
       })
 }
 
+export const getNameAndPhones = async () => {
+    // console.log(date + ' ' + field)
+    return axios.get(`http://localhost:3001/phones`)
+         .then(function (response) {
+            console.log(response.data)
+            return response.data
+      })
+}
+
 //--------------------------Deletes----------------------
 
 export const DeleteAppointment = async ({app}) => {
-    return axios.delete(`http://localhost:3001/apps/${app.id}`)
-         .then(function (response) {
-            // console.log(response.data)
-            return response.data
-      })
+    // return axios.delete(`http://localhost:3001/apps/${app.id}`)
+    //      .then(function (response) {
+    //         // console.log(response.data)
+    //         return response.data
+    //   })
 }
 
 

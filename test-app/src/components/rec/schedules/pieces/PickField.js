@@ -20,7 +20,7 @@ function PickField({field}) {
     const lgq =(en, ro) => {
         return cx.lg=='en'?en:ro
     }
-    console.log(field)
+    // console.log(field)
     
 
     const getChip = ()=>{

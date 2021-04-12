@@ -3,21 +3,7 @@ import { useState, useEffect} from 'react'
 import Scanner from './Scanner'
 import ClientIn from './ClientIn'
 
-import Keys from '../clients/Keys'
-
-
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Button from '@material-ui/core/Button'
-
-
-import { ListItemIcon, Typography } from '@material-ui/core';
-
-
 import loading from '../loading.gif'
-import Capture from './pieces/Capture.PNG'
 import { makeStyles } from '@material-ui/core/styles'
 
 
@@ -34,7 +20,7 @@ import {
     useParams,
     useHistory 
   } from "react-router-dom"
-import KeyBox from './pieces/KeyBox'
+  
 import { GridColumn, GridRow } from 'emotion-flex-grid'
 import ScanHisotory from './pieces/ScanHisotory';
 import UpcomingEvents from './pieces/UpcomingEvents';
@@ -92,7 +78,7 @@ function MaineRecScreen() {
                     setKey(ret)
                 })
             }
-        } else {
+        } else if(scanText.substr(0,2) == 'CL') {
             // getClient(scanText.substr(scanText.length - 1)).then(
             // if(scanText == 'lmao')
             getClient(scanText.substr(2,3)).then(

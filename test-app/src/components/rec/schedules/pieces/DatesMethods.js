@@ -9,6 +9,16 @@ export const formatDate = (date) =>{
     return res
 }
 
+
+// function getMonday(d) {
+//     d = new Date(d);
+//     var day = d.getDay(),
+//         diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+//     return new Date(d.setDate(diff));
+//   }
+  
+//   getMonday(new Date()); // Mon Nov 08 2010
+// }
 export const getCrtWeek = (date, language) => {
     var zileleweek
     if(language == 'en')

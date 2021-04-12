@@ -92,7 +92,6 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
 
     const generateLine = () => {
         var ret = []
-        // console.log(typeof ret)r
         var i
         if(field ==  'Tennis'|| field == 'Tenis') { 
             ret.push([])
@@ -100,28 +99,16 @@ function ColumnDateField({date,name, field, _mouseMove, onDubClick,
             ret.push([])                
             tennisCourts.map((court) => {
                 const crtField = parseInt(court.substring(1)) - 1
-                console.log(crtField)
-                // console.log('apps')
-                // console.log(apps)
                 const t1 = apps[crtField]
-                console.log(t1)
-                // console.log('t1')
-                // console.log(t1)
-                // console.log(typeof t1)
 
                 for ( i = 0;i < dayLenght ; i++) {
                     var aux =[]
                     if(t1!=undefined) 
                         if(t1.length == 1 ){
                             aux = t1
-                            // console.log('t1')
-                            // console.log(t1)
                         } else if(t1.length > 1 ){
                             aux = t1.filter(el=>el.time==i)
-    
                         }
-                    console.log('aux')
-                    console.log(aux)
                     if (aux.length != 0){
                         const app = aux[0]
                         i+= app.duration - 1
